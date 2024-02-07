@@ -11,7 +11,7 @@ from serviciisiutilaje import extrage_pozitii, coreleaza_date
 
 st.set_page_config(layout="wide")
 
-st.header(':violet[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
+st.header(':blue[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
 
 caen_nr_extras = None
 document_succes = False   # variabilă pentru a ține evidența succesului procesării primului document
@@ -19,11 +19,11 @@ document_succes = False   # variabilă pentru a ține evidența succesului proce
 col1, col2 = st.columns(2)
 
 with col1:
-    uploaded_template = st.file_uploader("Încărcați fișierul XLSX Date Solicitate", type=["xlsx"], key="dateSolicitate")
-    
+    uploaded_doc1 = st.file_uploader("Încărcați fișierul Date Solicitate", type=["xlsx"], key="dateSolicitate")
+    st.success("Adaugati DATE SOLICITATE")
     if uploaded_template is not None:
         
-        datesolicitate_doc = pd.read_excel(uploaded_template)
+        datesolicitate_doc = pd.read_excel(uploaded_doc1)
         date_din_xlsx_date_solicitate = extrage_date_solicitate(datesolicitate_doc)
         
         caen_extras = date_din_xlsx_date_solicitate.get('Cod CAEN', 'Cod CAEN necunoscut')
@@ -43,6 +43,5 @@ with col1:
 # Utilizarea celei de-a doua coloane pentru încărcarea celui de-al doilea document, dacă primul a fost procesat cu succes
 with col2:
     if document_succes:
-        uploaded_file2 = st.file_uploader("Încărcați al doilea document", type=["pdf", "docx", "txt"], key="RaportInterogare")
+        uploaded_file2 = st.file_uploader("Încărcați al doilea document", type=["docx"], key="RaportInterogare")
 
-        st.info(f"{caen_nr_extras} - aflat intrat lucru!")
