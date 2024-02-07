@@ -15,6 +15,9 @@ st.header(':blue[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow
 
 caen_nr_extras = None
 document_succes = False   # variabilă pentru a ține evidența succesului procesării primului document
+datesolicitate_doc = None
+date_din_xlsx_date_solicitate = None
+
 
 col1, col2 = st.columns(2)
 
