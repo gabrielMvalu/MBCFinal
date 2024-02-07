@@ -6,7 +6,7 @@ from docx import Document
 from constatator import extrage_informatii_firma, extrage_asociati_admini, extrage_situatie_angajati, extrage_coduri_caen
 from datesolicitate import extrage_date_solicitate
 from bilantsianaliza import extrage_date_bilant, extrage_date_contpp, extrage_indicatori_financiari
-from ssiutilaje import extrage_pozitii, coreleaza_date
+from serviciisiutilaje import extrage_pozitii, coreleaza_date
 
 
 st.set_page_config(layout="wide")
