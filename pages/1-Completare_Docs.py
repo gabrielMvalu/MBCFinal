@@ -11,7 +11,7 @@ from pages.ssiutilaje import extrage_pozitii, coreleaza_date
 
 st.set_page_config(layout="wide")
 
-st.header(':blue[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
+st.header(':violet[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
 
 caen_nr_extras = None
 document_succes = False   # variabilă pentru a ține evidența succesului procesării primului document
