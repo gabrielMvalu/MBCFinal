@@ -21,8 +21,8 @@ col1, col2 = st.columns(2)
 with col1:
     uploaded_doc1 = st.file_uploader("Încărcați fișierul Date Solicitate", type=["xlsx"], key="dateSolicitate")
     
-    if uploaded_template is not None:
-        
+    if uploaded_doc1 is not None:
+        st.success("DOCUMENTE SOLICITATE")
         datesolicitate_doc = pd.read_excel(uploaded_doc1)
         date_din_xlsx_date_solicitate = extrage_date_solicitate(datesolicitate_doc)
         
