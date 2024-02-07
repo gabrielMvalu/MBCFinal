@@ -44,5 +44,13 @@ with col1:
 # Utilizarea celei de-a doua coloane pentru încărcarea celui de-al doilea document, dacă primul a fost procesat cu succes
 with col2:
     if document_succes:
-        uploaded_file2 = st.file_uploader("Încărcați al doilea document", type=["docx"], key="RaportInterogare")
+        uploaded_doc2 = st.file_uploader("Încărcați al doilea document", type=["docx"], key="RaportInterogare")
+        st.info("Raport interogare")
 
+        if uploaded_doc1 is not None:
+            template_doc = Document(uploaded_doc1)
+            st.toast('Incepem procesarea Planului de afaceri', icon='⭐')   
+
+
+
+            
