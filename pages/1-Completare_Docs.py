@@ -52,8 +52,9 @@ with col2:
 
         if uploaded_doc2 is not None:
             template_doc = Document(uploaded_doc2)
-            st.toast('Incepem procesarea Planului de afaceri', icon='⭐')   
-
+            st.toast('Incepem procesarea Planului de afaceri', icon='⭐') 
+            ion = date_din_xlsx_date_solicitate.get('Cod CAEN', 'Cod CAEN necunoscut')
+            st.info(f"Vom începe prelucrarea firmei: {ion} cu prelucrarea pe codul CAEN: {caen_nr_extras} ")
 
 
             
