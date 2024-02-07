@@ -47,8 +47,8 @@ with col2:
         uploaded_doc2 = st.file_uploader("Încărcați al doilea document", type=["docx"], key="RaportInterogare")
         st.info("Raport interogare")
 
-        if uploaded_doc1 is not None:
-            template_doc = Document(uploaded_doc1)
+        if uploaded_doc2 is not None:
+            template_doc = Document(uploaded_doc2)
             st.toast('Incepem procesarea Planului de afaceri', icon='⭐')   
 
 
