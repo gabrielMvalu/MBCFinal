@@ -8,7 +8,7 @@ from datesolicitate import extrage_date_solicitate
 
 st.set_page_config(layout="wide")
 
-st.header(':violet[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
+st.header(':blue[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
 
 caen_nr_extras = None
 document_succes = False   # variabilă pentru a ține evidența succesului procesării primului document
