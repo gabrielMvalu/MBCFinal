@@ -161,7 +161,7 @@ with col4:
                 "#rude": str(solicitate_data.get('Rude', 'N/A')),
                 "#concluzie_CA": str(solicitate_data.get('Concluzie cifra de afaceri', 'N/A')),
                 
-                "#caracteristici_tehnice": str(solicitate_data.get('Caracteristici tehnice relevante', 'N/A')),
+                "#caracteristici_tehnice": str(solicitate_data.get('Caracteristici tehnice utilaje', 'N/A')),
                 "#flux_tehnologic": str(solicitate_data.get('Flux tehnologic', 'N/A')),
                 "#utilajeDNSH": str(solicitate_data.get('Utilaje DNSH', 'N/A')),
 
