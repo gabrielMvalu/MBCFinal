@@ -35,7 +35,8 @@ with col1:
         solicitate_data = extrage_date_solicitate(df)
         st.success(f"Vom prelucra")
         document_succes = True
-        
+        st.json({"Date Solicitate": solicitate_data})
+
 
 
 with col2:
@@ -43,12 +44,14 @@ with col2:
         uploaded_doc2 = st.file_uploader("Încărcați al doilea document", type=["docx"], key="RaportInterogare")
         if uploaded_doc2 is not None:
             template_doc = Document(uploaded_doc2)
-            solicitate_data = extrage_date_solicitate(df)
+           
             st.info(f"Vom începe prelucrar")
             document2_succes = True
-            st.json({"Date Solicitate": solicitate_data})
+        
+        
     else:
         st.warning("Vă rugăm să încărcați și să procesați mai întâi documentul din prima coloană.")
+    
 
 col3, col4 = st.columns(2)
 
