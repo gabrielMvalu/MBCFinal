@@ -33,9 +33,39 @@ with col2:
     if document_succes:
         uploaded_doc2 = st.file_uploader(f"Încărcați Raportul interogare pt {firma}", type=["docx"], key="RaportInterogare")
         if uploaded_doc2 is not None:
-            template_doc = Document(uploaded_doc2)
-            st.info(f"Vom începe prelucrar")
+            constatator_doc = Document(uploaded_doc2)
+            
+            
+            informatii_firma = extrage_informatii_firma(constatator_doc)
+            asociati_info, administratori_info = extrage_asociati_admini(constatator_doc)
+            situatie_angajati = extrage_situatie_angajati(constatator_doc)
+            full_text_constatator = "\n".join([p.text for p in constatator_doc.paragraphs])
+            coduri_caen = extrage_coduri_caen(full_text_constatator)
+            def curata_duplicate_coduri_caen(coduri_caen):
+            coduri_unice = {}
+            for cod, descriere in coduri_caen:
+                coduri_unice[cod] = descriere
+            return list(coduri_unice.items())
+    
+            coduri_caen_curatate = curata_duplicate_coduri_caen(coduri_caen)
+            
+            adrese_secundare_text = '\n'.join(informatii_firma.get('Adresa sediul secundar', [])) if informatii_firma.get('Adresa sediul secundar', []) else "N/A"
+            asociati_text = '\n'.join(asociati_info) if asociati_info else "N/A"
+            administratori_text = administratori_info if administratori_info else "N/A"
+            coduri_caen_text = '\n'.join([f"{cod} - {descriere}" for cod, descriere in coduri_caen_curatate]) if coduri_caen_curatate else "N/A"    
+
+
+            
+            st.info(f"Vom începe prelucrarea")
             document2_succes = True        
+            
+             # Afișarea datelor în format JSON
+            st.json({
+                "Date Generale": informatii_firma,
+                "Informații Detaliate": {"Asociați": asociati_info, "Administratori": administratori_info},
+                "Situație Angajati": situatie_angajati,
+                "Coduri CAEN": coduri_caen
+            })
     else:
         st.warning("Vă rugăm să încărcați și să procesați mai întâi date solicitate.xlsx")
     
