@@ -10,7 +10,7 @@ from serviciisiutilaje import extrage_pozitii, coreleaza_date
 
 st.set_page_config(layout="wide")
 
-st.header(':blue_book: Procesul de înlocuire a Placeholder-urilor', divider='rainbow')
+st.header(':blue[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
 
 # Inițializare variabile în st.session_state dacă nu există deja
 if 'caen_nr_extras_foi' not in st.session_state:
@@ -70,6 +70,7 @@ with col3:
         st.success("Incepem prelucrarea analizei")
         
         if uploaded_doc3 is not None:
+            template_doc1 = Document(uploaded_doc3)
             st.success(f"Vom începe prelucrarea analizei financiare CAEN: {st.session_state.caen_nr_extras_foi} JUDET: {st.session_state.judet_foi} NOUA SAU VECHE: {st.session_state.noua_veche_foi} ")
 
 
