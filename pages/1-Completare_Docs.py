@@ -28,7 +28,7 @@ with col1:
         firma = solicitate_data.get('Denumirea firmei SRL', 'N/A')
         st.success(f"Start proces completare pt: {firma}")
         document_succes = True
-        st.json({"Date extrase": solicitate_data})
+        #st.json({"Date extrase": solicitate_data})
 
 
 with col2:
@@ -59,7 +59,7 @@ with col2:
 
 
             
-            st.info(f"Vom începe prelucrarea")
+            st.info(f"Prelucrarea 'Rapor Interogare - {firma}' este completa")
             document2_succes = True        
             
              # Afișarea datelor în format JSON
