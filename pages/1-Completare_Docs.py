@@ -22,14 +22,12 @@ col1, col2 = st.columns(2)
 with col1:
     uploaded_doc1 = st.file_uploader("Încărcați fișierul Date Solicitate", type=["xlsx"], key="dateSolicitate")
     if uploaded_doc1 is not None:
-        
         df = pd.read_excel(uploaded_doc1)
         solicitate_data = extrage_date_solicitate(df)
-        st.success(f"Vom prelucra")
+
+        firma = solicitate_data.get('Denumirea firmei SRL', 'N/A')
+        st.success(f"Start proces completare pt: {firma} ")
         document_succes = True
-        st.json({"Date Solicitate": solicitate_data})
-
-
 
 with col2:
     if document_succes:
@@ -55,8 +53,8 @@ with col3:
 
 with col4:
     if document3_succes:
-        uploaded_doc4 = st.file_uploader("Încărcați al 4-lea document", type=["docx"], key="MachetaPA")
-        if uploaded_doc4 is not None:
+        uploaded_template = st.file_uploader("Încărcați al 4-lea document", type=["docx"], key="MachetaPA")
+        if uploaded_template is not None:
             
             st.info(f"Vom începe ")
             
