@@ -26,6 +26,7 @@ with col1:
         solicitate_data = extrage_date_solicitate(df)
 
         firma = solicitate_data.get('Denumirea firmei SRL', 'N/A')
+        nr_CAEN = solicitare_date.get('Doar nr CAEN','N/A')
         st.success(f"Primul pas, pentru: {firma}, completat.")
         document_succes = True
         #st.json({"Date extrase": solicitate_data})
@@ -36,8 +37,7 @@ with col2:
         uploaded_doc2 = st.file_uploader(f"Încărcați Raportul Interogare al {firma}", type=["docx"], key="RaportInterogare")
         if uploaded_doc2 is not None:
             constatator_doc = Document(uploaded_doc2)
-            
-            
+    
             informatii_firma = extrage_informatii_firma(constatator_doc)
             asociati_info, administratori_info = extrage_asociati_admini(constatator_doc)
             situatie_angajati = extrage_situatie_angajati(constatator_doc)
@@ -56,9 +56,7 @@ with col2:
             asociati_text = '\n'.join(asociati_info) if asociati_info else "N/A"
             administratori_text = administratori_info if administratori_info else "N/A"
             coduri_caen_text = '\n'.join([f"{cod} - {descriere}" for cod, descriere in coduri_caen_curatate]) if coduri_caen_curatate else "N/A"    
-
-
-            
+           
             st.info(f"Prelucrarea 'Rapor Interogare' al {firma}, este completa.")
             document2_succes = True        
             
@@ -80,6 +78,23 @@ with col3:
     if document2_succes:
         uploaded_doc3 = st.file_uploader("Încărcați al 3-lea document", type=["xlsx"], key="AnalizaMacheta")
         if uploaded_doc3 is not None:
+            df_bilant = pd.read_excel(uploaded_doc3, sheet_name='1-Bilant')
+            df_contpp = pd.read_excel(uploaded_doc3, sheet_name='2-ContPP')
+            df_analiza_fin = pd.read_excel(uploaded_doc3, sheet_name='1D-Analiza_fin_indicatori')    
+            df_financiar = pd.read_excel(uploaded_doc3, sheet_name='P. FINANCIAR')
+            date_financiare = extrage_pozitii(df_financiar)
+            if nr_CAEN != 'N/A' and date_financiare:
+                rezultate_corelate, rezultate_corelate1, rezultate_corelate2 = coreleaza_date(date_financiare)
+                rezultate_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate])
+                cheltuieli_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate1])
+                cantitati_corelate = [pd.to_numeric(item[1], errors='coerce') for item in rezultate_corelate]
+                cantitati_corelate = [0 if pd.isna(x) else x for x in cantitati_corelate]
+                numar_total_utilaje = sum(cantitati_corelate)
+                rezultate_corelate, rezultate_corelate1, rezultate_corelate2 = coreleaza_date(date_financiare)
+                rezultate2_text = '\n'.join([f"{descriere}" for nume, _, descriere in rezultate_corelate2])
+
+
+            
             st.success(f"Vom incepe prelucrarea datelor din Analiza Financiara")
             document3_succes = True
     else:
