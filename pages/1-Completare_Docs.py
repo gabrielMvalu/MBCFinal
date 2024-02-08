@@ -26,7 +26,7 @@ with col1:
         solicitate_data = extrage_date_solicitate(df)
 
         firma = solicitate_data.get('Denumirea firmei SRL', 'N/A')
-        nr_CAEN = solicitare_date.get('Doar nr CAEN','N/A')
+        nr_CAEN = solicitate_date.get('Doar nr CAEN','N/A')
         st.success(f"Primul pas, pentru: {firma}, completat.")
         document_succes = True
         #st.json({"Date extrase": solicitate_data})
