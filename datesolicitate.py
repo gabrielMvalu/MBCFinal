@@ -56,6 +56,7 @@ def extrage_date_suplimentare(judet, caen, tip_activitate):
 
         #Variabilele din foile ce pot fi nr cod caen
         "Activitate specifică": activitate,
+        "Descrierea utilaj reciclare": descriere_utilaj_reciclare,
         "Inovații în lucrări": lucrari_inovatie,
         "Lucrări conform codurilor CAEN": lucrari_caen,
         "Detalii DNSH - A": aDNSH,
