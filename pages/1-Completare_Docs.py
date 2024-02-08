@@ -62,6 +62,10 @@ with col3:
     if document2_succes:
         uploaded_doc3 = st.file_uploader("Încărcați al 3 lea document", type=["xlsx"], key="AnalizaMacheta")
         st.success(f"Incepem prelucrarea analizei")
+        
+        if uploaded_doc3 is not None:
+            st.info(f"Vom începe prelucrarea firmei: {ion} cu prelucrarea pe codul CAEN: {caen_nr_extras} ")
+            
 
 
 
