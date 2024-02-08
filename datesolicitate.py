@@ -57,7 +57,7 @@ def extrage_date_suplimentare(judet, caen, tip_activitate):
         #Variabile din foile ce pot fi nume judet
         "Contribuția proiectului la tranziția justă": contributia_proiectului_la_TJ,
         "Strategii materiale": strategii_materiale,
-        "Strategii materiale reciclate": strategii_reciclate,
+        "Strategii materiale reciclate": strategii_reciclare,
 
         #Variabilele din foile ce pot fi nr cod caen
         "Activitate specifică": activitate,
