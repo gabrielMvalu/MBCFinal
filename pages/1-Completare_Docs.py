@@ -26,18 +26,18 @@ with col1:
         solicitate_data = extrage_date_solicitate(df)
 
         firma = solicitate_data.get('Denumirea firmei SRL', 'N/A')
-        st.success(f"Start proces completare pt: {firma} ")
+        st.success(f"Start proces completare pt: {firma}")
         document_succes = True
 
 with col2:
     if document_succes:
-        uploaded_doc2 = st.file_uploader("Încărcați al doilea document", type=["docx"], key="RaportInterogare")
+        uploaded_doc2 = st.file_uploader(f"Încărcați Raportul interogare pt {firma}", type=["docx"], key="RaportInterogare")
         if uploaded_doc2 is not None:
             template_doc = Document(uploaded_doc2)
             st.info(f"Vom începe prelucrar")
             document2_succes = True        
     else:
-        st.warning("Vă rugăm să încărcați și să procesați mai întâi documentul din prima coloană.")
+        st.warning("Vă rugăm să încărcați și să procesați mai întâi date solicitate.xlsx")
     
 col3, col4 = st.columns(2)
 
