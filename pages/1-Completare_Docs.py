@@ -26,14 +26,14 @@ with col1:
         solicitate_data = extrage_date_solicitate(df)
 
         firma = solicitate_data.get('Denumirea firmei SRL', 'N/A')
-        st.success(f"Start proces completare pt: {firma}")
+        st.success(f"Primul pas, pentru: {firma}, completat.")
         document_succes = True
         #st.json({"Date extrase": solicitate_data})
 
 
 with col2:
     if document_succes:
-        uploaded_doc2 = st.file_uploader(f"Încărcați Raportul interogare pt {firma}", type=["docx"], key="RaportInterogare")
+        uploaded_doc2 = st.file_uploader(f"Încărcați Raportul Interogare al {firma}", type=["docx"], key="RaportInterogare")
         if uploaded_doc2 is not None:
             constatator_doc = Document(uploaded_doc2)
             
@@ -70,18 +70,20 @@ with col2:
             #    "Coduri CAEN": coduri_caen
             #}) 
     else:
-        st.warning("Vă rugăm să încărcați și să procesați 'date solicitate.xlsx' prima data")
-    
+        st.warning("Prima dată, încărcați și procesați, 'date solicitate.xlsx'.")
+
+
+
 col3, col4 = st.columns(2)
 
 with col3:
     if document2_succes:
         uploaded_doc3 = st.file_uploader("Încărcați al 3-lea document", type=["xlsx"], key="AnalizaMacheta")
         if uploaded_doc3 is not None:
-            st.success(f"Vom începe")
+            st.success(f"Vom incepe prelucrarea datelor din Analiza Financiara")
             document3_succes = True
     else:
-        st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
+        st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
 
 
 with col4:
