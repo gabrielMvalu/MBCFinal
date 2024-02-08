@@ -29,19 +29,19 @@ def extrage_date_suplimentare(judet, caen, tip_activitate):
     strategii_materiale = df_judet.iloc[1, 1]
     strategii_reciclare = df_judet.iloc[2, 1]
     
-    activitate = df_caen.iloc[1, 1] 
-    descriere_utilaj_reciclare = df_caen.iloc[2, 1]
-    lucrari_inovatie = df_caen.iloc[3, 1]
-    lucrari_caen = df_caen.iloc[4, 1]
-    aDNSH = df_caen.iloc[5, 1]
-    cDNSH = df_caen.iloc[6, 1]
-    dDNSH = df_caen.iloc[7, 1]
-    materiale_locale = df_caen.iloc[8, 1]
-    pregatireaTeren = df_caen.iloc[9, 1]
-    reciclareaMaterialelor = df_caen.iloc[10, 1]
-    clientiFirma = df_caen.iloc[11, 1]
-    descriere_serviciu = df_caen.iloc[12, 1]
-    piata_tinta = df_caen.iloc[0, 1]
+    activitate = df_caen.iloc[0, 1] 
+    descriere_utilaj_reciclare = df_caen.iloc[1, 1]
+    lucrari_inovatie = df_caen.iloc[2, 1]
+    lucrari_caen = df_caen.iloc[3, 1]
+    aDNSH = df_caen.iloc[4, 1]
+    cDNSH = df_caen.iloc[5, 1]
+    dDNSH = df_caen.iloc[6, 1]
+    materiale_locale = df_caen.iloc[7, 1]
+    pregatireaTeren = df_caen.iloc[8, 1]
+    reciclareaMaterialelor = df_caen.iloc[9, 1]
+    clientiFirma = df_caen.iloc[10, 1]
+    descriere_serviciu = df_caen.iloc[11, 1]
+    piata_tinta = df_caen.iloc[12, 1]
 
     crestere_creare = df_tip_activitate.iloc[0, 1]
     creareActivVizata = df_tip_activitate.iloc[1, 1]
@@ -68,7 +68,7 @@ def extrage_date_suplimentare(judet, caen, tip_activitate):
         "Piata tinta": piata_tinta,
 
         #Variabile din foi ce pot fi veche sau nou
-        "Creșterea și crearea de noi activități": crestere_creare,
+        "Creșterea sau crearea de noi surse de venit": crestere_creare,
         "Crearea de activități în domeniul vizat": creareActivVizata,
         "Identificarea dezavantajelor concurențiale": dezavantajeConcurentiale, 
     }
