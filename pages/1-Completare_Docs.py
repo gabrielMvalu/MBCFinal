@@ -12,7 +12,7 @@ st.set_page_config(layout="wide")
 
 st.header(':blue[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
 
-
+nr_CAEN = None
 document_succes = False  
 document2_succes = False
 document3_succes = False
