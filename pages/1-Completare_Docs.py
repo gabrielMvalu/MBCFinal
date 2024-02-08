@@ -27,6 +27,7 @@ with col1:
 
         firma = solicitate_data.get('Denumirea firmei SRL', 'N/A')
         nr_CAEN = solicitate_data.get('Doar nr CAEN','N/A')
+        st.session_state.codCAEN = nr_CAEN
         st.success(f"Primul pas, pentru: {firma}, completat.")
         document_succes = True
         #st.json({"Date extrase": solicitate_data})
