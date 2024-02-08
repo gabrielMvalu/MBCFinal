@@ -48,7 +48,7 @@ with col1:
         else:
             caen_nr_extras_foi = None 
         
-        st.success(f"Vom începe prelucrarea firmei: {firma} cu prelucrarea pe codul CAEN: {caen_nr_extras} - {caen_extras}")
+        st.success(f"Vom începe prelucrarea firmei: {firma} cu prelucrarea pe codul CAEN: {caen_nr_extras_foi} - {caen_extras}")
 
         document_succes = True  # Setăm variabila pe True pentru a indica că primul document a fost procesat cu succes
 
@@ -62,7 +62,7 @@ with col2:
             template_doc = Document(uploaded_doc2)
             st.toast('Incepem procesarea Planului de afaceri', icon='⭐') 
             ion = date_din_xlsx_date_solicitate.get('Cod CAEN', 'Cod CAEN necunoscut')
-            st.info(f"Vom începe prelucrarea firmei: {ion} cu prelucrarea pe codul CAEN: {caen_nr_extras} ")
+            st.info(f"Vom începe prelucrarea firmei: {ion} cu prelucrarea pe codul CAEN: {caen_nr_extras_foi} ")
             document2_succes = True
 
 with col3:
