@@ -237,7 +237,7 @@ with col4:
             with open(modified_doc_path, "rb") as file:
                 st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")  
         
-               st.info(f"Procesare Finalizata. Asteptati Butonul pt Descarcarea PA completat ")
+            st.info(f"Procesare Finalizata. Asteptati Butonul pt Descarcarea PA completat ")
             
     else:
         st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
