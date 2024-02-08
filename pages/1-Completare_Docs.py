@@ -63,14 +63,14 @@ with col2:
             document2_succes = True        
             
              # Afișarea datelor în format JSON
-            st.json({
+            """ st.json({
                 "Date Generale": informatii_firma,
                 "Informații Detaliate": {"Asociați": asociati_info, "Administratori": administratori_info},
                 "Situație Angajati": situatie_angajati,
                 "Coduri CAEN": coduri_caen
-            })
+            }) """
     else:
-        st.warning("Vă rugăm să încărcați și să procesați mai întâi date solicitate.xlsx")
+        st.warning("Vă rugăm să încărcați și să procesați 'date solicitate.xlsx' prima data")
     
 col3, col4 = st.columns(2)
 
