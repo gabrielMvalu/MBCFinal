@@ -8,21 +8,23 @@ from datesolicitate import extrage_date_solicitate
 from bilantsianaliza import extrage_date_bilant, extrage_date_contpp, extrage_indicatori_financiari
 from serviciisiutilaje import extrage_pozitii, coreleaza_date
 
-
 st.set_page_config(layout="wide")
 
-st.header(':blue[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
+st.header(':blue_book: Procesul de înlocuire a Placeholder-urilor', divider='rainbow')
 
-caen_nr_extras_foi = None
-judet_foi = None
-noua_veche_foi = None  # variabile pentru a selecta foile de extragere
+# Inițializare variabile în st.session_state dacă nu există deja
+if 'caen_nr_extras_foi' not in st.session_state:
+    st.session_state.caen_nr_extras_foi = None
+if 'judet_foi' not in st.session_state:
+    st.session_state.judet_foi = None
+if 'noua_veche_foi' not in st.session_state:
+    st.session_state.noua_veche_foi = None
 
 document_succes = False  
-document2_succes = False  # variabile pentru a ține evidența succesului procesării document
+document2_succes = False  
 
 datesolicitate_doc = None
-date_din_xlsx_date_solicitate = None # variabile necesare global
-
+date_din_xlsx_date_solicitate = None 
 
 col1, col2, col3 = st.columns(3)
 
@@ -31,28 +33,25 @@ with col1:
     st.success("Date Solicitate")
     
     if uploaded_doc1 is not None:
-        
         datesolicitate_doc = pd.read_excel(uploaded_doc1)
         date_din_xlsx_date_solicitate = extrage_date_solicitate(datesolicitate_doc)
         
         caen_extras = date_din_xlsx_date_solicitate.get('Cod CAEN', 'Cod CAEN necunoscut')
-        judet_foi = date_din_xlsx_date_solicitate.get('Județ', 'Cod CAEN necunoscut')
-        noua_veche_foi = date_din_xlsx_date_solicitate.get('Activitate', 'Cod CAEN necunoscut')
+        st.session_state.judet_foi = date_din_xlsx_date_solicitate.get('Județ', 'Judet necunoscut')
+        st.session_state.noua_veche_foi = date_din_xlsx_date_solicitate.get('Activitate', 'Activitate necunoscuta')
         
         firma = date_din_xlsx_date_solicitate.get('Denumirea firmei SRL', 'Firmă necunoscută')
         
         match = re.search(r'CAEN (\d+)', caen_extras)
-        # Verificăm si extragem numărul CAEN
         if match:
-            caen_nr_extras_foi = match.group(1)  
+            st.session_state.caen_nr_extras_foi = match.group(1)  
         else:
-            caen_nr_extras_foi = None 
+            st.session_state.caen_nr_extras_foi = None 
         
-        st.success(f"Vom începe prelucrarea firmei: {firma} cu prelucrarea pe codul CAEN: {caen_nr_extras_foi} - {caen_extras} ")
+        st.success(f"Vom începe prelucrarea firmei: {firma} cu prelucrarea pe codul CAEN: {st.session_state.caen_nr_extras_foi} - {caen_extras} ")
 
-        document_succes = True  # Setăm variabila pe True pentru a indica că primul document a fost procesat cu succes
+        document_succes = True  
 
-# Utilizarea celei de-a doua coloane pentru încărcarea celui de-al doilea document, dacă primul a fost procesat cu succes
 with col2:
     if document_succes:
         uploaded_doc2 = st.file_uploader("Încărcați al doilea document", type=["docx"], key="RaportInterogare")
@@ -62,18 +61,16 @@ with col2:
             template_doc = Document(uploaded_doc2)
             st.toast('Incepem procesarea Planului de afaceri', icon='⭐') 
             ion = date_din_xlsx_date_solicitate.get('Cod CAEN', 'Cod CAEN necunoscut')
-            st.info(f"Vom începe prelucrarea firmei: {ion} cu prelucrarea pe codul CAEN: {caen_nr_extras_foi} ")
+            st.info(f"Vom începe prelucrarea firmei: {ion} cu prelucrarea pe codul CAEN: {st.session_state.caen_nr_extras_foi} ")
             document2_succes = True
 
 with col3:
     if document2_succes:
         uploaded_doc3 = st.file_uploader("Încărcați al 3 lea document", type=["xlsx"], key="AnalizaMacheta")
-        st.success(f"Incepem prelucrarea analizei")
+        st.success("Incepem prelucrarea analizei")
         
         if uploaded_doc3 is not None:
-            st.success(f"Vom începe prelucrarea analizei financiare CAEN: {caen_nr_extras_foi} JUDET: {judet_foi} NOUA SAU VECHE: {noua_veche_foi} ")
-            
-
+            st.success(f"Vom începe prelucrarea analizei financiare CAEN: {st.session_state.caen_nr_extras_foi} JUDET: {st.session_state.judet_foi} NOUA SAU VECHE: {st.session_state.noua_veche_foi} ")
 
 
             
