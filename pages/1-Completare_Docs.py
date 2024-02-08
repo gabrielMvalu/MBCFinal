@@ -66,11 +66,14 @@ with col2:
             document2_succes = True
 
 with col3:
-    if document2_succes:
-        uploaded_doc3 = st.file_uploader("Încărcați al 3 lea document", type=["xlsx"], key="AnalizaMacheta")
+    if document2_succes:  # Această condiție presupune că documentul din col2 a fost încărcat și procesat cu succes
+        uploaded_doc3 = st.file_uploader("Încărcați al 3-lea document", type=["xlsx"], key="AnalizaMacheta")
         st.success("Incepem prelucrarea analizei")
         
         if uploaded_doc3 is not None:
-            st.success(f"Vom începe prelucrarea analizei financiare CAEN: {st.session_state.caen_nr_extras_foi} JUDET: {st.session_state.judet_foi} NOUA SAU VECHE: {st.session_state.noua_veche_foi} ")
+            # Asigurați-vă că valorile sunt disponibile în st.session_state înainte de a le utiliza
+            caen_nr_extras_foi = st.session_state.get('caen_nr_extras_foi', 'nedefinit')
+            judet_foi = st.session_state.get('judet_foi', 'nedefinit')
+            noua_veche_foi = st.session_state.get('noua_veche_foi', 'nedefinit')
 
-            
+            st.success(f"Vom începe prelucrarea analizei financiare CAEN: {caen_nr_extras_foi} JUDET: {judet_foi} NOUA SAU VECHE: {noua_veche_foi}")
