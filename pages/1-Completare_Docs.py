@@ -12,13 +12,14 @@ st.set_page_config(layout="wide")
 
 st.header(':blue[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
 
+
 # Inițializare variabile în st.session_state dacă nu există deja
 if 'caen_nr_extras_foi' not in st.session_state:
-    st.session_state.caen_nr_extras_foi = None
+    st.session_state['caen_nr_extras_foi'] = None
 if 'judet_foi' not in st.session_state:
-    st.session_state.judet_foi = None
+    st.session_state['judet_foi'] = None
 if 'noua_veche_foi' not in st.session_state:
-    st.session_state.noua_veche_foi = None
+    st.session_state['noua_veche_foi'] = None
 
 document_succes = False  
 document2_succes = False  
@@ -70,8 +71,6 @@ with col3:
         st.success("Incepem prelucrarea analizei")
         
         if uploaded_doc3 is not None:
-            template_doc3 = pd.read_excel(uploaded_doc3)
             st.success(f"Vom începe prelucrarea analizei financiare CAEN: {st.session_state.caen_nr_extras_foi} JUDET: {st.session_state.judet_foi} NOUA SAU VECHE: {st.session_state.noua_veche_foi} ")
-
 
             
