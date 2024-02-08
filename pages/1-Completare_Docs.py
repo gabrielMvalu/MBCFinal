@@ -200,6 +200,9 @@ with col4:
                 "#20NrLocMunca": str(solicitate_data.get('Procent 20% din total locuri munca nou create', 'N/A')),
                 "#zoneDN": str(solicitate_data.get('Zone vizate Prioritar', 'N/A')),
                 "#Iso14001": str(solicitate_data.get('Daca are sau nu iso14001', 'N/A')),
+                "#descriere_serviciu": str(solicitate_data.get('Descriere serviciului', 'N/A')),
+                "#piata_tinta": str(solicitate_data.get('Piata tinta', 'N/A')),
+                "#clientiFirma": str(solicitate_data.get('Clienți principali ai firmei', 'N/A')),
                                
                             
                 "#NAM20": str(situatie_angajati.get('Numar mediu angajati 2020', 'N/A')),
