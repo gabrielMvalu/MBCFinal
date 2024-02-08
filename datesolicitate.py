@@ -22,9 +22,9 @@ def extrage_date_suplimentare(judet, caen, tip_activitate):
             print(f"Foaia cu numele '{tip_activitate}' nu există.")
             df_tip_activitate = pd.DataFrame()
 
-    contributia_proiectului_la_TJ = df_judet.iloc[1, 1]
-    strategii_materiale = df_judet.iloc[2, 1]
-    strategii_reciclare = df_judet.iloc[3, 1]
+    contributia_proiectului_la_TJ = df_judet.iloc[0, 1]
+    strategii_materiale = df_judet.iloc[1, 1]
+    strategii_reciclare = df_judet.iloc[2, 1]
     
     activitate = df_caen.iloc[1, 1] 
     descriere_utilaj_reciclare = df_caen.iloc[2, 1]
@@ -40,9 +40,9 @@ def extrage_date_suplimentare(judet, caen, tip_activitate):
     descriere_serviciu = df_caen.iloc[12, 1]
     piata_tinta = df_caen.iloc[13, 1]
 
-    crestere_creare = df_tip_activitate.iloc[1, 1]
-    creareActivVizata = df_tip_activitate.iloc[2, 1]
-    dezavantajeConcurentiale = df_tip_activitate.iloc[3, 2]
+    crestere_creare = df_tip_activitate.iloc[0, 1]
+    creareActivVizata = df_tip_activitate.iloc[1, 1]
+    dezavantajeConcurentiale = df_tip_activitate.iloc[2, 2]
     
     data_foi = {
         #Variabile din foile ce pot fi nume judet
