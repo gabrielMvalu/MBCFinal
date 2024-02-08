@@ -48,7 +48,7 @@ with col1:
         else:
             caen_nr_extras_foi = None 
         
-        st.success(f"Vom începe prelucrarea firmei: {firma} cu prelucrarea pe codul CAEN: {caen_nr_extras_foi} - {caen_extras}")
+        st.success(f"Vom începe prelucrarea firmei: {firma} cu prelucrarea pe codul CAEN: {caen_nr_extras_foi} - {caen_extras} ")
 
         document_succes = True  # Setăm variabila pe True pentru a indica că primul document a fost procesat cu succes
 
@@ -71,7 +71,7 @@ with col3:
         st.success(f"Incepem prelucrarea analizei")
         
         if uploaded_doc3 is not None:
-            st.success(f"Vom începe prelucrarea analizei financiare CAEN:{caen_nr_extras_foi} JUDET:{judet_foi} NOUA SAU VECHE:{noua_veche_foi}")
+            st.success(f"Vom începe prelucrarea analizei financiare CAEN: {caen_nr_extras_foi} JUDET: {judet_foi} NOUA SAU VECHE: {noua_veche_foi} ")
             
 
 
