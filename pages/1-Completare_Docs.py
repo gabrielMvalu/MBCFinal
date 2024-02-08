@@ -163,7 +163,7 @@ with col4:
                 
                 "#caracteristici_tehnice": str(solicitate_data.get('Caracteristici tehnice utilaje', 'N/A')),
                 "#flux_tehnologic": str(solicitate_data.get('Fluxul tehnologic', 'N/A')),
-                "#utilajeDNSH": str(solicitate_data.get('Utilaje DNSH', 'N/A')),
+                "#utilajeDNSH": str(solicitate_data.get('DNSH pentru utilaje', 'N/A')),
 
                 
                 "#descriere_utilaj_ghidare": str(solicitate_data.get('Descrierea utilaj ghidare', 'N/A')),               
