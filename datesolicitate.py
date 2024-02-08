@@ -38,7 +38,7 @@ def extrage_date_suplimentare(judet, caen, tip_activitate):
     reciclareaMaterialelor = df_caen.iloc[10, 1]
     clientiFirma = df_caen.iloc[11, 1]
     descriere_serviciu = df_caen.iloc[12, 1]
-    piata_tinta = df_caen.iloc[13, 1]
+    piata_tinta = df_caen.iloc[0, 1]
 
     crestere_creare = df_tip_activitate.iloc[0, 1]
     creareActivVizata = df_tip_activitate.iloc[1, 1]
