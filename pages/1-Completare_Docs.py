@@ -77,6 +77,6 @@ with col4:
             
             st.info(f"Vom începe prelucrarea analizei financiare CAEN: {caen_nr_extras_foi} JUDET: {judet_foi} NOUA SAU VECHE: {noua_veche_foi}")
             
-        else:
-            st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
+    else:
+        st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
             
