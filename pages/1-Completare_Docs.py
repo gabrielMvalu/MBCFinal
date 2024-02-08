@@ -13,14 +13,6 @@ st.set_page_config(layout="wide")
 st.header(':blue[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
 
 
-# Inițializare variabile în st.session_state dacă nu există deja
-if 'caen_nr_extras_foi' not in st.session_state:
-    st.session_state['caen_nr_extras_foi'] = None
-if 'judet_foi' not in st.session_state:
-    st.session_state['judet_foi'] = None
-if 'noua_veche_foi' not in st.session_state:
-    st.session_state['noua_veche_foi'] = None
-
 document_succes = False  
 document2_succes = False
 document3_succes = False
@@ -44,36 +36,21 @@ with col2:
         uploaded_doc2 = st.file_uploader("Încărcați al doilea document", type=["docx"], key="RaportInterogare")
         if uploaded_doc2 is not None:
             template_doc = Document(uploaded_doc2)
-           
             st.info(f"Vom începe prelucrar")
-            document2_succes = True
-        
-        
+            document2_succes = True        
     else:
         st.warning("Vă rugăm să încărcați și să procesați mai întâi documentul din prima coloană.")
     
-
 col3, col4 = st.columns(2)
-
-
-
-
 
 with col3:
     if document2_succes:
         uploaded_doc3 = st.file_uploader("Încărcați al 3-lea document", type=["xlsx"], key="AnalizaMacheta")
         if uploaded_doc3 is not None:
-            caen_nr_extras_foi = st.session_state.get('caen_nr_extras_foi', 'nedefinit')
-            judet_foi = st.session_state.get('judet_foi', 'nedefinit')
-            noua_veche_foi = st.session_state.get('noua_veche_foi', 'nedefinit')
             st.success(f"Vom începe")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
-
-
-
-
 
 
 with col4:
