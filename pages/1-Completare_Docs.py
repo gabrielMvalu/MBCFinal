@@ -162,7 +162,7 @@ with col4:
                 "#concluzie_CA": str(solicitate_data.get('Concluzie cifra de afaceri', 'N/A')),
                 
                 "#caracteristici_tehnice": str(solicitate_data.get('Caracteristici tehnice utilaje', 'N/A')),
-                "#flux_tehnologic": str(solicitate_data.get('Flux tehnologic', 'N/A')),
+                "#flux_tehnologic": str(solicitate_data.get('Fluxul tehnologic', 'N/A')),
                 "#utilajeDNSH": str(solicitate_data.get('Utilaje DNSH', 'N/A')),
 
                 
@@ -191,8 +191,8 @@ with col4:
                 "#CrestCreare": str(solicitate_data.get('Creșterea sau crearea de noi surse de venit', 'N/A')),
                 "#CreareActivVizata": str(solicitate_data.get('Crearea de activități în domeniul vizat', 'N/A')),
                 "#DezavantajeConcurentiale": str(solicitate_data.get('Identificarea dezavantajelor concurențiale', 'N/A')),
-                "#30nrLocMunca": str(solicitate_data.get('Locuri Noi Create 30%', 'N/A')),
-                "#20NrLocMunca": str(solicitate_data.get('Locuri Noi Create 20%', 'N/A')),
+                "#30nrLocMunca": str(solicitate_data.get('Procent 30% din total locuri munca nou create', 'N/A')),
+                "#20NrLocMunca": str(solicitate_data.get('Procent 20% din total locuri munca nou create', 'N/A')),
                 "#zoneDN": str(solicitate_data.get('Zone vizate Prioritar', 'N/A')),
                 "#Iso14001": str(solicitate_data.get('Daca are sau nu iso14001', 'N/A')),
                             
