@@ -41,11 +41,12 @@ with col2:
             situatie_angajati = extrage_situatie_angajati(constatator_doc)
             full_text_constatator = "\n".join([p.text for p in constatator_doc.paragraphs])
             coduri_caen = extrage_coduri_caen(full_text_constatator)
+            
             def curata_duplicate_coduri_caen(coduri_caen):
-            coduri_unice = {}
-            for cod, descriere in coduri_caen:
-                coduri_unice[cod] = descriere
-            return list(coduri_unice.items())
+                coduri_unice = {}
+                for cod, descriere in coduri_caen:
+                    coduri_unice[cod] = descriere
+                return list(coduri_unice.items())
     
             coduri_caen_curatate = curata_duplicate_coduri_caen(coduri_caen)
             
