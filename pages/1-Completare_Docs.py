@@ -23,7 +23,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     uploaded_doc1 = st.file_uploader("Încărcați fișierul Date Solicitate", type=["xlsx"], key="dateSolicitate")
-    st.success("DATE SOLICITATE")
+    st.success("Date Solicitate")
     
     if uploaded_doc1 is not None:
         
