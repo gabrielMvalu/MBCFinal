@@ -1,6 +1,8 @@
 import pandas as pd
 
 def extrage_date_suplimentare(judet, caen, tip_activitate):
+    data_foi = {}
+    
     with pd.ExcelFile('./variabile/machetaVariabile.xlsx') as xls:
         sheet_names = xls.sheet_names
         if judet in sheet_names:
