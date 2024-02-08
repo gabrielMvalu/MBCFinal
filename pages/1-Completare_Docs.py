@@ -96,7 +96,7 @@ with col3:
 
 
             
-            st.success(f"Vom incepe prelucrarea datelor din Analiza Financiara")
+            st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul,{st.session_state.codCAEN} ")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
