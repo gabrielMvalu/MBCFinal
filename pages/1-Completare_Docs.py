@@ -94,7 +94,9 @@ with col3:
                 rezultate_corelate, rezultate_corelate1, rezultate_corelate2 = coreleaza_date(date_financiare)
                 rezultate2_text = '\n'.join([f"{descriere}" for nume, _, descriere in rezultate_corelate2])
 
-
+            capital_propriu = extrage_date_bilant(df_bilant)
+            cifra_venit_rezultat = extrage_date_contpp(df_contpp)
+            rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
             
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul,{st.session_state.codCAEN} ")
             document3_succes = True
