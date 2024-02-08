@@ -25,7 +25,7 @@ document_succes = False
 document2_succes = False
 document3_succes = False
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2 = st.columns(2)
 
 with col1:
     uploaded_doc1 = st.file_uploader("Încărcați fișierul Date Solicitate", type=["xlsx"], key="dateSolicitate")
@@ -57,6 +57,8 @@ with col2:
             document2_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați mai întâi documentul din prima coloană.")
+
+col3, col4 = st.columns(2)
 
 with col3:
     if document2_succes:
