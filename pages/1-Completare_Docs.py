@@ -121,7 +121,7 @@ with col4:
 
             # Preia și prelucrează valoarea pentru 'Nr clasare notificare'
             cDNSH_temp = solicitate_data.get('Detalii DNSH - C', 'N/A')
-            cDNSH_complet = reciclareaMaterialelor_temp.replace("#nr_clasare_notificare", nr_clasare_notificare_pt_inlocuire)
+            cDNSH_complet = cDNSH_temp.replace("#nr_clasare_notificare", nr_clasare_notificare_pt_inlocuire)
 
             
             placeholders = {
