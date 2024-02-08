@@ -28,6 +28,8 @@ with col1:
         firma = solicitate_data.get('Denumirea firmei SRL', 'N/A')
         st.success(f"Start proces completare pt: {firma}")
         document_succes = True
+        st.json({"Date extrase": solicitate_data})
+
 
 with col2:
     if document_succes:
