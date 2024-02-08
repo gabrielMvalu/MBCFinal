@@ -22,10 +22,8 @@ if 'noua_veche_foi' not in st.session_state:
     st.session_state['noua_veche_foi'] = None
 
 document_succes = False  
-document2_succes = False  
-
-datesolicitate_doc = None
-date_din_xlsx_date_solicitate = None 
+document2_succes = False
+document3_succes = False
 
 col1, col2, col3 = st.columns(3)
 
@@ -54,7 +52,6 @@ with col2:
         uploaded_doc2 = st.file_uploader("Încărcați al doilea document", type=["docx"], key="RaportInterogare")
         if uploaded_doc2 is not None:
             template_doc = Document(uploaded_doc2)
-            st.toast('Incepem procesarea Planului de afaceri', icon='⭐')
             ion = date_din_xlsx_date_solicitate.get('Cod CAEN', 'Cod CAEN necunoscut')
             st.info(f"Vom începe prelucrarea firmei: {ion} cu prelucrarea pe codul CAEN: {st.session_state.caen_nr_extras_foi}")
             document2_succes = True
@@ -69,5 +66,17 @@ with col3:
             judet_foi = st.session_state.get('judet_foi', 'nedefinit')
             noua_veche_foi = st.session_state.get('noua_veche_foi', 'nedefinit')
             st.success(f"Vom începe prelucrarea analizei financiare CAEN: {caen_nr_extras_foi} JUDET: {judet_foi} NOUA SAU VECHE: {noua_veche_foi}")
+            document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
+
+with col4:
+    if document3_succes:
+        uploaded_doc4 = st.file_uploader("Încărcați al 4-lea document", type=["docx"], key="MachetaPA")
+        if uploaded_doc4 is not None:
+            
+            st.info(f"Vom începe prelucrarea analizei financiare CAEN: {caen_nr_extras_foi} JUDET: {judet_foi} NOUA SAU VECHE: {noua_veche_foi}")
+            
+        else:
+            st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
+            
