@@ -156,9 +156,11 @@ with col4:
                 "#info_ctr_implementare": str(solicitate_data.get('Informații despre contractul de implementare', 'N/A')),
                 "#zonele_vizate_prioritar": str(solicitate_data.get('Zonele vizate prioritare', 'N/A')),
                 "#utilaj_ghidare": str(solicitate_data.get('Utilaj de ghidare', 'N/A')),
-                "#legaturi": str(solicitate_data.get('Legături', 'N/A')),
-                "#rude": str(solicitate_data.get('Rude în cadrul firmei', 'N/A')),
-                "#concluzie_CA": str(solicitate_data.get('Concluzie_CA', 'N/A')),
+                
+                "#legaturi": str(solicitate_data.get('Legaturi', 'N/A')),
+                "#rude": str(solicitate_data.get('Rude', 'N/A')),
+                "#concluzie_CA": str(solicitate_data.get('Concluzie cifra de afaceri', 'N/A')),
+                
                 "#caracteristici_tehnice": str(solicitate_data.get('Caracteristici tehnice relevante', 'N/A')),
                 "#flux_tehnologic": str(solicitate_data.get('Flux tehnologic', 'N/A')),
                 "#utilajeDNSH": str(solicitate_data.get('Utilaje DNSH', 'N/A')),
