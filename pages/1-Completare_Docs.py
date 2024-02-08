@@ -27,6 +27,9 @@ document3_succes = False
 
 col1, col2 = st.columns(2)
 
+
+
+
 with col1:
     uploaded_doc1 = st.file_uploader("Încărcați fișierul Date Solicitate", type=["xlsx"], key="dateSolicitate")
     if uploaded_doc1 is not None:
@@ -60,6 +63,10 @@ with col2:
 
 col3, col4 = st.columns(2)
 
+
+
+
+
 with col3:
     if document2_succes:
         uploaded_doc3 = st.file_uploader("Încărcați al 3-lea document", type=["xlsx"], key="AnalizaMacheta")
@@ -72,12 +79,17 @@ with col3:
     else:
         st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
 
+
+
+
+
+
 with col4:
     if document3_succes:
         uploaded_doc4 = st.file_uploader("Încărcați al 4-lea document", type=["docx"], key="MachetaPA")
         if uploaded_doc4 is not None:
             
-            st.info(f"Vom începe prelucrarea analizei financiare CAEN: {caen_nr_extras_foi} JUDET: {judet_foi} NOUA SAU VECHE: {noua_veche_foi}")
+            st.info(f"Vom începe prelucrarea analizei financiare FIRMA: {firma} JUDET: {judet_foi} NOUA SAU VECHE: {noua_veche_foi}")
             
     else:
         st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
