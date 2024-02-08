@@ -200,6 +200,7 @@ with col4:
                 "#20NrLocMunca": str(solicitate_data.get('Procent 20% din total locuri munca nou create', 'N/A')),
                 "#zoneDN": str(solicitate_data.get('Zone vizate Prioritar', 'N/A')),
                 "#Iso14001": str(solicitate_data.get('Daca are sau nu iso14001', 'N/A')),
+                               
                             
                 "#NAM20": str(situatie_angajati.get('Numar mediu angajati 2020', 'N/A')),
                 "#NAM21": str(situatie_angajati.get('Numar mediu angajati 2021', 'N/A')),
