@@ -30,32 +30,24 @@ col1, col2 = st.columns(2)
 with col1:
     uploaded_doc1 = st.file_uploader("Încărcați fișierul Date Solicitate", type=["xlsx"], key="dateSolicitate")
     if uploaded_doc1 is not None:
-        datesolicitate_doc = pd.read_excel(uploaded_doc1)
-        date_din_xlsx_date_solicitate = extrage_date_solicitate(datesolicitate_doc)
         
-        caen_extras = date_din_xlsx_date_solicitate.get('Cod CAEN', 'Cod CAEN necunoscut')
-        st.session_state.judet_foi = date_din_xlsx_date_solicitate.get('Județ', 'Judet necunoscut')
-        st.session_state.noua_veche_foi = date_din_xlsx_date_solicitate.get('Tip activitate', 'Tipul activitate necunoscut')
-        
-        firma = date_din_xlsx_date_solicitate.get('Denumirea firmei SRL', 'Firmă necunoscută')
-
-                
-        match = re.search(r'CAEN (\d+)', caen_extras)
-        if match:
-            st.session_state.caen_nr_extras_foi = match.group(1)
-        else:
-            st.session_state.caen_nr_extras_foi = None
-        
-        st.success(f"Vom începe prelucrarea firmei: {firma} cu prelucrarea pe codul CAEN: {st.session_state.caen_nr_extras_foi} - {caen_extras}")
+        df = pd.read_excel(uploaded_doc1)
+        solicitate_data = extrage_date_solicitate(df)
+        st.success(f"Vom prelucra")
         document_succes = True
+        
+        st.json({"Date Solicitate": solicitate_data})    
+        
+        
+
+
 
 with col2:
     if document_succes:
         uploaded_doc2 = st.file_uploader("Încărcați al doilea document", type=["docx"], key="RaportInterogare")
         if uploaded_doc2 is not None:
             template_doc = Document(uploaded_doc2)
-            ion = date_din_xlsx_date_solicitate.get('Cod CAEN', 'Cod CAEN necunoscut')
-            st.info(f"Vom începe prelucrarea firmei: {ion} cu prelucrarea pe codul CAEN: {st.session_state.caen_nr_extras_foi}")
+            st.info(f"Vom începe prelucrar")
             document2_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați mai întâi documentul din prima coloană.")
@@ -73,7 +65,7 @@ with col3:
             caen_nr_extras_foi = st.session_state.get('caen_nr_extras_foi', 'nedefinit')
             judet_foi = st.session_state.get('judet_foi', 'nedefinit')
             noua_veche_foi = st.session_state.get('noua_veche_foi', 'nedefinit')
-            st.success(f"Vom începe prelucrarea analizei financiare CAEN: {caen_nr_extras_foi} JUDET: {judet_foi} NOUA SAU VECHE: {noua_veche_foi}")
+            st.success(f"Vom începe")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
@@ -88,7 +80,7 @@ with col4:
         uploaded_doc4 = st.file_uploader("Încărcați al 4-lea document", type=["docx"], key="MachetaPA")
         if uploaded_doc4 is not None:
             
-            st.info(f"Vom începe prelucrarea analizei financiare FIRMA: {firma} JUDET: {judet_foi} NOUA SAU VECHE: {noua_veche_foi}")
+            st.info(f"Vom începe ")
             
     else:
         st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
