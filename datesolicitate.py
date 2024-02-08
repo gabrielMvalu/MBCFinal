@@ -148,7 +148,7 @@ def extrage_date_solicitate(df):
         "Descrierea utilaj ghidare": utilaj_ghidare_descriere,
         "Tipul investitiei": dacaTipInvest,
         "Procent 30% din total locuri munca nou create": nrlocmunca30,
-        "Procent 30% din total locuri munca nou create": nrlocmunca20,
+        "Procent 20% din total locuri munca nou create": nrlocmunca20,
         "Zone vizate Prioritar": zoneDN,
         "Daca are sau nu iso14001": iso14001,
     }
