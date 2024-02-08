@@ -10,7 +10,7 @@ from serviciisiutilaje import extrage_pozitii, coreleaza_date
 
 st.set_page_config(layout="wide")
 
-st.header(':blue[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
+st.header(':blue[Procese pentru inlocuirea 'Variabile' si completarea Machete PA / CF]', divider='rainbow')
 
 nr_CAEN = None
 document_succes = False  
