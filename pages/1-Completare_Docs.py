@@ -27,9 +27,6 @@ document3_succes = False
 
 col1, col2 = st.columns(2)
 
-
-
-
 with col1:
     uploaded_doc1 = st.file_uploader("Încărcați fișierul Date Solicitate", type=["xlsx"], key="dateSolicitate")
     if uploaded_doc1 is not None:
@@ -41,6 +38,8 @@ with col1:
         st.session_state.noua_veche_foi = date_din_xlsx_date_solicitate.get('Tip activitate', 'Tipul activitate necunoscut')
         
         firma = date_din_xlsx_date_solicitate.get('Denumirea firmei SRL', 'Firmă necunoscută')
+
+                
         match = re.search(r'CAEN (\d+)', caen_extras)
         if match:
             st.session_state.caen_nr_extras_foi = match.group(1)
