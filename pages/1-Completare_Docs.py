@@ -37,7 +37,7 @@ with col1:
         
         caen_extras = date_din_xlsx_date_solicitate.get('Cod CAEN', 'Cod CAEN necunoscut')
         st.session_state.judet_foi = date_din_xlsx_date_solicitate.get('Județ', 'Judet necunoscut')
-        st.session_state.noua_veche_foi = date_din_xlsx_date_solicitate.get('Activitate', 'Activitate necunoscuta')
+        st.session_state.noua_veche_foi = date_din_xlsx_date_solicitate.get('Tip activitate', 'Tipul activitate necunoscut')
         
         firma = date_din_xlsx_date_solicitate.get('Denumirea firmei SRL', 'Firmă necunoscută')
         match = re.search(r'CAEN (\d+)', caen_extras)
@@ -59,7 +59,7 @@ with col2:
             st.info(f"Vom începe prelucrarea firmei: {ion} cu prelucrarea pe codul CAEN: {st.session_state.caen_nr_extras_foi}")
             document2_succes = True
     else:
-        st.error("Vă rugăm să încărcați și să procesați mai întâi documentul din prima coloană.")
+        st.warning("Vă rugăm să încărcați și să procesați mai întâi documentul din prima coloană.")
 
 with col3:
     if document2_succes:
@@ -70,4 +70,4 @@ with col3:
             noua_veche_foi = st.session_state.get('noua_veche_foi', 'nedefinit')
             st.success(f"Vom începe prelucrarea analizei financiare CAEN: {caen_nr_extras_foi} JUDET: {judet_foi} NOUA SAU VECHE: {noua_veche_foi}")
     else:
-        st.error("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
+        st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
