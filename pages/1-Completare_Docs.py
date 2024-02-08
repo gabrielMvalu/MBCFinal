@@ -36,10 +36,6 @@ with col1:
         st.success(f"Vom prelucra")
         document_succes = True
         
-st.json({"Date Solicitate": solicitate_data})    
-        
-        
-
 
 
 with col2:
