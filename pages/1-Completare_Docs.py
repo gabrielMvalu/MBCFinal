@@ -106,7 +106,7 @@ with col3:
 
 with col4:
     if document3_succes:
-        uploaded_template = st.file_uploader("Încărcați al 4-lea document", type=["docx"], key="MachetaPA")
+        uploaded_template = st.file_uploader("Încărcați MACHETA pt procesarea finala.", type=["docx"], key="MachetaPA")
         if uploaded_template is not None:
             template_doc = Document(uploaded_template)
             st.toast('Incepem procesarea Planului de afaceri', icon='⭐')    
