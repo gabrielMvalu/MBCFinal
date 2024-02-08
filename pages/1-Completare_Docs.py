@@ -108,7 +108,8 @@ with col4:
     if document3_succes:
         uploaded_template = st.file_uploader("Încărcați al 4-lea document", type=["docx"], key="MachetaPA")
         if uploaded_template is not None:
-            
+            template_doc = Document(uploaded_template)
+            st.toast('Incepem procesarea Planului de afaceri', icon='⭐')            
             placeholders = {
                 "#SRL": str(informatii_firma.get('Denumirea firmei', 'N/A')),
                 "#CUI": str(informatii_firma.get('Codul unic de înregistrare (CUI)', 'N/A')),
