@@ -42,7 +42,7 @@ def extrage_date_suplimentare(judet, caen, tip_activitate):
 
     crestere_creare = df_tip_activitate.iloc[0, 1]
     creareActivVizata = df_tip_activitate.iloc[1, 1]
-    dezavantajeConcurentiale = df_tip_activitate.iloc[2, 2]
+    dezavantajeConcurentiale = df_tip_activitate.iloc[2, 1]
     
     data_foi = {
         #Variabile din foile ce pot fi nume judet
