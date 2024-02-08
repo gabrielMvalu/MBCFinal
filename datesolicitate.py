@@ -52,6 +52,13 @@ def extrage_date_solicitate(df):
         "Informații despre contractul de implementare": info_ctr_implementare,
         "Zonele vizate prioritare": zonele_vizate_prioritar,
         "Utilaj de ghidare": utilaj_ghidare,
+        "Legaturi": legaturi,
+        "Rude": rude,
+        "Concluzie cifra de afaceri": concluzie_CA,
+        "Caracteristici tehnice utilaje": caracteristici_tehnice,
+        "Fluxul tehnologic": flux_tehnologic,
+        "DNSH pentru utilaje": utilajeDNSH,
+        "Descrierea utilaj ghidare": utilaj_ghidare_descriere,
     
     }
 
