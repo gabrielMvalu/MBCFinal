@@ -162,8 +162,12 @@ with col4:
                 "#caracteristici_tehnice": str(solicitate_data.get('Caracteristici tehnice relevante', 'N/A')),
                 "#flux_tehnologic": str(solicitate_data.get('Flux tehnologic', 'N/A')),
                 "#utilajeDNSH": str(solicitate_data.get('Utilaje DNSH', 'N/A')),
-                "#descriere_utilaj_ghidare": str(solicitate_data.get('Descriere utilaj ghidare', 'N/A')),
-                "#descriere_utilaj_reciclare": str(solicitate_data.get('Descriere utilaj reciclare', 'N/A')),
+
+                
+                "#descriere_utilaj_ghidare": str(solicitate_data.get('Descrierea utilaj ghidare', 'N/A')),               
+                "#descriere_utilaj_reciclare": str(solicitate_data.get('Descrierea utilaj reciclare', 'N/A')),
+
+                
                 "#contributia_proiectului_la_TJ": str(solicitate_data.get('Contribuția proiectului la tranziția justă', 'N/A')),
                 "#strategii_materiale": str(solicitate_data.get('Strategii materiale', 'N/A')),
                 "#strategii_reciclate": str(solicitate_data.get('Strategii materiale reciclate', 'N/A')),
