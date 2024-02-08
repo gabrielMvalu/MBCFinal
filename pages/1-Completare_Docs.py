@@ -64,7 +64,7 @@ with col3:
         st.success(f"Incepem prelucrarea analizei")
         
         if uploaded_doc3 is not None:
-            st.info(f"Vom începe prelucrarea firmei: {ion} cu prelucrarea pe codul CAEN: {caen_nr_extras} ")
+            st.success(f"Vom începe prelucrarea analizei financiare")
             
 
 
