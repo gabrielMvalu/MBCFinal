@@ -13,11 +13,15 @@ st.set_page_config(layout="wide")
 
 st.header(':blue[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
 
-caen_nr_extras = None
+caen_nr_extras_foi = None
+judet_foi = None
+noua_veche_foi = None  # variabile pentru a selecta foile de extragere
+
 document_succes = False  
 document2_succes = False  # variabile pentru a ține evidența succesului procesării document
+
 datesolicitate_doc = None
-date_din_xlsx_date_solicitate = None
+date_din_xlsx_date_solicitate = None # variabile necesare global
 
 
 col1, col2, col3 = st.columns(3)
@@ -32,14 +36,17 @@ with col1:
         date_din_xlsx_date_solicitate = extrage_date_solicitate(datesolicitate_doc)
         
         caen_extras = date_din_xlsx_date_solicitate.get('Cod CAEN', 'Cod CAEN necunoscut')
+        judet_foi = date_din_xlsx_date_solicitate.get('Județ', 'Cod CAEN necunoscut')
+        noua_veche_foi = date_din_xlsx_date_solicitate.get('Activitate', 'Cod CAEN necunoscut')
+        
         firma = date_din_xlsx_date_solicitate.get('Denumirea firmei SRL', 'Firmă necunoscută')
         
         match = re.search(r'CAEN (\d+)', caen_extras)
         # Verificăm si extragem numărul CAEN
         if match:
-            caen_nr_extras = match.group(1)  
+            caen_nr_extras_foi = match.group(1)  
         else:
-            caen_nr_extras = None 
+            caen_nr_extras_foi = None 
         
         st.success(f"Vom începe prelucrarea firmei: {firma} cu prelucrarea pe codul CAEN: {caen_nr_extras} - {caen_extras}")
 
@@ -64,7 +71,7 @@ with col3:
         st.success(f"Incepem prelucrarea analizei")
         
         if uploaded_doc3 is not None:
-            st.success(f"Vom începe prelucrarea analizei financiare")
+            st.success(f"Vom începe prelucrarea analizei financiare CAEN:{caen_nr_extras_foi} JUDET:{judet_foi} NOUA SAU VECHE:{noua_veche_foi}")
             
 
 
