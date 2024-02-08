@@ -59,7 +59,7 @@ with col2:
 
 
             
-            st.info(f"Prelucrarea 'Rapor Interogare - {firma}' este completa")
+            st.info(f"Prelucrarea 'Rapor Interogare' al {firma}, este completa.")
             document2_succes = True        
             
              # Afișarea datelor în format JSON
