@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def extrage_date_suplimentare(judet, caen, tip_activitate):
-    
+    data_foi = {}
     with pd.ExcelFile('./variabile/machetaVariabile.xlsx') as xls:
         df_judet = pd.read_excel(xls, sheet_name=judet)
         df_caen = pd.read_excel(xls, sheet_name=caen)
