@@ -1,12 +1,6 @@
 import pandas as pd
 
 
-contributia_proiectului_la_TJ = None
-strategii_materiale = None
-strategii_reciclare = None
-  
-
-
 def extrage_date_suplimentare(judet, caen, tip_activitate):
     data_foi = {}
     
@@ -74,7 +68,7 @@ def extrage_date_suplimentare(judet, caen, tip_activitate):
         "Piata tinta": piata_tinta,
 
         #Variabile din foi ce pot fi veche sau nou
-        "Creșterea și crearea de noi activități": crestCreare,
+        "Creșterea și crearea de noi activități": crestere_creare,
         "Crearea de activități în domeniul vizat": creareActivVizata,
         "Identificarea dezavantajelor concurențiale": dezavantajeConcurentiale, 
     }
