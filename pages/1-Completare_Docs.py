@@ -109,7 +109,16 @@ with col4:
         uploaded_template = st.file_uploader("Încărcați al 4-lea document", type=["docx"], key="MachetaPA")
         if uploaded_template is not None:
             template_doc = Document(uploaded_template)
-            st.toast('Incepem procesarea Planului de afaceri', icon='⭐')            
+            st.toast('Incepem procesarea Planului de afaceri', icon='⭐')    
+
+            # Preia valoarea pentru 'Utilaj cu tocător'
+            utilaj_cu_tocator_pt_inlocuire = solicitate_data.get('Utilaj cu tocător', 'N/A')
+            
+            # Preia și prelucrează valoarea pentru 'Procesul de reciclare a materialelor'
+            reciclareaMaterialelor_temp = solicitate_data.get('Procesul de reciclare a materialelor', 'N/A')
+            reciclareaMaterialelor_complet = reciclareaMaterialelor_temp.replace("#utilaj_cu_tocator", utilaj_cu_tocator_pt_inlocuire)
+
+            
             placeholders = {
                 "#SRL": str(informatii_firma.get('Denumirea firmei', 'N/A')),
                 "#CUI": str(informatii_firma.get('Codul unic de înregistrare (CUI)', 'N/A')),
@@ -167,7 +176,7 @@ with col4:
                 "#dDNSH": str(solicitate_data.get('Detalii DNSH - D', 'N/A')),
                 "#materiale_locale": str(solicitate_data.get('Utilizarea materialelor locale', 'N/A')),
                 "#PregatireaTeren": str(solicitate_data.get('Pregătirea terenului pentru lucrări', 'N/A')),
-                "#ReciclareaMaterialelor": str(solicitate_data.get('Procesul de reciclare a materialelor', 'N/A')),
+                "#ReciclareaMaterialelor": str(reciclareaMaterialelor_complet),
                 "#clientiFirma": str(solicitate_data.get('Clienți principali ai firmei', 'N/A')),
                 "#DacaTipInvest": str(solicitate_data.get('Tipul investiției planificate', 'N/A')),
                 "#crearea": str(solicitate_data.get('Crearea de noi oportunități', 'N/A')),
