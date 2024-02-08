@@ -2,28 +2,11 @@ import pandas as pd
 
 
 def extrage_date_suplimentare(judet, caen, tip_activitate):
-    data_foi = {}
     
     with pd.ExcelFile('./variabile/machetaVariabile.xlsx') as xls:
-        sheet_names = xls.sheet_names
-        if judet in sheet_names:
-            df_judet = pd.read_excel(xls, sheet_name=judet)
-        else:
-            print(f"Foaia cu numele '{judet}' nu există.")
-            df_judet = pd.DataFrame()  # Creează un DataFrame gol pentru a evita erorile în codul ulterior
-        
-        caen_str = str(caen)  # Asigură-te că 'caen' este un șir de caractere
-        if caen_str in sheet_names:
-            df_caen = pd.read_excel(xls, sheet_name=caen_str)
-        else:
-            print(f"Foaia cu numele '{caen_str}' nu există.")
-            df_caen = pd.DataFrame()
-
-        if tip_activitate in sheet_names:
-            df_tip_activitate = pd.read_excel(xls, sheet_name=tip_activitate)
-        else:
-            print(f"Foaia cu numele '{tip_activitate}' nu există.")
-            df_tip_activitate = pd.DataFrame()
+        df_judet = pd.read_excel(xls, sheet_name=judet)
+        df_caen = pd.read_excel(xls, sheet_name=caen)
+        df_activitate = pd.read_excel(xls, sheet_name=activitate)
 
     contributia_proiectului_la_TJ = df_judet.iloc[0, 1]
     strategii_materiale = df_judet.iloc[1, 1]
