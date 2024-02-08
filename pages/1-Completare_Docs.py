@@ -113,10 +113,15 @@ with col4:
 
             # Preia valoarea pentru 'Utilaj cu tocător'
             utilaj_cu_tocator_pt_inlocuire = solicitate_data.get('Utilaj cu tocător', 'N/A')
+            nr_clasare_notificare_pt_inlocuire = solicitate_data.get('Număr clasare notificare', 'N/A')
             
             # Preia și prelucrează valoarea pentru 'Procesul de reciclare a materialelor'
             reciclareaMaterialelor_temp = solicitate_data.get('Procesul de reciclare a materialelor', 'N/A')
             reciclareaMaterialelor_complet = reciclareaMaterialelor_temp.replace("#utilaj_cu_tocator", utilaj_cu_tocator_pt_inlocuire)
+
+            # Preia și prelucrează valoarea pentru 'Nr clasare notificare'
+            cDNSH_temp = solicitate_data.get('Detalii DNSH - C', 'N/A')
+            cDNSH_complet = reciclareaMaterialelor_temp.replace("#nr_clasare_notificare", nr_clasare_notificare_pt_inlocuire)
 
             
             placeholders = {
@@ -178,7 +183,7 @@ with col4:
                 "#lucrari_inovatie": str(solicitate_data.get('Inovații în lucrări', 'N/A')),
                 "#lucrari_caen": str(solicitate_data.get('Lucrări conform codurilor CAEN', 'N/A')),
                 "#aDNSH": str(solicitate_data.get('Detalii DNSH - A', 'N/A')),
-                "#cDNSH": str(solicitate_data.get('Detalii DNSH - C', 'N/A')),
+                "#cDNSH": str(cDNSH_complet),
                 "#dDNSH": str(solicitate_data.get('Detalii DNSH - D', 'N/A')),
                 "#materiale_locale": str(solicitate_data.get('Utilizarea materialelor locale', 'N/A')),
                 "#PregatireaTeren": str(solicitate_data.get('Pregătirea terenului pentru lucrări', 'N/A')),
