@@ -14,12 +14,13 @@ st.set_page_config(layout="wide")
 st.header(':blue[Procesul de înlocuire a Placeholder-urilor]', divider='rainbow')
 
 caen_nr_extras = None
-document_succes = False   # variabilă pentru a ține evidența succesului procesării primului document
+document_succes = False  
+document2_succes = False  # variabile pentru a ține evidența succesului procesării document
 datesolicitate_doc = None
 date_din_xlsx_date_solicitate = None
 
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     uploaded_doc1 = st.file_uploader("Încărcați fișierul Date Solicitate", type=["xlsx"], key="dateSolicitate")
@@ -55,6 +56,13 @@ with col2:
             st.toast('Incepem procesarea Planului de afaceri', icon='⭐') 
             ion = date_din_xlsx_date_solicitate.get('Cod CAEN', 'Cod CAEN necunoscut')
             st.info(f"Vom începe prelucrarea firmei: {ion} cu prelucrarea pe codul CAEN: {caen_nr_extras} ")
+            document2_succes = True
+
+with col3:
+    if document2_succes:
+        uploaded_doc3 = st.file_uploader("Încărcați al 3 lea document", type=["xlsx"], key="AnalizaMacheta")
+        st.success(f"Incepem prelucrarea analizei")
+
 
 
             
