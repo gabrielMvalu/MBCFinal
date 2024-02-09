@@ -257,14 +257,14 @@ with col4:
                         if placeholder in run.text:
                             run.text = run.text.replace(placeholder, value)
         
-            modified_doc_path = "plan_afaceri_completat.docx"
-            template_doc.save(modified_doc_path)
-        
-            with open(modified_doc_path, "rb") as file:
-                st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")  
-        
-            st.info(f"Procesare Finalizata. Asteptati Butonul pt Descarcarea PA completat ")
+            template_doc.save("plan_afaceri_completat.docx")
+
+            st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")            
+
+            with open("plan_afaceri_completat.docx", "rb") as file:
+                st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+
             
     else:
-        st.warning("Vă rugăm să încărcați și să procesați documentele din primele două coloane.")
+        st.warning("Vă rugăm să încărcați și să procesați documentele din primele coloane.")
             
