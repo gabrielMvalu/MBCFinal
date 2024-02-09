@@ -13,7 +13,7 @@ st.set_page_config(layout="wide")
 st.header(':blue[Procese pentru inlocuirea "Variabilelor" si completarea "Machete PA/CF..."]', divider='rainbow')
 
 if 'downloaded' not in st.session_state:
-    st.session_state.downloaded = False
+    st.session_state['downloaded'] = False
 
 nr_CAEN = None
 document_succes = False  
@@ -122,7 +122,7 @@ with col3:
 
 
 with col4:
-    if document3_succes and not st.session_state_downloaded:
+    if document3_succes and 'downloaded' in st.session_state and not st.session_state['downloaded']:
         uploaded_template = st.file_uploader("Încărcați MACHETA pt procesarea finala.", type=["docx"], key="MachetaPA")
         if uploaded_template is not None:
             template_doc = Document(uploaded_template)
