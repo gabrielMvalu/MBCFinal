@@ -83,16 +83,30 @@ with col3:
             df_contpp = pd.read_excel(uploaded_doc3, sheet_name='2-ContPP')
             df_analiza_fin = pd.read_excel(uploaded_doc3, sheet_name='1D-Analiza_fin_indicatori')    
             df_financiar = pd.read_excel(uploaded_doc3, sheet_name='P. FINANCIAR')
+            
             date_financiare = extrage_pozitii(df_financiar)
+            
             if nr_CAEN != 'N/A' and date_financiare:
                 rezultate_corelate, rezultate_corelate1, rezultate_corelate2 = coreleaza_date(date_financiare)
                 rezultate_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate])
                 cheltuieli_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate1])
+                
                 cantitati_corelate = [pd.to_numeric(item[1], errors='coerce') for item in rezultate_corelate]
                 cantitati_corelate = [0 if pd.isna(x) else x for x in cantitati_corelate]
                 numar_total_utilaje = sum(cantitati_corelate)
                 rezultate_corelate, rezultate_corelate1, rezultate_corelate2 = coreleaza_date(date_financiare)
                 rezultate2_text = '\n'.join([f"{nume} - {descriere}" for nume, _, descriere in rezultate_corelate2])
+
+
+            nrutlocm = pd.to_numeric(df_financiar.iloc[5, 21], errors='coerce')
+            
+            if nrutlocm and nrutdanu < numar_total_utilaje:
+                nrutverificat1 = "De aceea, nu este necesar să angajam atât de mulți muncitori câte utilaje avem, ci să ne adaptam forța de muncă la nevoile specifice ale proiectelor pe care le vom executa."
+                nrutverificat2 = "Mai mult decat atat, daca va fi cazul, pentru operarea utilajelor prevazute in cadrul proiectului  va fi folosit o parte din personal existent prin relocare si utilizarea exclusiva in cadrul acestui proiect si se va angaja si personal nou, calificat/necalificat, in functie de necesitatile existente la un moment dat pentru aceasta activitate."
+            else:
+                nrutverificat1 = "N/A"
+                nrutverificat2 = "N/A"            
+            
 
             capital_propriu = extrage_date_bilant(df_bilant)
             cifra_venit_rezultat = extrage_date_contpp(df_contpp)
@@ -203,7 +217,9 @@ with col4:
                 "#descriere_serviciu": str(solicitate_data.get('Descriere serviciului', 'N/A')),
                 "#piata_tinta": str(solicitate_data.get('Piata tinta', 'N/A')),
                 "#clientiFirma": str(solicitate_data.get('Clienți principali ai firmei', 'N/A')),
-                               
+                
+                "#NlmU1": str(nrutverificat1),
+                "#NlmU2": str(nrutverificat2),                             
                             
                 "#NAM20": str(situatie_angajati.get('Numar mediu angajati 2020', 'N/A')),
                 "#NAM21": str(situatie_angajati.get('Numar mediu angajati 2021', 'N/A')),
