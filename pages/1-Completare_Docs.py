@@ -33,7 +33,9 @@ with col1:
         st.session_state.codCAEN = nr_CAEN
         st.success(f"Primul pas, pentru: {firma}, completat.")
         document_succes = True
-        #st.json({"Date extrase": solicitate_data})
+        ion = solicitate_data.get('D u reciclare', 'N/A')
+        st.write(f"{ion}")
+        st.json({"Date extrase": solicitate_data})
 
 
 with col2:
