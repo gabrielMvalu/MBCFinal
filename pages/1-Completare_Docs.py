@@ -16,9 +16,11 @@ if 'downloaded' not in st.session_state:
     st.session_state['downloaded'] = False
 
 nr_CAEN = None
+
 document_succes = False  
 document2_succes = False
 document3_succes = False
+
 
 col1, col2 = st.columns(2)
 
@@ -34,7 +36,7 @@ with col1:
         st.success(f"Primul pas, pentru: {firma}, completat.")
         document_succes = True
         descriere_u_r = solicitate_data.get('D u reciclare', 'N/A')
-
+        st.session_state.descriere = descriere_u_r 
 
 
 with col2:
@@ -190,7 +192,7 @@ with col4:
 
                 
                 "#descriere_utilaj_ghidare": str(solicitate_data.get('Descrierea utilaj ghidare', 'N/A')),               
-                "#descriere_utilaj_reciclare": str(descriere_u_r),
+                "#descriere_utilaj_reciclare": str(f"{st.session_state.descriere}"),
 
                 
                 "#contributia_proiectului_la_TJ": str(solicitate_data.get('Contribuția proiectului la tranziția justă', 'N/A')),
