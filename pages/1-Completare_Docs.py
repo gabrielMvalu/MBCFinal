@@ -189,7 +189,7 @@ with col4:
 
                 
                 "#descriere_utilaj_ghidare": str(solicitate_data.get('Descrierea utilaj ghidare', 'N/A')),               
-                "#descriere_utilaj_reciclare": str(solicitate_data.get('Descrierea utilaj reciclare', 'N/A')),
+                "#descriere_utilaj_reciclare": str(solicitate_data.get('D u reciclare', 'N/A')),
 
                 
                 "#contributia_proiectului_la_TJ": str(solicitate_data.get('Contribuția proiectului la tranziția justă', 'N/A')),
