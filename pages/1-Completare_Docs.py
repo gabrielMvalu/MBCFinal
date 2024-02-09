@@ -36,7 +36,7 @@ with col1:
         st.success(f"Primul pas, pentru: {firma}, completat.")
         document_succes = True
         descriere_u_r = solicitate_data.get('D u reciclare', 'N/A')
-        st.session_state.descriere = descriere_u_r 
+    
 
 
 with col2:
@@ -192,7 +192,7 @@ with col4:
 
                 
                 "#descriere_utilaj_ghidare": str(solicitate_data.get('Descrierea utilaj ghidare', 'N/A')),               
-                "#descriere_utilaj_reciclare": str(f"{st.session_state.descriere}"),
+                "#descriereUtilajReciclare": str(descriere_u_r),
 
                 
                 "#contributia_proiectului_la_TJ": str(solicitate_data.get('Contribuția proiectului la tranziția justă', 'N/A')),
@@ -283,7 +283,6 @@ with col4:
 
             st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")   
             st.json({descriere_u_r})
-            st.write("{st.session_state.descriere}")
 
             with open("plan_afaceri_completat.docx", "rb") as file:
                 st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
