@@ -31,7 +31,7 @@ def extrage_date_suplimentare(judet, caen, tip_activitate):
     strategii_reciclare = df_judet.iloc[2, 1]
     
     activitate = df_caen.iloc[0, 1] 
-    d_u_reciclare = df_caen.iloc[0, 1]
+    d_u_reciclare = df_caen.iloc[1, 1]
     lucrari_inovatie = df_caen.iloc[2, 1]
     lucrari_caen = df_caen.iloc[3, 1]
     aDNSH = df_caen.iloc[4, 1]
