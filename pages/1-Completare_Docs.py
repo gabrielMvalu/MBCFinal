@@ -280,10 +280,9 @@ with col4:
                             run.text = run.text.replace(placeholder, value)
         
             template_doc.save("plan_afaceri_completat.docx")
-
+            
             st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")   
-            st.json({descriere_u_r})
-
+      
             with open("plan_afaceri_completat.docx", "rb") as file:
                 st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
                 st.session_state.downloaded = True
