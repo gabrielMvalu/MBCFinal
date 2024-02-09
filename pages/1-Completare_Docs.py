@@ -12,6 +12,9 @@ st.set_page_config(layout="wide")
 
 st.header(':blue[Procese pentru inlocuirea "Variabilelor" si completarea "Machete PA/CF..."]', divider='rainbow')
 
+if 'downloaded' not in st.session_state:
+    st.session_state.downloaded = False
+
 nr_CAEN = None
 document_succes = False  
 document2_succes = False
@@ -119,7 +122,7 @@ with col3:
 
 
 with col4:
-    if document3_succes:
+    if document3_succes and not st.session_state_downloaded:
         uploaded_template = st.file_uploader("Încărcați MACHETA pt procesarea finala.", type=["docx"], key="MachetaPA")
         if uploaded_template is not None:
             template_doc = Document(uploaded_template)
@@ -275,12 +278,16 @@ with col4:
         
             template_doc.save("plan_afaceri_completat.docx")
 
-            st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")            
+            st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")   
+            
 
             with open("plan_afaceri_completat.docx", "rb") as file:
                 st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                 st.session_state.downloaded = True
 
-            
+    elif st.session_state.downloaded:
+        st.success("Documentul a fost descărcat. Procesul nu va fi reînceput.")
+        
     else:
         st.warning("Vă rugăm să încărcați și să procesați documentele din primele coloane.")
             
