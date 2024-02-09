@@ -33,9 +33,8 @@ with col1:
         st.session_state.codCAEN = nr_CAEN
         st.success(f"Primul pas, pentru: {firma}, completat.")
         document_succes = True
-        ion = solicitate_data.get('D u reciclare', 'N/A')
-        st.write(f"{ion}")
-        st.json({"Date extrase": solicitate_data})
+        descriere_u_r = solicitate_data.get('D u reciclare', 'N/A')
+
 
 
 with col2:
@@ -191,7 +190,7 @@ with col4:
 
                 
                 "#descriere_utilaj_ghidare": str(solicitate_data.get('Descrierea utilaj ghidare', 'N/A')),               
-                "#descriere_utilaj_reciclare": str(solicitate_data.get('D u reciclare', 'N/A')),
+                "#descriere_utilaj_reciclare": str(descriere_u_r),
 
                 
                 "#contributia_proiectului_la_TJ": str(solicitate_data.get('Contribuția proiectului la tranziția justă', 'N/A')),
