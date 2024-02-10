@@ -67,28 +67,31 @@ def transforma_date(df):
 
 
 
-def populate_table(doc, start_placeholder, df):
+def populate_table_from_placeholder(doc, placeholder, df):
     for table in doc.tables:
         for i, row in enumerate(table.rows):
-            for cell in row.cells:
-                if start_placeholder in cell.text:
-                    # Clear the placeholder
-                    cell.text = ""
-                    # Start populating the table from the next row
-                    data_start_row_index = i + 1
-                    # Continue as long as there are rows in the DataFrame
+            for j, cell in enumerate(row.cells):
+                if placeholder in cell.text:
+                    # Începem să populăm datele în tabel de la acest rând și celulă
+                    cell.text = ""  # Înlăturăm placeholder-ul
+                    current_row_index = i
+                    current_cell_index = j
+                    # Iterăm prin DataFrame și adăugăm datele în tabel
                     for df_index, data_row in df.iterrows():
-                        # If we have reached the end of the table, add a new row
-                        if data_start_row_index >= len(table.rows):
+                        # Asigură-te că avem suficiente rânduri în tabel
+                        if current_row_index == len(table.rows):
                             table.add_row()
-                        # Populate the cells with the DataFrame row
-                        for j in range(len(row.cells)):  # Only go up to the number of cells in the row
-                            cell_value = data_row.iloc[j] if j < len(data_row) else ""
-                            table.rows[data_start_row_index].cells[j].text = str(cell_value) if pd.notna(cell_value) else ""
-                        data_start_row_index += 1
-                    # We break since we only want to populate one placeholder per call
+                        # Obținem rândul curent în tabel
+                        row = table.rows[current_row_index]
+                        # Populăm datele începând de la celula curentă
+                        for df_cell_index in range(len(data_row)):
+                            table_index = current_cell_index + df_cell_index
+                            # Asigură-te că nu depășim numărul de celule din rând
+                            if table_index < len(row.cells):
+                                row.cells[table_index].text = str(data_row[df_cell_index]) if pd.notna(data_row[df_cell_index]) else ""
+                        current_row_index += 1
+                    # După ce am terminat de populat secțiunea, ieșim din buclă
                     return
-
 
 
 
@@ -115,13 +118,11 @@ if uploaded_word_file is not None and df_nou is not None:
     word_bytes = io.BytesIO(uploaded_word_file.getvalue())
     doc = Document(word_bytes)
 
-  # Populate the section for active corporale
-    df_corporale = df_nou[df_nou['Denumirea lucrărilor / bunurilor/ serviciilor'].str.contains("total active corporale", case=False)]
-    populate_table(doc, "#qq", df_corporale)
+    # Populăm tabelul începând de la placeholder-ul #qq
+    populate_table_from_placeholder(doc, "#qq", df_nou)
 
-    # Populate the section for active necorporale
-    df_necorporale = df_nou[df_nou['Denumirea lucrărilor / bunurilor/ serviciilor'].str.contains("total active necorporale", case=False)]
-    populate_table(doc, "#pp", df_necorporale)
+    # Populăm tabelul începând de la placeholder-ul #pp
+    populate_table_from_placeholder(doc, "#pp", df_nou)
 
 
     # Salvarea documentului modificat într-un buffer
