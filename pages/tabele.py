@@ -46,7 +46,7 @@ st.title('Transformare Date Excel')
 
 uploaded_file = st.file_uploader("Alegeți fișierul Excel:", type='xlsx')
 if uploaded_file is not None:
-    df = pd.read_excel(uploaded_file)
+    df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
 
     stop_text1 = 'Total active corporale'
     stop_text2 = 'Total active necorporale'
