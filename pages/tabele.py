@@ -65,6 +65,9 @@ def determina_eligibilitate(val_6, val_4):
 st.title('Transformare Date Excel')
 
 uploaded_file = st.file_uploader("Alegeți fișierul Excel:", type='xlsx')
+uploaded_word_file = st.file_uploader("Încarcă documentul Word", type=['docx'])
+
+
 if uploaded_file is not None:
     df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
 
@@ -77,3 +80,23 @@ if uploaded_file is not None:
 
     df2_transformed = transforma_date(df, df.index[df.iloc[:, 1].str.contains(start_text2, na=False)].tolist()[0] + 1, stop_text2)
     st.write("Tabel 2:", df2_transformed)
+
+
+if uploaded_word_file is not None and df1_transformed is not None:
+    word_bytes = io.BytesIO(uploaded_word_file.getvalue())
+    doc = Document(word_bytes)
+    
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                if "#tabel1" in cell.text:
+                    # Găsirea indexului rândului și a tabelului pentru adăugarea datelor
+                    row_index = table.rows.index(row)
+                    for i, data_row in df1_transformed.iterrows():
+                        new_row = table.add_row()
+                        for j, value in enumerate(data_row):
+                            new_row.cells[j].text = str(value)
+                    # Înlocuirea placeholder-ului cu un text gol sau cu header-ul tabelului, dacă este necesar
+                    cell.text = ""
+                    break  # Ieșire din bucla celulelor după ce găsești și populezi tabelul
+    
