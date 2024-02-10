@@ -66,51 +66,43 @@ def transforma_date(df):
     return df_nou 
 
 
-# Funcție pentru setarea bordurilor unei celule
-def set_cell_border(cell):
-    border_xml = """
-    <w:tcBorders xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
-        <w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-        <w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-        <w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-        <w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-    </w:tcBorders>
-    """
-    tcPr = cell._tc.get_or_add_tcPr()
-    tcBorders = parse_xml(border_xml)
-    tcPr.append(tcBorders)
-
 
 
 def populate_table(doc, start_placeholder, end_placeholder, df):
     for table in doc.tables:
+        started = False
         for i, row in enumerate(table.rows):
             for cell in row.cells:
                 if start_placeholder in cell.text:
-                    # Am găsit începutul secțiunii unde trebuie să adăugăm date
+                    # Începem să populăm datele în tabel
                     cell.text = cell.text.replace(start_placeholder, "")
-                    # Populăm datele în tabel începând cu rândul următor
-                    current_row = i + 1
-                    for _, data_row in df.iterrows():
-                        # Dacă rândul curent este mai mare decât numărul de rânduri din tabel, adăugăm un rând nou
-                        if current_row >= len(table.rows):
-                            table.add_row()
-                        for j, value in enumerate(data_row):
-                            table.cell(current_row, j).text = str(value) if pd.notna(value) else ""
-                        current_row += 1
-                elif end_placeholder in cell.text:
-                    # Am găsit sfârșitul secțiunii și ne oprim din adăugat date
-                    return
-                    
-def populate_rows(table, start_index, df):
-    for i, data in df.iterrows():
-        # Adăugăm un rând nou dacă am depășit numărul de rânduri din tabel
-        if i + start_index == len(table.rows):
-            table.add_row()
-        row = table.rows[i + start_index]
-        for j, value in enumerate(data):
-            cell = row.cells[j]
-            cell.text = str(value) if pd.notna(value) else ""
+                    started = True
+                    current_row = i
+                elif end_placeholder and end_placeholder in cell.text:
+                    # Găsim un nou loc de start și resetăm indicatorul
+                    started = True
+                    current_row = i
+                    cell.text = cell.text.replace(end_placeholder, "")
+
+            # Dacă am început să populăm, adăugăm datele
+            if started:
+                if current_row >= len(table.rows):
+                    table.add_row()
+                row_cells = table.rows[current_row].cells
+
+                # Dacă găsim un rând cu "total active corporale", oprim inserarea
+                if any("total active corporale" in cell.text.lower() for cell in row_cells):
+                    started = False
+                    continue
+
+                # Populăm celulele
+                data_row = df.iloc[current_row - i] if current_row - i < len(df) else None
+                if data_row is not None:
+                    for j, value in enumerate(data_row):
+                        cell = row_cells[j]
+                        cell.text = str(value) if pd.notna(value) else ""
+
+                current_row += 1
 
 
 
@@ -138,10 +130,10 @@ if uploaded_word_file is not None and df_nou is not None:
     doc = Document(word_bytes)
 
     # Populăm secțiunea de active corporale
-    populate_table(doc, "#qq", "#pp", df_nou[df_nou['Denumirea lucrărilor / bunurilor/ serviciilor'].str.contains("Total active corporale", case=False)])
-    
+    populate_table(doc, "#qq", None, df_nou[df_nou['Denumirea lucrărilor / bunurilor/ serviciilor'].str.contains("total active corporale", case=False)])
+
     # Populăm secțiunea de active necorporale
-    populate_table(doc, "#pp", None, df_nou[df_nou['Denumirea lucrărilor / bunurilor/ serviciilor'].str.contains("Total active necorporale", case=False)])
+    populate_table(doc, "#pp", None, df_nou[df_nou['Denumirea lucrărilor / bunurilor/ serviciilor'].str.contains("total active necorporale", case=False)])
 
 
     # Salvarea documentului modificat într-un buffer
