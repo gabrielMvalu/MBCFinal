@@ -67,50 +67,39 @@ st.title('Transformare Date Excel')
 uploaded_file = st.file_uploader("Alegeți fișierul Excel:", type='xlsx')
 uploaded_word_file = st.file_uploader("Încarcă documentul Word", type=['docx'])
 
-
 if uploaded_file is not None:
     df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
-
+    # Definirea textelor de oprire
     stop_text1 = 'Total active corporale'
     stop_text2 = 'Total active necorporale'
-    start_text2 = stop_text1  # start_text pentru tabelul 2 este egal cu stop_text1
-
-    df1_transformed = transforma_date(df, 3, stop_text1)  # Asumând că începem de la rândul 5 pentru tabelul 1
+    # Transformarea datelor
+    df1_transformed = transforma_date(df, 3, stop_text1)
     st.write("Tabel 1:", df1_transformed)
 
-    df2_transformed = transforma_date(df, df.index[df.iloc[:, 1].str.contains(start_text2, na=False)].tolist()[0] + 1, stop_text2)
-    st.write("Tabel 2:", df2_transformed)
-
-
 if uploaded_word_file is not None and df1_transformed is not None:
-    # Încărcarea și deschiderea documentului Word
     word_bytes = io.BytesIO(uploaded_word_file.getvalue())
     doc = Document(word_bytes)
 
-    placeholder_found = False
-
-    # Căutarea tabelului și a celulei cu placeholder-ul
     for table in doc.tables:
         for row in table.rows:
             for cell in row.cells:
                 if "#tabel1" in cell.text:
-                    cell.text = ""  # Șterge placeholder
-                    placeholder_found = True
-                    break  # Ieșire din bucla celulelor
-            if placeholder_found:
-                # Popularea tabelului începând de la rândul următor după cel cu placeholder
-                for i, data_row in df1_transformed.iterrows():
-                    new_row = table.add_row()
-                    for j, value in enumerate(data_row):
-                        new_row.cells[j].text = str(value)
-                break  # Ieșire din bucla rândurilor după populare
-        if placeholder_found:
-            break  # Ieșire din bucla tabelurilor după găsirea și popularea tabelului
+                    # Ștergerea textului placeholder și începerea populării tabelului
+                    cell_index = row.cells.index(cell)
+                    for i, data_row in df1_transformed.iterrows():
+                        # Adăugarea unui rând nou sau utilizarea rândului curent dacă este primul rând de date
+                        if i > 0 or cell_index > 0:  # Dacă nu este prima celulă sau primul rând de date
+                            new_row = table.add_row()
+                        else:
+                            new_row = row
+                        for j in range(len(data_row)):
+                            new_row.cells[j].text = str(df1_transformed.iloc[i, j])
+                    break  # Ieșire din bucla celulelor după popularea tabelului
+            if "#tabel1" in cell.text:
+                break  # Ieșire din bucla rândurilor după găsirea și popularea tabelului
 
-    # Salvarea documentului modificat
+    # Salvarea și descărcarea documentului Word modificat
     word_modified_bytes = io.BytesIO()
     doc.save(word_modified_bytes)
     word_modified_bytes.seek(0)
-
-    # Oferirea documentului modificat pentru descărcare
     st.download_button(label="Descarcă documentul Word modificat", data=word_modified_bytes, file_name="Document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
