@@ -37,14 +37,14 @@ def transforma(df):
         counter += 1
 
 
-        eligibilitate, total_eligibil, total_neeligibil = determina_eligibilitate(val_6, val_4, total_eligibil, total_neeligibil)
+        total_eligibil, total_neeligibil = determina_eligibilitate(total_eligibil, total_neeligibil)
              
         val_6 = pd.to_numeric(row.iloc[6], errors='coerce')
         val_4 = pd.to_numeric(row.iloc[4], errors='coerce')
         eligibil_neeligibil.append(determina_eligibilitate(val_6, val_4))
 
     
-    return pd.DataFrame({
+    return  total_eligibil, total_neeligibil, pd.DataFrame({
         "Nr. crt.": nr_crt,
         "Denumirea lucrărilor / bunurilor/ serviciilor": df.iloc[:, 1],
         "UM": um_list,
