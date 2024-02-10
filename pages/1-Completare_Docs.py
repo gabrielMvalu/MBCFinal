@@ -10,15 +10,17 @@ from serviciisiutilaje import extrage_pozitii, coreleaza_date
 
 st.set_page_config(layout="wide")
 
-st.header(':blue[Procese pentru inlocuirea "Variabilelor" si completarea "Machete PA/CF..."]', divider='rainbow')
+st.header(':blue[Procese pentru inlocuire "Variabile" si completare "Machete PA/CF..."]', divider='rainbow')
 
 if 'downloaded' not in st.session_state:
     st.session_state['downloaded'] = False
 
 nr_CAEN = None
+
 document_succes = False  
 document2_succes = False
 document3_succes = False
+
 
 col1, col2 = st.columns(2)
 
@@ -33,7 +35,8 @@ with col1:
         st.session_state.codCAEN = nr_CAEN
         st.success(f"Primul pas, pentru: {firma}, completat.")
         document_succes = True
-        #st.json({"Date extrase": solicitate_data})
+        descriere_u_r = solicitate_data.get('D u reciclare', 'N/A')
+    
 
 
 with col2:
@@ -126,9 +129,10 @@ with col4:
         uploaded_template = st.file_uploader("Încărcați MACHETA pt procesarea finala.", type=["docx"], key="MachetaPA")
         if uploaded_template is not None:
             template_doc = Document(uploaded_template)
+            st.toast('A inceput procesarea Planului de afaceri', icon='⭐')
+            # st.info(f"Procesare Finalizata. Pentru descarcarea documentului completat", icon="⬇️")
             st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")
-            st.toast('Incepem procesarea Planului de afaceri', icon='⭐')    
-
+            
             # Preia valoarea pentru 'Utilaj cu tocător'
             utilaj_cu_tocator_pt_inlocuire = solicitate_data.get('Utilaj cu tocător', 'N/A')
             nr_clasare_notificare_pt_inlocuire = solicitate_data.get('Număr clasare notificare', 'N/A')
@@ -283,9 +287,10 @@ with col4:
             
             with open("plan_afaceri_completat.docx", "rb") as file:
                 st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-                st.session_state.downloaded = True
+                st.session_state['downloaded'] = True
                          
 
     else:
         st.warning("Vă rugăm să încărcați și să procesați documentele din primele coloane.")
+
 
