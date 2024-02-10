@@ -49,7 +49,7 @@ def transforma_date(df):
             eligibil_neeligibil.append(f"{round(val_6, 2)} // {round(val_6 - val_4, 2)}")
 
     nr_crt_int = [int(x) if pd.notna(x) else None for x in nr_crt]
-    cantitate_int = pd.to_numeric(df.iloc[:, 15], errors='coerce').fillna(None).astype('Int64').tolist()
+    cantitate_int = pd.to_numeric(df.iloc[:, 15], errors='coerce').astype('Int64').tolist()
     
     df_nou = pd.DataFrame({
         "Nr. crt.": nr_crt_int,
