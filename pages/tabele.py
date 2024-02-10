@@ -7,20 +7,25 @@ import io
 
 
 def transforma_date(df, start_row, stop_text):
-    # Extrage datele începând de la rândul specificat până la rândul de oprire
-    stop_index = df.index[df.iloc[:, 1].eq(stop_text)].tolist()[0]
+    stop_indexes = df.index[df.iloc[:, 1].eq(stop_text)].tolist()
+    if not stop_indexes:
+        raise ValueError(f"'{stop_text}' nu a fost găsit în DataFrame.")
+    stop_index = stop_indexes[0]
     df = df.iloc[start_row:stop_index]
-    
-    # Aplică filtrul și transformările
     return transforma(df)
 
 def transforma_date_alt(df, start_text, stop_text):
-    # Identifică rândul de început și extrage datele până la rândul de oprire
-    start_index = df.index[df.iloc[:, 1].eq(start_text)].tolist()[0] + 1
-    stop_index = df.index[df.iloc[:, 1].eq(stop_text)].tolist()[0]
-    df = df.iloc[start_index:stop_index]
+    start_indexes = df.index[df.iloc[:, 1].eq(start_text)].tolist()
+    if not start_indexes:
+        raise ValueError(f"'{start_text}' nu a fost găsit în DataFrame.")
+    start_index = start_indexes[0] + 1
     
-    # Aplică filtrul și transformările
+    stop_indexes = df.index[df.iloc[:, 1].eq(stop_text)].tolist()
+    if not stop_indexes:
+        raise ValueError(f"'{stop_text}' nu a fost găsit în DataFrame.")
+    stop_index = stop_indexes[0]
+
+    df = df.iloc[start_index:stop_index]
     return transforma(df)
 
 def transforma(df):
@@ -52,7 +57,6 @@ def transforma(df):
         "Valoare Totală (fără TVA)": valoare_totala_list,
         "Linie bugetară": linie_bugetara_list,
         "Eligibil/ neeligibil": eligibil_neeligibil,
-        "Contribuie la criteriile de evaluare a,b,c,d": df.iloc[:, 15]
     })
 
 def determina_eligibilitate(val_6, val_4):
@@ -67,28 +71,18 @@ def determina_eligibilitate(val_6, val_4):
     else:
         return f"{round(val_6, 2)} // {round(val_6 - val_4, 2)}"
 
+st.title('Transformare Date Excel')
 
-
-# Titlul aplicației
-st.title('Încărcare și prelucrare fișier Excel și Word')
-
-
-# Încărcarea fișierului Excel
 uploaded_file = st.file_uploader("Alegeți fișierul Excel:", type='xlsx')
-
 if uploaded_file is not None:
-    # Citirea datelor din fișierul Excel
     df = pd.read_excel(uploaded_file)
 
-    # Aplicarea transformărilor pe DataFrame
     stop_text1 = 'Total active corporale'
     start_text2 = 'Publicitate'
     stop_text2 = 'Total active necorporale'
 
-    # Aplicați prima transformare
-    df1_transformed = transforma_date(df, 4, stop_text1)  # Asumând că începem de la rândul 5 (index 4)
+    df1_transformed = transforma_date(df, 4, stop_text1)
     st.write("Tabel 1:", df1_transformed)
 
-    # Aplicați a doua transformare
     df2_transformed = transforma_date_alt(df, start_text2, stop_text2)
     st.write("Tabel 2:", df2_transformed)
