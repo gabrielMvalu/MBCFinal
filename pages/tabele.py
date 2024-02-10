@@ -71,7 +71,7 @@ if uploaded_file is not None:
     stop_text2 = 'Total active necorporale'
     start_text2 = stop_text1  # start_text pentru tabelul 2 este egal cu stop_text1
 
-    df1_transformed = transforma_date(df, 4, stop_text1)  # Asumând că începem de la rândul 5 pentru tabelul 1
+    df1_transformed = transforma_date(df, 3, stop_text1)  # Asumând că începem de la rândul 5 pentru tabelul 1
     st.write("Tabel 1:", df1_transformed)
 
     df2_transformed = transforma_date(df, df.index[df.iloc[:, 1].str.contains(start_text2, na=False)].tolist()[0] + 1, stop_text2)
