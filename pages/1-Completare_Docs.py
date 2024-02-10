@@ -130,8 +130,8 @@ with col4:
         if uploaded_template is not None:
             template_doc = Document(uploaded_template)
             st.toast('A inceput procesarea Planului de afaceri', icon='⭐')
-            st.info(f"Procesare Finalizata. Pentru descarcarea documentului completat", icon="⬇️")
-            
+            # st.info(f"Procesare Finalizata. Pentru descarcarea documentului completat", icon="⬇️")
+            st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")
             
             # Preia valoarea pentru 'Utilaj cu tocător'
             utilaj_cu_tocator_pt_inlocuire = solicitate_data.get('Utilaj cu tocător', 'N/A')
