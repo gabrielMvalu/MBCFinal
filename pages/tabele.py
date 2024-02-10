@@ -112,8 +112,8 @@ if uploaded_excel_file is not None:
     
         return df_nou
 
-    st.write('Datele filtrate (limitate la 16 coloane):')
-    st.dataframe(df_nou)
+        st.write('Datele filtrate (limitate la 16 coloane):')
+        st.dataframe(df_nou)
 
 
 # Procesarea și modificarea fișierului Word
