@@ -47,7 +47,7 @@ with col1:
         nr_CAEN = solicitate_data.get('Doar nr CAEN','N/A')
         st.session_state.codCAEN = nr_CAEN
         st.success(f"Primul pas, pentru: {firma}, completat.")
-        document_succes = True
+        st.session_state['document_succes'] = True
         descriere_u_r = solicitate_data.get('D u reciclare', 'N/A')
     
 
@@ -78,7 +78,7 @@ with col2:
             coduri_caen_text = '\n'.join([f"{cod} - {descriere}" for cod, descriere in coduri_caen_curatate]) if coduri_caen_curatate else "N/A"    
            
             st.info(f"Prelucrarea 'Rapor Interogare' al {firma}, este completa.")
-            document2_succes = True        
+            st.session_state['document2_succes'] = True       
             
              # Afișarea datelor în format JSON
             #st.json({
@@ -132,7 +132,7 @@ with col3:
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
             
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul,{st.session_state.codCAEN} ")
-            document3_succes = True
+            st.session_state['document3_succes'] = False
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
 
