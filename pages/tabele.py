@@ -75,7 +75,7 @@ if uploaded_file is not None:
 
     df1_transformed = transforma_date(df, 3, stop_text1)  
     df2_transformed = transforma_date(df, df.index[df.iloc[:, 1].str.contains(start_text2, na=False)].tolist()[0] + 1, stop_text2)
-    st.write(f"Total Eligibil:{total_eligibil} Total neeligibil:{total_neeligibil}")
+   
 
 if uploaded_word_file is not None and df1_transformed is not None and df2_transformed is not None:
     # Încărcarea și deschiderea documentului Word
