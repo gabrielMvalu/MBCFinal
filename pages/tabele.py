@@ -52,13 +52,14 @@ def determina_eligibilitate(val_6, val_4):
     if pd.isna(val_6) or pd.isna(val_4):
         return "Data Missing"
     elif val_6 == 0 and val_4 != 0:
-        return f"0 // {round(val_4, 2)}"
+        return f"Eligibil: 0 \nNeeligibil: {round(val_4, 2)}"
     elif val_6 == 0 and val_4 == 0:
-        return "0 // 0"
+        return "Eligibil: 0 \nNeeligibil: 0"
     elif val_6 < val_4:
-        return f"{round(val_6, 2)} // {round(val_4 - val_6, 2)}"
+        return f"Eligibil: {round(val_6, 2)} \nNeeligibil: {round(val_4 - val_6, 2)}"
     else:
-        return f"{round(val_6, 2)} // {round(val_6 - val_4, 2)}"
+        return f"Eligibil: {round(val_6, 2)} \nNeeligibil: {round(val_6 - val_4, 2)}"
+
 
 
 st.title('Transformare Date Excel')
