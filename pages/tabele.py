@@ -55,13 +55,17 @@ stop_text = 'Total proiect'
 if uploaded_excel_file is not None:
     df = pd.read_excel(uploaded_excel_file, sheet_name='P. FINANCIAR')
     stop_row = df[df.iloc[:, 1] == stop_text].index.min()
+
+    # Verificăm dacă stop_text a fost găsit și limităm DataFrame-ul la primele 15 coloane
     if pd.notna(stop_row):
-        df_filtered = df.iloc[4:stop_row + 1]
+        df_filtered = df.iloc[4:stop_row + 1, :15]  # Selectăm rândurile și primele 15 coloane
     else:
-        st.write('Textul de stop nu a fost găsit. Se afișează toate datele începând cu rândul 5.')
-        df_filtered = df.iloc[4:]
-    st.write('Datele filtrate:')
+        st.write('Textul de stop nu a fost găsit. Se afișează toate datele începând cu rândul 5, limitat la 15 coloane.')
+        df_filtered = df.iloc[4:, :15]  # Selectăm toate datele începând cu rândul 5, limitat la 15 coloane
+
+    st.write('Datele filtrate (limitate la 15 coloane):')
     st.dataframe(df_filtered)
+
 
 # Procesarea și modificarea fișierului Word
 if uploaded_word_file is not None and df_filtered is not None:
