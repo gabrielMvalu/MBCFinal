@@ -82,33 +82,35 @@ if uploaded_file is not None:
     st.write("Tabel 2:", df2_transformed)
 
 
-for table in doc.tables:
-    for row in table.rows:
-        for cell in row.cells:
-            if "#tabel1" in cell.text:
-                placeholder_found = True
-                cell.text = ""  # Șterge textul placeholder
-                # Continuă cu adăugarea datelor în rândurile următoare
-                data_row_index = 0
-                break  # Ieșire din bucla celulelor
-        if placeholder_found:
-            # Adaugă datele în rândurile noi, începând cu rândul următor
-            for i in range(table.rows.index(row) + 1, table.rows.index(row) + 1 + len(df1_transformed)):
-                if data_row_index < len(df1_transformed):
-                    for j, value in enumerate(df1_transformed.iloc[data_row_index]):
-                        table.cell(i, j).text = str(value)
-                    data_row_index += 1
-                else:
-                    break  # Ieșire dacă toate datele au fost adăugate
-            break  # Ieșire din bucla rândurilor după adăugarea datelor
-    if placeholder_found:
-        break  # Ieșire din bucla tabelurilor după adăugarea datelor în tabelul dorit
+if uploaded_word_file is not None and df1_transformed is not None:
+    # Încărcarea și deschiderea documentului Word
+    word_bytes = io.BytesIO(uploaded_word_file.getvalue())
+    doc = Document(word_bytes)
 
-    
-    # Salvarea și oferirea documentului modificat pentru descărcare
+    placeholder_found = False
+
+    # Căutarea tabelului și a celulei cu placeholder-ul
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                if "#tabel1" in cell.text:
+                    cell.text = ""  # Șterge placeholder
+                    placeholder_found = True
+                    break  # Ieșire din bucla celulelor
+            if placeholder_found:
+                # Popularea tabelului începând de la rândul următor după cel cu placeholder
+                for i, data_row in df1_transformed.iterrows():
+                    new_row = table.add_row()
+                    for j, value in enumerate(data_row):
+                        new_row.cells[j].text = str(value)
+                break  # Ieșire din bucla rândurilor după populare
+        if placeholder_found:
+            break  # Ieșire din bucla tabelurilor după găsirea și popularea tabelului
+
+    # Salvarea documentului modificat
     word_modified_bytes = io.BytesIO()
     doc.save(word_modified_bytes)
     word_modified_bytes.seek(0)
 
+    # Oferirea documentului modificat pentru descărcare
     st.download_button(label="Descarcă documentul Word modificat", data=word_modified_bytes, file_name="Document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-
