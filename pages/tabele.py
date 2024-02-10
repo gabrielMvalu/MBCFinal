@@ -8,7 +8,7 @@ st.title('Încărcare și prelucrare fișier Excel')
 uploaded_file = st.file_uploader("Alege un fișier Excel (.xlsx)", type=['xlsx'])
 
 # Variabila care reprezintă textul de stop
-stop_text = 'Total_proiect'
+stop_text = 'Total proiect'
 
 # Verifică dacă a fost încărcat un fișier
 if uploaded_file is not None:
