@@ -28,9 +28,13 @@ def transforma(df):
         valoare_totala = row.iloc[3] * cantitate if cantitate is not None else None
         valoare_totala_list.append(valoare_totala)
         linie_bugetara_list.append(row.iloc[14])
-        eligibil_neeligibil.append("")  # Actualizează logica aici dacă este necesar
         counter += 1
 
+        val_6 = pd.to_numeric(row.iloc[6], errors='coerce')
+        val_4 = pd.to_numeric(row.iloc[4], errors='coerce')
+        eligibil_neeligibil.append(determina_eligibilitate(val_6, val_4))
+
+    
     return pd.DataFrame({
         "Nr. crt.": nr_crt,
         "Denumirea lucrărilor / bunurilor/ serviciilor": df.iloc[:, 1],
@@ -42,6 +46,20 @@ def transforma(df):
         "Eligibil/ neeligibil": eligibil_neeligibil,
         "Contribuie la criteriile de evaluare a,b,c,d": df.iloc[:, 15]
     })
+
+
+def determina_eligibilitate(val_6, val_4):
+    if pd.isna(val_6) or pd.isna(val_4):
+        return "Data Missing"
+    elif val_6 == 0 and val_4 != 0:
+        return f"0 // {round(val_4, 2)}"
+    elif val_6 == 0 and val_4 == 0:
+        return "0 // 0"
+    elif val_6 < val_4:
+        return f"{round(val_6, 2)} // {round(val_4 - val_6, 2)}"
+    else:
+        return f"{round(val_6, 2)} // {round(val_6 - val_4, 2)}"
+
 
 st.title('Transformare Date Excel')
 
