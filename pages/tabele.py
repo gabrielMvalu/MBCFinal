@@ -16,7 +16,7 @@ def transforma_date(df, start_row, stop_text):
 
 def transforma(df):
     df = df[df.iloc[:, 1].notna() & (df.iloc[:, 1] != '0') & (df.iloc[:, 1] != '-')]
-    nr_crt, um_list, cantitate_list, pret_unitar_list, valoare_totala_list, linie_bugetara_list, eligibil_neeligibil = [], [], [], [], [], [], []
+    nr_crt, um_list, cantitate_list, pret_unitar_list, valoare_totala_list, linie_bugetara_list, eligibil_neeligibil, = [], [], [], [], [], [], [],
     counter = 1
 
     for _, row in df.iterrows():
@@ -40,6 +40,7 @@ def transforma(df):
         "Valoare Totală (fără TVA)": valoare_totala_list,
         "Linie bugetară": linie_bugetara_list,
         "Eligibil/ neeligibil": eligibil_neeligibil,
+        "Contribuie la criteriile de evaluare a,b,c,d": df.iloc[:, 15]
     })
 
 st.title('Transformare Date Excel')
