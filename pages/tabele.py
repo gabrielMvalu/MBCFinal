@@ -80,18 +80,37 @@ def set_cell_border(cell):
     tcBorders = parse_xml(border_xml)
     tcPr.append(tcBorders)
 
-# Funcție pentru adăugarea unui tabel cu borduri într-un document Word
-def add_df_with_borders_to_doc(doc, df):
-    table = doc.add_table(rows=1, cols=len(df.columns))
-    for i, column in enumerate(df.columns):
-        table.cell(0, i).text = str(column)
-        set_cell_border(table.cell(0, i))
 
+
+def add_df_with_borders_to_doc(doc, df):
+    table = doc.add_table(rows=0, cols=len(df.columns))  # Nu adăugăm rânduri inițial
+
+    # Adăugăm antetul tabelului
+    hdr_cells = table.add_row().cells
+    for i, column in enumerate(df.columns):
+        hdr_cells[i].text = str(column)
+        set_cell_border(hdr_cells[i])
+
+    # Iterăm prin rândurile DataFrame-ului și adăugăm datele în tabel
     for index, row in df.iterrows():
         row_cells = table.add_row().cells
         for i, value in enumerate(row):
             row_cells[i].text = str(value) if pd.notna(value) else ""
             set_cell_border(row_cells[i])
+
+        # Verificăm dacă rândul curent este un subtitlu sau un rând total
+        if row['Denumirea lucrărilor / bunurilor/ serviciilor'] in ["Lucrări de construcții", "Dotări (active corporale)", "Active necorporale", "Servicii"]:
+            for cell in row_cells:
+                cell.merge(row_cells[0])  # Combinăm celulele pentru subtitlu
+                set_cell_border(cell)  # Setăm bordurile pentru celulele combinate
+        elif 'TOTAL' in row['Denumirea lucrărilor / bunurilor/ serviciilor']:
+            for cell in row_cells:
+                cell.merge(row_cells[0])  # Combinăm celulele pentru rândul total
+                set_cell_border(cell)  # Setăm bordurile pentru celulele combinate
+
+    return doc
+
+
 
 
 # Titlul aplicației
