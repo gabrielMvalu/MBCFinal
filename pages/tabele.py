@@ -80,22 +80,26 @@ if uploaded_word_file is not None and df1_transformed is not None:
     doc = Document(word_bytes)
 
     for table in doc.tables:
-        for row in table.rows:
+        for i, row in enumerate(table.rows):
             for cell in row.cells:
-                if "#tabel1" in cell.text:
-                    # Ștergerea textului placeholder și începerea populării tabelului
-                    cell_index = row.cells.index(cell)
-                    for i, data_row in df1_transformed.iterrows():
-                        # Adăugarea unui rând nou sau utilizarea rândului curent dacă este primul rând de date
-                        if i > 0 or cell_index > 0:  # Dacă nu este prima celulă sau primul rând de date
-                            new_row = table.add_row()
-                        else:
-                            new_row = row
-                        for j in range(len(data_row)):
-                            new_row.cells[j].text = str(df1_transformed.iloc[i, j])
-                    break  # Ieșire din bucla celulelor după popularea tabelului
-            if "#tabel1" in cell.text:
-                break  # Ieșire din bucla rândurilor după găsirea și popularea tabelului
+                if start_placeholder in cell.text:
+                    # Clear the placeholder
+                    cell.text = ""
+                    # Start populating the table from the next row
+                    data_start_row_index = i + 1
+                    # Continue as long as there are rows in the DataFrame
+                    for df_index, data_row in df.iterrows():
+                        # If we have reached the end of the table, add a new row
+                        if data_start_row_index >= len(table.rows):
+                            table.add_row()
+                        # Populate the cells with the DataFrame row
+                        for j in range(len(row.cells)):  # Only go up to the number of cells in the row
+                            cell_value = data_row.iloc[j] if j < len(data_row) else ""
+                            table.rows[data_start_row_index].cells[j].text = str(cell_value) if pd.notna(cell_value) else ""
+                        data_start_row_index += 1
+                    # We break since we only want to populate one placeholder per call
+                    return
+
 
     # Salvarea și descărcarea documentului Word modificat
     word_modified_bytes = io.BytesIO()
