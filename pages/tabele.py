@@ -73,16 +73,13 @@ if uploaded_file is not None:
 
     stop_text1 = 'Total active corporale'
     stop_text2 = 'Total active necorporale'
-    start_text2 = stop_text1  # start_text pentru tabelul 2 este egal cu stop_text1
+    start_text2 = stop_text1 
 
-    df1_transformed = transforma_date(df, 3, stop_text1)  # Asumând că începem de la rândul 5 pentru tabelul 1
-    st.write("Tabel 1:", df1_transformed)
-
+    df1_transformed = transforma_date(df, 3, stop_text1)  
     df2_transformed = transforma_date(df, df.index[df.iloc[:, 1].str.contains(start_text2, na=False)].tolist()[0] + 1, stop_text2)
-    st.write("Tabel 2:", df2_transformed)
 
 
-if uploaded_word_file is not None and df1_transformed is not None:
+if uploaded_word_file is not None and df1_transformed is not None and df2_transformed is not None:
     # Încărcarea și deschiderea documentului Word
     word_bytes = io.BytesIO(uploaded_word_file.getvalue())
     doc = Document(word_bytes)
