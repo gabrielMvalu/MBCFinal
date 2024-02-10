@@ -17,9 +17,14 @@ if 'downloaded' not in st.session_state:
 
 nr_CAEN = None
 
-document_succes = False  
-document2_succes = False
-document3_succes = False
+if 'downloaded' not in st.session_state:
+    st.session_state['downloaded'] = False
+if 'document_succes' not in st.session_state:
+    st.session_state['document_succes'] = False
+if 'document2_succes' not in st.session_state:
+    st.session_state['document2_succes'] = False
+if 'document3_succes' not in st.session_state:
+    st.session_state['document3_succes'] = False
 
 
 def resetare_proces():
@@ -28,7 +33,7 @@ def resetare_proces():
     document_succes = False  
     document2_succes = False
     document3_succes = False
-    st.experimental_rerun()
+    st.rerun()
     
 col1, col2 = st.columns(2)
 
