@@ -86,17 +86,33 @@ if uploaded_word_file is not None and df1_transformed is not None:
     word_bytes = io.BytesIO(uploaded_word_file.getvalue())
     doc = Document(word_bytes)
     
+    placeholder_found = False
+
     for table in doc.tables:
         for row in table.rows:
             for cell in row.cells:
                 if "#tabel1" in cell.text:
-                    # Găsirea indexului rândului și a tabelului pentru adăugarea datelor
-                    row_index = table.rows.index(row)
-                    for i, data_row in df1_transformed.iterrows():
-                        new_row = table.add_row()
-                        for j, value in enumerate(data_row):
-                            new_row.cells[j].text = str(value)
-                    # Înlocuirea placeholder-ului cu un text gol sau cu header-ul tabelului, dacă este necesar
-                    cell.text = ""
-                    break  # Ieșire din bucla celulelor după ce găsești și populezi tabelul
+                    # Înlocuirea placeholder-ului cu prima valoare din DataFrame
+                    cell_index = row.cells.index(cell)
+                    cell.text = str(df1_transformed.iloc[0, cell_index])
+                    placeholder_found = True
+                    start_row_index = table.rows.index(row) + 1
+                    break
+            if placeholder_found:
+                break
+        
+        if placeholder_found:
+            # Adăugarea rândurilor și popularea lor cu datele din DataFrame
+            for i in range(1, len(df1_transformed)):
+                new_row = table.add_row()
+                for j in range(len(df1_transformed.columns)):
+                    new_row.cells[j].text = str(df1_transformed.iloc[i, j])
+            break
     
+    # Salvarea și oferirea documentului modificat pentru descărcare
+    word_modified_bytes = io.BytesIO()
+    doc.save(word_modified_bytes)
+    word_modified_bytes.seek(0)
+
+    st.download_button(label="Descarcă documentul Word modificat", data=word_modified_bytes, file_name="Document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+
