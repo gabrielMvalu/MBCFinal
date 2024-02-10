@@ -10,31 +10,16 @@ from serviciisiutilaje import extrage_pozitii, coreleaza_date
 
 st.set_page_config(layout="wide")
 
-st.header(':blue[Procese pentru inlocuire "Variabile" si completare "Machete PA/CF..."]', divider='rainbow')
+st.header(':blue[Procese pentru inlocuirea "Variabilelor" si completarea "Machete PA/CF..."]', divider='rainbow')
 
 if 'downloaded' not in st.session_state:
     st.session_state['downloaded'] = False
 
 nr_CAEN = None
+document_succes = False  
+document2_succes = False
+document3_succes = False
 
-if 'downloaded' not in st.session_state:
-    st.session_state['downloaded'] = False
-if 'document_succes' not in st.session_state:
-    st.session_state['document_succes'] = False
-if 'document2_succes' not in st.session_state:
-    st.session_state['document2_succes'] = False
-if 'document3_succes' not in st.session_state:
-    st.session_state['document3_succes'] = False
-
-
-def resetare_proces():
-    st.session_state['downloaded'] = False
-    global document_succes, document2_succes, document3_succes
-    document_succes = False  
-    document2_succes = False
-    document3_succes = False
-    st.rerun()
-    
 col1, col2 = st.columns(2)
 
 with col1:
@@ -47,13 +32,12 @@ with col1:
         nr_CAEN = solicitate_data.get('Doar nr CAEN','N/A')
         st.session_state.codCAEN = nr_CAEN
         st.success(f"Primul pas, pentru: {firma}, completat.")
-        st.session_state['document_succes'] = True
-        descriere_u_r = solicitate_data.get('D u reciclare', 'N/A')
-    
+        document_succes = True
+        #st.json({"Date extrase": solicitate_data})
 
 
 with col2:
-    if st.session_state['document_succes']:
+    if document_succes:
         uploaded_doc2 = st.file_uploader(f"Încărcați Raportul Interogare al {firma}", type=["docx"], key="RaportInterogare")
         if uploaded_doc2 is not None:
             constatator_doc = Document(uploaded_doc2)
@@ -78,7 +62,7 @@ with col2:
             coduri_caen_text = '\n'.join([f"{cod} - {descriere}" for cod, descriere in coduri_caen_curatate]) if coduri_caen_curatate else "N/A"    
            
             st.info(f"Prelucrarea 'Rapor Interogare' al {firma}, este completa.")
-            st.session_state['document2_succes'] = True       
+            document2_succes = True        
             
              # Afișarea datelor în format JSON
             #st.json({
@@ -95,7 +79,7 @@ with col2:
 col3, col4 = st.columns(2)
 
 with col3:
-    if st.session_state['document2_succes']:
+    if document2_succes:
         uploaded_doc3 = st.file_uploader("Încărcați Anexa 3 Macheta Financiară", type=["xlsx"], key="AnalizaMacheta")
         if uploaded_doc3 is not None:
             df_bilant = pd.read_excel(uploaded_doc3, sheet_name='1-Bilant')
@@ -132,20 +116,19 @@ with col3:
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
             
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul,{st.session_state.codCAEN} ")
-            st.session_state['document3_succes'] = False
+            document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
 
 
 with col4:
-    if st.session_state['document3_succes'] and not st.session_state['downloaded']:
+    if document3_succes and 'downloaded' in st.session_state and not st.session_state['downloaded']:
         uploaded_template = st.file_uploader("Încărcați MACHETA pt procesarea finala.", type=["docx"], key="MachetaPA")
         if uploaded_template is not None:
             template_doc = Document(uploaded_template)
-            st.toast('A inceput procesarea Planului de afaceri', icon='⭐')
-            # st.info(f"Procesare Finalizata. Pentru descarcarea documentului completat", icon="⬇️")
             st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")
-            
+            st.toast('Incepem procesarea Planului de afaceri', icon='⭐')    
+
             # Preia valoarea pentru 'Utilaj cu tocător'
             utilaj_cu_tocator_pt_inlocuire = solicitate_data.get('Utilaj cu tocător', 'N/A')
             nr_clasare_notificare_pt_inlocuire = solicitate_data.get('Număr clasare notificare', 'N/A')
@@ -299,13 +282,10 @@ with col4:
             # st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")
             
             with open("plan_afaceri_completat.docx", "rb") as file:
-                btn = st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-                if btn:
-                    resetare_proces()
+                st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                st.session_state.downloaded = True
                          
 
     else:
         st.warning("Vă rugăm să încărcați și să procesați documentele din primele coloane.")
 
-if st.button('Resetează procesul'):
-    resetare_proces()
