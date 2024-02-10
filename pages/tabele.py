@@ -114,4 +114,3 @@ if uploaded_word_file is not None and df1_transformed is not None:
 
     # Oferirea documentului modificat pentru descărcare
     st.download_button(label="Descarcă documentul Word modificat", data=word_modified_bytes, file_name="Document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-  )
