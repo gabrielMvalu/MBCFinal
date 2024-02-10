@@ -289,7 +289,7 @@ with col4:
                 st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
                 st.session_state.downloaded = True
                 
-    elif: st.error("Procesare Completa Pentru functionalitate corecta va rugam resetati procesul, incepand cu pasul 1.")
+        elif: st.error("Procesare Completa Pentru functionalitate corecta va rugam resetati procesul, incepand cu pasul 1.")
           
 
     else:
