@@ -117,7 +117,7 @@ if uploaded_word_file is not None and df_nou is not None:
     # Căutarea placeholder-ului și înlocuirea cu tabelul
     for paragraph in doc.paragraphs:
         if '#Tabel1' in paragraph.text:
-            add_df_with_borders_to_doc(doc, df_filtered)
+            add_df_with_borders_to_doc(doc, df_nou)
             p = paragraph._element
             p.getparent().remove(p)
             p._p = p._element = None
