@@ -285,7 +285,8 @@ with col4:
       
             with open("plan_afaceri_completat.docx", "rb") as file:
                 st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-                st.session_state.downloaded = True
+              #  st.session_state.downloaded = True
+                document_succes = False
         
     else:
         st.warning("Vă rugăm să încărcați și să procesați documentele din primele coloane.")
