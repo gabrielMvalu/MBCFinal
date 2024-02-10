@@ -16,8 +16,8 @@ if uploaded_file is not None:
     df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
 
     # Găsirea rândului care conține stop_text în coloana B (folosind indexul 1 pentru a accesa coloana B)
-    stop_index = df[df.iloc[:, 2] == stop_text].index.min()
-
+    stop_row = df[df.iloc[:, 2] == stop_text].index.min()
+    st.write(f"Index {stop_row}")
     # Verificăm dacă stop_text a fost găsit
     if pd.notna(stop_index):
         # Selectarea datelor de la rândul 5 până la rândul stop_index
