@@ -75,9 +75,10 @@ if uploaded_file is not None:
     stop_text2 = 'Total active necorporale'
     start_text2 = stop_text1 
 
-    df1_transformed = transforma_date(df, 3, stop_text1)  
-    df2_transformed = transforma_date(df, df.index[df.iloc[:, 1].str.contains(start_text2, na=False)].tolist()[0] + 1, stop_text2)
-
+   
+    df1_transformed, total_eligibil1, total_neeligibil1 = transforma_date(df, 3, stop_text1)  
+    df2_transformed, total_eligibil2, total_neeligibil2 = transforma_date(df, df.index[df.iloc[:, 1].str.contains(start_text2, na=False)].tolist()[0] + 1, stop_text2)
+ 
     # Afisarea totalurilor eligibile și neeligibile
     st.write(f"Total Eligibil Tabel 1: {total_eligibil1}")
     st.write(f"Total Neeligibil Tabel 1: {total_neeligibil1}")
