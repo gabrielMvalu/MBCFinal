@@ -81,17 +81,27 @@ def set_cell_border(cell):
     tcPr.append(tcBorders)
 
 
-def populate_table(doc, placeholder, df):
+
+def populate_table(doc, start_placeholder, end_placeholder, df):
     for table in doc.tables:
         for i, row in enumerate(table.rows):
             for cell in row.cells:
-                if placeholder in cell.text:
-                    # Ștergem placeholderul și începem să populăm tabelul de la acest rând
-                    start_index = i
-                    cell.text = cell.text.replace(placeholder, "")
-                    populate_rows(table, start_index, df)
-                    return  # Ieșim după ce am terminat de populat tabelul pentru acest placeholder
-
+                if start_placeholder in cell.text:
+                    # Am găsit începutul secțiunii unde trebuie să adăugăm date
+                    cell.text = cell.text.replace(start_placeholder, "")
+                    # Populăm datele în tabel începând cu rândul următor
+                    current_row = i + 1
+                    for _, data_row in df.iterrows():
+                        # Dacă rândul curent este mai mare decât numărul de rânduri din tabel, adăugăm un rând nou
+                        if current_row >= len(table.rows):
+                            table.add_row()
+                        for j, value in enumerate(data_row):
+                            table.cell(current_row, j).text = str(value) if pd.notna(value) else ""
+                        current_row += 1
+                elif end_placeholder in cell.text:
+                    # Am găsit sfârșitul secțiunii și ne oprim din adăugat date
+                    return
+                    
 def populate_rows(table, start_index, df):
     for i, data in df.iterrows():
         # Adăugăm un rând nou dacă am depășit numărul de rânduri din tabel
@@ -127,11 +137,12 @@ if uploaded_word_file is not None and df_nou is not None:
     word_bytes = io.BytesIO(uploaded_word_file.getvalue())
     doc = Document(word_bytes)
 
- # Înlocuim placeholderii și populăm tabelul cu datele pentru secțiunea activelor corporale
-    populate_table(doc, "#qq", df_nou[df_nou['Tip'] == 'Active corporale'])
+    # Populăm secțiunea de active corporale
+    populate_table(doc, "#qq", "#pp", df_nou[df_nou['Denumirea lucrărilor / bunurilor/ serviciilor'].str.contains("Total active corporale", case=False)])
+    
+    # Populăm secțiunea de active necorporale
+    populate_table(doc, "#pp", None, df_nou[df_nou['Denumirea lucrărilor / bunurilor/ serviciilor'].str.contains("Total active necorporale", case=False)])
 
-    # Înlocuim placeholderii și populăm tabelul cu datele pentru secțiunea activelor necorporale
-    populate_table(doc, "#pp", df_nou[df_nou['Tip'] == 'Active necorporale'])
 
     # Salvarea documentului modificat într-un buffer
     word_modified_bytes = io.BytesIO()
