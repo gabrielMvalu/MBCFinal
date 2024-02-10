@@ -34,31 +34,31 @@ def transforma_date(df):
                 linie_bugetara_list.append(row.iloc[14])
                 counter += 1
     
-        for index, row in df.iterrows():
-            val_6 = pd.to_numeric(row.iloc[6], errors='coerce')
-            val_4 = pd.to_numeric(row.iloc[4], errors='coerce')
-            if pd.isna(val_6) or pd.isna(val_4):
-                eligibil_neeligibil.append("Data Missing")
-            elif val_6 == 0 and val_4 != 0:
-                eligibil_neeligibil.append(f"0 // {round(val_4, 2)}")
-            elif val_6 == 0 and val_4 == 0:
-                eligibil_neeligibil.append("0 // 0")
-            elif val_6 < val_4:
-                eligibil_neeligibil.append(f"{round(val_6, 2)} // {round(val_4 - val_6, 2)}")
-            else:
-                eligibil_neeligibil.append(f"{round(val_6, 2)} // {round(val_6 - val_4, 2)}")
-    
-        df_nou = pd.DataFrame({
-            "Nr. crt.": nr_crt,
-            "Denumirea lucrărilor / bunurilor/ serviciilor": df.iloc[:, 1],
-            "UM": um_list,
-            "Cantitate": cantitate_list,
-            "Preţ unitar (fără TVA)": pret_unitar_list,
-            "Valoare Totală (fără TVA)": valoare_totala_list,
-            "Linie bugetară": linie_bugetara_list,
-            "Eligibil/ neeligibil": eligibil_neeligibil,
-            "Contribuie la criteriile de evaluare a,b,c,d": df.iloc[:, 15]
-        })
+                for index, row in df.iterrows():
+                    val_6 = pd.to_numeric(row.iloc[6], errors='coerce')
+                    val_4 = pd.to_numeric(row.iloc[4], errors='coerce')
+                    if pd.isna(val_6) or pd.isna(val_4):
+                        eligibil_neeligibil.append("Data Missing")
+                    elif val_6 == 0 and val_4 != 0:
+                        eligibil_neeligibil.append(f"0 // {round(val_4, 2)}")
+                    elif val_6 == 0 and val_4 == 0:
+                        eligibil_neeligibil.append("0 // 0")
+                    elif val_6 < val_4:
+                        eligibil_neeligibil.append(f"{round(val_6, 2)} // {round(val_4 - val_6, 2)}")
+                    else:
+                        eligibil_neeligibil.append(f"{round(val_6, 2)} // {round(val_6 - val_4, 2)}")
+            
+                df_nou = pd.DataFrame({
+                    "Nr. crt.": nr_crt,
+                    "Denumirea lucrărilor / bunurilor/ serviciilor": df.iloc[:, 1],
+                    "UM": um_list,
+                    "Cantitate": cantitate_list,
+                    "Preţ unitar (fără TVA)": pret_unitar_list,
+                    "Valoare Totală (fără TVA)": valoare_totala_list,
+                    "Linie bugetară": linie_bugetara_list,
+                    "Eligibil/ neeligibil": eligibil_neeligibil,
+                    "Contribuie la criteriile de evaluare a,b,c,d": df.iloc[:, 15]
+                })
     
         return df_nou 
 
