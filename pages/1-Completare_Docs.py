@@ -22,6 +22,13 @@ document2_succes = False
 document3_succes = False
 
 
+def resetare_proces():
+    st.session_state['downloaded'] = False
+    global document_succes, document2_succes, document3_succes
+    document_succes = False  
+    document2_succes = False
+    document3_succes = False
+
 col1, col2 = st.columns(2)
 
 with col1:
@@ -286,8 +293,9 @@ with col4:
             # st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")
             
             with open("plan_afaceri_completat.docx", "rb") as file:
-                st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-                st.session_state['downloaded'] = True
+                btn = st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                if btn:
+                    resetare_proces()
                          
 
     else:
