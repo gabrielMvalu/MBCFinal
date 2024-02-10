@@ -117,7 +117,7 @@ if uploaded_excel_file is not None:
 
 
 # Procesarea și modificarea fișierului Word
-if uploaded_word_file is not None and df_filtered is not None:
+if uploaded_word_file is not None and df_nou is not None:
     # Încărcarea documentului Word din buffer
     word_bytes = io.BytesIO(uploaded_word_file.getvalue())
     doc = Document(word_bytes)
