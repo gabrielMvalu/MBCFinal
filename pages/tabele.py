@@ -13,7 +13,7 @@ stop_text = 'Total_proiect'
 # Verifică dacă a fost încărcat un fișier
 if uploaded_file is not None:
     # Citirea datelor din fișierul Excel încărcat
-    df = pd.read_excel(uploaded_file, sheet_name='P. Financiar')
+    df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
 
     # Găsirea rândului care conține stop_text în coloana B
     stop_index = df[df['B'] == stop_text].index.min()  # Presupunem că 'B' este numele coloanei
