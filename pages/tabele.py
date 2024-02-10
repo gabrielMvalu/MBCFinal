@@ -18,6 +18,12 @@ def transforma(df):
     df = df[df.iloc[:, 1].notna() & (df.iloc[:, 1] != '0') & (df.iloc[:, 1] != '-')]
     nr_crt, um_list, cantitate_list, pret_unitar_list, valoare_totala_list, linie_bugetara_list, eligibil_neeligibil, = [], [], [], [], [], [], [],
     counter = 1
+    
+    # Inițializarea variabilelor pentru totaluri
+    total_eligibil = 0
+    total_neeligibil = 0
+
+    
 
     for _, row in df.iterrows():
         nr_crt.append(counter)
@@ -30,6 +36,9 @@ def transforma(df):
         linie_bugetara_list.append(row.iloc[14])
         counter += 1
 
+
+        eligibilitate, total_eligibil, total_neeligibil = determina_eligibilitate(val_6, val_4, total_eligibil, total_neeligibil)
+             
         val_6 = pd.to_numeric(row.iloc[6], errors='coerce')
         val_4 = pd.to_numeric(row.iloc[4], errors='coerce')
         eligibil_neeligibil.append(determina_eligibilitate(val_6, val_4))
@@ -48,17 +57,21 @@ def transforma(df):
     })
 
 
-def determina_eligibilitate(val_6, val_4):
+def determina_eligibilitate(val_6, val_4, total_eligibil, total_neeligibil):
     if pd.isna(val_6) or pd.isna(val_4):
-        return "Data Missing"
+        return "Data Missing", total_eligibil, total_neeligibil
     elif val_6 == 0 and val_4 != 0:
-        return f"Eligibil: 0 \nNeeligibil: {round(val_4, 2)}"
+        total_neeligibil += val_4
+        return f"Eligibil: 0 \nNeeligibil: {round(val_4, 2)}", total_eligibil, total_neeligibil
     elif val_6 == 0 and val_4 == 0:
-        return "Eligibil: 0 \nNeeligibil: 0"
+        return "Eligibil: 0 \nNeeligibil: 0", total_eligibil, total_neeligibil
     elif val_6 < val_4:
-        return f"Eligibil: {round(val_6, 2)} \nNeeligibil: {round(val_4 - val_6, 2)}"
+        total_eligibil += val_6
+        total_neeligibil += (val_4 - val_6)
+        return f"Eligibil: {round(val_6, 2)} \nNeeligibil: {round(val_4 - val_6, 2)}", total_eligibil, total_neeligibil
     else:
-        return f"Eligibil: {round(val_6, 2)} \nNeeligibil: {round(val_6 - val_4, 2)}"
+        total_eligibil += val_6
+        return f"Eligibil: {round(val_6, 2)} \nNeeligibil: {round(val_6 - val_4, 2)}", total_eligibil, total_neeligibil
 
 
 
@@ -77,7 +90,7 @@ if uploaded_file is not None:
 
     df1_transformed = transforma_date(df, 3, stop_text1)  
     df2_transformed = transforma_date(df, df.index[df.iloc[:, 1].str.contains(start_text2, na=False)].tolist()[0] + 1, stop_text2)
-
+    st.write(f"Total Eligibil:{total_eligibil} Total neeligibil:{total_neeligibil}")
 
 if uploaded_word_file is not None and df1_transformed is not None and df2_transformed is not None:
     # Încărcarea și deschiderea documentului Word
