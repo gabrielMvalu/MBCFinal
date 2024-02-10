@@ -7,29 +7,15 @@ import io
 
 
 def transforma_date(df, start_row, stop_text):
-    stop_indexes = df.index[df.iloc[:, 1].eq(stop_text)].tolist()
+    stop_indexes = df.index[df.iloc[:, 1].str.contains(stop_text, na=False)].tolist()
     if not stop_indexes:
         raise ValueError(f"'{stop_text}' nu a fost găsit în DataFrame.")
     stop_index = stop_indexes[0]
     df = df.iloc[start_row:stop_index]
     return transforma(df)
 
-def transforma_date_alt(df, start_text, stop_text):
-    start_indexes = df.index[df.iloc[:, 1].eq(start_text)].tolist()
-    if not start_indexes:
-        raise ValueError(f"'{start_text}' nu a fost găsit în DataFrame.")
-    start_index = start_indexes[0] + 1
-    
-    stop_indexes = df.index[df.iloc[:, 1].eq(stop_text)].tolist()
-    if not stop_indexes:
-        raise ValueError(f"'{stop_text}' nu a fost găsit în DataFrame.")
-    stop_index = stop_indexes[0]
-
-    df = df.iloc[start_index:stop_index]
-    return transforma(df)
-
 def transforma(df):
-    df = df[df.iloc[:, 1].notna() & (df.iloc[:, 1] != 0) & (df.iloc[:, 1] != '-')]
+    df = df[df.iloc[:, 1].notna() & (df.iloc[:, 1] != '0') & (df.iloc[:, 1] != '-')]
     nr_crt, um_list, cantitate_list, pret_unitar_list, valoare_totala_list, linie_bugetara_list, eligibil_neeligibil = [], [], [], [], [], [], []
     counter = 1
 
@@ -42,11 +28,8 @@ def transforma(df):
         valoare_totala = row.iloc[3] * cantitate if cantitate is not None else None
         valoare_totala_list.append(valoare_totala)
         linie_bugetara_list.append(row.iloc[14])
+        eligibil_neeligibil.append("")  # Actualizează logica aici dacă este necesar
         counter += 1
-
-        val_6 = pd.to_numeric(row.iloc[6], errors='coerce')
-        val_4 = pd.to_numeric(row.iloc[4], errors='coerce')
-        eligibil_neeligibil.append(determina_eligibilitate(val_6, val_4))
 
     return pd.DataFrame({
         "Nr. crt.": nr_crt,
@@ -59,18 +42,6 @@ def transforma(df):
         "Eligibil/ neeligibil": eligibil_neeligibil,
     })
 
-def determina_eligibilitate(val_6, val_4):
-    if pd.isna(val_6) or pd.isna(val_4):
-        return "Data Missing"
-    elif val_6 == 0 and val_4 != 0:
-        return f"0 // {round(val_4, 2)}"
-    elif val_6 == 0 and val_4 == 0:
-        return "0 // 0"
-    elif val_6 < val_4:
-        return f"{round(val_6, 2)} // {round(val_4 - val_6, 2)}"
-    else:
-        return f"{round(val_6, 2)} // {round(val_6 - val_4, 2)}"
-
 st.title('Transformare Date Excel')
 
 uploaded_file = st.file_uploader("Alegeți fișierul Excel:", type='xlsx')
@@ -78,11 +49,11 @@ if uploaded_file is not None:
     df = pd.read_excel(uploaded_file)
 
     stop_text1 = 'Total active corporale'
-    start_text2 = 'Publicitate'
     stop_text2 = 'Total active necorporale'
+    start_text2 = stop_text1  # start_text pentru tabelul 2 este egal cu stop_text1
 
-    df1_transformed = transforma_date(df, 4, stop_text1)
+    df1_transformed = transforma_date(df, 4, stop_text1)  # Asumând că începem de la rândul 5 pentru tabelul 1
     st.write("Tabel 1:", df1_transformed)
 
-    df2_transformed = transforma_date_alt(df, start_text2, stop_text2)
+    df2_transformed = transforma_date(df, df.index[df.iloc[:, 1].str.contains(start_text2, na=False)].tolist()[0] + 1, stop_text2)
     st.write("Tabel 2:", df2_transformed)
