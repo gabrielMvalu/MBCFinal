@@ -67,42 +67,28 @@ def transforma_date(df):
 
 
 
-
-def populate_table(doc, start_placeholder, end_placeholder, df):
+def populate_table(doc, start_placeholder, df):
     for table in doc.tables:
-        started = False
         for i, row in enumerate(table.rows):
             for cell in row.cells:
                 if start_placeholder in cell.text:
-                    # Începem să populăm datele în tabel
-                    cell.text = cell.text.replace(start_placeholder, "")
-                    started = True
-                    current_row = i
-                elif end_placeholder and end_placeholder in cell.text:
-                    # Găsim un nou loc de start și resetăm indicatorul
-                    started = True
-                    current_row = i
-                    cell.text = cell.text.replace(end_placeholder, "")
+                    # Clear the placeholder
+                    cell.text = ""
+                    # Start populating the table from the next row
+                    data_start_row_index = i + 1
+                    # Continue as long as there are rows in the DataFrame
+                    for df_index, data_row in df.iterrows():
+                        # If we have reached the end of the table, add a new row
+                        if data_start_row_index >= len(table.rows):
+                            table.add_row()
+                        # Populate the cells with the DataFrame row
+                        for j in range(len(row.cells)):  # Only go up to the number of cells in the row
+                            cell_value = data_row.iloc[j] if j < len(data_row) else ""
+                            table.rows[data_start_row_index].cells[j].text = str(cell_value) if pd.notna(cell_value) else ""
+                        data_start_row_index += 1
+                    # We break since we only want to populate one placeholder per call
+                    return
 
-            # Dacă am început să populăm, adăugăm datele
-            if started:
-                if current_row >= len(table.rows):
-                    table.add_row()
-                row_cells = table.rows[current_row].cells
-
-                # Dacă găsim un rând cu "total active corporale", oprim inserarea
-                if any("total active corporale" in cell.text.lower() for cell in row_cells):
-                    started = False
-                    continue
-
-                # Populăm celulele
-                data_row = df.iloc[current_row - i] if current_row - i < len(df) else None
-                if data_row is not None:
-                    for j, value in enumerate(data_row):
-                        cell = row_cells[j]
-                        cell.text = str(value) if pd.notna(value) else ""
-
-                current_row += 1
 
 
 
@@ -129,11 +115,13 @@ if uploaded_word_file is not None and df_nou is not None:
     word_bytes = io.BytesIO(uploaded_word_file.getvalue())
     doc = Document(word_bytes)
 
-    # Populăm secțiunea de active corporale
-    populate_table(doc, "#qq", None, df_nou[df_nou['Denumirea lucrărilor / bunurilor/ serviciilor'].str.contains("total active corporale", case=False)])
+  # Populate the section for active corporale
+    df_corporale = df_nou[df_nou['Denumirea lucrărilor / bunurilor/ serviciilor'].str.contains("total active corporale", case=False)]
+    populate_table(doc, "#qq", df_corporale)
 
-    # Populăm secțiunea de active necorporale
-    populate_table(doc, "#pp", None, df_nou[df_nou['Denumirea lucrărilor / bunurilor/ serviciilor'].str.contains("total active necorporale", case=False)])
+    # Populate the section for active necorporale
+    df_necorporale = df_nou[df_nou['Denumirea lucrărilor / bunurilor/ serviciilor'].str.contains("total active necorporale", case=False)]
+    populate_table(doc, "#pp", df_necorporale)
 
 
     # Salvarea documentului modificat într-un buffer
