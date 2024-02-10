@@ -60,7 +60,7 @@ def transforma_date(df):
             "Contribuie la criteriile de evaluare a,b,c,d": df.iloc[:, 15]
         })
     
-        return df_nou" 
+        return df_nou 
 
 
 # Funcție pentru setarea bordurilor unei celule
