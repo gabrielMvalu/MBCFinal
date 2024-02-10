@@ -61,7 +61,7 @@ def transforma_date(df):
     })
         
     
-        return df_nou 
+    return df_nou 
 
 
 # Funcție pentru setarea bordurilor unei celule
