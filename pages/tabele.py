@@ -48,8 +48,8 @@ def transforma_date(df):
         else:
             eligibil_neeligibil.append(f"{round(val_6, 2)} // {round(val_6 - val_4, 2)}")
 
-    nr_crt_int = [int(x) if x is not None else None for x in nr_crt]
-    cantitate_int = [int(x) if x is not None else None for x in df.iloc[:, 15]]
+    nr_crt_int = [int(x) if pd.notna(x) else None for x in nr_crt]
+    cantitate_int = pd.to_numeric(df.iloc[:, 15], errors='coerce').fillna(None).astype('Int64').tolist()
     
     df_nou = pd.DataFrame({
         "Nr. crt.": nr_crt_int,
@@ -62,7 +62,7 @@ def transforma_date(df):
         "Eligibil/ neeligibil": eligibil_neeligibil,
         "Contribuie la criteriile de evaluare a,b,c,d": cantitate_int
     })
-        
+
     
     return df_nou 
 
