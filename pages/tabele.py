@@ -55,7 +55,7 @@ stop_text = 'Total proiect'
 if uploaded_excel_file is not None:
     df = pd.read_excel(uploaded_excel_file, sheet_name='P. FINANCIAR')
     
-    #functia pt rearanjarea tabelului
+  #functia pt rearanjarea tabelului
     def transforma_date(df):
         stop_index = df.index[df.iloc[:, 1].eq(stop_text)].tolist()
         df = df.iloc[3:stop_index[0]] if stop_index else df.iloc[3:]
@@ -112,9 +112,8 @@ if uploaded_excel_file is not None:
     
         return df_nou
 
-        st.write('Datele filtrate (limitate la 16 coloane):')
-        st.dataframe(df_nou)
-
+    st.write('Datele filtrate (limitate la 16 coloane):')
+    st.dataframe(df_nou)
 
 # Procesarea și modificarea fișierului Word
 if uploaded_word_file is not None and df_nou is not None:
