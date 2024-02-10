@@ -64,17 +64,18 @@ def transforma_date(df):
 
 
 # Funcție pentru setarea bordurilor unei celule
-def set_cell_border(cell, border_sz=4, border_color="000000"):
-    from docx.oxml import OxmlElement
-
-    # Definirea proprietăților pentru fiecare parte a bordurii
-    for border in ["top", "left", "bottom", "right"]:
-        border_el = OxmlElement(f'w:{border}')
-        border_el.set(qn('w:val'), 'single')
-        border_el.set(qn('w:sz'), str(border_sz))
-        border_el.set(qn('w:space'), '0')
-        border_el.set(qn('w:color'), border_color)
-        cell._tc.get_or_add_tcPr().append(border_el)
+def set_cell_border(cell):
+    border_xml = """
+    <w:tcBorders xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+        <w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+        <w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+        <w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+        <w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+    </w:tcBorders>
+    """
+    tcPr = cell._tc.get_or_add_tcPr()
+    tcBorders = parse_xml(border_xml)
+    tcPr.append(tcBorders)
 
 # Funcție pentru adăugarea unui tabel cu borduri într-un document Word
 def add_df_with_borders_to_doc(doc, df):
