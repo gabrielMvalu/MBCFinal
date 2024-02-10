@@ -61,6 +61,27 @@ def determina_eligibilitate(val_6, val_4):
 
 
 
+def populare_tabel_word(doc, df, start_row, placeholder_text):
+  table = doc.tables[0]
+  # Găsirea celulei cu placeholder-ul
+  for row in table.rows:
+    for cell in row.cells:
+      if placeholder_text in cell.text:
+        placeholder_cell = cell
+        break
+
+  # Inserarea datelor incepand cu celula placeholder
+  for i in range(start_row, len(df)):
+    row = table.add_row()
+    for j, column in enumerate(df.columns):
+      cell = row.cells[j]
+      cell.text = str(df.iloc[i, j])
+
+  return doc
+
+
+
+
 st.title('Transformare Date Excel')
 
 uploaded_file = st.file_uploader("Alegeți fișierul Excel:", type='xlsx')
@@ -76,33 +97,18 @@ if uploaded_file is not None:
     st.write("Tabel 1:", df1_transformed)
 
 if uploaded_word_file is not None and df1_transformed is not None:
-    word_bytes = io.BytesIO(uploaded_word_file.getvalue())
-    doc = Document(word_bytes)
+  word_bytes = io.BytesIO(uploaded_word_file.getvalue())
+  doc = Document(word_bytes)
+  doc = populare_tabel_word(doc, df1_transformed, 2, '#tabel1')
 
-    for table in doc.tables:
-        for i, row in enumerate(table.rows):
-            for cell in row.cells:
-                if start_placeholder in cell.text:
-                    # Clear the placeholder
-                    cell.text = ""
-                    # Start populating the table from the next row
-                    data_start_row_index = i + 1
-                    # Continue as long as there are rows in the DataFrame
-                    for df_index, data_row in df.iterrows():
-                        # If we have reached the end of the table, add a new row
-                        if data_start_row_index >= len(table.rows):
-                            table.add_row()
-                        # Populate the cells with the DataFrame row
-                        for j in range(len(row.cells)):  # Only go up to the number of cells in the row
-                            cell_value = data_row.iloc[j] if j < len(data_row) else ""
-                            table.rows[data_start_row_index].cells[j].text = str(cell_value) if pd.notna(cell_value) else ""
-                        data_start_row_index += 1
-                    # We break since we only want to populate one placeholder per call
-                    return
+  # Salvarea documentului Word modificat
+  with open("output.docx", "wb") as f:
+    f.write(doc.content)
 
-
-    # Salvarea și descărcarea documentului Word modificat
-    word_modified_bytes = io.BytesIO()
-    doc.save(word_modified_bytes)
-    word_modified_bytes.seek(0)
-    st.download_button(label="Descarcă documentul Word modificat", data=word_modified_bytes, file_name="Document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+  # Descărcarea documentului Word
+  st.download_button(
+      label="Descarcă documentul Word",
+      data=doc.content,
+      file_name="output.docx",
+      mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  )
