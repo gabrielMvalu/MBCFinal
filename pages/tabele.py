@@ -16,7 +16,8 @@ def transforma_date(df, start_row, stop_text):
 
 def transforma(df):
     df = df[df.iloc[:, 1].notna() & (df.iloc[:, 1] != '0') & (df.iloc[:, 1] != '-')]
-    nr_crt, um_list, cantitate_list, pret_unitar_list, valoare_totala_list, linie_bugetara_list, eligibil_neeligibil, = [], [], [], [], [], [], [],
+    nr_crt, um_list, cantitate_list, pret_unitar_list, valoare_totala_list, linie_bugetara_list, eligibil_neeligibil, = [], [], [], [], [], [], []
+    total_eligibil, total_neeligibil = 0, 0  # Inițializarea totalurilor
     counter = 1
 
     for _, row in df.iterrows():
@@ -28,13 +29,14 @@ def transforma(df):
         valoare_totala = row.iloc[3] * cantitate if cantitate is not None else None
         valoare_totala_list.append(valoare_totala)
         linie_bugetara_list.append(row.iloc[14])
+        eligibilitate = determina_eligibilitate(pd.to_numeric(row.iloc[6], errors='coerce'), pd.to_numeric(row.iloc[4], errors='coerce'))
+        eligibil_neeligibil.append(eligibilitate)
+        if 'Eligibil' in eligibilitate:
+            total_eligibil += float(eligibilitate.split('\n')[0].split(': ')[1])  # Presupunem că formatul este "Eligibil: x.xx"
+        if 'Neeligibil' in eligibilitate:
+            total_neeligibil += float(eligibilitate.split('\n')[1].split(': ')[1])  # Presupunem că formatul este "Neeligibil: x.xx"
         counter += 1
 
-        val_6 = pd.to_numeric(row.iloc[6], errors='coerce')
-        val_4 = pd.to_numeric(row.iloc[4], errors='coerce')
-        eligibil_neeligibil.append(determina_eligibilitate(val_6, val_4))
-
-    
     return pd.DataFrame({
         "Nr. crt.": nr_crt,
         "Denumirea lucrărilor / bunurilor/ serviciilor": df.iloc[:, 1],
@@ -45,7 +47,7 @@ def transforma(df):
         "Linie bugetară": linie_bugetara_list,
         "Eligibil/ neeligibil": eligibil_neeligibil,
         "Contribuie la criteriile de evaluare a,b,c,d": df.iloc[:, 15]
-    })
+    }), total_eligibil, total_neeligibil  # Returnează și totalurile
 
 
 def determina_eligibilitate(val_6, val_4):
@@ -75,7 +77,13 @@ if uploaded_file is not None:
 
     df1_transformed = transforma_date(df, 3, stop_text1)  
     df2_transformed = transforma_date(df, df.index[df.iloc[:, 1].str.contains(start_text2, na=False)].tolist()[0] + 1, stop_text2)
-   
+
+    # Afisarea totalurilor eligibile și neeligibile
+    st.write(f"Total Eligibil Tabel 1: {total_eligibil1}")
+    st.write(f"Total Neeligibil Tabel 1: {total_neeligibil1}")
+    st.write(f"Total Eligibil Tabel 2: {total_eligibil2}")
+    st.write(f"Total Neeligibil Tabel 2: {total_neeligibil2}")
+  
 
 if uploaded_word_file is not None and df1_transformed is not None and df2_transformed is not None:
     # Încărcarea și deschiderea documentului Word
