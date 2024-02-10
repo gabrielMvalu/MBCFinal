@@ -11,7 +11,7 @@ uploaded_file = st.file_uploader("Incarca Anexa 3 Macheta Financiara (.xlsx)", t
 if uploaded_file is not None:
   
     # Citirea datelor din fișierul Excel încărcat
-    df = pd.read_excel(uploaded_file)
+    df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
 
     # Afișarea datelor în Streamlit
     st.write('Datele încărcate:')
