@@ -48,14 +48,13 @@ def transforma_date(df):
         else:
             eligibil_neeligibil.append(f"{round(val_6, 2)} // {round(val_6 - val_4, 2)}")
 
-    nr_crt_int = [int(x) if pd.notna(x) else None for x in nr_crt]
-    
+      
     
     df_nou = pd.DataFrame({
         "Nr. crt.": [str(int(x)) if pd.notna(x) else "" for x in nr_crt],
         "Denumirea lucrărilor / bunurilor/ serviciilor": df.iloc[:, 1],
         "UM": um_list,
-        "Cantitate": cantitate_list,
+        "Cantitate": [str(int(x)) if pd.notna(x) else "" for x in cantitate_list],
         "Preţ unitar (fără TVA)": pret_unitar_list,
         "Valoare Totală (fără TVA)": valoare_totala_list,
         "Linie bugetară": linie_bugetara_list,
