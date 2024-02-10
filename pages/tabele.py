@@ -82,32 +82,28 @@ if uploaded_file is not None:
     st.write("Tabel 2:", df2_transformed)
 
 
-if uploaded_word_file is not None and df1_transformed is not None:
-    word_bytes = io.BytesIO(uploaded_word_file.getvalue())
-    doc = Document(word_bytes)
-    
-    placeholder_found = False
-
-    for table in doc.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                if "#tabel1" in cell.text:
-                    # Înlocuirea placeholder-ului cu prima valoare din DataFrame
-                    cell_index = row.cells.index(cell)
-                    cell.text = str(df1_transformed.iloc[0, cell_index])
-                    placeholder_found = True
-                    start_row_index = table.rows.index(row) + 1
-                    break
-            if placeholder_found:
-                break
-        
+for table in doc.tables:
+    for row in table.rows:
+        for cell in row.cells:
+            if "#tabel1" in cell.text:
+                placeholder_found = True
+                cell.text = ""  # Șterge textul placeholder
+                # Continuă cu adăugarea datelor în rândurile următoare
+                data_row_index = 0
+                break  # Ieșire din bucla celulelor
         if placeholder_found:
-            # Adăugarea rândurilor și popularea lor cu datele din DataFrame
-            for i in range(1, len(df1_transformed)):
-                new_row = table.add_row()
-                for j in range(len(df1_transformed.columns)):
-                    new_row.cells[j].text = str(df1_transformed.iloc[i, j])
-            break
+            # Adaugă datele în rândurile noi, începând cu rândul următor
+            for i in range(table.rows.index(row) + 1, table.rows.index(row) + 1 + len(df1_transformed)):
+                if data_row_index < len(df1_transformed):
+                    for j, value in enumerate(df1_transformed.iloc[data_row_index]):
+                        table.cell(i, j).text = str(value)
+                    data_row_index += 1
+                else:
+                    break  # Ieșire dacă toate datele au fost adăugate
+            break  # Ieșire din bucla rândurilor după adăugarea datelor
+    if placeholder_found:
+        break  # Ieșire din bucla tabelurilor după adăugarea datelor în tabelul dorit
+
     
     # Salvarea și oferirea documentului modificat pentru descărcare
     word_modified_bytes = io.BytesIO()
