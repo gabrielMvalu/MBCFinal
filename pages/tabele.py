@@ -89,23 +89,25 @@ if uploaded_word_file is not None and df1_transformed is not None:
 
     placeholder_found = False
 
-    # Căutarea tabelului și a celulei cu placeholder-ul
     for table in doc.tables:
         for row in table.rows:
             for cell in row.cells:
                 if "#tabel1" in cell.text:
                     cell.text = ""  # Șterge placeholder
-                    placeholder_found = True
-                    break  # Ieșire din bucla celulelor
-            if placeholder_found:
+                    data_frame = df1_transformed  # Alege DataFrame-ul corespunzător
+                elif "#tabel2" in cell.text:
+                    cell.text = ""  # Șterge placeholder
+                    data_frame = df2_transformed  # Alege DataFrame-ul corespunzător
+                else:
+                    continue  # Dacă nu se găsește niciun placeholder, continuă căutarea
+    
                 # Popularea tabelului începând de la rândul următor după cel cu placeholder
-                for i, data_row in df1_transformed.iterrows():
+                for i, data_row in data_frame.iterrows():
                     new_row = table.add_row()
                     for j, value in enumerate(data_row):
                         new_row.cells[j].text = str(value)
-                break  # Ieșire din bucla rândurilor după populare
-        if placeholder_found:
-            break  # Ieșire din bucla tabelurilor după găsirea și popularea tabelului
+                break  # Ieșire din bucla celulelor după popularea tabelului
+            break  # Ieșire din bucla rândurilor după găsirea și popularea tabelului
 
     # Salvarea documentului modificat
     word_modified_bytes = io.BytesIO()
