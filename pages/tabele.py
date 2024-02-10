@@ -58,12 +58,12 @@ if uploaded_excel_file is not None:
 
     # Verificăm dacă stop_text a fost găsit și limităm DataFrame-ul la primele 15 coloane
     if pd.notna(stop_row):
-        df_filtered = df.iloc[4:stop_row + 1, :15]  # Selectăm rândurile și primele 15 coloane
+        df_filtered = df.iloc[4:stop_row + 1, :16]  # Selectăm rândurile și primele 15 coloane
     else:
         st.write('Textul de stop nu a fost găsit. Se afișează toate datele începând cu rândul 5, limitat la 15 coloane.')
-        df_filtered = df.iloc[4:, :15]  # Selectăm toate datele începând cu rândul 5, limitat la 15 coloane
+        df_filtered = df.iloc[4:, :16]  # Selectăm toate datele începând cu rândul 5, limitat la 15 coloane
 
-    st.write('Datele filtrate (limitate la 15 coloane):')
+    st.write('Datele filtrate (limitate la 16 coloane):')
     st.dataframe(df_filtered)
 
 
