@@ -10,7 +10,7 @@ from serviciisiutilaje import extrage_pozitii, coreleaza_date
 
 st.set_page_config(layout="wide")
 
-st.header(':blue[Procese pentru inlocuirea "Variabilelor" si completarea "Machete PA/CF..."]', divider='rainbow')
+st.header(':blue[Procese pentru inlocuire "Variabile" si completare "Machete PA/CF..."]', divider='rainbow')
 
 if 'downloaded' not in st.session_state:
     st.session_state['downloaded'] = False
