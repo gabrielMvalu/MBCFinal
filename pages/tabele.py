@@ -5,58 +5,8 @@ from docx.oxml import parse_xml
 from docx.oxml.ns import nsdecls
 import io
 
-# Funcție pentru setarea bordurilor unei celule
-def set_cell_border(cell):
-    border_xml = """
-    <w:tcBorders xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
-        <w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-        <w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-        <w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-        <w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-    </w:tcBorders>
-    """
-    tcPr = cell._tc.get_or_add_tcPr()
-    tcBorders = parse_xml(border_xml)
-    tcPr.append(tcBorders)
 
-# Funcție pentru adăugarea unui tabel cu borduri într-un document Word
-def add_df_with_borders_to_doc(doc, df):
-    table = doc.add_table(rows=1, cols=len(df.columns))  # Creăm tabelul
-    
-    # Setăm bordurile pentru header
-    for cell in table.rows[0].cells:
-        set_cell_border(cell)
-    
-    # Adăugăm anteturile coloanelor
-    hdr_cells = table.rows[0].cells
-    for i, column in enumerate(df.columns):
-        hdr_cells[i].text = str(column)
-    
-    # Adăugăm rândurile din DataFrame
-    for index, row in df.iterrows():
-        row_cells = table.add_row().cells
-        for i, value in enumerate(row):
-            row_cells[i].text = str(value) if pd.notna(value) else ""
-            set_cell_border(row_cells[i])  # Setăm bordurile pentru fiecare celulă din tabel
-
-# Titlul aplicației
-st.title('Încărcare și prelucrare fișier Excel și Word')
-
-# Widget pentru încărcarea fișierului Excel
-uploaded_excel_file = st.file_uploader("Alege un fișier Excel (.xlsx)", type=['xlsx'], key="excel")
-
-# Widget pentru încărcarea fișierului Word
-uploaded_word_file = st.file_uploader("Încarcă documentul Word", type=['docx'], key="word")
-
-# Variabila care reprezintă textul de stop
-stop_text = 'Total proiect'
-
-# Procesarea fișierului Excel
-if uploaded_excel_file is not None:
-    df = pd.read_excel(uploaded_excel_file, sheet_name='P. FINANCIAR')
-    
-  #functia pt rearanjarea tabelului
-    def transforma_date(df):
+def transforma_date(df):
         stop_index = df.index[df.iloc[:, 1].eq(stop_text)].tolist()
         df = df.iloc[3:stop_index[0]] if stop_index else df.iloc[3:]
         df = df[df.iloc[:, 1].notna() & (df.iloc[:, 1] != 0) & (df.iloc[:, 1] != '-')]
@@ -110,10 +60,52 @@ if uploaded_excel_file is not None:
             "Contribuie la criteriile de evaluare a,b,c,d": df.iloc[:, 15]
         })
     
-        return df_nou
+        return df_nou" 
 
-    st.write('Datele filtrate (limitate la 16 coloane):')
-    st.dataframe(df_nou)
+
+# Funcție pentru setarea bordurilor unei celule
+def set_cell_border(cell, border_sz=4, border_color="000000"):
+    from docx.oxml import OxmlElement
+
+    # Definirea proprietăților pentru fiecare parte a bordurii
+    for border in ["top", "left", "bottom", "right"]:
+        border_el = OxmlElement(f'w:{border}')
+        border_el.set(qn('w:val'), 'single')
+        border_el.set(qn('w:sz'), str(border_sz))
+        border_el.set(qn('w:space'), '0')
+        border_el.set(qn('w:color'), border_color)
+        cell._tc.get_or_add_tcPr().append(border_el)
+
+# Funcție pentru adăugarea unui tabel cu borduri într-un document Word
+def add_df_with_borders_to_doc(doc, df):
+    table = doc.add_table(rows=1, cols=len(df.columns))
+    for i, column in enumerate(df.columns):
+        table.cell(0, i).text = str(column)
+        set_cell_border(table.cell(0, i))
+
+    for index, row in df.iterrows():
+        row_cells = table.add_row().cells
+        for i, value in enumerate(row):
+            row_cells[i].text = str(value) if pd.notna(value) else ""
+            set_cell_border(row_cells[i])
+
+
+# Titlul aplicației
+st.title('Încărcare și prelucrare fișier Excel și Word')
+
+# Widget pentru încărcarea fișierului Excel
+uploaded_excel_file = st.file_uploader("Alege un fișier Excel (.xlsx)", type=['xlsx'], key="excel")
+
+# Widget pentru încărcarea fișierului Word
+uploaded_word_file = st.file_uploader("Încarcă documentul Word", type=['docx'], key="word")
+
+# Variabila care reprezintă textul de stop
+stop_text = 'Total proiect'
+
+# Procesarea fișierului Excel
+if uploaded_excel_file is not None:
+    df = pd.read_excel(uploaded_excel_file, sheet_name='P. FINANCIAR')
+    df_nou = transforma_date(df)
 
 # Procesarea și modificarea fișierului Word
 if uploaded_word_file is not None and df_nou is not None:
