@@ -29,7 +29,7 @@ def transforma_date(df):
             cantitate = int(row.iloc[11]) if pd.notna(row.iloc[11]) else None
             cantitate_list.append(cantitate)
             pret_unitar_list.append(row.iloc[3])
-            valoare_totala = row.iloc[2] * cantitate if cantitate is not None else None
+            valoare_totala = row.iloc[3] * cantitate if cantitate is not None else None
             valoare_totala_list.append(valoare_totala)
             linie_bugetara_list.append(row.iloc[14])
             counter += 1
