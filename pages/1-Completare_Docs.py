@@ -138,7 +138,7 @@ with col3:
 
 
 with col4:
-    if document3_succes and 'downloaded' in st.session_state and not st.session_state['downloaded']:
+    if st.session_state['document3_succes'] and not st.session_state['downloaded']:
         uploaded_template = st.file_uploader("Încărcați MACHETA pt procesarea finala.", type=["docx"], key="MachetaPA")
         if uploaded_template is not None:
             template_doc = Document(uploaded_template)
