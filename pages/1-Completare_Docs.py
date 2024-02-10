@@ -53,7 +53,7 @@ with col1:
 
 
 with col2:
-    if document_succes:
+    if st.session_state['document_succes']:
         uploaded_doc2 = st.file_uploader(f"Încărcați Raportul Interogare al {firma}", type=["docx"], key="RaportInterogare")
         if uploaded_doc2 is not None:
             constatator_doc = Document(uploaded_doc2)
@@ -95,7 +95,7 @@ with col2:
 col3, col4 = st.columns(2)
 
 with col3:
-    if document2_succes:
+    if st.session_state['document2_succes']:
         uploaded_doc3 = st.file_uploader("Încărcați Anexa 3 Macheta Financiară", type=["xlsx"], key="AnalizaMacheta")
         if uploaded_doc3 is not None:
             df_bilant = pd.read_excel(uploaded_doc3, sheet_name='1-Bilant')
