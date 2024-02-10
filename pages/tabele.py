@@ -56,37 +56,16 @@ if uploaded_excel_file is not None:
     df = pd.read_excel(uploaded_excel_file, sheet_name='P. FINANCIAR')
     stop_row = df[df.iloc[:, 1] == stop_text].index.min()
 
-    # Verificăm dacă stop_text a fost găsit și limităm DataFrame-ul la primele 16 coloane
+    # Verificăm dacă stop_text a fost găsit și limităm DataFrame-ul la primele 15 coloane
     if pd.notna(stop_row):
-        df_filtered = df.iloc[4:stop_row + 1, :16]  # Selectăm rândurile și primele 16 coloane
+        df_filtered = df.iloc[4:stop_row + 1, :16]  # Selectăm rândurile și primele 15 coloane
     else:
-        st.write('Textul de stop nu a fost găsit. Se afișează toate datele începând cu rândul 5, limitat la 16 coloane.')
-        df_filtered = df.iloc[4:, :16]  # Selectăm toate datele începând cu rândul 5, limitat la 16 coloane
+        st.write('Textul de stop nu a fost găsit. Se afișează toate datele începând cu rândul 5, limitat la 15 coloane.')
+        df_filtered = df.iloc[4:, :16]  # Selectăm toate datele începând cu rândul 5, limitat la 15 coloane
 
-    # Crearea header-ului nou pentru DataFrame
-    nr_crt = range(1, len(df_filtered) + 1)
-    um_list = ["UM"] * len(df_filtered)  # Înlocuiește cu valorile reale
-    cantitate_list = [0] * len(df_filtered)  # Înlocuiește cu valorile reale
-    pret_unitar_list = [0] * len(df_filtered)  # Înlocuiește cu valorile reale
-    valoare_totala_list = [0] * len(df_filtered)  # Înlocuiește cu valorile reale
-    linie_bugetara_list = ["Linie bugetară"] * len(df_filtered)  # Înlocuiește cu valorile reale
-    eligibil_neeligibil = ["Eligibil"] * len(df_filtered)  # Înlocuiește cu valorile reale
-
-    # Actualizarea df_filtered cu noile coloane
-    df_filtered = pd.DataFrame({
-        "Nr. crt.": nr_crt,
-        "Denumirea lucrărilor / bunurilor/ serviciilor": df_filtered.iloc[:, 1],
-        "UM": um_list,
-        "Cantitate": cantitate_list,
-        "Preţ unitar (fără TVA)": pret_unitar_list,
-        "Valoare Totală (fără TVA)": valoare_totala_list,
-        "Linie bugetară": linie_bugetara_list,
-        "Eligibil/ neeligibil": eligibil_neeligibil,
-        "Contribuie la criteriile de evaluare a,b,c,d": df_filtered.iloc[:, 15]
-    })
-
-    st.write('Datele filtrate (actualizate cu noul header):')
+    st.write('Datele filtrate (limitate la 16 coloane):')
     st.dataframe(df_filtered)
+
 
 # Procesarea și modificarea fișierului Word
 if uploaded_word_file is not None and df_filtered is not None:
