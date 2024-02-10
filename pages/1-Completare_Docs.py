@@ -129,8 +129,10 @@ with col4:
         uploaded_template = st.file_uploader("Încărcați MACHETA pt procesarea finala.", type=["docx"], key="MachetaPA")
         if uploaded_template is not None:
             template_doc = Document(uploaded_template)
-            st.toast('Incepem procesarea Planului de afaceri', icon='⭐')    
-
+            st.toast('A inceput procesarea Planului de afaceri', icon='⭐')
+            st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")
+            
+            
             # Preia valoarea pentru 'Utilaj cu tocător'
             utilaj_cu_tocator_pt_inlocuire = solicitate_data.get('Utilaj cu tocător', 'N/A')
             nr_clasare_notificare_pt_inlocuire = solicitate_data.get('Număr clasare notificare', 'N/A')
@@ -281,7 +283,7 @@ with col4:
         
             template_doc.save("plan_afaceri_completat.docx")
 
-            st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")
+            # st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")
             
             with open("plan_afaceri_completat.docx", "rb") as file:
                 st.download_button(label="Descarcă Documentul Completat", data=file, file_name="document_modificat.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
