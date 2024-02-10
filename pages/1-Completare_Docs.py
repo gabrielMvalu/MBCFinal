@@ -28,7 +28,8 @@ def resetare_proces():
     document_succes = False  
     document2_succes = False
     document3_succes = False
-
+    st.experimental_rerun()
+    
 col1, col2 = st.columns(2)
 
 with col1:
@@ -301,4 +302,5 @@ with col4:
     else:
         st.warning("Vă rugăm să încărcați și să procesați documentele din primele coloane.")
 
-
+if st.button('Resetează procesul'):
+    resetare_proces()
