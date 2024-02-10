@@ -128,10 +128,10 @@ if uploaded_word_file is not None and df_nou is not None:
     doc = Document(word_bytes)
 
  # Înlocuim placeholderii și populăm tabelul cu datele pentru secțiunea activelor corporale
-    populate_table(doc, "#primaparte", df_nou[df_nou['Tip'] == 'Active corporale'])
+    populate_table(doc, "#qq", df_nou[df_nou['Tip'] == 'Active corporale'])
 
     # Înlocuim placeholderii și populăm tabelul cu datele pentru secțiunea activelor necorporale
-    populate_table(doc, "#parteadoi", df_nou[df_nou['Tip'] == 'Active necorporale'])
+    populate_table(doc, "#pp", df_nou[df_nou['Tip'] == 'Active necorporale'])
 
     # Salvarea documentului modificat într-un buffer
     word_modified_bytes = io.BytesIO()
