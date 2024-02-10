@@ -44,7 +44,6 @@ def transforma(df):
         "Valoare Totală (fără TVA)": valoare_totala_list,
         "Linie bugetară": linie_bugetara_list,
         "Eligibil/ neeligibil": eligibil_neeligibil,
-        "Contribuie la criteriile de evaluare a,b,c,d": df.iloc[:, 15]
     })
 
 
