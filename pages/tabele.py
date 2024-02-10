@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from docx import Document
+from docx.oxml import parse_xml
+from docx.oxml.ns import nsdecls
 
 # Titlul aplicației
 st.title('Încărcare și prelucrare fișier Excel')
@@ -35,47 +37,54 @@ else:
 
 
 
-def replace_placeholder_with_table(doc_path, placeholder, df):
-    # Deschiderea documentului Word existent
-    doc = Document(doc_path)
-
-    # Căutarea fiecărui paragraf pentru placeholder
-    for paragraph in doc.paragraphs:
-        if placeholder in paragraph.text:
-            # Crearea unui tabel în locul placeholder-ului
-            table = doc.add_table(rows=df.shape[0]+1, cols=df.shape[1])
-            table.style = 'Table Grid'  # Adăugarea unui stil de tabel (opțional)
-
-            # Completarea anteturilor de coloane
-            for j in range(df.shape[1]):
-                table.cell(0, j).text = df.columns[j]
-
-            # Completarea celulelor tabelului cu date
-            for i in range(df.shape[0]):
-                for j in range(df.shape[1]):
-                    table.cell(i+1, j).text = str(df.iloc[i, j])
-
-            # Ștergerea paragrafului cu placeholder
-            p = paragraph._element
-            p.getparent().remove(p)
-            p._p = p._element = None
-
-            break  # Oprește bucla după ce găsește și înlocuiește primul placeholder
-
-    # Salvarea documentului modificat
-    doc.save('document_modificat.docx')
-
-# Presupunând că ai un file_uploader pentru încărcarea documentului Word
-uploaded_word_file = st.file_uploader("Încarcă documentul Word care conține placeholder-ul", type=['docx'])
-
-if uploaded_word_file is not None:
-    # Salvarea temporară a fișierului încărcat pentru a-l putea deschide cu Document
-    with open("temp_document.docx", "wb") as f:
-        f.write(uploaded_word_file.getbuffer())
+# Funcție pentru adăugarea unui tabel cu borduri într-un document Word
+def add_df_with_borders_to_doc(doc, df):
+    table = doc.add_table(rows=1, cols=len(df.columns))  # Creăm tabelul
     
-    # Apelarea funcției pentru a înlocui placeholder-ul cu tabelul
-    replace_placeholder_with_table("temp_document.docx", "#Tabel1", df_filtered)
-    st.success("Placeholder-ul a fost înlocuit cu tabelul în documentul Word.")
+    # Setăm bordurile pentru header
+    for cell in table.rows[0].cells:
+        set_cell_border(cell)
+    
+    # Adăugăm anteturile coloanelor
+    hdr_cells = table.rows[0].cells
+    for i, column in enumerate(df.columns):
+        hdr_cells[i].text = str(column)
+    
+    # Adăugăm rândurile din DataFrame
+    for index, row in df.iterrows():
+        row_cells = table.add_row().cells
+        for i, value in enumerate(row):
+            row_cells[i].text = str(value) if pd.notna(value) else ""
+            set_cell_border(row_cells[i])  # Setăm bordurile pentru fiecare celulă din tabel
 
+# Funcție pentru setarea bordurilor unei celule
+def set_cell_border(cell):
+    border_xml = """
+    <w:tcBorders xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+        <w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+        <w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+        <w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+        <w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+    </w:tcBorders>
+    """
+    tcPr = cell._tc.get_or_add_tcPr()
+    tcBorders = parse_xml(border_xml)
+    tcPr.append(tcBorders)
 
+# Încărcăm documentul Word
+doc = Document("x.docx")
 
+# Căutăm placeholder-ul și înlocuim cu tabelul
+for paragraph in doc.paragraphs:
+    if '#TABEL' in paragraph.text:
+        # Adăugăm tabelul cu borduri în document
+        add_df_with_borders_to_doc(doc, df_filtered)  # Presupunem că df_filtered este DataFrame-ul tău
+        
+        # Ștergem paragraful cu placeholder
+        p = paragraph._element
+        p.getparent().remove(p)
+        p._p = p._element = None  # Înlăturăm referințele pentru a evita scurgerile de memorie
+        break  # Opriți bucla după primul placeholder găsit și înlocuit
+
+# Salvăm documentul modificat
+doc.save("xcomplet.docx")
