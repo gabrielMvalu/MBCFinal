@@ -81,35 +81,26 @@ def set_cell_border(cell):
     tcPr.append(tcBorders)
 
 
+def populate_table(doc, placeholder, df):
+    for table in doc.tables:
+        for i, row in enumerate(table.rows):
+            for cell in row.cells:
+                if placeholder in cell.text:
+                    # Ștergem placeholderul și începem să populăm tabelul de la acest rând
+                    start_index = i
+                    cell.text = cell.text.replace(placeholder, "")
+                    populate_rows(table, start_index, df)
+                    return  # Ieșim după ce am terminat de populat tabelul pentru acest placeholder
 
-def add_df_with_borders_to_doc(doc, df):
-    table = doc.add_table(rows=0, cols=len(df.columns))  # Nu adăugăm rânduri inițial
-
-    # Adăugăm antetul tabelului
-    hdr_cells = table.add_row().cells
-    for i, column in enumerate(df.columns):
-        hdr_cells[i].text = str(column)
-        set_cell_border(hdr_cells[i])
-
-    # Iterăm prin rândurile DataFrame-ului și adăugăm datele în tabel
-    for index, row in df.iterrows():
-        row_cells = table.add_row().cells
-        for i, value in enumerate(row):
-            row_cells[i].text = str(value) if pd.notna(value) else ""
-            set_cell_border(row_cells[i])
-
-        # Verificăm dacă rândul curent este un subtitlu sau un rând total
-        if row['Denumirea lucrărilor / bunurilor/ serviciilor'] in ["Lucrări de construcții", "Dotări (active corporale)", "Active necorporale", "Servicii"]:
-            for cell in row_cells:
-                cell.merge(row_cells[0])  # Combinăm celulele pentru subtitlu
-                set_cell_border(cell)  # Setăm bordurile pentru celulele combinate
-        elif 'TOTAL' in row['Denumirea lucrărilor / bunurilor/ serviciilor']:
-            for cell in row_cells:
-                cell.merge(row_cells[0])  # Combinăm celulele pentru rândul total
-                set_cell_border(cell)  # Setăm bordurile pentru celulele combinate
-
-    return doc
-
+def populate_rows(table, start_index, df):
+    for i, data in df.iterrows():
+        # Adăugăm un rând nou dacă am depășit numărul de rânduri din tabel
+        if i + start_index == len(table.rows):
+            table.add_row()
+        row = table.rows[i + start_index]
+        for j, value in enumerate(data):
+            cell = row.cells[j]
+            cell.text = str(value) if pd.notna(value) else ""
 
 
 
@@ -136,14 +127,11 @@ if uploaded_word_file is not None and df_nou is not None:
     word_bytes = io.BytesIO(uploaded_word_file.getvalue())
     doc = Document(word_bytes)
 
-    # Căutarea placeholder-ului și înlocuirea cu tabelul
-    for paragraph in doc.paragraphs:
-        if '#Tabel1' in paragraph.text:
-            add_df_with_borders_to_doc(doc, df_nou)
-            p = paragraph._element
-            p.getparent().remove(p)
-            p._p = p._element = None
-            break
+ # Înlocuim placeholderii și populăm tabelul cu datele pentru secțiunea activelor corporale
+    populate_table(doc, "#primaparte", df_nou[df_nou['Tip'] == 'Active corporale'])
+
+    # Înlocuim placeholderii și populăm tabelul cu datele pentru secțiunea activelor necorporale
+    populate_table(doc, "#parteadoi", df_nou[df_nou['Tip'] == 'Active necorporale'])
 
     # Salvarea documentului modificat într-un buffer
     word_modified_bytes = io.BytesIO()
