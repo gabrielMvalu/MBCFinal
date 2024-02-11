@@ -30,8 +30,6 @@ def transforma_date_tabel2(df):
              # Identificarea indexurilor pentru fiecare element specific
             cursuri_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Cursuri instruire personal"].tolist()
             toaleta_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Toaleta ecologica"].tolist()
-            rampa_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Rampa mobila"].tolist()
-            servicii_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"].tolist()
             
             # Adăugarea "Toaleta ecologica" după "Cursuri instruire personal"
             if cursuri_index and toaleta_index:
@@ -39,19 +37,7 @@ def transforma_date_tabel2(df):
                 df_filtrat = df_filtrat.drop(toaleta_index)
                 df_filtrat = pd.concat([df_filtrat.iloc[:cursuri_index[0]], toaleta_row.to_frame().T, df_filtrat.iloc[cursuri_index[0]:]], ignore_index=True)
             
-            # Adăugarea "Rampa mobila" după "Toaleta ecologica" sau "Cursuri instruire personal" dacă "Toaleta ecologica" nu este prezentă
-            if cursuri_index and rampa_index:
-                rampa_row = df_filtrat.loc[rampa_index[0]]
-                df_filtrat = df_filtrat.drop(rampa_index)
-                df_filtrat = pd.concat([df_filtrat.iloc[:cursuri_index[0]+1], rampa_row.to_frame().T, df_filtrat.iloc[cursuri_index[0]+1:]], ignore_index=True)
-            
-            # Adăugarea "Servicii de adaptare a utilajelor..." după "Rampa mobila" sau ultimul element adăugat anterior
-            if cursuri_index and servicii_index:
-                servicii_row = df_filtrat.loc[servicii_index[0]]
-                df_filtrat = df_filtrat.drop(servicii_index)
-                df_filtrat = pd.concat([df_filtrat.iloc[:cursuri_index[0]+2], servicii_row.to_frame().T, df_filtrat.iloc[cursuri_index[0]+2:]], ignore_index=True)
-
-            
+           
 
             # Initialize 'Nr. crt.' counter and lists for all columns
             nr_crt_counter = 1
@@ -71,9 +57,9 @@ def transforma_date_tabel2(df):
                 item = row[2]  # Assuming 'Denumire' is the second column
         
                 # Calculați subtotals
-                if item not in ["Cursuri instruire personal", "Toaleta ecologica", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
+                if item not in ["Cursuri instruire personal", "Toaleta ecologica"]:
                     subtotal_1 += row[5]  # Suma valorilor pentru coloana 'Valoare Totală'
-                if item in ["Cursuri instruire personal", "Toaleta ecologica", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
+                if item in ["Cursuri instruire personal", "Toaleta ecologica"]:
                     subtotal_2 += row[5]
         
                 # Add "Subtotal 1" before "Cursuri instruire personal"
@@ -95,16 +81,16 @@ def transforma_date_tabel2(df):
                 nr_crt_counter += 1
         
             # Add other specific entries after processing all items
-            nr_crt.extend(["Subtotal 2", None, "Pondere", "Pondere"])
+            nr_crt.extend(["Subtotal 2", " ", "Pondere", "Pondere"])
             denumire.extend([
                 "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități",
                 "Valoare totala eligibila proiect",
                 "Total valoare cheltuieli cu investiția care contribuie substanțial la obiectivele de mediu / Valoare totala eligibila proiect",
                 "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități / Valoare totala eligibila proiect"
             ])
-            um.extend([None, None, None, None])
-            cantitate.extend([None, None, None, None])
-            pret_unitar.extend([None, None, None, None])
+            um.extend([" ", " ", " ", " "])
+            cantitate.extend([" ", " ", " ", " "])
+            pret_unitar.extend([" ", " ", " ", " "])
             valoare_totala.extend([subtotal_2, val_total_proiect, 100*subtotal_1/val_total_proiect, 100*subtotal_2/val_total_proiect])
         
             # Create the final DataFrame
