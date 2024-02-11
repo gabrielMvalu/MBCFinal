@@ -63,24 +63,16 @@ elemente_specifice = [
 
 
 for index, row in df.iterrows():
-    # Verifică dacă ai ajuns la 'Total proiect'
     if row[1] == 'Total proiect':
         stop_row = index
-        break  # Ieși din buclă când găsești 'Total proiect'
-    
-    # Verifică dacă rândul curent conține unul dintre elementele specifice
+        break 
     if row[1] in elemente_specifice:
-        # Adună valoarea din coloana dorită la subtotal_2
-        subtotal_2 += row[4]  # Presupunând că valorile sunt în coloana cu indexul 4
-
-# Verifică dacă ai găsit 'Total proiect' și calculează valoarea totală a proiectului
+        subtotal_2 += row[4]  
 if stop_row is not None:
     valoare_total_proiect = df.iloc[stop_row, 4]
 else:
-    pass  # Poți gestiona cazul în care 'Total proiect' nu este găsit
-
-# Afișează subtotal_2 și valoare_total_proiect
+    pass 
 
 st.write(f"Total: {valoare_total_proiect}")
-st.write(f"Subtotal 2: {subtotal_2}")
+st.write(f"Subtotal 2: {subtotal_2:.2f}")
 st.write(f"Subtotal 1: {subtotal_1}")
