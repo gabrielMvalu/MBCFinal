@@ -27,7 +27,7 @@ if uploaded_file is not None:
 
 
     # Lista cu valorile pe care dorim să le excludem din coloana B
-    valori_de_exclus1 = [
+    valori_de_exclus = [
         "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
         "Rampa mobila",
         "Toaleta ecologica",
@@ -40,20 +40,8 @@ if uploaded_file is not None:
         "Cursuri instruire personal",
     ]
 
-    valori_de_exclus2 = [
-        "Total active corporale",
-        "Total active necorporale",
-        "Publicitate",
-        "Consultanta management",
-        "Consultanta achizitii",
-        "Consultanta scriere",
-    ]    
-
     # Filtrăm DataFrame-ul pentru a exclude rândurile cu valorile specificate în lista 'valori_de_exclus'
-    df_filtrat_pt_subtotal1 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus1)]
-    df_filtrat_pt_subtotal2 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus2)]
-       
-
+    df_filtrat_pt_subtotal1 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus)]
     
     elemente_specifice = [
     "Cursuri instruire personal",
@@ -61,10 +49,9 @@ if uploaded_file is not None:
     "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
     "Rampa mobila"
     ]
-    
 
     st.dataframe(df_filtrat_pt_subtotal1)
-    st.dataframe(df_filtrat_pt_subtotal2)    
+   
 
     stop_row = None
 
