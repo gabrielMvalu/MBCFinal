@@ -1,3 +1,9 @@
+import pandas as pd
+from docx import Document
+from docx.oxml import parse_xml
+from docx.oxml.ns import nsdecls
+from io import BytesIO
+
 stop_text = 'Total proiect'
 
 def transforma_date_tabel2(df):
