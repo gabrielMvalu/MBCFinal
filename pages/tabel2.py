@@ -43,16 +43,12 @@ def transforma_date_tabel2(df):
 
             subtotal_1 = 0
             subtotal_2 = 0
-            
-            # Asigură-te că toate valorile sunt numerice și tratează valorile non-numerice sau lipsă
+                        
             for i, row in enumerate(df_filtrat_pt_subtotal1.itertuples(), 1):
-                value = pd.to_numeric(row[4], errors='coerce')  # Converteste la numeric, non-numerice devin NaN
-                subtotal_1 += value if not pd.isnull(value) else 0  # Adună doar dacă valoarea este numerică
+                subtotal_1 += row[4]
             
-            # Presupunând că df_filtrat_pt_subtotal2 este definit și filtrat corect mai sus în cod
-            for i, row in enumerate(df_filtrat_pt_subtotal2.itertuples(), 1):
-                value = pd.to_numeric(row[4], errors='coerce')  # La fel ca mai sus
-                subtotal_2 += value if not pd.isnull(value) else 0
+            for i, row in enumerate(df_filtrat_pt_subtota2.itertuples(), 1):
+                subtotal_2 += row[4]
             
 
             if stop_in:
@@ -112,7 +108,7 @@ def transforma_date_tabel2(df):
                 valoare_totala.append(df_filtrat.iloc[i-1, 3] * df_filtrat.iloc[i-1, 11])
                 nr_crt_counter += 1
         
-            nr_crt.extend([nr_crt_counter, nr_crt_counter, "Subtotal 2", " ", "Pondere", "Pondere"])
+            nr_crt.extend([nr_crt_counter, nr_crt_counter + 1, "Subtotal 2", " ", "Pondere", "Pondere"])
             denumire.extend([
                 "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
                 "Rampa mobila",
