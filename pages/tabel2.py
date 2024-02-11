@@ -62,7 +62,7 @@ def transforma_date_tabel2(df):
 
             st.write(f"{subtotal_1t}")
             st.write(f"{subtotal_2: .2f}")   
-            st.write(f"{subtotal_1t}")
+            st.write(f"{subtotal_1: .2f}")
             
 
             stop_in = df.index[df.iloc[:, 1].eq("Total proiect")].tolist()            
