@@ -14,9 +14,45 @@ def transforma_date_tabel2(df):
             
             stop_in = df.index[df.iloc[:, 1].eq("Total proiect")].tolist()
 
+             valori_de_exclus1 = [
+                    "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
+                    "Rampa mobila",
+                    "Toaleta ecologica",
+                    "Total active corporale",
+                    "Total active necorporale",
+                    "Publicitate",
+                    "Consultanta management",
+                    "Consultanta achizitii",
+                    "Consultanta scriere",
+                    "Cursuri instruire personal",
+                ]
+            
+                valori_de_exclus2 = [
+                    "Total active corporale",
+                    "Total active necorporale",
+                    "Publicitate",
+                    "Consultanta management",
+                    "Consultanta achizitii",
+                    "Consultanta scriere",
+                ]    
+                        
 
-
-
+            # Filtrăm DataFrame-ul pentru a exclude rândurile cu valorile specificate în lista 'valori_de_exclus'
+            df_filtrat_pt_subtotal1 = df[df.iloc[:, 1].notna() & ~df.iloc[:, 1].isin(valori_de_exclus1) & (df.iloc[:, 1] != 0) & (df.iloc[:, 1] != '-')]
+            df_filtrat_pt_subtotal2 = df[df.iloc[:, 1].notna() & ~df.iloc[:, 1].isin(valori_de_exclus2) & (df.iloc[:, 1] != 0) & (df.iloc[:, 1] != '-')]
+            
+            subtotal_1 = 0
+            subtotal_2 = 0
+            
+            # Asigură-te că toate valorile sunt numerice și tratează valorile non-numerice sau lipsă
+            for i, row in enumerate(df_filtrat_pt_subtotal1.itertuples(), 1):
+                value = pd.to_numeric(row[4], errors='coerce')  # Converteste la numeric, non-numerice devin NaN
+                subtotal_1 += value if not pd.isnull(value) else 0  # Adună doar dacă valoarea este numerică
+            
+            # Presupunând că df_filtrat_pt_subtotal2 este definit și filtrat corect mai sus în cod
+            for i, row in enumerate(df_filtrat_pt_subtotal2.itertuples(), 1):
+                value = pd.to_numeric(row[4], errors='coerce')  # La fel ca mai sus
+                subtotal_2 += value if not pd.isnull(value) else 0
             
 
             if stop_in:
@@ -55,9 +91,6 @@ def transforma_date_tabel2(df):
             pret_unitar = []
             valoare_totala = []
         
-            # Inițializați variabilele de subtotal
-            subtotal_1 = 0
-            subtotal_2 = 0
         
             # Bucla de procesare a elementelor
             for i, row in enumerate(df_filtrat.itertuples(), 1):
@@ -79,7 +112,7 @@ def transforma_date_tabel2(df):
                 valoare_totala.append(df_filtrat.iloc[i-1, 3] * df_filtrat.iloc[i-1, 11])
                 nr_crt_counter += 1
         
-            nr_crt.extend(["", "", "Subtotal 2", " ", "Pondere", "Pondere"])
+            nr_crt.extend([nr_crt_counter, nr_crt_counter, "Subtotal 2", " ", "Pondere", "Pondere"])
             denumire.extend([
                 "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
                 "Rampa mobila",
@@ -88,7 +121,7 @@ def transforma_date_tabel2(df):
                 "Total valoare cheltuieli cu investiția care contribuie substanțial la obiectivele de mediu / Valoare totala eligibila proiect",
                 "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități / Valoare totala eligibila proiect"
             ])
-            um.extend([nr_crt_counter, " ", " ", " "," ", " "])
+            um.extend(["buc", "buc", " ", " "," ", " "])
             cantitate.extend([" ", " ", " ", " "," ", " "])
             pret_unitar.extend([" ", " ", " ", " "," ", " "])
             valoare_totala.extend([" val pt serv", " val pt rampa", subtotal_2, val_total_proiect, 100*subtotal_1/val_total_proiect, 100*subtotal_2/val_total_proiect])
