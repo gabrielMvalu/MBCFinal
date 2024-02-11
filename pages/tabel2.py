@@ -47,7 +47,7 @@ def transforma_date_tabel2(df):
                 subtotal_2 += row[4]
 
 
-            st.write(f"{subtotal_1}")
+            st.write(f"{subtotal_1t}")
             st.write(f"{subtotal_2: .2f}")   
          
 
