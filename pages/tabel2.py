@@ -37,7 +37,7 @@ def transforma_date_tabel2(df):
             df_filtrat_pt_subtotal1t = df1_filtrat[df1_filtrat.iloc[:, 1].isin(valori_de_exclus1)]
             df_filtrat_pt_subtotal2 = df_filtrat[df_filtrat.iloc[:, 1].isin(valori_de_exclus2)]    
 
-            subtotal_1 = 0
+            subtotal_1t = 0
             subtotal_2 = 0
                         
             for i, row in enumerate(df_filtrat_pt_subtotal1t.itertuples(), 1):
