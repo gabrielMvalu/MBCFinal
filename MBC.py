@@ -37,13 +37,15 @@ else:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
+
+with st.container(height=400):
     # Input pentru mesaj nou de la utilizator
     if prompt := st.chat_input("Adaugati mesajul aici."):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
             
-with st.container(height=400):
+
     # Generarea răspunsului asistentului și afișarea acestuia
         with st.chat_message("assistant"):
             stream = client.chat.completions.create(
