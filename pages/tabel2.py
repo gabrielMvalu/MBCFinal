@@ -14,6 +14,11 @@ def transforma_date_tabel2(df):
             
             stop_in = df.index[df.iloc[:, 1].eq("Total proiect")].tolist()
 
+
+
+
+            
+
             if stop_in:
                 val_total_proiect = df.iloc[stop_in[0], 4]
             else:
@@ -27,6 +32,8 @@ def transforma_date_tabel2(df):
             df_filtrat = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
 
 
+           
+            
              # Identificarea indexurilor pentru fiecare element specific
             cursuri_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Cursuri instruire personal"].tolist()
             toaleta_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Toaleta ecologica"].tolist()
