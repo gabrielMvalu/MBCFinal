@@ -21,13 +21,13 @@ def transforma_date_tabel2(df):
     valori_de_eliminat = ["Total active corporale", "Total active necorporale", 
         "Publicitate", "Consultanta management", "Consultanta achizitii", "Consultanta scriere"]
     
-    df_filtrat1 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
+    df_filtrat = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
 
     # Reordonare specifică bazată pe index
-    cursuri_index = df_filtrat1.index[df_filtrat.iloc[:, 1] == "Cursuri instruire personal"].tolist()
-    toaleta_index = df_filtrat1.index[df_filtrat.iloc[:, 1] == "Toaleta ecologica"].tolist()
-    rampa_iddex = df_filtrat1.index[df_filtrat.iloc[:, 1] == "Rampa mobila"].tolist()
-    servicii_index = df_filtrat1.index[df_filtrat.iloc[:, 1] == "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"].tolist()
+    cursuri_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Cursuri instruire personal"].tolist()
+    toaleta_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Toaleta ecologica"].tolist()
+    rampa_iddex = df_filtrat.index[df_filtrat.iloc[:, 1] == "Rampa mobila"].tolist()
+    servicii_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"].tolist()
     
     if cursuri_index and toaleta_index:
         toaleta_row = df_filtrat.loc[toaleta_index[0]]
