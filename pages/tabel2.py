@@ -53,9 +53,7 @@ def transforma_date_tabel2(df):
                 df_filtrat = df_filtrat.drop(servicii_index)
                 df_filtrat = pd.concat([df_filtrat.iloc[:cursuri_index[0]+2], servicii_row.to_frame().T, df_filtrat.iloc[cursuri_index[0]+2:]], ignore_index=True)
 
-            
 
-            # Initialize 'Nr. crt.' counter and lists for all columns
             nr_crt_counter = 1
             nr_crt = []
             denumire = []
@@ -63,20 +61,6 @@ def transforma_date_tabel2(df):
             cantitate = []
             pret_unitar = []
             valoare_totala = []
-        
-            # Inițializați variabilele de subtotal
-            subtotal_1 = 0
-            subtotal_2 = 0
-        
-            # Bucla de procesare a elementelor
-            for i, row in enumerate(df_filtrat.itertuples(), 1):
-                item = row[2]  # Assuming 'Denumire' is the second column
-        
-                # Calculați subtotals
-                if item not in ["Cursuri instruire personal", "Toaleta ecologica", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
-                    subtotal_1 += row[5]  # Suma valorilor pentru coloana 'Valoare Totală'
-                if item in ["Cursuri instruire personal", "Toaleta ecologica", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
-                    subtotal_2 += row[5]
         
                 # Add "Subtotal 1" before "Cursuri instruire personal"
                 if item == "Cursuri instruire personal":
@@ -121,15 +105,10 @@ def transforma_date_tabel2(df):
         
             return tabel_2
     
-st.dataframe(tabel_2)
-
-
-
 
 
 st.title(':blue[Transformare Date Excel]')
 
-stop_text = None
 
 uploaded_file = st.file_uploader("Alegeți fișierul Excel:", type='xlsx')
 uploaded_word_file = st.file_uploader("Încarcă documentul Word", type=['docx'])
