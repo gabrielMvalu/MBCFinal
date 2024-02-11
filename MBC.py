@@ -9,7 +9,7 @@ st.header(':blue[Pagina Principală]', divider='rainbow')
 st.write(':violet[Bine ați venit la aplicația pentru completarea - Planului de Afaceri! -]')
 
 
-with st.expander("ℹ️ Mesaj informativ"):
+with st.expander("ℹ️ Informativ ℹ️"):
     st.write("""
         Dorim să vă informăm că aceast bot se află într-o fază incipientă de dezvoltare. 
         În acest moment, funcționalitatea este limitată la furnizarea de răspunsuri generale. Ne străduim să îmbunătățim și să extindem capacitățile aplicației. 
