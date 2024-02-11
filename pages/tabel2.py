@@ -76,4 +76,4 @@ if uploaded_file is not None:
     else:
         pass
 
-st.write(f"Valoare totala proiect: {valoare_total_proiect}, Subtotal_1: {subtotal_1}, Subtotal_2 {subtotal_2}")
+st.write(f"Valoare totala proiect: {valoare_total_proiect}, Subtotal_1: {subtotal_1}")
