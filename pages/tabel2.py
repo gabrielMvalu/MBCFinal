@@ -41,6 +41,14 @@ def transforma_date_tabel2(df):
             subtotal_1 = 0
             subtotal_2 = 0
 
+
+            for i, row in enumerate(df_filtrat_pt_subtotal1t.itertuples(), 1):
+                subtotal_1t += row[4]
+            
+            for i, row in enumerate(df_filtrat_pt_subtotal2.itertuples(), 1):
+                subtotal_2 += row[4]
+            
+
             stop_in = df.index[df.iloc[:, 1].eq("Total active corporale")].tolist()            
             if stop_in:
                 valoare_active_necorporale = df.iloc[stop_in[0], 4]          
@@ -78,10 +86,10 @@ def transforma_date_tabel2(df):
                 subtotal_2 += row[4]
 
 
-            st.write(f"{subtotal_1t}")
-            st.write(f"{subtotal_2: .2f}")   
-            st.write(f"{subtotal_1: .2f}")
-            
+            st.write(f"Subtotal 1 temp: {subtotal_1t}")
+            st.write(f"subtotal 2: {subtotal_2: .2f}")   
+            st.write(f"subtotal 1: {subtotal_1: .2f}")
+            st.write(f"valoare_active_necorporale: {valoare_active_necorporale: .2f}")            
 
             stop_in = df.index[df.iloc[:, 1].eq("Total proiect")].tolist()            
 
