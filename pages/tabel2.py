@@ -10,7 +10,7 @@ stop_text2 = 'Total active corporale'
 
 def transforma_date_tabel2(df):
             stop_index = df[df.iloc[:, 1] == stop_text].index.min()
-            stop_intex2 = df[df.iloc[:, 1] == stop_text2].index.min()
+            stop_index2 = df[df.iloc[:, 1] == stop_text2].index.min()
             
             df1_filtrat = df.iloc[3:stop_index2] if pd.notna(stop_index2) else df.iloc[3:]
             df1_filtrat = df1_filtrat[df_filtrat.iloc[:, 1].notna() & (df_filtrat.iloc[:, 1] != 0) & (df_filtrat.iloc[:, 1] != '-')]
