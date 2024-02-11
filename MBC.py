@@ -42,7 +42,7 @@ else:
         with st.chat_message("user"):
             st.markdown(prompt)    
             
-    with st.container(height:200):
+    with st.container(height=200):
         # Generarea răspunsului asistentului și afișarea acestuia
           st.chat_message("assistant"):
                 stream = client.chat.completions.create(
