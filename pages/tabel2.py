@@ -12,29 +12,24 @@ def transforma_date_tabel2(df):
     stop_index = df[df.iloc[:, 1] == stop_text].index.min()
     df_filtrat = df.iloc[3:stop_index] if pd.notna(stop_index) else df.iloc[3:]
     df_filtrat = df_filtrat[df_filtrat.iloc[:, 1].notna() & (df_filtrat.iloc[:, 1] != 0) & (df_filtrat.iloc[:, 1] != '-')]
-
     valori_de_eliminat = ["Total active corporale", "Total active necorporale", "Publicitate", "Consultanta management", "Consultanta achizitii", "Consultanta scriere"]
     df_filtrat = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
-
     valori_speciale = ["Cursuri instruire personal", "Toaleta ecologica", "Rampa mobila", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"]
     df_filtrat2 = df_filtrat[df_filtrat.iloc[:, 1].isin(valori_speciale)]
-
     df_filtrat3 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_speciale)]
+    subtotal_1 = df_filtrat2.iloc[:, 5].sum()
+    subtotal_2 = df_filtrat3.iloc[:, 5].sum()
+    val_total_proiect = df_filtrat.iloc[:, 5].sum() 
 
-    subtotal_1 = df_filtrat2.iloc[:, 5].sum()  # Calcul subtotal pentru df_filtrat2
-    subtotal_2 = df_filtrat3.iloc[:, 5].sum()  # Calcul subtotal pentru df_filtrat3
-
-    # Crearea DataFrame-ului final
     df_final = pd.DataFrame({
         "Nr. crt.": range(1, len(df_filtrat) + 1),
         "Denumire": df_filtrat.iloc[:, 1],
-        "UM": df_filtrat.iloc[:, 2],  # Presupunând că UM se află în coloana cu indexul 2
-        "Cantitate": df_filtrat.iloc[:, 3],  # Presupunând că Cantitatea se află în coloana cu indexul 3
-        "Preţ unitar (fără TVA)": df_filtrat.iloc[:, 4],  # Presupunând că Prețul Unitar se află în coloana cu indexul 4
-        "Valoare Totală (fără TVA)": df_filtrat.iloc[:, 5]  # Presupunând că Valoarea Totală se află în coloana cu indexul 5
+        "UM": df_filtrat.iloc[:, 2],
+        "Cantitate": df_filtrat.iloc[:, 3],
+        "Preţ unitar (fără TVA)": df_filtrat.iloc[:, 4],
+        "Valoare Totală (fără TVA)": df_filtrat.iloc[:, 5]
     })
 
-    # Adăugarea subtotalurilor și valoare totală proiect
     df_final = df_final.append({
         "Denumire": "Subtotal 1",
         "Valoare Totală (fără TVA)": subtotal_1
@@ -53,6 +48,7 @@ def transforma_date_tabel2(df):
     }, ignore_index=True)
 
     return df_final
+
  
 
 st.title('Transformare Date Excel')
