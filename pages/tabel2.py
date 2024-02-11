@@ -52,7 +52,6 @@ def transforma_date_tabel2(df):
     
     return tabel_2
 
-tabel_2 = transforma_date_tabel2(df)
 
 st.dataframe(tabel_2)
 
