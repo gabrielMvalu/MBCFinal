@@ -8,6 +8,14 @@ st.set_page_config(layout="wide")
 st.header(':blue[Pagina Principală]', divider='rainbow')
 st.write(':violet[Bine ați venit la aplicația pentru completarea - Planului de Afaceri! -]')
 
+
+with st.expander("ℹ️ Mesaj informativ"):
+    st.write("""
+        Dorim să vă informăm că aceast bot se află într-o fază incipientă de dezvoltare. 
+        În acest moment, funcționalitatea este limitată la furnizarea de răspunsuri generale. Ne străduim să îmbunătățim și să extindem capacitățile aplicației. 
+        Vă mulțumim pentru înțelegere și răbdare!
+    """)
+
 with st.sidebar:
     openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
     
