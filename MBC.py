@@ -24,7 +24,7 @@ else:
     # Inițializarea clientului OpenAI cu cheia API introdusă
     client = OpenAI(api_key=openai_api_key)
 
-with st.container(height=400):
+
     # Inițializarea stării sesiunii pentru model și mesaje
     if "openai_model" not in st.session_state:
         st.session_state["openai_model"] = "gpt-4-0125-preview"
@@ -42,8 +42,9 @@ with st.container(height=400):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
-
-        # Generarea răspunsului asistentului și afișarea acestuia
+            
+with st.container(height=400):
+    # Generarea răspunsului asistentului și afișarea acestuia
         with st.chat_message("assistant"):
             stream = client.chat.completions.create(
                 model=st.session_state["openai_model"],
