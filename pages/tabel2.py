@@ -28,18 +28,16 @@ def transforma_date_tabel2(df):
                 ]
             
             valori_de_exclus2 = [
-                    "Total active corporale",
-                    "Total active necorporale",
-                    "Publicitate",
-                    "Consultanta management",
-                    "Consultanta achizitii",
-                    "Consultanta scriere",
+                    "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
+                    "Rampa mobila",
+                    "Toaleta ecologica",
+                    "Cursuri instruire personal",
                 ]    
                         
 
             # Filtrăm DataFrame-ul pentru a exclude rândurile cu valorile specificate în lista 'valori_de_exclus'
             df_filtrat_pt_subtotal1 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus1)]
-            df_filtrat_pt_subtotal2 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus2)]    
+            df_filtrat_pt_subtotal2 = df_filtrat[df_filtrat.iloc[:, 1].isin(valori_de_exclus2)]    
 
             subtotal_1 = 0
             subtotal_2 = 0
