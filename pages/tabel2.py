@@ -91,7 +91,7 @@ def transforma_date_tabel2(df):
             um.extend([nr_crt_counter, " ", " ", " "," ", " "])
             cantitate.extend([" ", " ", " ", " "," ", " "])
             pret_unitar.extend([" ", " ", " ", " "," ", " "])
-            valoare_totala.extend(" val pt serv", " val pt rampa", subtotal_2, val_total_proiect, 100*subtotal_1/val_total_proiect, 100*subtotal_2/val_total_proiect])
+            valoare_totala.extend([" val pt serv", " val pt rampa", subtotal_2, val_total_proiect, 100*subtotal_1/val_total_proiect, 100*subtotal_2/val_total_proiect])
         
             # Create the final DataFrame
             tabel_2 = pd.DataFrame({
