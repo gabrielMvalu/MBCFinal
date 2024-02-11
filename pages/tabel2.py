@@ -50,7 +50,7 @@ def transforma_date_tabel2(df):
 
 
             st.write(f"{subtotal_1}")
-            st.write(f"{subtotal_2}")      
+            st.write(f"{subtotal_2}.2f")      
 
             
             if stop_in:
