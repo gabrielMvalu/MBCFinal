@@ -29,12 +29,30 @@ def transforma_date_tabel2(df):
             ]
             df_filtrat = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
         
+            # Identificarea indexurilor pentru fiecare element specific
             cursuri_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Cursuri instruire personal"].tolist()
             toaleta_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Toaleta ecologica"].tolist()
+            rampa_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Rampa mobila"].tolist()
+            servicii_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"].tolist()
+            
+            # Adăugarea "Toaleta ecologica" după "Cursuri instruire personal"
             if cursuri_index and toaleta_index:
                 toaleta_row = df_filtrat.loc[toaleta_index[0]]
                 df_filtrat = df_filtrat.drop(toaleta_index)
-                df_filtrat = pd.concat([df_filtrat.iloc[:cursuri_index[0]], toaleta_row.to_frame().T, df_filtrat.iloc[cursuri_index[0]:]])
+                df_filtrat = pd.concat([df_filtrat.iloc[:cursuri_index[0]], toaleta_row.to_frame().T, df_filtrat.iloc[cursuri_index[0]:]], ignore_index=True)
+            
+            # Adăugarea "Rampa mobila" după "Toaleta ecologica" sau "Cursuri instruire personal" dacă "Toaleta ecologica" nu este prezentă
+            if cursuri_index and rampa_index:
+                rampa_row = df_filtrat.loc[rampa_index[0]]
+                df_filtrat = df_filtrat.drop(rampa_index)
+                df_filtrat = pd.concat([df_filtrat.iloc[:cursuri_index[0]+1], rampa_row.to_frame().T, df_filtrat.iloc[cursuri_index[0]+1:]], ignore_index=True)
+            
+            # Adăugarea "Servicii de adaptare a utilajelor..." după "Rampa mobila" sau ultimul element adăugat anterior
+            if cursuri_index and servicii_index:
+                servicii_row = df_filtrat.loc[servicii_index[0]]
+                df_filtrat = df_filtrat.drop(servicii_index)
+                df_filtrat = pd.concat([df_filtrat.iloc[:cursuri_index[0]+2], servicii_row.to_frame().T, df_filtrat.iloc[cursuri_index[0]+2:]], ignore_index=True)
+
 
             # Initialize 'Nr. crt.' counter and lists for all columns
             nr_crt_counter = 1
