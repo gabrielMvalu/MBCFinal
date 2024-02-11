@@ -11,8 +11,6 @@ def transforma_date_tabel2(df):
             stop_index = df[df.iloc[:, 1] == stop_text].index.min()
             df_filtrat = df.iloc[3:stop_index] if pd.notna(stop_index) else df.iloc[3:]
             df_filtrat = df_filtrat[df_filtrat.iloc[:, 1].notna() & (df_filtrat.iloc[:, 1] != 0) & (df_filtrat.iloc[:, 1] != '-')]
-            
-            stop_in = df.index[df.iloc[:, 1].eq("Total proiect")].tolist()
 
             valori_de_exclus1 = [
                     "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
@@ -50,7 +48,9 @@ def transforma_date_tabel2(df):
 
 
             st.write(f"{subtotal_1}")
-            st.write(f"{subtotal_2: .2f}")      
+            st.write(f"{subtotal_2: .2f}")   
+
+            stop_in = df.index[df.iloc[:, 1].eq("Total proiect")].tolist()            
 
             
             if stop_in:
