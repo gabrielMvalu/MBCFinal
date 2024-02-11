@@ -49,7 +49,7 @@ def transforma_date_tabel2(df):
         item = row[1]  # Presupunând că 'Denumire' este în a doua coloană
 
         if item not in ["Cursuri instruire personal", "Toaleta ecologica", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
-            subtotal_1 += row[5]  # Suma valorilor pentru 'Valoare Totală'
+            subtotal_1 += row[5] 
 
         if item in  ["Cursuri instruire personal", "Toaleta ecologica", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
             subtotal_2 += row[5]
@@ -73,8 +73,8 @@ def transforma_date_tabel2(df):
     additional_entries = [
         {"Nr. crt.": "Subtotal 2", "Denumire": "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități", "UM": None, "Cantitate": None, "Preţ unitar (fără TVA)": None, "Valoare Totală (fără TVA)": subtotal_2},
         {"Nr. crt.": None, "Denumire": "Valoare totala eligibila proiect", "UM": None, "Cantitate": None, "Preţ unitar (fără TVA)": None, "Valoare Totală (fără TVA)": val_total_proiect},
-        {"Nr. crt.": "Pondere", "Denumire": "Total valoare cheltuieli cu investiția care contribuie substanțial la obiectivele de mediu / Valoare totala eligibila proiect", "UM": None, "Cantitate": None, "Preţ unitar (fără TVA)": None, "Valoare Totală (fără TVA)": 100 * subtotal_1 / val_total_proiect if val_total_proiect else None},
-        {"Nr. crt.": "Pondere", "Denumire": "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități / Valoare totala eligibila proiect", "UM": None, "Cantitate": None, "Preţ unitar (fără TVA)": None, "Valoare Totală (fără TVA)": 100 * subtotal_2 / val_total_proiect if val_total_proiect else None}
+        {"Nr. crt.": "Pondere", "Denumire": "Total valoare cheltuieli cu investiția care contribuie substanțial la obiectivele de mediu / Valoare totala eligibila proiect", "UM": None, "Cantitate": None, "Preţ unitar (fără TVA)": None, "Valoare Totală (fără TVA)": 100 * subtotal_1 / val_total_proiect },
+        {"Nr. crt.": "Pondere", "Denumire": "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități / Valoare totala eligibila proiect", "UM": None, "Cantitate": None, "Preţ unitar (fără TVA)": None, "Valoare Totală (fără TVA)": 100 * subtotal_2 / val_total_proiect }
     ]
 
     for entry in additional_entries:
