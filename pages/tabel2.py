@@ -8,8 +8,56 @@ from io import BytesIO
 
 st.title(':blue[Transformare Date Excel]')
 
-stop_text = None
 
+
+def transforma_date_tabel2(df):
+    stop_text = 'Total proiect'
+    
+    # Filtrează și preprocesează df
+    stop_index = df[df.iloc[:, 1] == stop_text].index.min()
+    df_filtrat = df.iloc[3:stop_index] if pd.notna(stop_index) else df.iloc[3:]
+    df_filtrat = df_filtrat[df_filtrat.iloc[:, 1].notna() & (df_filtrat.iloc[:, 1] != 0) & (df_filtrat.iloc[:, 1] != '-')]
+
+    valori_de_eliminat = [
+        "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
+        "Rampa mobila", "Total active corporale", "Total active necorporale", 
+        "Publicitate", "Consultanta management", "Consultanta achizitii", "Consultanta scriere"
+    ]
+    
+    df_filtrat = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
+   
+    nr_crt = []
+    denumire = []
+    um = []
+    cantitate = []
+    pret_unitar = []
+    valoare_totala = []
+    
+    for i, row in df_filtrat.iterrows():
+        nr_crt.append(i)
+        denumire.append(row[1])  
+        um.append(row[2]) 
+        cantitate.append(row[3])  
+        pret_unitar.append(row[4])  
+        valoare_totala.append(row[5])  
+    
+    tabel_2 = pd.DataFrame({
+        "Nr. crt.": nr_crt,
+        "Denumire": denumire,
+        "UM": um,
+        "Cantitate": cantitate,
+        "Preț unitar (fără TVA)": pret_unitar,
+        "Valoare Totală (fără TVA)": valoare_totala
+    })
+    
+    return tabel_2
+
+tabel_2 = transforma_date_tabel2(df)
+
+st.dataframe(tabel_2)
+
+
+stop_text = None
 
 uploaded_file = st.file_uploader("Alegeți fișierul Excel:", type='xlsx')
 uploaded_word_file = st.file_uploader("Încarcă documentul Word", type=['docx'])
