@@ -46,10 +46,10 @@ if uploaded_file is not None:
     subtotal_2 = 0
 
     for i, row in enumerate(df_filtrat_pt_subtotal1.itertuples(), 1):
-    subtotal_1 += row[4]
+        subtotal_1 += row[4]
 
     for i, row in enumerate(df_filtrat_pt_subtotal2.itertuples(), 1):
-    subtotal_1 += row[4]
+        subtotal_2 += row[4]
 
     
 
