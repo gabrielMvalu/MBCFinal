@@ -79,13 +79,10 @@ if uploaded_file is not None:
     df2_transformed, total_eligibil2, total_neeligibil2 = transforma_date(df, df.index[df.iloc[:, 1].str.contains(start_text2, na=False)].tolist()[0] + 1, stop_text2)
  
     # Afisarea totalurilor eligibile și neeligibile
-    st.write(f"Total Eligibil Tabel 1: {total_eligibil1}")
-    st.write(f"Total Neeligibil Tabel 1: {total_neeligibil1}")
-    st.write(f"Total Eligibil Tabel 2: {total_eligibil2}")
-    st.write(f"Total Neeligibil Tabel 2: {total_neeligibil2}")
-    
-    st.dataframe(df1_transformed)
-    st.dataframe(df2_transformed)
+    st.write(f"Total Eligibil 1: {total_eligibil1}")
+    st.write(f"Total Neeligibil  1: {total_neeligibil1}")
+    st.write(f"Total Eligibil  2: {total_eligibil2}")
+    st.write(f"Total Neeligibil  2: {total_neeligibil2}")
     
 if uploaded_word_file is not None and df1_transformed is not None and df2_transformed is not None:
     # Încărcarea și deschiderea documentului Word
