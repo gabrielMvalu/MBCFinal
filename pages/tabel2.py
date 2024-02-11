@@ -43,13 +43,6 @@ if uploaded_file is not None:
     # Filtrăm DataFrame-ul pentru a exclude rândurile cu valorile specificate în lista 'valori_de_exclus'
     df_filtrat_pt_subtotal1 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus)]
     
-    elemente_specifice = [
-    "Cursuri instruire personal",
-    "Toaleta ecologica",
-    "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
-    "Rampa mobila"
-    ]
-
     st.dataframe(df_filtrat_pt_subtotal1)
     
     subtotal_1 = df_filtrat_pt_subtotal1.iloc[:, 3].sum()
@@ -58,22 +51,35 @@ if uploaded_file is not None:
     st.write(f"Subtotal 1: {subtotal_1}")
 
 
+stop_row = None
+subtotal_2 = 0  # Inițializează subtotal_2 cu 0
+
+elemente_specifice = [
+    "Cursuri instruire personal",
+    "Toaleta ecologica",
+    "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
+    "Rampa mobila"
+]
 
 
+for index, row in df.iterrows():
+    # Verifică dacă ai ajuns la 'Total proiect'
+    if row[1] == 'Total proiect':
+        stop_row = index
+        break  # Ieși din buclă când găsești 'Total proiect'
     
+    # Verifică dacă rândul curent conține unul dintre elementele specifice
+    if row[1] in elemente_specifice:
+        # Adună valoarea din coloana dorită la subtotal_2
+        subtotal_2 += row[4]  # Presupunând că valorile sunt în coloana cu indexul 4
 
-    stop_row = None
+# Verifică dacă ai găsit 'Total proiect' și calculează valoarea totală a proiectului
+if stop_row is not None:
+    valoare_total_proiect = df.iloc[stop_row, 4]
+else:
+    pass  # Poți gestiona cazul în care 'Total proiect' nu este găsit
 
-    for index, row in df.iterrows():
-        if row[1] == 'Total proiect':
-            stop_row = index
-            break  
-   
-    if stop_row is not None:
-      
-        valoare_total_proiect = df.iloc[stop_row, 4]
-     
-    else:
-        pass
-
-st.write(f"Valoare totala proiect: {valoare_total_proiect}, Subtotal_1: {subtotal_1}")
+# Afișează subtotal_2 și valoare_total_proiect
+print(f"Subtotal 2: {subtotal_2}")
+if stop_row is not None:
+    print(f"Valoare totală proiect: {valoare_total_proiect}")
