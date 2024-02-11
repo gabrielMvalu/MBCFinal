@@ -42,16 +42,34 @@ def transforma_date_tabel2(df):
             subtotal_2 = 0
 
             stop_in = df.index[df.iloc[:, 1].eq("Total active corporale")].tolist()            
-
-            
             if stop_in:
-                valoare_active_necorporale = df.iloc[stop_in[0], 4]
+                valoare_active_necorporale = df.iloc[stop_in[0], 4]          
             else:
                 valoare_active_necorporale = None 
             subtotal_1 = valoare_active_necorporale - subtotal_1t
 
-
             
+            stop_in = df.index[df.iloc[:, 1].eq("Rampa mobila")].tolist()            
+            if stop_in:
+                cantitater = df.iloc[stop_in[0], 11]
+                pret_unitarr = df.iloc[stop_in[0], 3]
+                valoarer = df.iloc[stop_in[0], 4]            
+            else:
+                cantitater = None
+                pret_unitarr = None
+                valoarer = None   
+
+
+            stop_in = df.index[df.iloc[:, 1].eq("Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati")].tolist()            
+            if stop_in:
+                cantitates = df.iloc[stop_in[0], 11]
+                pret_unitars = df.iloc[stop_in[0], 3]
+                valoares = df.iloc[stop_in[0], 4]            
+            else:
+                cantitates = None
+                pret_unitars = None
+                valoares = None
+
                         
             for i, row in enumerate(df_filtrat_pt_subtotal1t.itertuples(), 1):
                 subtotal_1t += row[4]
@@ -115,7 +133,7 @@ def transforma_date_tabel2(df):
                     um.append(" ")
                     cantitate.append(" ")
                     pret_unitar.append(" ")
-                    valoare_totala.append(subtotal_1)
+                    valoare_totala.append(f"{subtotal_1: .2f}")
         
                 nr_crt.append(nr_crt_counter)
                 denumire.append(item)
@@ -135,9 +153,9 @@ def transforma_date_tabel2(df):
                 "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități / Valoare totala eligibila proiect"
             ])
             um.extend(["buc", "buc", " ", " "," ", " "])
-            cantitate.extend([" ", " ", " ", " "," ", " "])
-            pret_unitar.extend([" ", " ", " ", " "," ", " "])
-            valoare_totala.extend([" val pt serv", " val pt rampa", f"{subtotal_2: .2f}", val_total_proiect, f"{100*subtotal_1/val_total_proiect: .2f}%", f"{100*subtotal_2/val_total_proiect: .2f}%"])
+            cantitate.extend([f"{cantitates}", f"{cantitater}", " ", " "," ", " "])
+            pret_unitar.extend([f"{pret_unitars}", f"{pret_unitarr}", " ", " "," ", " "])
+            valoare_totala.extend([f"{valoares}", f"{valoares}", f"{subtotal_2: .2f}", val_total_proiect, f"{100*subtotal_1/val_total_proiect: .2f}%", f"{100*subtotal_2/val_total_proiect: .2f}%"])
         
             # Create the final DataFrame
             tabel_2 = pd.DataFrame({
