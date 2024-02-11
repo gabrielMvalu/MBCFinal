@@ -62,7 +62,7 @@ def determina_eligibilitate(val_6, val_4):
     else:
         return f"Eligibil: {round(val_6, 2)} \nNeeligibil: {round(val_6 - val_4, 2)}"
 
-st.title('Transformare Date Excel')
+st.title(':green[Transformare Date Excel]', divider='rainbow')
 
 uploaded_file = st.file_uploader("Alegeți fișierul Excel:", type='xlsx')
 uploaded_word_file = st.file_uploader("Încarcă documentul Word", type=['docx'])
