@@ -32,9 +32,9 @@ def transforma(df):
         eligibilitate = determina_eligibilitate(pd.to_numeric(row.iloc[6], errors='coerce'), pd.to_numeric(row.iloc[4], errors='coerce'))
         eligibil_neeligibil.append(eligibilitate)
         if 'Eligibil' in eligibilitate:
-            total_eligibil += float(eligibilitate.split('\n')[0].split(': ')[1])  # Presupunem că formatul este "Eligibil: x.xx"
+            total_eligibil += float(eligibilitate.split('\n')[0].split(': ')[1])
         if 'Neeligibil' in eligibilitate:
-            total_neeligibil += float(eligibilitate.split('\n')[1].split(': ')[1])  # Presupunem că formatul este "Neeligibil: x.xx"
+            total_neeligibil += float(eligibilitate.split('\n')[1].split(': ')[1])
         counter += 1
 
     return pd.DataFrame({
