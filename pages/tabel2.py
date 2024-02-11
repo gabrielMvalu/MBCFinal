@@ -76,15 +76,7 @@ def transforma_date_tabel2(df):
                 cantitates = None
                 pret_unitars = None
                 valoares = None
-
                         
-
-            st.write(f"Subtotal 1 temp: {subtotal_1t}")
-            st.write(f"subtotal 2: {subtotal_2: .2f}")   
-            st.write(f"subtotal 1: {subtotal_1: .2f}")
-            st.write(f"valoare_active_necorporale: {valoare_active_necorporale: .2f}")            
-
-
             
             stop_in = df.index[df.iloc[:, 1].eq("Total proiect")].tolist()                      
             if stop_in:
@@ -182,7 +174,6 @@ uploaded_word_file = st.file_uploader("Încarcă documentul Word", type=['docx']
 if uploaded_file is not None:
     df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
     tabel_2 = transforma_date_tabel2(df)
-    st.dataframe(tabel_2)
 
     placeholder_found = False
 
