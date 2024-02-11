@@ -82,7 +82,7 @@ def transforma_date_tabel2(df):
             nr_crt.extend(["", "", "Subtotal 2", " ", "Pondere", "Pondere"])
             denumire.extend([
                 "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
-                "Rampa mobila"
+                "Rampa mobila",
                 "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități",
                 "Valoare totala eligibila proiect",
                 "Total valoare cheltuieli cu investiția care contribuie substanțial la obiectivele de mediu / Valoare totala eligibila proiect",
