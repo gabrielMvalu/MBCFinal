@@ -165,7 +165,7 @@ def transforma_date_tabel2(df):
 
  
 
-st.title('Transformare Date Excel')
+st.title(':blue[Transformare Date Excel]')
 
 uploaded_file = st.file_uploader("Alegeți fișierul Excel:", type='xlsx')
 uploaded_word_file = st.file_uploader("Încarcă documentul Word", type=['docx'])
