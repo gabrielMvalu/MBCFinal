@@ -18,7 +18,7 @@ def transforma_date_tabel2(df):
     else:
         val_total_proiect = None  
 
-    valori_de_eliminat = ["Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila", "Total active corporale", "Total active necorporale", "Publicitate", "Consultanta management", "Consultanta achizitii", "Consultanta scriere"]
+    valori_de_eliminat = ["Total active corporale", "Total active necorporale", "Publicitate", "Consultanta management", "Consultanta achizitii", "Consultanta scriere"]
     df_filtrat = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
 
     nr_crt_counter = 1
@@ -28,15 +28,19 @@ def transforma_date_tabel2(df):
     cantitate = []
     pret_unitar = []
     valoare_totala = []
+    
     subtotal_1 = 0
     subtotal_2 = 0
 
     for i, row in enumerate(df_filtrat.itertuples(), 1):
         item = row[2] 
-        if item not in valori_de_eliminat:
-            subtotal_1 += row[5]
-        else:
+        
+        # Calculați subtotals
+        if item not in ["Cursuri instruire personal", "Toaleta ecologica", "Rampa mobila", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"]:
+            subtotal_1 += row[5]  # Suma valorilor pentru coloana 'Valoare Totală'
+        if item in ["Cursuri instruire personal", "Toaleta ecologica", "Rampa mobila", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"]:
             subtotal_2 += row[5]
+            
 
         if item == "Cursuri instruire personal":
             nr_crt.append("Subtotal 1")
