@@ -63,22 +63,14 @@ def transforma_date_tabel2(df):
             for i, row in enumerate(df_filtrat.itertuples(), 1):
                 item = row[2]  # Assuming 'Denumire' is the second column
         
-                # Calculați subtotals
-                if item not in ["Cursuri instruire personal", "Toaleta ecologica"]:
-                    subtotal_1 += row[5]  # Suma valorilor pentru coloana 'Valoare Totală'
-                if item in ["Cursuri instruire personal", "Toaleta ecologica"]:
-                    subtotal_2 += row[5]
-        
-                # Add "Subtotal 1" before "Cursuri instruire personal"
                 if item == "Cursuri instruire personal":
                     nr_crt.append("Subtotal 1")
                     denumire.append("Total valoare cheltuieli cu investiția care contribuie substanțial la obiectivele de mediu")
-                    um.append(None)
-                    cantitate.append(None)
-                    pret_unitar.append(None)
+                    um.append(" ")
+                    cantitate.append(" ")
+                    pret_unitar.append(" ")
                     valoare_totala.append(subtotal_1)
         
-                # Add items to lists
                 nr_crt.append(nr_crt_counter)
                 denumire.append(item)
                 um.append("buc")
@@ -87,7 +79,6 @@ def transforma_date_tabel2(df):
                 valoare_totala.append(df_filtrat.iloc[i-1, 3] * df_filtrat.iloc[i-1, 11])
                 nr_crt_counter += 1
         
-            # Add other specific entries after processing all items
             nr_crt.extend(["Subtotal 2", " ", "Pondere", "Pondere"])
             denumire.extend([
                 "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități",
