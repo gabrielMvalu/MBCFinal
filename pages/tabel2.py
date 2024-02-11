@@ -79,7 +79,6 @@ def transforma_date_tabel2(df):
         "Valoare Totală (fără TVA)": valoare_totala
     })
 
-    return tabel_2
 
 st.title('Transformare Date Excel')
 
@@ -92,7 +91,6 @@ if uploaded_file is not None:
     tabel_2 = transforma_date_tabel2(df)
     st.dataframe(tabel_2)
     
-       
 
     placeholder_found = False
 
