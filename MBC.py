@@ -42,8 +42,14 @@ if prompt := st.chat_input("Ce doriți să întrebați?"):
         messages=st.session_state["messages"]
     )
 
+    # Verificăm structura răspunsului și extragem mesajul corespunzător
+    if response.choices and response.choices[0].message:
+        assistant_message = response.choices[0].message.get("content", "Nu am putut procesa răspunsul.")
+    else:
+        assistant_message = "Nu am primit un răspuns valid."
+
     # Adăugarea răspunsului asistentului la istoricul de mesaje și afișarea acestuia
-    assistant_message = response.choices[0].message["content"]
     st.session_state["messages"].append({"role": "assistant", "content": assistant_message})
     with st.chat_message("assistant"):
         st.markdown(assistant_message)
+
