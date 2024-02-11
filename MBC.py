@@ -40,18 +40,18 @@ else:
     if prompt := st.chat_input("Adaugati mesajul aici."):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
-            st.markdown(prompt)    
-            
-    with st.container(height=200):
+            st.markdown(prompt)
+
         # Generarea răspunsului asistentului și afișarea acestuia
-         with st.chat_message("assistant"):
-                stream = client.chat.completions.create(
-                    model=st.session_state["openai_model"],
-                    messages=[
-                        {"role": m["role"], "content": m["content"]}
-                        for m in st.session_state.messages
-                    ],
-                    stream=True,
-                )
-                response = st.write_stream(stream)
-            st.session_state.messages.append({"role": "assistant", "content": response})
+        with st.chat_message("assistant"):
+            stream = client.chat.completions.create(
+                model=st.session_state["openai_model"],
+                messages=[
+                    {"role": m["role"], "content": m["content"]}
+                    for m in st.session_state.messages
+                ],
+                stream=True,
+            )
+            response = st.write_stream(stream)
+        st.session_state.messages.append({"role": "assistant", "content": response})
+
