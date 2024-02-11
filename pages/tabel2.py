@@ -50,7 +50,7 @@ if uploaded_file is not None:
     ]    
 
     # Filtrăm DataFrame-ul pentru a exclude rândurile cu valorile specificate în lista 'valori_de_exclus'
-    df_filtrat_pt_subtotal1 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus)]
+    df_filtrat_pt_subtotal1 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus1)]
     df_filtrat_pt_subtotal2 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus2)]
        
 
