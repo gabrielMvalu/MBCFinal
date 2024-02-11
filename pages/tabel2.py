@@ -14,10 +14,13 @@ def transforma_date_tabel2(df):
     df_filtrat = df_filtrat[df_filtrat.iloc[:, 1].notna() & (df_filtrat.iloc[:, 1] != 0) & (df_filtrat.iloc[:, 1] != '-')]
     valori_de_eliminat = ["Total active corporale", "Total active necorporale", "Publicitate", "Consultanta management", "Consultanta achizitii", "Consultanta scriere"]
     df_filtrat = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
+    valori_speciale = ["Cursuri instruire personal", "Toaleta ecologica", "Rampa mobila", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"]
+    df_filtrat2 = df_filtrat[df_filtrat.iloc[:, 1].isin(valori_speciale)]
+    df_filtrat3 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_speciale)]
+    subtotal_1 = df_filtrat2.iloc[:, 5].sum()
+    subtotal_2 = df_filtrat3.iloc[:, 5].sum()
+    val_total_proiect = df_filtrat.iloc[:, 5].sum()  # Assuming total project value is the sum of all values in column 5
 
-    subtotal_1 = df_filtrat[df_filtrat.iloc[:, 1].str.contains("Subtotal 1", na=False)].iloc[:, 5].sum()
-    subtotal_2 = df_filtrat[df_filtrat.iloc[:, 1].str.contains("Subtotal 2", na=False)].iloc[:, 5].sum()
-    val_total_proiect = df_filtrat.iloc[:, 5].sum()
 
     df_final = pd.DataFrame({
         "Denumire": df_filtrat.iloc[:, 1],
