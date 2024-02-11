@@ -79,6 +79,7 @@ def transforma_date_tabel2(df):
         "Valoare Totală (fără TVA)": valoare_totala
     })
 
+    return tabel_2 
 
 st.title('Transformare Date Excel')
 
