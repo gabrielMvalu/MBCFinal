@@ -65,7 +65,7 @@ def transforma_date_tabel2(df):
             pret_unitar.append(None)
             valoare_totala.append(subtotal_1)
 
-        nr_crt.append(i - 2)  # Ajustează numărul de ordine dacă este necesar
+        nr_crt.append(i)  # Ajustează numărul de ordine dacă este necesar
         denumire.append(item)
         um.append(row[2])  # Presupunând că 'UM' este în a treia coloană
         cantitate.append(row[3])  # Presupunând că 'Cantitate' este în a patra coloană
