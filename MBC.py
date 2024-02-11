@@ -5,36 +5,45 @@ import streamlit as st
 
 st.set_page_config(layout="wide")
 
-
+st.header(':blue[Pagina Principală]', divider='rainbow')
+st.write(':violet[Bine ați venit la aplicația pentru completarea - Planului de Afaceri! -]')
 
 with st.sidebar:
     openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
     
-
-st.header(':blue[Pagina Principală]', divider='rainbow')
-st.write(':violet[Bine ați venit la aplicația pentru completarea - Planului de Afaceri! -]')
-
-
-if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "Cu ce te pot ajuta?"}]
-
-message_placeholder = st.empty()
-
-for msg in st.session_state.messages:
-    if msg["role"] == "assistant":
-        message_placeholder.write(":robot: " + msg["content"])
-    elif msg["role"] == "user":
-        message_placeholder.write(":man: " + msg["content"])
-
-if prompt := st.chat_input():
-    if not openai_api_key:
-        st.info("Adaugati OpenAI API key pentru a putea continua.")
-        st.stop()
-
+if not openai_api_key:
+    st.error("Vă rugăm să introduceți cheia API OpenAI în bara laterală.")
+else:
+    # Inițializarea clientului OpenAI cu cheia API introdusă
     client = OpenAI(api_key=openai_api_key)
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    st.chat_message("user").write(prompt)
-    response = client.chat.completions.create(model="gpt-3.5-turbo", messages=st.session_state.messages)
-    msg = response.choices[0].message.content
-    st.session_state.messages.append({"role": "assistant", "content": msg})
-    st.chat_message("assistant").write(msg)
+
+    # Inițializarea stării sesiunii pentru model și mesaje
+    if "openai_model" not in st.session_state:
+        st.session_state["openai_model"] = "gpt-3.5-turbo"
+
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    # Afișarea mesajelor anterioare
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    # Input pentru mesaj nou de la utilizator
+    if prompt := st.chat_input("What is up?"):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        # Generarea răspunsului asistentului și afișarea acestuia
+        with st.chat_message("assistant"):
+            stream = client.chat.completions.create(
+                model=st.session_state["openai_model"],
+                messages=[
+                    {"role": m["role"], "content": m["content"]}
+                    for m in st.session_state.messages
+                ],
+                stream=True,
+            )
+            response = st.write_stream(stream)
+        st.session_state.messages.append({"role": "assistant", "content": response})
