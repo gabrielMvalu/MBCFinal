@@ -28,6 +28,9 @@ def transforma_date_tabel2(df):
     # Reordonare specifică bazată pe index
     cursuri_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Cursuri instruire personal"].tolist()
     toaleta_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Toaleta ecologica"].tolist()
+    rampa_iddex = df_filtrat.index[df_filtrat.iloc[:, 1] == "Rampa mobila"].tolist()
+    servicii_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"].tolist()
+    
     if cursuri_index and toaleta_index:
         toaleta_row = df_filtrat.loc[toaleta_index[0]]
         df_filtrat = df_filtrat.drop(toaleta_index)
@@ -48,10 +51,10 @@ def transforma_date_tabel2(df):
     for i, row in df_filtrat.iterrows():
         item = row[1]  # Presupunând că 'Denumire' este în a doua coloană
 
-        if item not in ["Cursuri instruire personal", "Toaleta ecologica"]:
+        if item not in ["Cursuri instruire personal", "Toaleta ecologica","Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
             subtotal_1 += row[5]  # Suma valorilor pentru 'Valoare Totală'
 
-        if item in ["Cursuri instruire personal", "Toaleta ecologica"]:
+        if item in  ["Cursuri instruire personal", "Toaleta ecologica","Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
             subtotal_2 += row[5]
 
         if item == "Cursuri instruire personal":
