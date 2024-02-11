@@ -23,7 +23,7 @@ if uploaded_file is not None:
    
     if stop_row is not None:
       
-        valoare_total_proiect = df.iloc[stop_row, 5]
+        valoare_total_proiect = df.iloc[stop_row, 4]
      
     else:
         pass
