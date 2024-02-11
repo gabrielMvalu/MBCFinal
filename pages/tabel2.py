@@ -18,8 +18,7 @@ def transforma_date_tabel2(df):
     else:
         val_total_proiect = None  # Sau setează la o valoare implicită dacă 'Total proiect' nu este găsit
 
-    valori_de_eliminat = ["Total active corporale", "Total active necorporale", 
-        "Publicitate", "Consultanta management", "Consultanta achizitii", "Consultanta scriere"]
+    valori_de_eliminat = ["Total active corporale", "Total active necorporale", "Publicitate", "Consultanta management", "Consultanta achizitii", "Consultanta scriere"]
     
     df_filtrat = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
 
@@ -49,10 +48,10 @@ def transforma_date_tabel2(df):
     for i, row in df_filtrat.iterrows():
         item = row[1]  # Presupunând că 'Denumire' este în a doua coloană
 
-        if item not in ["Cursuri instruire personal", "Toaleta ecologica","Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
+        if item not in ["Cursuri instruire personal", "Toaleta ecologica", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
             subtotal_1 += row[5]  # Suma valorilor pentru 'Valoare Totală'
 
-        if item in  ["Cursuri instruire personal", "Toaleta ecologica","Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
+        if item in  ["Cursuri instruire personal", "Toaleta ecologica", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
             subtotal_2 += row[5]
 
         if item == "Cursuri instruire personal":
