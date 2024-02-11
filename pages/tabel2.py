@@ -122,7 +122,7 @@ def transforma_date_tabel2(df):
             um.extend(["buc", "buc", " ", " "," ", " "])
             cantitate.extend([" ", " ", " ", " "," ", " "])
             pret_unitar.extend([" ", " ", " ", " "," ", " "])
-            valoare_totala.extend([" val pt serv", " val pt rampa", f"{subtotal_2: .2f}", val_total_proiect, f"{100*subtotal_1/val_total_proiect: .2f}", f"{100*subtotal_2/val_total_proiect: .2f}"])
+            valoare_totala.extend([" val pt serv", " val pt rampa", f"{subtotal_2: .2f}", val_total_proiect, f"{100*subtotal_1/val_total_proiect: .2f}%", f"{100*subtotal_2/val_total_proiect: .2f}%"])
         
             # Create the final DataFrame
             tabel_2 = pd.DataFrame({
