@@ -147,8 +147,10 @@ if uploaded_file is not None:
     df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
     tabel_2 = transforma_date_tabel2(df)
     st.dataframe(tabel_2)
-    
-
+            
+    st.write(f"{subtotal_1}")
+    st.write(f"{subtotal_2}")
+            
     placeholder_found = False
 
     doc = Document(uploaded_word_file) if uploaded_word_file is not None else None
