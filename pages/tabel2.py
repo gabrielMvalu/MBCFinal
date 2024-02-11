@@ -47,7 +47,7 @@ def transforma_date_tabel2(df):
             for i, row in enumerate(df_filtrat_pt_subtotal1.itertuples(), 1):
                 subtotal_1 += row[4]
             
-            for i, row in enumerate(df_filtrat_pt_subtota2.itertuples(), 1):
+            for i, row in enumerate(df_filtrat_pt_subtotal2.itertuples(), 1):
                 subtotal_2 += row[4]
             
 
