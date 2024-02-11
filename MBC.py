@@ -38,7 +38,7 @@ else:
             st.markdown(message["content"])
 
     # Input pentru mesaj nou de la utilizator
-    if prompt := st.chat_input("What is up?"):
+    if prompt := st.chat_input("Adaugati mesajul aici."):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
