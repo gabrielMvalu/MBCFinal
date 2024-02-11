@@ -51,7 +51,16 @@ if uploaded_file is not None:
     ]
 
     st.dataframe(df_filtrat_pt_subtotal1)
-   
+    
+    subtotal_1 = df_filtrat_pt_subtotal1.iloc[:, 3].sum()
+    
+    # Afișăm subtotal_1
+    st.write(f"Subtotal 1: {subtotal_1}")
+
+
+
+
+    
 
     stop_row = None
 
