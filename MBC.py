@@ -2,11 +2,15 @@
 from openai import OpenAI
 import streamlit as st
 
+st.set_page_config(layout="wide")
+
+
+
 with st.sidebar:
     openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
     "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
 
-st.set_page_config(layout="wide")
+
 
 st.header(':blue[Pagina Principală]', divider='rainbow')
 st.write(':violet[Bine ați venit la aplicația pentru completarea - Planului de Afaceri! -]')
