@@ -8,11 +8,22 @@ from io import BytesIO
 
 st.title(':blue[Transformare Date Excel]')
 
+stop_text = None
+
+
 uploaded_file = st.file_uploader("Alegeți fișierul Excel:", type='xlsx')
 uploaded_word_file = st.file_uploader("Încarcă documentul Word", type=['docx'])
 
+
+
 if uploaded_file is not None:
+    
+    stop_text = 'Total proiect'
+    
     df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
+    stop_index = df[df.iloc[:, 1] == stop_text].index.min()
+    df_filtrat = df.iloc[3:stop_index] if pd.notna(stop_index) else df.iloc[3:]
+    df_filtrat = df_filtrat[df_filtrat.iloc[:, 1].notna() & (df_filtrat.iloc[:, 1] != 0) & (df_filtrat.iloc[:, 1] != '-')]
 
 
     # Lista cu valorile pe care dorim să le excludem din coloana B
@@ -39,8 +50,8 @@ if uploaded_file is not None:
     ]    
 
     # Filtrăm DataFrame-ul pentru a exclude rândurile cu valorile specificate în lista 'valori_de_exclus'
-    df_filtrat_pt_subtotal1 = df[df.iloc[:, 1].notna() & ~df.iloc[:, 1].isin(valori_de_exclus1) & (df.iloc[:, 1] != 0) & (df.iloc[:, 1] != '-')]
-    df_filtrat_pt_subtotal2 = df[df.iloc[:, 1].notna() & ~df.iloc[:, 1].isin(valori_de_exclus2) & (df.iloc[:, 1] != 0) & (df.iloc[:, 1] != '-')]
+    df_filtrat_pt_subtotal1 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus)]
+    df_filtrat_pt_subtotal2 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus2)]
        
 
     
