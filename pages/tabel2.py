@@ -80,6 +80,7 @@ else:
     pass  # Poți gestiona cazul în care 'Total proiect' nu este găsit
 
 # Afișează subtotal_2 și valoare_total_proiect
-print(f"Subtotal 2: {subtotal_2}")
-if stop_row is not None:
-    print(f"Valoare totală proiect: {valoare_total_proiect}")
+
+st.write(f"Total: {valoare_total_proiect}")
+st.write(f"Subtotal 2: {subtotal_2}")
+st.write(f"Subtotal 1: {subtotal_1}")
