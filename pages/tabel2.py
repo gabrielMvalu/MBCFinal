@@ -156,7 +156,7 @@ def transforma_date_tabel2(df):
             um.extend(["buc", "buc", " ", " "," ", " "])
             cantitate.extend([f"{cantitates}", f"{cantitater}", " ", " "," ", " "])
             pret_unitar.extend([f"{pret_unitars}", f"{pret_unitarr}", " ", " "," ", " "])
-            valoare_totala.extend([f"{valoares}", f"{valoares}", f"{subtotal_2: .2f}", val_total_proiect, f"{100*subtotal_1/val_total_proiect: .2f}%", f"{100*subtotal_2/val_total_proiect: .2f}%"])
+            valoare_totala.extend([f"{valoares}", f"{valoarer}", f"{subtotal_2: .2f}", val_total_proiect, f"{100*subtotal_1/val_total_proiect: .2f}%", f"{100*subtotal_2/val_total_proiect: .2f}%"])
         
             # Create the final DataFrame
             tabel_2 = pd.DataFrame({
