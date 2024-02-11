@@ -45,7 +45,7 @@ def transforma_date_tabel2(df):
     subtotal_1 = 0
     subtotal_2 = 0
 
-    for i, row in df_filtrat.iterrows():
+   for i, row in enumerate(df_filtrat.itertuples(), 1):
         item = row[1]  # Presupunând că 'Denumire' este în a doua coloană
 
         if item not in ["Cursuri instruire personal", "Toaleta ecologica", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati", "Rampa mobila"]:
