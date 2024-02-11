@@ -42,12 +42,6 @@ def transforma_date_tabel2(df):
             subtotal_2 = 0
 
 
-            for i, row in enumerate(df_filtrat_pt_subtotal1t.itertuples(), 1):
-                subtotal_1t += row[4]
-            
-            for i, row in enumerate(df_filtrat_pt_subtotal2.itertuples(), 1):
-                subtotal_2 += row[4]
-            
 
             stop_in = df.index[df.iloc[:, 1].eq("Total active corporale")].tolist()            
             if stop_in:
