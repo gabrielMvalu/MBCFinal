@@ -6,9 +6,15 @@ from docx.oxml.ns import nsdecls
 from io import BytesIO
 
 stop_text = 'Total proiect'
+stop_text2 = 'Total active corporale'
 
 def transforma_date_tabel2(df):
             stop_index = df[df.iloc[:, 1] == stop_text].index.min()
+            stop_intex = df1[df1.iloc[:, 1] == stop_text2].index.min()
+            
+            df1_filtrat = df.iloc[3:stop_index] if pd.notna(stop_index) else df.iloc[3:]
+            df1_filtrat = df1_filtrat[df1_filtrat.iloc[:, 1].notna() & (df1_filtrat.iloc[:, 1] != 0) & (df1_filtrat.iloc[:, 1] != '-')]
+            
             df_filtrat = df.iloc[3:stop_index] if pd.notna(stop_index) else df.iloc[3:]
             df_filtrat = df_filtrat[df_filtrat.iloc[:, 1].notna() & (df_filtrat.iloc[:, 1] != 0) & (df_filtrat.iloc[:, 1] != '-')]
 
@@ -16,13 +22,6 @@ def transforma_date_tabel2(df):
                "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
                "Rampa mobila",
                "Toaleta ecologica",
-               "Total active corporale",
-               "Total active necorporale",
-               "Publicitate",
-               "Consultanta management",
-               "Consultanta achizitii",
-               "Consultanta scriere",
-               "Cursuri instruire personal",
             ]
             
             valori_de_exclus2 = [
@@ -33,14 +32,14 @@ def transforma_date_tabel2(df):
             ]
 
             # Filtrăm DataFrame-ul pentru a exclude rândurile cu valorile specificate în lista 'valori_de_exclus'
-            df_filtrat_pt_subtotal1 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus1)]
+            df_filtrat_pt_subtotal1t = df1_filtrat[df1_filtrat.iloc[:, 1].isin(valori_de_exclus1)]
             df_filtrat_pt_subtotal2 = df_filtrat[df_filtrat.iloc[:, 1].isin(valori_de_exclus2)]    
 
             subtotal_1 = 0
             subtotal_2 = 0
                         
-            for i, row in enumerate(df_filtrat_pt_subtotal1.itertuples(), 1):
-                subtotal_1 += row[4]
+            for i, row in enumerate(df_filtrat_pt_subtotal1t.itertuples(), 1):
+                subtotal_1t += row[4]
             
             for i, row in enumerate(df_filtrat_pt_subtotal2.itertuples(), 1):
                 subtotal_2 += row[4]
