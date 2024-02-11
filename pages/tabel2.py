@@ -38,9 +38,9 @@ def transforma_date_tabel2(df):
                         
 
             # Filtrăm DataFrame-ul pentru a exclude rândurile cu valorile specificate în lista 'valori_de_exclus'
-            df_filtrat_pt_subtotal1 = df[df.iloc[3:, 1].notna() & ~df.iloc[3:, 1].isin(valori_de_exclus1) & (df.iloc[3:, 1] != 0) & (df.iloc[3:, 1] != '-')]
-            df_filtrat_pt_subtotal2 = df[df.iloc[3:, 1].notna() & ~df.iloc[3:, 1].isin(valori_de_exclus2) & (df.iloc[3:, 1] != 0) & (df.iloc[3:, 1] != '-')]
-            
+            df_filtrat_pt_subtotal1 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus)]
+            df_filtrat_pt_subtotal2 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus2)]    
+
             subtotal_1 = 0
             subtotal_2 = 0
             
