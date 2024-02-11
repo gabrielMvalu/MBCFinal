@@ -49,8 +49,12 @@ def transforma_date_tabel2(df):
             
             for i, row in enumerate(df_filtrat_pt_subtotal2.itertuples(), 1):
                 subtotal_2 += row[4]
-            
 
+
+            st.write(f"{subtotal_1}")
+            st.write(f"{subtotal_2}")      
+
+            
             if stop_in:
                 val_total_proiect = df.iloc[stop_in[0], 4]
             else:
@@ -147,10 +151,7 @@ if uploaded_file is not None:
     df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
     tabel_2 = transforma_date_tabel2(df)
     st.dataframe(tabel_2)
-            
-    st.write(f"{subtotal_1}")
-    st.write(f"{subtotal_2}")
-            
+
     placeholder_found = False
 
     doc = Document(uploaded_word_file) if uploaded_word_file is not None else None
