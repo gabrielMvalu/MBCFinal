@@ -79,17 +79,19 @@ def transforma_date_tabel2(df):
                 valoare_totala.append(df_filtrat.iloc[i-1, 3] * df_filtrat.iloc[i-1, 11])
                 nr_crt_counter += 1
         
-            nr_crt.extend(["Subtotal 2", " ", "Pondere", "Pondere"])
+            nr_crt.extend(["", "", "Subtotal 2", " ", "Pondere", "Pondere"])
             denumire.extend([
+                "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
+                "Rampa mobila"
                 "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități",
                 "Valoare totala eligibila proiect",
                 "Total valoare cheltuieli cu investiția care contribuie substanțial la obiectivele de mediu / Valoare totala eligibila proiect",
                 "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități / Valoare totala eligibila proiect"
             ])
-            um.extend([" ", " ", " ", " "])
-            cantitate.extend([" ", " ", " ", " "])
-            pret_unitar.extend([" ", " ", " ", " "])
-            valoare_totala.extend([subtotal_2, val_total_proiect, 100*subtotal_1/val_total_proiect, 100*subtotal_2/val_total_proiect])
+            um.extend([nr_crt_counter, " ", " ", " "," ", " "])
+            cantitate.extend([" ", " ", " ", " "," ", " "])
+            pret_unitar.extend([" ", " ", " ", " "," ", " "])
+            valoare_totala.extend(" val pt serv", " val pt rampa", subtotal_2, val_total_proiect, 100*subtotal_1/val_total_proiect, 100*subtotal_2/val_total_proiect])
         
             # Create the final DataFrame
             tabel_2 = pd.DataFrame({
