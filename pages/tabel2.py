@@ -8,21 +8,17 @@ from io import BytesIO
 stop_text = 'Total proiect'
 
 def transforma_date_tabel2(df):
-    # Identificarea punctului de oprire în DataFrame
-    stop_index = df[df.iloc[:, 1] == 'Total proiect'].index.min()
+    stop_text = 'Total proiect'
+    stop_index = df[df.iloc[:, 1] == stop_text].index.min()
     df_filtrat = df.iloc[3:stop_index] if pd.notna(stop_index) else df.iloc[3:]
     df_filtrat = df_filtrat[df_filtrat.iloc[:, 1].notna() & (df_filtrat.iloc[:, 1] != 0) & (df_filtrat.iloc[:, 1] != '-')]
-
-    # Eliminarea anumitor valori din DataFrame
     valori_de_eliminat = ["Total active corporale", "Total active necorporale", "Publicitate", "Consultanta management", "Consultanta achizitii", "Consultanta scriere"]
     df_filtrat = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
 
-    # Calculul subtotalurilor și valoarea totală a proiectului
     subtotal_1 = df_filtrat[df_filtrat.iloc[:, 1].str.contains("Subtotal 1", na=False)].iloc[:, 5].sum()
     subtotal_2 = df_filtrat[df_filtrat.iloc[:, 1].str.contains("Subtotal 2", na=False)].iloc[:, 5].sum()
     val_total_proiect = df_filtrat.iloc[:, 5].sum()
 
-    # Crearea DataFrame-ului final fără coloana "Nr. crt."
     df_final = pd.DataFrame({
         "Denumire": df_filtrat.iloc[:, 1],
         "UM": df_filtrat.iloc[:, 2],
@@ -31,15 +27,13 @@ def transforma_date_tabel2(df):
         "Valoare Totală (fără TVA)": df_filtrat.iloc[:, 5]
     }).reset_index(drop=True)
 
-    # Adăugarea rândurilor pentru subtotaluri și valoarea totală a proiectului
-    additional_rows = [
+    additional_rows = pd.DataFrame([
         {"Denumire": "Subtotal 1", "Valoare Totală (fără TVA)": subtotal_1},
         {"Denumire": "Subtotal 2", "Valoare Totală (fără TVA)": subtotal_2},
         {"Denumire": "Valoare totală proiect", "Valoare Totală (fără TVA)": val_total_proiect}
-    ]
+    ])
 
-    for row in additional_rows:
-        df_final = df_final.append(row, ignore_index=True)
+    df_final = pd.concat([df_final, additional_rows], ignore_index=True)
 
     return df_final
 
