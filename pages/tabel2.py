@@ -16,8 +16,23 @@ def transforma_date_tabel2(df):
     
             stop_in = df.index[df.iloc[:, 1].eq("Total proiect")].tolist()
 
+            # Verifică dacă s-a găsit index-ul
+            if stop_in:
+                # Extrage valoarea din coloana 5 (index 4) pentru rândul găsit
+                val_total_proiect = df.iloc[stop_in[0], 4]
+            else:
+                # Dacă nu s-a găsit textul, poți seta val_total_proiect la un anumit valor default sau arunca o excepție, depinde de cazul tău.
+                val_total_proiect = None  # Sau poți seta la altă valoare default    
+                
+            valori_de_eliminat = [
+                "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
+                "Rampa mobila", "Total active corporale", "Total active necorporale", 
+                "Publicitate", "Consultanta management", "Consultanta achizitii", "Consultanta scriere"
+            ]
+            df_filtrat = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
 
-            # Identificarea indexurilor pentru fiecare element specific
+
+             # Identificarea indexurilor pentru fiecare element specific
             cursuri_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Cursuri instruire personal"].tolist()
             toaleta_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Toaleta ecologica"].tolist()
             rampa_index = df_filtrat.index[df_filtrat.iloc[:, 1] == "Rampa mobila"].tolist()
@@ -41,24 +56,7 @@ def transforma_date_tabel2(df):
                 df_filtrat = df_filtrat.drop(servicii_index)
                 df_filtrat = pd.concat([df_filtrat.iloc[:cursuri_index[0]+2], servicii_row.to_frame().T, df_filtrat.iloc[cursuri_index[0]+2:]], ignore_index=True)
 
-
-
             
-            # Verifică dacă s-a găsit index-ul
-            if stop_in:
-                # Extrage valoarea din coloana 5 (index 4) pentru rândul găsit
-                val_total_proiect = df.iloc[stop_in[0], 4]
-            else:
-                # Dacă nu s-a găsit textul, poți seta val_total_proiect la un anumit valor default sau arunca o excepție, depinde de cazul tău.
-                val_total_proiect = None  # Sau poți seta la altă valoare default    
-                
-            valori_de_eliminat = [
-                "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
-                "Rampa mobila", "Total active corporale", "Total active necorporale", 
-                "Publicitate", "Consultanta management", "Consultanta achizitii", "Consultanta scriere"
-            ]
-            df_filtrat = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
-        
 
             # Initialize 'Nr. crt.' counter and lists for all columns
             nr_crt_counter = 1
