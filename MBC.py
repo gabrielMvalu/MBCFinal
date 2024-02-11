@@ -24,7 +24,6 @@ else:
     # Inițializarea clientului OpenAI cu cheia API introdusă
     client = OpenAI(api_key=openai_api_key)
 
-with st.container(height=400):
     # Inițializarea stării sesiunii pentru model și mesaje
     if "openai_model" not in st.session_state:
         st.session_state["openai_model"] = "gpt-4-0125-preview"
