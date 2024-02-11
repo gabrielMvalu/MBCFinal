@@ -32,58 +32,43 @@ def transforma_date_tabel2(df):
     subtotal_1 = 0
     subtotal_2 = 0
 
-    # Definim elementele speciale care trebuie să apară între subtotaluri
-    elemente_speciale = ["Cursuri instruire personal", "Toaleta ecologica", "Rampa mobila", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"]
-
     for i, row in enumerate(df_filtrat.itertuples(), 1):
-        item = row[2]
+        item = row[2] 
         
-        if item in elemente_speciale:
-            continue  # Sărim peste elementele speciale pentru moment
-
-        # Calculați subtotalurile
-        if item not in elemente_speciale:
+        # Calculați subtotals
+        if item not in ["Cursuri instruire personal", "Toaleta ecologica", "Rampa mobila", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"]:
             subtotal_1 += row[5]  # Suma valorilor pentru coloana 'Valoare Totală'
+        if item in ["Cursuri instruire personal", "Toaleta ecologica", "Rampa mobila", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"]:
+            subtotal_2 += row[5]
+            
 
-    # După calcularea subtotalului 1, adăugăm elementele speciale
-    nr_crt.append("Subtotal 1")
-    denumire.append("Total valoare cheltuieli cu investiția care contribuie substanțial la obiectivele de mediu")
-    um.append(None)
-    cantitate.append(None)
-    pret_unitar.append(None)
-    valoare_totala.append(subtotal_1)
+        if item == "Cursuri instruire personal":
+            nr_crt.append("Subtotal 1")
+            denumire.append("Total valoare cheltuieli cu investiția care contribuie substanțial la obiectivele de mediu")
+            um.append(None)
+            cantitate.append(None)
+            pret_unitar.append(None)
+            valoare_totala.append(subtotal_1)
 
-    for element in elemente_speciale:
-        index = df_filtrat.index[df_filtrat.iloc[:, 1] == element].tolist()
-        if index:
-            idx = index[0]
-            nr_crt.append(nr_crt_counter)
-            denumire.append(element)
-            um.append("buc")
-            cantitate.append(df_filtrat.iloc[idx, 11])
-            pret_unitar.append(df_filtrat.iloc[idx, 3])
-            valoare_totala.append(df_filtrat.iloc[idx, 6])
-            nr_crt_counter += 1
-            subtotal_2 += df_filtrat.iloc[idx, 6]
+        nr_crt.append(nr_crt_counter)
+        denumire.append(item)
+        um.append("buc")
+        cantitate.append(df_filtrat.iloc[i-1, 11])
+        pret_unitar.append(df_filtrat.iloc[i-1, 3])
+        valoare_totala.append(df_filtrat.iloc[i-1, 6])
+        nr_crt_counter += 1
 
-    # Adăugăm Subtotal 2 și restul valorilor după elementele speciale
-    nr_crt.append("Subtotal 2")
-    denumire.append("Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități")
-    um.append(None)
-    cantitate.append(None)
-    pret_unitar.append(None)
-    valoare_totala.append(subtotal_2)
-
-    nr_crt.extend([None, "Pondere", "Pondere"])
+    nr_crt.extend(["Subtotal 2", None, "Pondere", "Pondere"])
     denumire.extend([
+        "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități",
         "Valoare totala eligibila proiect",
         "Total valoare cheltuieli cu investiția care contribuie substanțial la obiectivele de mediu / Valoare totala eligibila proiect",
         "Total valoare cheltuieli cu investiția care contribuie substanțial la egalitatea de șanse, de tratament și accesibilitatea pentru persoanele cu dizabilități / Valoare totala eligibila proiect"
     ])
-    um.extend([None, None, None])
-    cantitate.extend([None, None, None])
-    pret_unitar.extend([None, None, None])
-    valoare_totala.extend([val_total_proiect, 100*subtotal_1/val_total_proiect, 100*subtotal_2/val_total_proiect])
+    um.extend([None, None, None, None])
+    cantitate.extend([None, None, None, None])
+    pret_unitar.extend([None, None, None, None])
+    valoare_totala.extend([subtotal_2, val_total_proiect, 100*subtotal_1/val_total_proiect, 100*subtotal_2/val_total_proiect])
 
     tabel_2 = pd.DataFrame({
         "Nr. crt.": nr_crt,
@@ -94,7 +79,7 @@ def transforma_date_tabel2(df):
         "Valoare Totală (fără TVA)": valoare_totala
     })
 
-    return tabel_2
+    return tabel_2 
  
 
 st.title('Transformare Date Excel')
