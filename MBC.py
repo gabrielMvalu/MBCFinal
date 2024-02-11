@@ -18,8 +18,13 @@ st.write(':violet[Bine ați venit la aplicația pentru completarea - Planului de
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "assistant", "content": "Cu ce te pot ajuta?"}]
 
+message_placeholder = st.empty()
+
 for msg in st.session_state.messages:
-    st.chat_message(msg["role"]).write(msg["content"])
+    if msg["role"] == "assistant":
+        message_placeholder.write(":robot: " + msg["content"])
+    elif msg["role"] == "user":
+        message_placeholder.write(":man: " + msg["content"])
 
 if prompt := st.chat_input():
     if not openai_api_key:
