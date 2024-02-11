@@ -14,7 +14,7 @@ def transforma_date_tabel2(df):
             
             stop_in = df.index[df.iloc[:, 1].eq("Total proiect")].tolist()
 
-             valori_de_exclus1 = [
+            valori_de_exclus1 = [
                     "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
                     "Rampa mobila",
                     "Toaleta ecologica",
@@ -27,7 +27,7 @@ def transforma_date_tabel2(df):
                     "Cursuri instruire personal",
                 ]
             
-                valori_de_exclus2 = [
+            valori_de_exclus2 = [
                     "Total active corporale",
                     "Total active necorporale",
                     "Publicitate",
