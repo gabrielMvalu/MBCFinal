@@ -8,19 +8,21 @@ from io import BytesIO
 stop_text = 'Total proiect'
 
 def transforma_date_tabel2(df):
-    stop_text = 'Total proiect'
-    stop_index = df[df.iloc[:, 1] == stop_text].index.min()
+    # Identificarea punctului de oprire în DataFrame
+    stop_index = df[df.iloc[:, 1] == 'Total proiect'].index.min()
     df_filtrat = df.iloc[3:stop_index] if pd.notna(stop_index) else df.iloc[3:]
     df_filtrat = df_filtrat[df_filtrat.iloc[:, 1].notna() & (df_filtrat.iloc[:, 1] != 0) & (df_filtrat.iloc[:, 1] != '-')]
+
+    # Eliminarea anumitor valori din DataFrame
     valori_de_eliminat = ["Total active corporale", "Total active necorporale", "Publicitate", "Consultanta management", "Consultanta achizitii", "Consultanta scriere"]
     df_filtrat = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_eliminat)]
-    valori_speciale = ["Cursuri instruire personal", "Toaleta ecologica", "Rampa mobila", "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati"]
-    df_filtrat2 = df_filtrat[df_filtrat.iloc[:, 1].isin(valori_speciale)]
-    df_filtrat3 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_speciale)]
-    subtotal_1 = df_filtrat2.iloc[:, 5].sum()
-    subtotal_2 = df_filtrat3.iloc[:, 5].sum()
-    val_total_proiect = df_filtrat.iloc[:, 5].sum()  # Assuming total project value is the sum of all values in column 5
 
+    # Calculul subtotalurilor și valoarea totală a proiectului
+    subtotal_1 = df_filtrat[df_filtrat.iloc[:, 1].str.contains("Subtotal 1", na=False)].iloc[:, 5].sum()
+    subtotal_2 = df_filtrat[df_filtrat.iloc[:, 1].str.contains("Subtotal 2", na=False)].iloc[:, 5].sum()
+    val_total_proiect = df_filtrat.iloc[:, 5].sum()
+
+    # Crearea DataFrame-ului final fără coloana "Nr. crt."
     df_final = pd.DataFrame({
         "Denumire": df_filtrat.iloc[:, 1],
         "UM": df_filtrat.iloc[:, 2],
@@ -29,29 +31,15 @@ def transforma_date_tabel2(df):
         "Valoare Totală (fără TVA)": df_filtrat.iloc[:, 5]
     }).reset_index(drop=True)
 
-    df_final["Nr. crt."] = range(1, len(df_final) + 1)
+    # Adăugarea rândurilor pentru subtotaluri și valoarea totală a proiectului
+    additional_rows = [
+        {"Denumire": "Subtotal 1", "Valoare Totală (fără TVA)": subtotal_1},
+        {"Denumire": "Subtotal 2", "Valoare Totală (fără TVA)": subtotal_2},
+        {"Denumire": "Valoare totală proiect", "Valoare Totală (fără TVA)": val_total_proiect}
+    ]
 
-    # Append rows without "Nr. crt." for subtotal and total
-    df_final = df_final.append({
-        "Denumire": "Subtotal 1",
-        "Valoare Totală (fără TVA)": subtotal_1
-    }, ignore_index=True)
-
-    df_final = df_final.append(df_filtrat2.drop(columns=["Nr. crt."]), ignore_index=True)
-
-    df_final = df_final.append({
-        "Denumire": "Subtotal 2",
-        "Valoare Totală (fără TVA)": subtotal_2
-    }, ignore_index=True)
-
-    df_final = df_final.append({
-        "Denumire": "Valoare totală proiect",
-        "Valoare Totală (fără TVA)": val_total_proiect
-    }, ignore_index=True)
-
-    # Correct "Nr. crt." for rows where applicable
-    df_final["Nr. crt."] = df_final.index + 1
-    df_final.loc[df_final['Denumire'].isin(['Subtotal 1', 'Subtotal 2', 'Valoare totală proiect']), 'Nr. crt.'] = ''
+    for row in additional_rows:
+        df_final = df_final.append(row, ignore_index=True)
 
     return df_final
 
