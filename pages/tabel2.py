@@ -14,19 +14,13 @@ stop_text = None
 uploaded_file = st.file_uploader("Alegeți fișierul Excel:", type='xlsx')
 uploaded_word_file = st.file_uploader("Încarcă documentul Word", type=['docx'])
 
-
-
 if uploaded_file is not None:
-    
     stop_text = 'Total proiect'
-    
     df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
     stop_index = df[df.iloc[:, 1] == stop_text].index.min()
     df_filtrat = df.iloc[3:stop_index] if pd.notna(stop_index) else df.iloc[3:]
     df_filtrat = df_filtrat[df_filtrat.iloc[:, 1].notna() & (df_filtrat.iloc[:, 1] != 0) & (df_filtrat.iloc[:, 1] != '-')]
 
-
-    # Lista cu valorile pe care dorim să le excludem din coloana B
     valori_de_exclus = [
         "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
         "Rampa mobila",
@@ -39,29 +33,18 @@ if uploaded_file is not None:
         "Consultanta scriere",
         "Cursuri instruire personal",
     ]
-
-    # Filtrăm DataFrame-ul pentru a exclude rândurile cu valorile specificate în lista 'valori_de_exclus'
     df_filtrat_pt_subtotal1 = df_filtrat[~df_filtrat.iloc[:, 1].isin(valori_de_exclus)]
-    
     st.dataframe(df_filtrat_pt_subtotal1)
-    
     subtotal_1 = df_filtrat_pt_subtotal1.iloc[:, 3].sum()
-    
-    # Afișăm subtotal_1
-    st.write(f"Subtotal 1: {subtotal_1}")
-
 
 stop_row = None
-subtotal_2 = 0  # Inițializează subtotal_2 cu 0
-
+subtotal_2 = 0  
 elemente_specifice = [
     "Cursuri instruire personal",
     "Toaleta ecologica",
     "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
     "Rampa mobila"
 ]
-
-
 for index, row in df.iterrows():
     if row[1] == 'Total proiect':
         stop_row = index
