@@ -85,7 +85,7 @@ if uploaded_file is not None:
     st.write(f"Total Neeligibil Tabel 2: {total_neeligibil2}")
     
     st.dataframe(df1_transformed)
-    st.dataframe(df1_transformed)
+    st.dataframe(df2_transformed)
     
 if uploaded_word_file is not None and df1_transformed is not None and df2_transformed is not None:
     # Încărcarea și deschiderea documentului Word
