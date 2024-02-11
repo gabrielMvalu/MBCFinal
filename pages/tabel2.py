@@ -37,25 +37,23 @@ if uploaded_file is not None:
         "Consultanta achizitii",
         "Consultanta scriere",
     ]    
-    
-     # Filtrăm DataFrame-ul pentru a exclude rândurile cu valorile specificate în lista 'valori_de_exclus'
+
+    # Filtrăm DataFrame-ul pentru a exclude rândurile cu valorile specificate în lista 'valori_de_exclus'
     df_filtrat_pt_subtotal1 = df[df.iloc[:, 1].notna() & ~df.iloc[:, 1].isin(valori_de_exclus1) & (df.iloc[:, 1] != 0) & (df.iloc[:, 1] != '-')]
     df_filtrat_pt_subtotal2 = df[df.iloc[:, 1].notna() & ~df.iloc[:, 1].isin(valori_de_exclus2) & (df.iloc[:, 1] != 0) & (df.iloc[:, 1] != '-')]
-    
-    subtotal_1 = 0
-    subtotal_2 = 0
-    
-    # Asigură-te că toate valorile sunt numerice și tratează valorile non-numerice sau lipsă
-    for i, row in enumerate(df_filtrat_pt_subtotal1.itertuples(), 1):
-        value = pd.to_numeric(row[4], errors='coerce')  # Converteste la numeric, non-numerice devin NaN
-        subtotal_1 += value if not pd.isnull(value) else 0  # Adună doar dacă valoarea este numerică
-    
-    # Presupunând că df_filtrat_pt_subtotal2 este definit și filtrat corect mai sus în cod
-    for i, row in enumerate(df_filtrat_pt_subtotal2.itertuples(), 1):
-        value = pd.to_numeric(row[4], errors='coerce')  # La fel ca mai sus
-        subtotal_2 += value if not pd.isnull(value) else 0
+       
 
     
+    elemente_specifice = [
+    "Cursuri instruire personal",
+    "Toaleta ecologica",
+    "Servicii de adaptare a utilajelor pentru operarea acestora de persoanele cu dizabilitati",
+    "Rampa mobila"
+    ]
+    
+
+    st.dataframe(df_filtrat_pt_subtotal1)
+    st.dataframe(df_filtrat_pt_subtotal2)    
 
     stop_row = None
 
