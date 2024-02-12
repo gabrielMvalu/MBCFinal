@@ -118,19 +118,25 @@ def extrage_coduri_caen(doc):
     end_index = full_text.find(end_marker)
     relevant_section = full_text[start_index:end_index]
 
-    pattern = r"Sediul secundar din:(.+?)(?=Sediul secundar din:|$)"
+    pattern = r"(Sediul secundar din:.+?)(?=Sediul secundar din:|$)"
     matches = re.findall(pattern, relevant_section, re.DOTALL)
 
     results = []
     for match in matches:
-        # Extragem activitățile la sediu și codurile CAEN, evitând orice alt text care urmează după ultimul cod CAEN
+        # Păstrăm informația despre sediu
+        sediu_info = re.search(r"(Sediul secundar din:.+?)Activităţi la sediu:", match, re.DOTALL)
+        if sediu_info:
+            sediu_info = sediu_info.group(1).strip()
+
+        # Extragem activitățile la sediu și codurile CAEN
         activitati_pattern = r"Activităţi la sediu:\s*((?:\d{4} - .+?(?:\n|$))+)"
         activitati_match = re.search(activitati_pattern, match, re.DOTALL)
         if activitati_match:
             activitati_info = activitati_match.group(1).strip()
             # Eliminăm tot ce urmează după ultimul cod CAEN, inclusiv "Data certificatului constatator"
             activitati_info = re.sub(r"\nData certificatului.*$", "", activitati_info, flags=re.MULTILINE).strip()
-            results.append(activitati_info)
+            # Combinăm informațiile despre sediu cu activitățile la sediu
+            combined_info = f"{sediu_info}\nActivităţi la sediu:\n{activitati_info}"
+            results.append(combined_info)
 
-    return results
     return results
