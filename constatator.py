@@ -136,7 +136,7 @@ def extrage_coduri_caen(doc):
             # Eliminăm tot ce urmează după ultimul cod CAEN, inclusiv "Data certificatului constatator"
             activitati_info = re.sub(r"\nData certificatului.*$", "", activitati_info, flags=re.MULTILINE).strip()
             # Combinăm informațiile despre sediu cu activitățile la sediu
-            combined_info = f"{sediu_info}\nActivităţi la sediu:\n{activitati_info}"
+            combined_info = f"\n{sediu_info}\nActivităţi la sediu:\n{activitati_info}"
             results.append(combined_info)
 
     return results
