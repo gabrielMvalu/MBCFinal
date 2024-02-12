@@ -96,7 +96,7 @@ def extrage_date_solicitate(df):
     furnizori = df.iloc[15, 2]
     tip_activitate = df.iloc[16, 2]
     iso = df.iloc[17, 2]
-    activitate_curenta = df.iloc[18, 2]
+    activitateCurenta = df.iloc[18, 2]
     dotari_activitate_curenta = df.iloc[19, 2]
     info_ctr_implementare = df.iloc[20, 2]
     zonele_vizate_prioritar = df.iloc[21, 2]
@@ -134,7 +134,7 @@ def extrage_date_solicitate(df):
         "Furnizori": furnizori,
         "Tip activitate": tip_activitate,
         "Certificări ISO": iso,
-        "Activitate curentă": activitate_curenta,
+        "Activitate curentă": activitateCurenta,
         "Dotări pentru activitatea curentă": dotari_activitate_curenta,
         "Informații despre contractul de implementare": info_ctr_implementare,
         "Zonele vizate prioritare": zonele_vizate_prioritar,
