@@ -112,32 +112,25 @@ def extrage_situatie_angajati(doc):
 
 def extrage_coduri_caen(doc):
     full_text = "\n".join(paragraph.text for paragraph in doc.paragraphs)
-    # Definirea delimitatorilor pentru secțiunea de interes
     start_marker = "SEDII SI/SAU ACTIVITATI AUTORIZATE"
     end_marker = "CONCORDAT PREVENTIV"
-
-    # Extrage secțiunea de interes
     start_index = full_text.find(start_marker) + len(start_marker)
     end_index = full_text.find(end_marker)
     relevant_section = full_text[start_index:end_index]
 
-    # Definirea modelului de expresie regulată pentru a extrage informațiile dorite
     pattern = r"Sediul secundar din:(.+?)(?=Sediul secundar din:|$)"
-
-    # Căutarea tuturor potrivirilor în secțiunea relevantă
     matches = re.findall(pattern, relevant_section, re.DOTALL)
 
     results = []
     for match in matches:
-        sediu_info = match.strip()
-        # Extragem doar activitățile la sediu și codurile CAEN
+        # Extragem activitățile la sediu și codurile CAEN, evitând orice alt text care urmează după ultimul cod CAEN
         activitati_pattern = r"Activităţi la sediu:\s*((?:\d{4} - .+?(?:\n|$))+)"
-        activitati_match = re.search(activitati_pattern, sediu_info, re.DOTALL)
+        activitati_match = re.search(activitati_pattern, match, re.DOTALL)
         if activitati_match:
             activitati_info = activitati_match.group(1).strip()
-            # Înlăturăm orice informație după codurile CAEN
-            activitati_info = re.sub(r"\n.*$", "", activitati_info, flags=re.MULTILINE)
-            # Adăugăm informațiile despre activități la rezultate
+            # Eliminăm tot ce urmează după ultimul cod CAEN, inclusiv "Data certificatului constatator"
+            activitati_info = re.sub(r"\nData certificatului.*$", "", activitati_info, flags=re.MULTILINE).strip()
             results.append(activitati_info)
 
+    return results
     return results
