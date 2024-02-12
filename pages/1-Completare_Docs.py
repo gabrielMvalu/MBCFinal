@@ -74,13 +74,13 @@ with col2:
             st.info(f"Prelucrarea 'Rapor Interogare' al {firma}, este completa.")
             document2_succes = True        
             
-             # Afișarea datelor în format JSON
-            #st.json({
-            #    "Date Generale": informatii_firma,
-            #    "Informații Detaliate": {"Asociați": asociati_info, "Administratori": administratori_info},
-            #    "Situație Angajati": situatie_angajati,
-            #    "Coduri CAEN": coduri_caen
-            #}) 
+            #  Afișarea datelor în format JSON
+            st.json({
+                "Date Generale": informatii_firma,
+                "Informații Detaliate": {"Asociați": asociati_info, "Administratori": administratori_info},
+                "Situație Angajati": situatie_angajati,
+                "Coduri CAEN": coduri_caen
+            }) 
     else:
         st.warning("Prima dată, încărcați și procesați, 'date solicitate.xlsx'.")
 
