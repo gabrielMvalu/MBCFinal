@@ -41,7 +41,7 @@ with col1:
 
 with col2:
     if document_succes:
-        uploaded_doc2 = st.file_uploader(f"Încărcați Raportul Interogare al {firma}", type=["docx"], key="RaportInterogare")
+        uploaded_doc2 = st.file_uploader(f"Încărcați 'RAPORT INTEROGARE' al: {firma}", type=["docx"], key="RaportInterogare")
         if uploaded_doc2 is not None:
             constatator_doc = Document(uploaded_doc2)
     
@@ -49,20 +49,25 @@ with col2:
             asociati_info, administratori_info = extrage_asociati_admini(constatator_doc)
             situatie_angajati = extrage_situatie_angajati(constatator_doc)
             full_text_constatator = "\n".join([p.text for p in constatator_doc.paragraphs])
-            coduri_caen = extrage_coduri_caen(full_text_constatator)
             
-            def curata_duplicate_coduri_caen(coduri_caen):
-                coduri_unice = {}
-                for cod, descriere in coduri_caen:
-                    coduri_unice[cod] = descriere
-                return list(coduri_unice.items())
+            #modificat noilor cerinte din:12.feb.2024 
+            #coduri_caen = extrage_coduri_caen(full_text_constatator)
+            
+            
+            #def curata_duplicate_coduri_caen(coduri_caen):
+            #    coduri_unice = {}
+            #    for cod, descriere in coduri_caen:
+            #        coduri_unice[cod] = descriere
+            #    return list(coduri_unice.items())
     
-            coduri_caen_curatate = curata_duplicate_coduri_caen(coduri_caen)
+            #coduri_caen_curatate = curata_duplicate_coduri_caen(coduri_caen)
             
             adrese_secundare_text = '\n'.join(informatii_firma.get('Adresa sediul secundar', [])) if informatii_firma.get('Adresa sediul secundar', []) else "N/A"
             asociati_text = '\n'.join(asociati_info) if asociati_info else "N/A"
             administratori_text = administratori_info if administratori_info else "N/A"
-            coduri_caen_text = '\n'.join([f"{cod} - {descriere}" for cod, descriere in coduri_caen_curatate]) if coduri_caen_curatate else "N/A"    
+            sedii_si_activitati_text = extrage_coduri_caen(constatator_doc)
+            
+            #coduri_caen_text = '\n'.join([f"{cod} - {descriere}" for cod, descriere in coduri_caen_curatate]) if coduri_caen_curatate else "N/A"    
            
             st.info(f"Prelucrarea 'Rapor Interogare' al {firma}, este completa.")
             document2_succes = True        
@@ -156,7 +161,7 @@ with col4:
                 "#Asociati": str(asociati_text),
                 "#Administrator": str(administratori_text),
                 "#activitatePrincipala": str(informatii_firma.get('Activitate principală', 'N/A')),
-                "#CAENautorizate": str(coduri_caen_text),
+                "#CAENautorizate": str(sedii_si_activitati_text),
                 "#categ_intreprindere": str(solicitate_data.get('Categorie întreprindere', 'N/A')),
                 "#Firme_legate": str(solicitate_data.get('Firme legate', 'N/A')),
                 "#Tip_investitie": str(solicitate_data.get('Tipul investiției', 'N/A')),
