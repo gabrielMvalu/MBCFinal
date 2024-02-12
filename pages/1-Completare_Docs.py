@@ -79,7 +79,7 @@ with col2:
                 "Date Generale": informatii_firma,
                 "Informații Detaliate": {"Asociați": asociati_info, "Administratori": administratori_info},
                 "Situație Angajati": situatie_angajati,
-                "Coduri CAEN": coduri_caen
+                "Coduri CAEN": sedii_si_activitati
             }) 
     else:
         st.warning("Prima dată, încărcați și procesați, 'date solicitate.xlsx'.")
