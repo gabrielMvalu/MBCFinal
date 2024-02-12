@@ -48,12 +48,13 @@ with col2:
             informatii_firma = extrage_informatii_firma(constatator_doc)
             asociati_info, administratori_info = extrage_asociati_admini(constatator_doc)
             situatie_angajati = extrage_situatie_angajati(constatator_doc)
-            full_text_constatator = "\n".join([p.text for p in constatator_doc.paragraphs])
+            # full_text_constatator = "\n".join([p.text for p in constatator_doc.paragraphs])
+            sedii_si_activitati = extrage_coduri_caen(constatator_doc)
+
             
-            #modificat noilor cerinte din:12.feb.2024 
+            #modificat cnf noilor cerinte din:12.feb.2024 
             #coduri_caen = extrage_coduri_caen(full_text_constatator)
-            
-            
+                      
             #def curata_duplicate_coduri_caen(coduri_caen):
             #    coduri_unice = {}
             #    for cod, descriere in coduri_caen:
@@ -65,7 +66,8 @@ with col2:
             adrese_secundare_text = '\n'.join(informatii_firma.get('Adresa sediul secundar', [])) if informatii_firma.get('Adresa sediul secundar', []) else "N/A"
             asociati_text = '\n'.join(asociati_info) if asociati_info else "N/A"
             administratori_text = administratori_info if administratori_info else "N/A"
-            sedii_si_activitati_text = extrage_coduri_caen(constatator_doc)
+            sedii_si_activitati_text = '\n'.join(sedii_si_activitati) if sedii_si_activitati  else "N/A"
+
             
             #coduri_caen_text = '\n'.join([f"{cod} - {descriere}" for cod, descriere in coduri_caen_curatate]) if coduri_caen_curatate else "N/A"    
            
