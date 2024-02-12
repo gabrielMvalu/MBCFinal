@@ -129,14 +129,15 @@ def extrage_coduri_caen(doc):
 
     results = []
     for match in matches:
-        # Curățarea fiecărei potriviri pentru a elimina informațiile nedorite
-        sediu_info = re.sub(r"Tip sediu:.+?(?=Activităţi la sediu:)", "", match, flags=re.DOTALL).strip()
-        activitati_info = re.search(r"Activităţi la sediu:(.+)", sediu_info, re.DOTALL)
-        if activitati_info:
-            activitati_info = activitati_info.group(1).strip()
-            # Formatarea informațiilor despre activități pe linii separate
-            activitati_info = re.sub(r"\n+", "\n", activitati_info)
-            cleaned_match = f"Sediul secundar din:{sediu_info[:sediu_info.find('Activităţi la sediu:')]}\nActivităţi la sediu:\n{activitati_info}"
-            results.append(cleaned_match)
+        sediu_info = match.strip()
+        # Extragem doar activitățile la sediu și codurile CAEN
+        activitati_pattern = r"Activităţi la sediu:\s*((?:\d{4} - .+?(?:\n|$))+)"
+        activitati_match = re.search(activitati_pattern, sediu_info, re.DOTALL)
+        if activitati_match:
+            activitati_info = activitati_match.group(1).strip()
+            # Înlăturăm orice informație după codurile CAEN
+            activitati_info = re.sub(r"\n.*$", "", activitati_info, flags=re.MULTILINE)
+            # Adăugăm informațiile despre activități la rezultate
+            results.append(activitati_info)
 
     return results
