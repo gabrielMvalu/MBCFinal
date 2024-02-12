@@ -19,7 +19,7 @@ with st.sidebar:
     openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
     
 if not openai_api_key:
-    st.error("Vă rugăm să introduceți cheia API OpenAI în bara laterală.")
+    st.info("Vă rugăm să introduceți cheia API OpenAI în bara laterală.")
 else:
     # Inițializarea clientului OpenAI cu cheia API introdusă
     client = OpenAI(api_key=openai_api_key)
