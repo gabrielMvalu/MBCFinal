@@ -123,10 +123,12 @@ def extrage_coduri_caen(doc):
 
     results = []
     for match in matches:
-        # Păstrăm informația despre sediu
-        sediu_info = re.search(r"(Sediul secundar din:.+?)Activităţi la sediu:", match, re.DOTALL)
+        # Extragem și curățăm informațiile despre sediu pentru a exclude detaliile nedorite
+        sediu_info = re.search(r"(Sediul secundar din:.+?)(?:Tip sediu:.*?$)?", match, re.DOTALL)
         if sediu_info:
             sediu_info = sediu_info.group(1).strip()
+            # Eliminăm orice linie care nu este relevantă pentru adresa sediului
+            sediu_info = re.sub(r"^(Tip sediu:.*$|Tip model declara.*$)", "", sediu_info, flags=re.MULTILINE).strip()
 
         # Extragem activitățile la sediu și codurile CAEN
         activitati_pattern = r"Activităţi la sediu:\s*((?:\d{4} - .+?(?:\n|$))+)"
