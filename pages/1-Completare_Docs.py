@@ -152,6 +152,8 @@ with col4:
             cDNSH_temp = solicitate_data.get('Detalii DNSH - C', 'N/A')
             cDNSH_complet = cDNSH_temp.replace("#nr_clasare_notificare", nr_clasare_notificare_pt_inlocuire)
 
+            dDNSH_text = solicitate_data.get('Detalii DNSH - D', 'N/A')
+            
             
             placeholders = {
                 "#SRL": str(informatii_firma.get('Denumirea firmei', 'N/A')),
@@ -213,7 +215,7 @@ with col4:
                 "#lucrari_caen": str(solicitate_data.get('Lucrări conform codurilor CAEN', 'N/A')),
                 "#aDNSH": str(solicitate_data.get('Detalii DNSH - A', 'N/A')),
                 "#cDNSH": str(cDNSH_complet),
-                "#dDNSH": str(solicitate_data.get('Detalii DNSH - D', 'N/A')),
+                "#dDNSH": str(dDNSH_text),
                 "#materiale_locale": str(solicitate_data.get('Utilizarea materialelor locale', 'N/A')),
                 "#PregatireaTeren": str(solicitate_data.get('Pregătirea terenului pentru lucrări', 'N/A')),
                 "#ReciclareaMaterialelor": str(reciclareaMaterialelor_complet),
