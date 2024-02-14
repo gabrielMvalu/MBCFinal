@@ -121,11 +121,7 @@ with col3:
                 try:
                     nrutlocm = float(df_financiar.iloc[4, 21])
                 except ValueError:
-                    nrutlocm = 0
-
-            
-                            # Extrage valoarea brută din DataFrame
-                valoare_bruta = df_financiar.iloc[4, 21]
+                    nrutlocm = None
                 
                 # Actualizează st.session_state.NRU la valoarea brută pentru a putea fi folosită ulterior
                 st.session_state.NRU = numar_total_utilaje
@@ -189,7 +185,10 @@ with col4:
                 "#Tip_investitie": str(solicitate_data.get('Tipul investiției', 'N/A')),
                 "#activitate": str(solicitate_data.get('Activitate', 'N/A')),
                 "#CAEN": str(solicitate_data.get('Cod CAEN', 'N/A')),
-                "#nr_locuri_munca_noi": str(solicitate_data.get('Număr locuri de muncă noi', 'N/A')),
+            #    "#nr_locuri_munca_noi": str(solicitate_data.get('Număr locuri de muncă noi', 'N/A')),
+                "#nr_locuri_munca_noi": str(nrutlocm), #modificat la cerere pt a nu se mai prelua valoarea din date_financiare
+                
+                
                 "#Judet": str(solicitate_data.get('Județ', 'N/A')),
         
                 "#Utilaj": str(rezultate_text),
