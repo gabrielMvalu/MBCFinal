@@ -124,7 +124,11 @@ with col3:
                     nrutlocm = 0
 
             
-            st.session_state.NRU = nrutlocm
+                            # Extrage valoarea brută din DataFrame
+                valoare_bruta = df_financiar.iloc[5, 21]
+                
+                # Actualizează st.session_state.NRU la valoarea brută pentru a putea fi folosită ulterior
+                st.session_state.NRU = valoare_bruta
             
             
             if nrutlocm < numar_total_utilaje:
