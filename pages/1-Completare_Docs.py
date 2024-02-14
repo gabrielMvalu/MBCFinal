@@ -119,7 +119,7 @@ with col3:
 
                 nrutlocm = df_financiar.iloc[4, 21]
                 
-            if nrutlocm < numar_total_utilaje:
+            if nrutlocm < numar_total_utilaje + 1:
                 nrutverificat1 = "De aceea, nu este necesar să angajam atât de mulți muncitori câte utilaje avem, ci să ne adaptam forța de muncă la nevoile specifice ale proiectelor pe care le vom executa."
                 nrutverificat2 = "Mai mult decat atat, daca va fi cazul, pentru operarea utilajelor prevazute in cadrul proiectului  va fi folosit o parte din personal existent prin relocare si utilizarea exclusiva in cadrul acestui proiect si se va angaja si personal nou, calificat/necalificat, in functie de necesitatile existente la un moment dat pentru aceasta activitate."
             else:
