@@ -102,7 +102,7 @@ with col3:
             if nr_CAEN != 'N/A' and date_financiare:
                 rezultate_corelate, rezultate_corelate1, rezultate_corelate2 = coreleaza_date(date_financiare)
                 rezultate_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate])
-                cheltuieli_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate1])
+               # cheltuieli_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate1]) - Eliminat datorita schimbarii variabilei cheltuieli_buget
                 
                 cantitati_corelate = [pd.to_numeric(item[1], errors='coerce') for item in rezultate_corelate]
                 cantitati_corelate = [0 if pd.isna(x) else x for x in cantitati_corelate]
@@ -140,7 +140,7 @@ with col4:
             # st.info(f"Procesare Finalizata. Pentru descarcarea documentului completat", icon="⬇️")
             st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")
             
-            # Preia valoarea pentru 'Utilaj cu tocător'
+            # Preia valoarea pentru 'Utilaj cu tocător' - Eliminat in urma schimbarii variabilei ReciclareaMaterialelor.
         #    utilaj_cu_tocator_pt_inlocuire = solicitate_data.get('Utilaj cu tocător', 'N/A')
             nr_clasare_notificare_pt_inlocuire = solicitate_data.get('Număr clasare notificare', 'N/A')
             
