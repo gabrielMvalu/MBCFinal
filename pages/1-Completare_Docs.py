@@ -118,7 +118,7 @@ with col3:
                 rezultate2_text = '\n'.join([f"{nume} - {descriere}" for nume, _, descriere in rezultate_corelate2])
 
 
-            nrutlocm = pd.to_numeric(date_financiare.iloc[5, 22], errors='coerce')
+            nrutlocm = df_financiar.iloc[5, 21]
 
             
             st.session_state.NRU = nrutlocm
