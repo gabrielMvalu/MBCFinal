@@ -96,7 +96,7 @@ with col3:
             df_bilant = pd.read_excel(uploaded_doc3, sheet_name='1-Bilant')
             df_contpp = pd.read_excel(uploaded_doc3, sheet_name='2-ContPP')
             df_analiza_fin = pd.read_excel(uploaded_doc3, sheet_name='1D-Analiza_fin_indicatori')    
-            df_financiar = pd.read_excel(uploaded_doc3, sheet_name='P. FINANCIAR')
+            df_financiar = pd.read_excel(uploaded_doc3, sheet_name='P. FINANCIAR', engine='openpyxl', data_only=True)
             
             date_financiare = extrage_pozitii(df_financiar)
            
