@@ -24,7 +24,7 @@ if uploaded_file is not None:
             st.write(df_rezultate)
 
             # Construirea stringului cheltuieli_buget
-            cheltuieli_buget = '\n'.join([f"{row[0]} - {row[1]} buc." for _, row in df_rezultate.iterrows()])
+            cheltuieli_buget = '\n'.join([f"{row[0]} - {row[1]} buc. \n" for _, row in df_rezultate.iterrows()])
 
             # Afișarea cheltuielilor buget sub forma specificată
             st.write(cheltuieli_buget)
