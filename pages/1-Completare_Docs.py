@@ -139,7 +139,7 @@ with col3:
             cifra_venit_rezultat = extrage_date_contpp(df_contpp)
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
 
-            st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul. PT : {st.session_state.NRU} ")
+            st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul.")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
