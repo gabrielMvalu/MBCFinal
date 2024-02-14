@@ -114,7 +114,7 @@ with col3:
                 cantitati_corelate = [pd.to_numeric(item[1], errors='coerce') for item in rezultate_corelate]
                 cantitati_corelate = [0 if pd.isna(x) else x for x in cantitati_corelate]
                 numar_total_utilaje = sum(cantitati_corelate)
-                rezultate_corelate, rezultate_corelate1, rezultate_corelate2 = coreleaza_date(date_financiare)
+                rezultate_corelate, rezultate_corelate2 = coreleaza_date(date_financiare)
                 rezultate2_text = '\n'.join([f"{nume} - {descriere}" for nume, _, descriere in rezultate_corelate2])
 
 
