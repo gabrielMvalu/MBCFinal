@@ -7,6 +7,7 @@ from constatator import extrage_informatii_firma, extrage_asociati_admini, extra
 from datesolicitate import extrage_date_solicitate, extrage_date_suplimentare
 from bilantsianaliza import extrage_date_bilant, extrage_date_contpp, extrage_indicatori_financiari
 from serviciisiutilaje import extrage_pozitii, coreleaza_date
+from cheltuieliBugetVar import extrage_cheltuieli_buget
 
 st.set_page_config(layout="wide")
 
@@ -98,6 +99,8 @@ with col3:
             df_financiar = pd.read_excel(uploaded_doc3, sheet_name='P. FINANCIAR')
             
             date_financiare = extrage_pozitii(df_financiar)
+           
+            
             
             if nr_CAEN != 'N/A' and date_financiare:
                # rezultate_corelate, rezultate_corelate1, rezultate_corelate2 = coreleaza_date(date_financiare)
@@ -105,6 +108,8 @@ with col3:
                 
                 rezultate_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate])
                # cheltuieli_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate1]) - Eliminat datorita schimbarii variabilei cheltuieli_buget
+                df_cheltuieli = extrage_cheltuieli_buget(df_financiar) #adaugat dupa eliminarea rezultate_corelate1
+                cheltuieli_buget_text = '\n'.join([f"{row[0]} - {row[1]} buc. \n" for _, row in df_rezultate.iterrows()]) #adaugat dupa eliminarea rezultate_corelate1
                 
                 cantitati_corelate = [pd.to_numeric(item[1], errors='coerce') for item in rezultate_corelate]
                 cantitati_corelate = [0 if pd.isna(x) else x for x in cantitati_corelate]
@@ -177,7 +182,9 @@ with col4:
                 "#Judet": str(solicitate_data.get('Județ', 'N/A')),
         
                 "#Utilaj": str(rezultate_text),
-                "#cheltuieli_proiect_din_buget_excel": str(cheltuieli_text),
+               # "#cheltuieli_proiect_din_buget_excel": str(cheltuieli_text),
+                "#cheltuieli_proiect_din_buget_excel": str(cheltuieli_buget_text), #adaugat in urma modif din 14.feb.2024 pt modificarea variabilei
+                
                 "#DescriereUtilaje" : str(rezultate2_text),
                 "#nr_utilaje": str(numar_total_utilaje),
                 
