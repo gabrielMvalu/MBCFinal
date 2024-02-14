@@ -118,7 +118,10 @@ with col3:
                 rezultate2_text = '\n'.join([f"{nume} - {descriere}" for nume, _, descriere in rezultate_corelate2])
 
 
-            nrutlocm = df_financiar.iloc[5, 21]
+                try:
+                    nrutlocm = float(df_financiar.iloc[5, 21])
+                except ValueError:
+                    nrutlocm = 0
 
             
             st.session_state.NRU = nrutlocm
