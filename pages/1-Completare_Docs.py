@@ -195,6 +195,11 @@ with col4:
                 
                 "#legaturi": str(solicitate_data.get('Legaturi', 'N/A')),
                 "#rude": str(solicitate_data.get('Rude', 'N/A')),
+                
+                "#detaliere_CA": str(solicitate_data.get('Detalierea CA', 'N/A')),
+                "#legate_detaliere_CA": str(solicitate_data.get('Detaliere CA legate', 'N/A')),
+                "#posturiRevisal": str(solicitate_data.get('Posturi Revisal', 'N/A')),
+                
                 "#concluzie_CA": str(solicitate_data.get('Concluzie cifra de afaceri', 'N/A')),
                 
                 "#caracteristici_tehnice": str(solicitate_data.get('Caracteristici tehnice utilaje', 'N/A')),
