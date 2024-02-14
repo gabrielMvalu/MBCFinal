@@ -125,7 +125,7 @@ with col3:
 
             
                             # Extrage valoarea brută din DataFrame
-                valoare_bruta = df_financiar.iloc[5, 21]
+                valoare_bruta = df_financiar.iloc[4, 21]
                 
                 # Actualizează st.session_state.NRU la valoarea brută pentru a putea fi folosită ulterior
                 st.session_state.NRU = valoare_bruta
