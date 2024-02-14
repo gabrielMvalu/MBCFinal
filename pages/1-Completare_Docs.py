@@ -187,7 +187,7 @@ with col4:
                 "#furnizori": str(solicitate_data.get('Furnizori', 'N/A')),
                 "#tip_activitate": str(solicitate_data.get('Tip activitate', 'N/A')),
                 "#ISO": str(solicitate_data.get('Certificări ISO', 'N/A')),
-                "#activitateCurenta": str(solicitate_data.get('Activitate curentă', 'N/A')),
+                "#CurentaActivitate": str(solicitate_data.get('Curenta Activitate', 'N/A')),
                 "#dotari_activitate_curenta": str(solicitate_data.get('Dotări pentru activitatea curentă', 'N/A')),
                 "#info_ctr_implementare": str(solicitate_data.get('Informații despre contractul de implementare', 'N/A')),
                 "#zonele_vizate_prioritar": str(solicitate_data.get('Zonele vizate prioritare', 'N/A')),
