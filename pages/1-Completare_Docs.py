@@ -119,6 +119,10 @@ with col3:
 
 
             nrutlocm = pd.to_numeric(df_financiar.iloc[5, 21], errors='coerce')
+
+            
+            st.session_state.NRU = nrutlocm
+            
             
             if nrutlocm < numar_total_utilaje:
                 nrutverificat1 = "De aceea, nu este necesar să angajam atât de mulți muncitori câte utilaje avem, ci să ne adaptam forța de muncă la nevoile specifice ale proiectelor pe care le vom executa."
@@ -132,7 +136,7 @@ with col3:
             cifra_venit_rezultat = extrage_date_contpp(df_contpp)
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
 
-            st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul, {nrutlocm} ,{st.session_state.codCAEN} ")
+            st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul. PT : {st.session_state.NRU} ")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
