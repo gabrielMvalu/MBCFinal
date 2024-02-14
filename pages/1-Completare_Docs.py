@@ -119,7 +119,7 @@ with col3:
 
 
                 try:
-                    nrutlocm = float(df_financiar.iloc[5, 21])
+                    nrutlocm = float(df_financiar.iloc[4, 21])
                 except ValueError:
                     nrutlocm = 0
 
