@@ -103,16 +103,19 @@ def extrage_date_solicitate(df):
     utilaj_ghidare = df.iloc[22, 2]
     legaturi = df.iloc[23, 2]
     rude = df.iloc[24, 2]
-    concluzie_CA = df.iloc[36, 2]
-    caracteristici_tehnice = df.iloc[37, 2]
-    flux_tehnologic = df.iloc[38, 2]
-    utilajeDNSH = df.iloc[39, 2]
-    utilaj_ghidare_descriere = df.iloc[40, 2]
-    dacaTipInvest = df.iloc[41, 2]
-    nrlocmunca30 = df.iloc[49, 2]
-    nrlocmunca20 = df.iloc[50, 2]
-    zoneDN = df.iloc[51, 2]
-    iso14001 = df.iloc[53, 2]
+    detaliere_CA = df.iloc[25, 2]
+    legate_detaliere_CA = df.iloc[26, 2]
+    concluzie_CA = df.iloc[27, 2]
+    caracteristici_tehnice = df.iloc[28, 2]
+    flux_tehnologic = df.iloc[29, 2]
+    utilajeDNSH = df.iloc[30, 2]
+    utilaj_ghidare_descriere = df.iloc[31, 2]
+    posturi_revisal = df.iloc[32, 2]
+    dacaTipInvest = df.iloc[33, 2]
+    nrlocmunca30 = df.iloc[41, 2]
+    nrlocmunca20 = df.iloc[42, 2]
+    zoneDN = df.iloc[43, 2]
+    iso14001 = df.iloc[45, 2]
 
     
     data = {
@@ -141,11 +144,19 @@ def extrage_date_solicitate(df):
         "Utilaj de ghidare": utilaj_ghidare,
         "Legaturi": legaturi,
         "Rude": rude,
+        
+        "Detalierea CA": detaliere_CA,
+        "Detaliere CA legate": legate_detaliere_CA,
+        
         "Concluzie cifra de afaceri": concluzie_CA,
         "Caracteristici tehnice utilaje": caracteristici_tehnice,
         "Fluxul tehnologic": flux_tehnologic,
         "DNSH pentru utilaje": utilajeDNSH,
         "Descrierea utilaj ghidare": utilaj_ghidare_descriere,
+
+        "Posturi Revisal": posturi_revisal,
+
+        
         "Tipul investitiei": dacaTipInvest,
         "Procent 30% din total locuri munca nou create": nrlocmunca30,
         "Procent 20% din total locuri munca nou create": nrlocmunca20,
