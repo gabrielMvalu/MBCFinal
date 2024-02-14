@@ -117,16 +117,8 @@ with col3:
                 rezultate_corelate, rezultate_corelate2 = coreleaza_date(date_financiare)
                 rezultate2_text = '\n'.join([f"{nume} - {descriere}" for nume, _, descriere in rezultate_corelate2])
 
-
-                try:
-                    nrutlocm = float(df_financiar.iloc[4, 21])
-                except ValueError:
-                    nrutlocm = None
+                nrutlocm = df_financiar.iloc[4, 21]
                 
-                # Actualizează st.session_state.NRU la valoarea brută pentru a putea fi folosită ulterior
-                st.session_state.NRU = numar_total_utilaje
-            
-            
             if nrutlocm < numar_total_utilaje:
                 nrutverificat1 = "De aceea, nu este necesar să angajam atât de mulți muncitori câte utilaje avem, ci să ne adaptam forța de muncă la nevoile specifice ale proiectelor pe care le vom executa."
                 nrutverificat2 = "Mai mult decat atat, daca va fi cazul, pentru operarea utilajelor prevazute in cadrul proiectului  va fi folosit o parte din personal existent prin relocare si utilizarea exclusiva in cadrul acestui proiect si se va angaja si personal nou, calificat/necalificat, in functie de necesitatile existente la un moment dat pentru aceasta activitate."
