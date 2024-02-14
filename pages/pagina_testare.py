@@ -7,7 +7,7 @@ stop_text3 = 'Total active necorporale'
 
 def extrage_cheltuieli_buget(df):
     stop_row = df[df.iloc[:, 1] == stop_text].index.min()
-    df_filtrat = df.iloc[3:stop_row, [1, 11]] if pd.notna(stop_row) else df.iloc[3:, [1, 11]]  # Ajustează indexul coloanei la 10 pentru a corespunde coloanei 11 în Excel
+    df_filtrat = df.iloc[3:stop_row, [1, 11]] if pd.notna(stop_row) else df.iloc[3:, [1, 11]] 
     conditii_de_excludere = (df_filtrat.iloc[:, 0] == stop_text) | (df_filtrat.iloc[:, 0] == stop_text2) | (df_filtrat.iloc[:, 0] == stop_text3) | (df_filtrat.iloc[:, 0] == '-') | (df_filtrat.iloc[:, 0] == 0) | df_filtrat.iloc[:, 0].isna()
     df_filtrat = df_filtrat[~conditii_de_excludere]
     return df_filtrat
