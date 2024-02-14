@@ -141,7 +141,7 @@ with col4:
             st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")
             
             # Preia valoarea pentru 'Utilaj cu tocător'
-            utilaj_cu_tocator_pt_inlocuire = solicitate_data.get('Utilaj cu tocător', 'N/A')
+        #    utilaj_cu_tocator_pt_inlocuire = solicitate_data.get('Utilaj cu tocător', 'N/A')
             nr_clasare_notificare_pt_inlocuire = solicitate_data.get('Număr clasare notificare', 'N/A')
             
             # Preia și prelucrează valoarea pentru 'Procesul de reciclare a materialelor'
