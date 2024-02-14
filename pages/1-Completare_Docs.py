@@ -145,8 +145,8 @@ with col4:
             nr_clasare_notificare_pt_inlocuire = solicitate_data.get('Număr clasare notificare', 'N/A')
             
             # Preia și prelucrează valoarea pentru 'Procesul de reciclare a materialelor'
-            reciclareaMaterialelor_temp = solicitate_data.get('Procesul de reciclare a materialelor', 'N/A')
-            reciclareaMaterialelor_complet = reciclareaMaterialelor_temp.replace("#utilaj_cu_tocator", utilaj_cu_tocator_pt_inlocuire)
+        #    reciclareaMaterialelor_temp = solicitate_data.get('Procesul de reciclare a materialelor', 'N/A')
+        #    reciclareaMaterialelor_complet = reciclareaMaterialelor_temp.replace("#utilaj_cu_tocator", utilaj_cu_tocator_pt_inlocuire)
 
             # Preia și prelucrează valoarea pentru 'Nr clasare notificare'
             cDNSH_temp = solicitate_data.get('Detalii DNSH - C', 'N/A')
@@ -223,7 +223,7 @@ with col4:
                 "#dDNSH": str(dDNSH_text),
                 "#materiale_locale": str(solicitate_data.get('Utilizarea materialelor locale', 'N/A')),
                 "#PregatireaTeren": str(solicitate_data.get('Pregătirea terenului pentru lucrări', 'N/A')),
-                "#ReciclareaMaterialelor": str(reciclareaMaterialelor_complet),
+                "#ReciclareaMaterialelor": str(solicitate_data.get('Procesul de reciclare a materialelor', 'N/A')),
                 "#clientiFirma": str(solicitate_data.get('Clienți principali ai firmei', 'N/A')),
                 "#DacaTipInvest": str(solicitate_data.get('Tipul investitiei', 'N/A')),
                 "#crearea": str(solicitate_data.get('Crearea de noi oportunități', 'N/A')),
