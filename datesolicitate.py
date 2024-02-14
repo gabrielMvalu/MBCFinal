@@ -85,7 +85,7 @@ def extrage_date_solicitate(df):
     tip_investitie = df.iloc[5, 2]
     activitate = df.iloc[6, 2]
     caen = df.iloc[7, 2]
-    nr_caen = df.iloc[43, 2]
+    nr_caen = df.iloc[35, 2]
     nr_locuri_munca_noi = df.iloc[8, 2]
     judet = df.iloc[9, 2]
     utilaj_dizabilitati = df.iloc[10, 2]
