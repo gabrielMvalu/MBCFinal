@@ -104,7 +104,7 @@ with col3:
             
             if nr_CAEN != 'N/A' and date_financiare:
                # rezultate_corelate, rezultate_corelate1, rezultate_corelate2 = coreleaza_date(date_financiare)
-                rezultate_corelate, _, rezultate_corelate2 = coreleaza_date(date_financiare)
+                rezultate_corelate, rezultate_corelate2 = coreleaza_date(date_financiare)
                 
                 rezultate_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate])
                # cheltuieli_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate1]) - Eliminat datorita schimbarii variabilei cheltuieli_buget
