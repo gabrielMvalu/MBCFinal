@@ -109,7 +109,7 @@ with col3:
                 rezultate_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate])
                # cheltuieli_text = '\n'.join([rezultat for _, _, rezultat in rezultate_corelate1]) - Eliminat datorita schimbarii variabilei cheltuieli_buget
                 df_cheltuieli = extrage_cheltuieli_buget(df_financiar) #adaugat dupa eliminarea rezultate_corelate1
-                cheltuieli_buget_text = '\n'.join([f"{row[0]} - {row[1]} buc. \n" for _, row in df_rezultate.iterrows()]) #adaugat dupa eliminarea rezultate_corelate1
+                cheltuieli_buget_text = '\n'.join([f"{row[0]} - {row[1]} buc. \n" for _, row in df_cheltuieli.iterrows()]) #adaugat dupa eliminarea rezultate_corelate1
                 
                 cantitati_corelate = [pd.to_numeric(item[1], errors='coerce') for item in rezultate_corelate]
                 cantitati_corelate = [0 if pd.isna(x) else x for x in cantitati_corelate]
