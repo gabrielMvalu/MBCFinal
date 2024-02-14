@@ -180,7 +180,7 @@ with col4:
                 "#nr_utilaje": str(numar_total_utilaje),
                 
                 "#utilaj_dizabilitati": str(solicitate_data.get('Utilaj pentru persoane cu dizabilități', 'N/A')),
-                "#utilaj_cu_tocator": str(solicitate_data.get('Utilaj cu tocător', 'N/A')),
+          #      "#utilaj_cu_tocator": str(solicitate_data.get('Utilaj cu tocător', 'N/A')),
                 "#adresa_loc_implementare": str(solicitate_data.get('Adresa locației de implementare', 'N/A')),
                 "#nrClasareNotificare": str(solicitate_data.get('Număr clasare notificare', 'N/A')),
                 "#clientiActuali": str(solicitate_data.get('Clienți actuali', 'N/A')),
