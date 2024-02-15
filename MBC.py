@@ -60,7 +60,7 @@ else:
 
     # Input pentru mesaj nou de la utilizator
     if prompt := st.chat_input("Adaugati mesajul aici."):
-        st.session_state.messages.append({"role": "user", "content": f"Vreau sa ma asisti si sa mi raspunzi care din elementele astea:{prompt} le poti identifica in: {equipment_list} ***Vei raspunde enumerand doar utilajele pe care le ai identificat!!!! Nimic altceva!!!! ")
+        st.session_state.messages.append({"role": "user", "content": f"Avamd lista asta: {equipment_list} ***Scrie mi doar acelea din {prompt} pe care le gasesti in lista!! ")
         with st.chat_message("user"):
             st.markdown(prompt)
 
