@@ -9,28 +9,6 @@ st.header(':blue[Pagina Principală]', divider='rainbow')
 st.write(':violet[Bine ați venit la aplicația pentru completarea - Planului de Afaceri! -]')
 
 
-equipment_list = [
-        "autogreder", "autogreder cu sistem 3d", "autogudronator", "automacara",
-        "automaturatoare cu apa", "autopompa cu malaxor", "autopompa de beton",
-        "buldoexcavator", "buldoexcavator cu roti egale", "buldoexcavator cu roti inegale",
-        "buldozer", "cilindru compactor terasament", "ciur mobil rotativ", "compactor de sol",
-        "compactor/cilindru vibrator compactor", "concasor cu falci si presortare",
-        "excavator pe pneuri", "excavator pe senile", "finisor beton", "finisor de asfalt pe pneuri",
-        "finisor de asfalt pe senile", "finisorul de asfalt", "foreza", "freza", "freza de asfalt",
-        "greder", "incarcator frontal", "incarcator multifunctional cu brat telescopic",
-        "incarcator pe pneuri", "macara mobila cu brat telescopic",
-        "manipulator telescopic/incarcator multifunctional rotativ", "masina badijonat",
-        "masina de colmatat rosturi", "midiexcavatorele", "minibuldoexcavator", "miniexcavator",
-        "miniincarcator", "motostivuitor", "panouri fotovoltaice mobile", "pompa de beton",
-        "reciclator pentru beton/asfalt", "repartizator mixturi asfaltice", "sistem de ghidare automata",
-        "stabilizator terasament", "statia de betoane", "statie de asfalt", "statie mobila de concasare",
-        "statie mobila de sortare cu spalare", "telehandler", "tocatorul pentru resturi vegetale",
-        "vibroprese fabricare pavele, boltari, borduri", "macara", "masina de repartizat emulsie (autogudronator)",
-        "grupul electrogen", "microexcavator", "miniexcavator"
-    ]
-
-
-
 with st.expander(" ℹ️ Mesaj Informativ ℹ️  "):
     st.write("""
         Vă informăm că aceast bot se află într-o fază incipientă de dezvoltare. 
@@ -60,7 +38,7 @@ else:
 
     # Input pentru mesaj nou de la utilizator
     if prompt := st.chat_input("Adaugati mesajul aici."):
-        st.session_state.messages.append({"role": "user", "content": f"Avamd lista asta: {equipment_list} ***Scrie mi doar acelea din {prompt} pe care le gasesti in lista!!. DE exemplu: eu iti scriu :' autogreder, autogreder cu sistem 3d, moara de rufe, legume, ananas' . Raspunsul tau va fi : ' autogreder, autogreder cu sistem 3d ' "})
+        st.session_state.messages.append({"role": "user", "content": {prompt} })
         with st.chat_message("user"):
             st.markdown(prompt)
 
