@@ -60,8 +60,7 @@ else:
 
     # Input pentru mesaj nou de la utilizator
     if prompt := st.chat_input("Adaugati mesajul aici."):
-        st.session_state.messages.append({"role": "user", "content": f"Avamd lista asta: {equipment_list} ***Scrie mi doar acelea din {prompt} pe care le gasesti in lista!!. DE exemplu: eu iti scriu : autogreder, autogreder cu sistem 3d, moara de rufe, legume, ananas. Raspunsul tau va fi : ' autogreder, autogreder cu sistem 3d '",
-        "automaturatoare cu apa", "autopompa cu malaxor", " })
+        st.session_state.messages.append({"role": "user", "content": f"Avamd lista asta: {equipment_list} ***Scrie mi doar acelea din {prompt} pe care le gasesti in lista!!. DE exemplu: eu iti scriu :' autogreder, autogreder cu sistem 3d, moara de rufe, legume, ananas' . Raspunsul tau va fi : ' autogreder, autogreder cu sistem 3d ' "})
         with st.chat_message("user"):
             st.markdown(prompt)
 
