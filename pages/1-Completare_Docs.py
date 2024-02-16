@@ -284,7 +284,7 @@ with col4:
                 "#20NrLocMunca": str(nrLocMunca20),
                 "#30ProcentLocMuncaTotal": str(procentTotalSi30),
                 "#20ProcentLocMuncaTotal": str(procentTotalSi20),
-                "#procentCrestereLocuriMunca": str()
+                "#procentCrestereLocuriMunca": str(procentCrestere),
                 
                 "#zoneDN": str(solicitate_data.get('Zone vizate Prioritar', 'N/A')),
                 "#Iso14001": str(solicitate_data.get('Daca are sau nu iso14001', 'N/A')),
