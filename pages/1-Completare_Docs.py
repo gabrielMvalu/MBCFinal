@@ -66,9 +66,6 @@ with col2:
                 nr_angajati_22 = None  
             # La acest punct, `nr_angajati_22` este fie un întreg, fie `None`  
             
-            
-
-            
             #modificat cnf noilor cerinte din:12.feb.2024 
             #coduri_caen = extrage_coduri_caen(full_text_constatator)
                       
