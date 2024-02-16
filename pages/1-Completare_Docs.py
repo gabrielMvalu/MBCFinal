@@ -52,6 +52,14 @@ with col2:
             # full_text_constatator = "\n".join([p.text for p in constatator_doc.paragraphs])
             sedii_si_activitati = extrage_coduri_caen(constatator_doc)
 
+
+
+            ############
+           # modificari adaugare variabile noi 16 feb 2024
+            ############
+
+            nr_angajati_22 = situatie_angajati.get('Numar mediu angajati 2022', 'N/A') # adaugata 16.feb 2024 pt nr mediu angajati pe 2022 din constatator
+
             
             #modificat cnf noilor cerinte din:12.feb.2024 
             #coduri_caen = extrage_coduri_caen(full_text_constatator)
@@ -117,7 +125,8 @@ with col3:
                 rezultate_corelate, rezultate_corelate2 = coreleaza_date(date_financiare)
                 rezultate2_text = '\n'.join([f"{nume} - {descriere}" for nume, _, descriere in rezultate_corelate2])
 
-                nrutlocm = df_financiar.iloc[4, 21]
+                nrutlocm = df_financiar.iloc[4, 21] # adaugat in 12 feb pt modificarile facute legat de extragerea nr total de angajati
+                
                 
             if nrutlocm < numar_total_utilaje:
                 nrutverificat1 = "De aceea, nu este necesar să angajam atât de mulți muncitori câte utilaje avem, ci să ne adaptam forța de muncă la nevoile specifice ale proiectelor pe care le vom executa."
