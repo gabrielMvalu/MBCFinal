@@ -141,8 +141,8 @@ with col3:
                 if nr_angajati_22 is not None and nrLocMuncaNoi is not None:
                      try:
                         total_angajati = nr_angajati_22 + nrLocMuncaNoi
-                        nrLocMunca30 = math.ceil(nr_angajati_22 * 0.30) 
-                        nrLocMunca20 = math.ceil(nr_angajati_22 * 0.20) 
+                        nrLocMunca30 = math.ceil(nrLocMuncaNoi * 0.30) 
+                        nrLocMunca20 = math.ceil(nrLocMuncaNoi * 0.20) 
                      except ValueError:
                          st.error("Una dintre valorile pentru calculul totalului angajaților nu este un număr valid.")
                         
@@ -165,6 +165,7 @@ with col3:
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
 
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul. ang 22 {nr_angajati_22} 30{nrLocMunca30} {total_angajati}")
+            st.success(f"Angajati in anul 2022:{nr_angajati_22} . Angajati noi cf proiect: {nrLocMuncaNoi}; 30 la sunta din cei noi 30{nrLocMunca30} ; 20 la suta din ei: {nrLocMunca30}; Total angajati vechi + noi{total_angajati}")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
