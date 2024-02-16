@@ -164,7 +164,7 @@ with col3:
             cifra_venit_rezultat = extrage_date_contpp(df_contpp)
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
 
-            st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul. ang 22 {nr_angajati_22} 30{nrLocMunca30} {total_angajati}")
+            st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul.")
             st.success(f"Angajati in anul 2022:{nr_angajati_22} . Angajati noi cf proiect: {nrLocMuncaNoi}; 30 la sunta din cei noi:{nrLocMunca30} ; 20 la suta din ei:{nrLocMunca30}; Total angajati vechi + noi: {total_angajati}")
             document3_succes = True
     else:
