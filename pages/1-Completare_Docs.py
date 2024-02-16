@@ -143,11 +143,11 @@ with col3:
                         total_angajati = nr_angajati_22 + nrLocMuncaNoi
                         nrLocMunca30 = math.ceil(nr_angajati_22 * 0.30) 
                         nrLocMunca20 = math.ceil(nr_angajati_22 * 0.20) 
-                    except ValueError:
-                        st.error("Una dintre valorile pentru calculul totalului angajaților nu este un număr valid.")
+                     except ValueError:
+                         st.error("Una dintre valorile pentru calculul totalului angajaților nu este un număr valid.")
                         
-                 else:
-                     st.error("Una dintre valorile necesare pentru calculul totalului angajaților lipsește sau este None.")     #modific 16 end aici
+                else:
+                    st.error("Una dintre valorile necesare pentru calculul totalului angajaților lipsește sau este None.")     #modific 16 end aici
 
                       
                
