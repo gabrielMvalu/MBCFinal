@@ -65,6 +65,8 @@ def extrage_indicatori_financiari(df2):
     roe20 = f"{df2.iloc[47, 1]:.0%}"
     roe21 = f"{df2.iloc[47, 2]:.0%}"
     roe22 = f"{df2.iloc[47, 3]:.0%}"
+    #adaugare dupa schimbari din 16.feb 
+    rpe22 = f"{df2.iloc[32, 3]:.0%}"
 
     data = {
         "Rata solvabilitatii generale 2020": rs20, 
@@ -79,6 +81,8 @@ def extrage_indicatori_financiari(df2):
         "Rentabilitatea capitalului propriu (ROE) 2020": roe20, 
         "Rentabilitatea capitalului propriu (ROE) 2021": roe21,
         "Rentabilitatea capitalului propriu (ROE) 2022": roe22,
+        #adaugare  schimbari din 16.feb 
+        "Rata profitului din exploatare RPE22": rpe22
     }
 
     return data
