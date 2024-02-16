@@ -168,7 +168,7 @@ with col3:
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
 
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul.")
-            st.success(f"Angajati in anul 2022:{procentCrestereNrLocMunca} . Angajati noi cf proiect: {nrLocMuncaNoi}; 30 la sunta din cei noi:{nrLocMunca30} ; 20 la suta din ei:{nrLocMunca30}; Total angajati vechi + noi: {total_angajati}")
+            st.success(f"Procent crestere:{procentCrestereNrLocMunca} . Angajati noi cf proiect: {nrLocMuncaNoi}; 30 la sunta din cei noi:{nrLocMunca30} ; 20 la suta din ei:{nrLocMunca30}; Total angajati vechi + noi: {total_angajati}")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
