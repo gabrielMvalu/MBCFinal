@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import re
+import math
 from docx import Document
 from constatator import extrage_informatii_firma, extrage_asociati_admini, extrage_situatie_angajati, extrage_coduri_caen
 from datesolicitate import extrage_date_solicitate, extrage_date_suplimentare
@@ -51,14 +52,21 @@ with col2:
             situatie_angajati = extrage_situatie_angajati(constatator_doc)
             # full_text_constatator = "\n".join([p.text for p in constatator_doc.paragraphs])
             sedii_si_activitati = extrage_coduri_caen(constatator_doc)
-
-
-
-            ############
-           # modificari adaugare variabile noi 16 feb 2024
-            ############
-
-            nr_angajati_22 = situatie_angajati.get('Numar mediu angajati 2022', 'N/A') # adaugata 16.feb 2024 pt nr mediu angajati pe 2022 din constatator
+            
+        
+            # modificari adaugare variabile noi 16 feb 2024
+       
+            # adaugata 16.feb 2024 pt nr mediu angajati pe 2022 din constatator       
+            # Încercăm să extragem și să convertim valoarea pentru anul 2022
+            nr_ang_brut_22 = situatie_angajati.get('Numar mediu angajati 2022', 'N/A')
+            try:
+                #convertim valoarea într-un întreg
+                nr_angajati_22 = int(nr_ang_brut_22)
+            except ValueError:
+                nr_angajati_22 = None  
+            # La acest punct, `nr_angajati_22` este fie un întreg, fie `None`  
+            
+            
 
             
             #modificat cnf noilor cerinte din:12.feb.2024 
@@ -71,13 +79,10 @@ with col2:
             #    return list(coduri_unice.items())
     
             #coduri_caen_curatate = curata_duplicate_coduri_caen(coduri_caen)
-            
             adrese_secundare_text = '\n'.join(informatii_firma.get('Adresa sediul secundar', [])) if informatii_firma.get('Adresa sediul secundar', []) else "N/A"
             asociati_text = '\n'.join(asociati_info) if asociati_info else "N/A"
             administratori_text = administratori_info if administratori_info else "N/A"
-            sedii_si_activitati_text = '\n'.join(sedii_si_activitati) if sedii_si_activitati  else "N/A"
-
-            
+            sedii_si_activitati_text = '\n'.join(sedii_si_activitati) if sedii_si_activitati  else "N/A"           
             #coduri_caen_text = '\n'.join([f"{cod} - {descriere}" for cod, descriere in coduri_caen_curatate]) if coduri_caen_curatate else "N/A"    
            
             st.info(f"Prelucrarea 'Rapor Interogare' al {firma}, este completa.")
@@ -108,8 +113,7 @@ with col3:
             
             date_financiare = extrage_pozitii(df_financiar)
            
-            
-            
+
             if nr_CAEN != 'N/A' and date_financiare:
                # rezultate_corelate, rezultate_corelate1, rezultate_corelate2 = coreleaza_date(date_financiare)
                 rezultate_corelate, rezultate_corelate2 = coreleaza_date(date_financiare)
@@ -125,10 +129,26 @@ with col3:
                 rezultate_corelate, rezultate_corelate2 = coreleaza_date(date_financiare)
                 rezultate2_text = '\n'.join([f"{nume} - {descriere}" for nume, _, descriere in rezultate_corelate2])
 
-                nrutlocm = df_financiar.iloc[4, 21] # adaugat in 12 feb pt modificarile facute legat de extragerea nr total de angajati
+                nrutlocm_temp = df_financiar.iloc[4, 21] # adaugat in 12 feb pt modificarile facute legat de extragerea nr total de noi angajati conf proiect
+
+                # mai jos pregatire pt modificari 16 feb 
+                try:
+                    nrLocMuncaNoi = int(nrutlocm_temp)
+                except ValueError:
+                    nrLocMuncaNoi = None  
+
+                # mai jos : modificari 16 feb la cerinta: calcul variabile noi in cod
+                if nr_angajati_22 and nrLocMuncaNoi is not None:
+                    total_angajati = nr_angajati_22 + nrutlocm
+                    nrLocMunca30 = math.ceil(nr_angajati_22 * 0.30) 
+                    nrLocMunca20 = math.ceil(nr_angajati_22 * 0.20)                  
+                else:
+                    total_angajati = None  
+                    nrLocMunca30 = None
+                    nrLocMunca20 = None      #modific 16 end aici
+               
                 
-                
-            if nrutlocm < numar_total_utilaje:
+            if nrLocMuncaNoi < numar_total_utilaje:
                 nrutverificat1 = "De aceea, nu este necesar să angajam atât de mulți muncitori câte utilaje avem, ci să ne adaptam forța de muncă la nevoile specifice ale proiectelor pe care le vom executa."
                 nrutverificat2 = "Mai mult decat atat, daca va fi cazul, pentru operarea utilajelor prevazute in cadrul proiectului  va fi folosit o parte din personal existent prin relocare si utilizarea exclusiva in cadrul acestui proiect si se va angaja si personal nou, calificat/necalificat, in functie de necesitatile existente la un moment dat pentru aceasta activitate."
             else:
@@ -140,7 +160,7 @@ with col3:
             cifra_venit_rezultat = extrage_date_contpp(df_contpp)
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
 
-            st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul.")
+            st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul. ang 22 {nr_angajati_22} 30{nrLocMunca30} {total_angajati}")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
@@ -187,7 +207,7 @@ with col4:
                 "#activitate": str(solicitate_data.get('Activitate', 'N/A')),
                 "#CAEN": str(solicitate_data.get('Cod CAEN', 'N/A')),
             #    "#nr_locuri_munca_noi": str(solicitate_data.get('Număr locuri de muncă noi', 'N/A')),
-                "#nr_locuri_munca_noi": str(nrutlocm), #modificat la cerere pt a nu se mai prelua valoarea din date_financiare
+                "#nr_locuri_munca_noi": str(nrLocMuncaNoi), #modificat la cerere pt a nu se mai prelua valoarea din date_financiare
                 
                 
                 "#Judet": str(solicitate_data.get('Județ', 'N/A')),
@@ -225,11 +245,9 @@ with col4:
                 "#caracteristici_tehnice": str(solicitate_data.get('Caracteristici tehnice utilaje', 'N/A')),
                 "#flux_tehnologic": str(solicitate_data.get('Fluxul tehnologic', 'N/A')),
                 "#utilajeDNSH": str(solicitate_data.get('DNSH pentru utilaje', 'N/A')),
-
                 
                 "#descriere_utilaj_ghidare": str(solicitate_data.get('Descrierea utilaj ghidare', 'N/A')),               
                 "#descriereUtilajReciclare": str(descriere_u_r),
-
                 
                 "#contributia_proiectului_la_TJ": str(solicitate_data.get('Contribuția proiectului la tranziția justă', 'N/A')),
                 "#strategii_materiale": str(solicitate_data.get('Strategii materiale', 'N/A')),
@@ -252,8 +270,8 @@ with col4:
                 "#CrestCreare": str(solicitate_data.get('Creșterea sau crearea de noi surse de venit', 'N/A')),
                 "#CreareActivVizata": str(solicitate_data.get('Crearea de activități în domeniul vizat', 'N/A')),
                 "#DezavantajeConcurentiale": str(solicitate_data.get('Identificarea dezavantajelor concurențiale', 'N/A')),
-                "#30nrLocMunca": str(solicitate_data.get('Procent 30% din total locuri munca nou create', 'N/A')),
-                "#20NrLocMunca": str(solicitate_data.get('Procent 20% din total locuri munca nou create', 'N/A')),
+                "#30nrLocMunca": str(nrLocMunca30),
+                "#20NrLocMunca": str(nrLocMunca20),
                 "#zoneDN": str(solicitate_data.get('Zone vizate Prioritar', 'N/A')),
                 "#Iso14001": str(solicitate_data.get('Daca are sau nu iso14001', 'N/A')),
                 "#descriere_serviciu": str(solicitate_data.get('Descriere serviciului', 'N/A')),
