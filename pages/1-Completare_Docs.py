@@ -322,6 +322,9 @@ with col4:
                 "#ROE20": str(rata_rent_grad.get('Rentabilitatea capitalului propriu (ROE) 2020', 'N/A')),
                 "#ROE21": str(rata_rent_grad.get('Rentabilitatea capitalului propriu (ROE) 2021', 'N/A')),
                 "#ROE22": str(rata_rent_grad.get('Rentabilitatea capitalului propriu (ROE) 2022', 'N/A')),
+                #schimbari 16 feb pt CF
+                "#RPE22": str(rata_rent_grad.get('Rata profitului din exploatare RPE22', 'N/A')),
+                "#REF22": str(rata_rent_grad.get('Rentabilitatea capitalului propriu (ROE) 2022', 'N/A')), # end here sch 16 CF
 
             }
         
