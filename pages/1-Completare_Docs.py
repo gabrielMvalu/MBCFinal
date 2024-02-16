@@ -215,6 +215,7 @@ with col4:
                 "#Tip_investitie": str(solicitate_data.get('Tipul investiției', 'N/A')),
                 "#activitate": str(solicitate_data.get('Activitate', 'N/A')),
                 "#CAEN": str(solicitate_data.get('Cod CAEN', 'N/A')),
+                
             #    "#nr_locuri_munca_noi": str(solicitate_data.get('Număr locuri de muncă noi', 'N/A')),
                 "#nr_locuri_munca_noi": str(nrLocMuncaNoi), #modificat la cerere pt a nu se mai prelua valoarea din date_financiare
                 
@@ -229,6 +230,7 @@ with col4:
                 "#nr_utilaje": str(numar_total_utilaje),
                 
                 "#utilaj_dizabilitati": str(solicitate_data.get('Utilaj pentru persoane cu dizabilități', 'N/A')),
+                
           #      "#utilaj_cu_tocator": str(solicitate_data.get('Utilaj cu tocător', 'N/A')),
                 "#adresa_loc_implementare": str(solicitate_data.get('Adresa locației de implementare', 'N/A')),
                 "#nrClasareNotificare": str(solicitate_data.get('Număr clasare notificare', 'N/A')),
@@ -284,7 +286,7 @@ with col4:
                 "#20NrLocMunca": str(nrLocMunca20),
                 "#30ProcentLocMuncaTotal": str(procentTotalSi30),
                 "#20ProcentLocMuncaTotal": str(procentTotalSi20),
-                "#procentCrestereLocuriMunca": str(procentCrestere),
+                "#procentCrestereLocuriMunca": str(procentCrestere), # end modif 16.02
                 
                 "#zoneDN": str(solicitate_data.get('Zone vizate Prioritar', 'N/A')),
                 "#Iso14001": str(solicitate_data.get('Daca are sau nu iso14001', 'N/A')),
