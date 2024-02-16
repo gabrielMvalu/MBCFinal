@@ -130,6 +130,7 @@ with col3:
                 rezultate2_text = '\n'.join([f"{nume} - {descriere}" for nume, _, descriere in rezultate_corelate2])
 
                 nrutlocm_temp = df_financiar.iloc[4, 21] # adaugat in 12 feb pt modificarile facute legat de extragerea nr total de noi angajati conf proiect
+                procentCrestereNrLocMunca = df_financiar.iloc[3, 22] # adaugat cf cerinte din 16 feb
 
                 # mai jos pregatire pt modificari 16 feb 
                 try:
@@ -140,9 +141,11 @@ with col3:
                 # mai jos : modificari 16 feb la cerinta: calcul variabile noi in cod
                 if nr_angajati_22 is not None and nrLocMuncaNoi is not None:
                      try:
-                        total_angajati = nr_angajati_22 + nrLocMuncaNoi
+                        total_angajati = nrLocMuncaNoi + nr_angajati_22
                         nrLocMunca30 = math.ceil(nrLocMuncaNoi * 0.30) 
                         nrLocMunca20 = math.ceil(nrLocMuncaNoi * 0.20) 
+                        procentTotalSi30 = nrLocMunca30 + nr_angajati_22
+                        procentTotalSi20 = nrLocMunca20 + nr_angajati_22
                      except ValueError:
                          st.error("Una dintre valorile pentru calculul totalului angajaților nu este un număr valid.")
                         
@@ -165,7 +168,7 @@ with col3:
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
 
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul.")
-            st.success(f"Angajati in anul 2022:{nr_angajati_22} . Angajati noi cf proiect: {nrLocMuncaNoi}; 30 la sunta din cei noi:{nrLocMunca30} ; 20 la suta din ei:{nrLocMunca30}; Total angajati vechi + noi: {total_angajati}")
+            st.success(f"Angajati in anul 2022:{procentCrestereNrLocMunca} . Angajati noi cf proiect: {nrLocMuncaNoi}; 30 la sunta din cei noi:{nrLocMunca30} ; 20 la suta din ei:{nrLocMunca30}; Total angajati vechi + noi: {total_angajati}")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
@@ -275,8 +278,12 @@ with col4:
                 "#CrestCreare": str(solicitate_data.get('Creșterea sau crearea de noi surse de venit', 'N/A')),
                 "#CreareActivVizata": str(solicitate_data.get('Crearea de activități în domeniul vizat', 'N/A')),
                 "#DezavantajeConcurentiale": str(solicitate_data.get('Identificarea dezavantajelor concurențiale', 'N/A')),
-                "#30nrLocMunca": str(nrLocMunca30),
+                
+                "#30nrLocMunca": str(nrLocMunca30), #modificari aduse in 16 feb 2024 pt 30 si pt 20, 30Procent si 20 Procent
                 "#20NrLocMunca": str(nrLocMunca20),
+                "#30ProcentLocMuncaTotal": str(procentTotalSi30),
+                "#20ProcentLocMuncaTotal": str(procentTotalSi20),
+                
                 "#zoneDN": str(solicitate_data.get('Zone vizate Prioritar', 'N/A')),
                 "#Iso14001": str(solicitate_data.get('Daca are sau nu iso14001', 'N/A')),
                 "#descriere_serviciu": str(solicitate_data.get('Descriere serviciului', 'N/A')),
