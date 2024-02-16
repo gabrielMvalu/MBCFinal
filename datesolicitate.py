@@ -112,8 +112,8 @@ def extrage_date_solicitate(df):
     utilaj_ghidare_descriere = df.iloc[31, 2]
     posturi_revisal = df.iloc[32, 2]
     dacaTipInvest = df.iloc[33, 2]
-    nrlocmunca30 = df.iloc[41, 2]
-    nrlocmunca20 = df.iloc[42, 2]
+  #  nrlocmunca30 = df.iloc[41, 2]    anulate in urma modificarii din 16 feb 2024
+  #  nrlocmunca20 = df.iloc[42, 2]
     zoneDN = df.iloc[43, 2]
     iso14001 = df.iloc[45, 2]
 
@@ -158,8 +158,8 @@ def extrage_date_solicitate(df):
 
         
         "Tipul investitiei": dacaTipInvest,
-        "Procent 30% din total locuri munca nou create": nrlocmunca30,
-        "Procent 20% din total locuri munca nou create": nrlocmunca20,
+     #   "Procent 30% din total locuri munca nou create": nrlocmunca30,        anulate in urma modificarilor din 16.02.2024
+     #   "Procent 20% din total locuri munca nou create": nrlocmunca20,
         "Zone vizate Prioritar": zoneDN,
         "Daca are sau nu iso14001": iso14001,
     }
