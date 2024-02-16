@@ -138,14 +138,17 @@ with col3:
                     nrLocMuncaNoi = None  
 
                 # mai jos : modificari 16 feb la cerinta: calcul variabile noi in cod
-                if nr_angajati_22 and nrLocMuncaNoi is not None:
-                    total_angajati = nr_angajati_22 + nrutlocm
-                    nrLocMunca30 = math.ceil(nr_angajati_22 * 0.30) 
-                    nrLocMunca20 = math.ceil(nr_angajati_22 * 0.20)                  
-                else:
-                    total_angajati = None  
-                    nrLocMunca30 = None
-                    nrLocMunca20 = None      #modific 16 end aici
+                if nr_angajati_22 is not None and nrLocMuncaNoi is not None:
+                     try:
+                        total_angajati = nr_angajati_22 + nrLocMuncaNoi
+                        nrLocMunca30 = math.ceil(nr_angajati_22 * 0.30) 
+                        nrLocMunca20 = math.ceil(nr_angajati_22 * 0.20) 
+                    except ValueError:
+                    st.error("Una dintre valorile pentru calculul totalului angajaților nu este un număr valid.")
+                 else:
+                st.error("Una dintre valorile necesare pentru calculul totalului angajaților lipsește sau este None.")     #modific 16 end aici
+
+                      
                
                 
             if nrLocMuncaNoi < numar_total_utilaje:
