@@ -130,7 +130,8 @@ with col3:
                 rezultate2_text = '\n'.join([f"{nume} - {descriere}" for nume, _, descriere in rezultate_corelate2])
 
                 nrutlocm_temp = df_financiar.iloc[4, 21] # adaugat in 12 feb pt modificarile facute legat de extragerea nr total de noi angajati conf proiect
-                procentCrestereNrLocMunca = df_financiar.iloc[3, 22] # adaugat cf cerinte din 16 feb
+                procentCrestereNrLocMunca = df_financiar.iloc[3, 22] / 100 # adaugat cf cerinte din 16 feb
+                procentCrestere = f"{procentCrestereNrLocMunca:.2%}"
 
                 # mai jos pregatire pt modificari 16 feb 
                 try:
@@ -168,7 +169,7 @@ with col3:
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
 
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul.")
-            st.success(f"Procent crestere:{procentCrestereNrLocMunca} . Angajati noi cf proiect: {nrLocMuncaNoi}; 30 la sunta din cei noi:{nrLocMunca30} ; 20 la suta din ei:{nrLocMunca30}; Total angajati vechi + noi: {total_angajati}")
+            st.success(f"Procent crestere:{procentCrestere} . Angajati noi cf proiect: {nrLocMuncaNoi}; 30 la sunta din cei noi:{nrLocMunca30} ; 20 la suta din ei:{nrLocMunca30}; Total angajati vechi + noi: {total_angajati}")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
@@ -283,6 +284,7 @@ with col4:
                 "#20NrLocMunca": str(nrLocMunca20),
                 "#30ProcentLocMuncaTotal": str(procentTotalSi30),
                 "#20ProcentLocMuncaTotal": str(procentTotalSi20),
+                "#procentCrestereLocuriMunca": str()
                 
                 "#zoneDN": str(solicitate_data.get('Zone vizate Prioritar', 'N/A')),
                 "#Iso14001": str(solicitate_data.get('Daca are sau nu iso14001', 'N/A')),
