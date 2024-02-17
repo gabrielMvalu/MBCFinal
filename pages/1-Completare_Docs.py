@@ -127,14 +127,22 @@ with col3:
                 rezultate2_text = '\n'.join([f"{nume} - {descriere}" for nume, _, descriere in rezultate_corelate2])
 
                 nrutlocm_temp = df_financiar.iloc[4, 21] # adaugat in 12 feb pt modificarile facute legat de extragerea nr total de noi angajati conf proiect
+                
                 procentCrestereNrLocMunca = df_financiar.iloc[3, 22] / 100 # adaugat cf cerinte din 16 feb
-                procentCrestere = f"{procentCrestereNrLocMunca:.2%}"
+                procentCrestereAngajati = f"{procentCrestereNrLocMunca:.2%}"
+                
                 procentCAtemp = df_financiar.iloc[32, 18] / 100
                 procentCA = f"{procentCAtemp:.2%}"
+                
                 valoareCheltuieliNeeligibile = df_financiar.iloc[24, 7]
                 procentNePerValoareTPtemp = df_financiar.iloc[24, 7] / df_financiar.iloc[24, 2]
                 procentNePerValoareTP = f"{procentNePerValoareTPtemp:.2%}"
+                
                 totalEligibil = df_financiar.iloc[24, 6]
+                valAFN = df_financiar.iloc[24, 8]
+                ca22 = cifra_venit_rezultat.get('Venituri totale 2020', 'N/A')
+                raportCA22AFNtemp = ca22 / valAFN    # Raportul dintre cuantumul finanțării solicitate si cifra de afaceri înregistrată în anul fiscal anterior lansării apelului de proiecte                
+                raportCA22AFN = f"{raportCA22AFNtemp: .2f}"
 
                 
 
@@ -174,7 +182,8 @@ with col3:
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
 
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul.")
-            st.success(f"Procent crestere: {procentCrestere}. Procent CA: {procentCA}. Valoare Cheltuieli Neeligibile: {valoareCheltuieliNeeligibile}. Procent Neeligibil per Valoare Totală Proiect: {procentNePerValoareTP}. Total Eligibil: {totalEligibil}")
+            st.success(f"Procent crestere Ang: {procentCrestereAngajati}. Procent crestere CA: {procentCA}. Valoare Cheltuieli Neeligibile: {valoareCheltuieliNeeligibile}. Procent Neeligibil per Valoare Totală Proiect: {procentNePerValoareTP}. Total Eligibil: {totalEligibil}")
+            st.success(f"AFN: {valAFN}. Procent CA/AFN: {raportCA22AFN}")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
