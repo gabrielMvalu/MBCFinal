@@ -129,6 +129,14 @@ with col3:
                 nrutlocm_temp = df_financiar.iloc[4, 21] # adaugat in 12 feb pt modificarile facute legat de extragerea nr total de noi angajati conf proiect
                 procentCrestereNrLocMunca = df_financiar.iloc[3, 22] / 100 # adaugat cf cerinte din 16 feb
                 procentCrestere = f"{procentCrestereNrLocMunca:.2%}"
+                procentCAtemp = df_financiar.iloc[32, 18] / 100
+                procentCA = f"{procentCrestereNrLocMunca:.2%}"
+                valoareCheltuieliNeeligibile = df_financiar.iloc[24, 7]
+                procentNePerValoareTPtemp = df_financiar.iloc[24, 7] / df_financiar.iloc[24, 2] * 100
+                procentNePerValoareTP = f"{procentCrestereNrLocMunca:.2%}"
+                totalEligibil = df_financiar.iloc[24, 6]
+
+                
 
                 # mai jos pregatire pt modificari 16 feb 
                 try:
@@ -166,7 +174,7 @@ with col3:
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
 
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul.")
-            st.success(f"Procent crestere:{procentCrestere} . Angajati noi cf proiect: {nrLocMuncaNoi}; 30 la sunta din cei noi:{nrLocMunca30} ; 20 la suta din ei:{nrLocMunca30}; Total angajati vechi + noi: {total_angajati}")
+            st.success(f"Procent crestere: {procentCrestere}. Procent CA: {procentCA}. Valoare Cheltuieli Neeligibile: {valoareCheltuieliNeeligibile}. Procent Neeligibil per Valoare Totală Proiect: {procentNePerValoareTP}. Total Eligibil: {totalEligibil}")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
