@@ -64,9 +64,9 @@ def extrage_indicatori_financiari(df2):
     roa22 = f"{df2.iloc[43, 3]:.0%}"
     roe20 = f"{df2.iloc[47, 1]:.0%}"
     roe21 = f"{df2.iloc[47, 2]:.0%}"
-    roe22 = f"{df2.iloc[47, 3]:.0%}"
+    roe22 = f"{df2.iloc[47, 3]:.2%}"
     #adaugare dupa schimbari din 16.feb 
-    rpe22 = f"{df2.iloc[32, 3]:.0%}"
+    rpe22 = f"{df2.iloc[32, 3]:.2%}"
 
     data = {
         "Rata solvabilitatii generale 2020": rs20, 
