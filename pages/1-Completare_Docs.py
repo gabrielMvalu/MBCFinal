@@ -140,9 +140,7 @@ with col3:
                 
                 totalEligibil = df_financiar.iloc[24, 6]
                 valAFN = df_financiar.iloc[24, 8]
-                ca22 = cifra_venit_rezultat.get('Venituri totale 2020', 'N/A')
-                raportCA22AFNtemp = ca22 / valAFN    # Raportul dintre cuantumul finanțării solicitate si cifra de afaceri înregistrată în anul fiscal anterior lansării apelului de proiecte                
-                raportCA22AFN = f"{raportCA22AFNtemp: .2f}"
+               
 
                 
 
@@ -180,6 +178,10 @@ with col3:
             capital_propriu = extrage_date_bilant(df_bilant)
             cifra_venit_rezultat = extrage_date_contpp(df_contpp)
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
+
+            ca22 = cifra_venit_rezultat.get('Venituri totale 2020', 'N/A')
+            raportCA22AFNtemp = ca22 / valAFN    # Raportul dintre cuantumul finanțării solicitate si cifra de afaceri înregistrată în anul fiscal anterior lansării apelului de proiecte                
+            raportCA22AFN = f"{raportCA22AFNtemp: .2f}"
 
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul.")
             st.success(f"Procent crestere Ang: {procentCrestereAngajati}. Procent crestere CA: {procentCA}. Valoare Cheltuieli Neeligibile: {valoareCheltuieliNeeligibile}. Procent Neeligibil per Valoare Totală Proiect: {procentNePerValoareTP}. Total Eligibil: {totalEligibil}")
