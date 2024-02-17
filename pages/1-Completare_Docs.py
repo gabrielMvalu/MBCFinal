@@ -156,7 +156,7 @@ with col3:
                 # mai jos : modificari 16 feb la cerinta: calcul variabile noi in cod
                 if nr_angajati_22 is not None and nrLocMuncaNoi is not None:
                      try:
-                        total_angajati = nrLocMuncaNoi + nr_angajati_22
+                        totalAngajati = nrLocMuncaNoi + nr_angajati_22
                         nrLocMunca30 = math.ceil(nrLocMuncaNoi * 0.30) 
                         nrLocMunca20 = math.ceil(nrLocMuncaNoi * 0.20) 
                         procentTotalSi30 = nrLocMunca30 + nr_angajati_22
@@ -181,8 +181,6 @@ with col3:
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
 
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul.")
-            st.success(f"Procent crestere Ang: {procentCrestereAngajati}. Procent crestere CA: {procentCA}. Valoare Cheltuieli Neeligibile: {valoareCheltuieliNeeligibile}. Procent Neeligibil per Valoare Totală Proiect: {procentNePerValoareTP}. Total Eligibil: {totalEligibil}")
-            st.success(f"AFN: {valAFN}. Procent CA/AFN: {raportCA22AFN} . CA: {ca22}")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
@@ -301,7 +299,7 @@ with col4:
                 "#30%total": str(procentTotalSi30), #var noi adaugate post facturare pt CF referitor la anagajati
                 "#20%total": str(procentTotalSi20),
                 "#%crestereang": str(procentCrestereAngajati),
-                "#totalangajati": str(nrutverificat1), #end var ang noi
+                "#totalangajati": str(totalAngajati), #end var ang noi
         
                 "#valoare_cheltuieli_neeligibile": str(valoareCheltuieliNeeligibile), #var noi adaugate post fact pt CF referitor la chelt neelig
                 "#procent_neeligibil_din_valoare_totala_proiect": str(procentNePerValoareTP),    
