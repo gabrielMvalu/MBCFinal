@@ -313,6 +313,19 @@ with col4:
                 
                 "#NlmU1": str(nrutverificat1),
                 "#NlmU2": str(nrutverificat2),                             
+
+                #modficiari dupa cererea de noi variabil din 16 feb
+                "#NlmU1": str(nrutverificat1),
+                "#NlmU2": str(nrutverificat2),    
+                "#NlmU1": str(nrutverificat1),
+                "#NlmU2": str(nrutverificat2),  
+                "#NlmU1": str(nrutverificat1),
+                "#NlmU2": str(nrutverificat2),    
+                "#NlmU1": str(nrutverificat1),
+                "#NlmU2": str(nrutverificat2), 
+
+
+                
                             
                 "#NAM20": str(situatie_angajati.get('Numar mediu angajati 2020', 'N/A')),
                 "#NAM21": str(situatie_angajati.get('Numar mediu angajati 2021', 'N/A')),
