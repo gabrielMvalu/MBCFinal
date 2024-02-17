@@ -132,7 +132,7 @@ with col3:
                 procentCAtemp = df_financiar.iloc[32, 18] / 100
                 procentCA = f"{procentCAtemp:.2%}"
                 valoareCheltuieliNeeligibile = df_financiar.iloc[24, 7]
-                procentNePerValoareTPtemp = df_financiar.iloc[24, 7] / df_financiar.iloc[24, 2] / 100
+                procentNePerValoareTPtemp = df_financiar.iloc[24, 7] / df_financiar.iloc[24, 2]
                 procentNePerValoareTP = f"{procentNePerValoareTPtemp:.2%}"
                 totalEligibil = df_financiar.iloc[24, 6]
 
