@@ -147,8 +147,6 @@ with col3:
                 raportCA22AFN = f"{raportCA22AFNtemp: .2f}"   #end modfiic funct 16
                
 
-                
-
                 # mai jos pregatire pt modificari 16 feb 
                 try:
                     nrLocMuncaNoi = int(nrutlocm_temp)
@@ -169,8 +167,6 @@ with col3:
                 else:
                     st.error("Una dintre valorile necesare pentru calculul totalului angajaților lipsește sau este None.")     #modific 16 end aici
 
-                      
-               
                 
             if nrLocMuncaNoi < numar_total_utilaje:
                 nrutverificat1 = "De aceea, nu este necesar să angajam atât de mulți muncitori câte utilaje avem, ci să ne adaptam forța de muncă la nevoile specifice ale proiectelor pe care le vom executa."
@@ -301,31 +297,31 @@ with col4:
                 
                 "#30nrLocMunca": str(nrLocMunca30), #modificari aduse in 16 feb 2024 pt 30 si pt 20, 30Procent si 20 Procent
                 "#20NrLocMunca": str(nrLocMunca20),
-                "#30ProcentLocMuncaTotal": str(procentTotalSi30),
-                "#20ProcentLocMuncaTotal": str(procentTotalSi20),
-                "#procentCrestereLocuriMunca": str(procentCrestere), # end modif 16.02
+                
+                "#30%total": str(procentTotalSi30), #var noi adaugate post facturare pt CF referitor la anagajati
+                "#20%total": str(procentTotalSi20),
+                "#%crestereang": str(procentCrestereAngajati),
+                "#totalangajati": str(nrutverificat1), #end var ang noi
+        
+                "#valoare_cheltuieli_neeligibile": str(valoareCheltuieliNeeligibile), #var noi adaugate post fact pt CF referitor la chelt neelig
+                "#procent_neeligibil_din_valoare_totala_proiect": str(procentNePerValoareTP),    
+                "#%crestere_CA": str(procentCA),
+                "#total_eligibil": str(totalEligibil),  
+                "#AFN": str(valAFN),
+                "#raportCA_AFN": str(raportCA22AFN),     # end modif 16.02 / eng variabile ref chelt
                 
                 "#zoneDN": str(solicitate_data.get('Zone vizate Prioritar', 'N/A')),
                 "#Iso14001": str(solicitate_data.get('Daca are sau nu iso14001', 'N/A')),
                 "#descriere_serviciu": str(solicitate_data.get('Descriere serviciului', 'N/A')),
                 "#piata_tinta": str(solicitate_data.get('Piata tinta', 'N/A')),
                 "#clientiFirma": str(solicitate_data.get('Clienți principali ai firmei', 'N/A')),
+
+                #necesaitau modific in urma dec 12.02
                 
                 "#NlmU1": str(nrutverificat1),
                 "#NlmU2": str(nrutverificat2),                             
 
-                #modficiari dupa cererea de noi variabil din 16 feb
-                "#NlmU1": str(nrutverificat1),
-                "#NlmU2": str(nrutverificat2),    
-                "#NlmU1": str(nrutverificat1),
-                "#NlmU2": str(nrutverificat2),  
-                "#NlmU1": str(nrutverificat1),
-                "#NlmU2": str(nrutverificat2),    
-                "#NlmU1": str(nrutverificat1),
-                "#NlmU2": str(nrutverificat2), 
-
-
-                
+                   #end modif pt 12 feb
                             
                 "#NAM20": str(situatie_angajati.get('Numar mediu angajati 2020', 'N/A')),
                 "#NAM21": str(situatie_angajati.get('Numar mediu angajati 2021', 'N/A')),
