@@ -186,7 +186,7 @@ with col3:
 
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul.")
             st.success(f"Procent crestere Ang: {procentCrestereAngajati}. Procent crestere CA: {procentCA}. Valoare Cheltuieli Neeligibile: {valoareCheltuieliNeeligibile}. Procent Neeligibil per Valoare Totală Proiect: {procentNePerValoareTP}. Total Eligibil: {totalEligibil}")
-            st.success(f"AFN: {valAFN}. Procent CA/AFN: {raportCA22AFN}")
+            st.success(f"AFN: {valAFN}. Procent CA/AFN: {raportCA22AFN} . CA: {ca22}")
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
