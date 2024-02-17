@@ -154,7 +154,7 @@ def extrage_date_solicitate(df):
         "DNSH pentru utilaje": utilajeDNSH,
         "Descrierea utilaj ghidare": utilaj_ghidare_descriere,
 
-        "Posturi Revisal": posturi_revisal,
+        "Posturi Revisal": posturi_revisal,        #adaugat ulterior facturarii , adaugat la cerinte 12.feb
 
         
         "Tipul investitiei": dacaTipInvest,
