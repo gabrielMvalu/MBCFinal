@@ -96,7 +96,7 @@ if uploaded_file is not None:
     st.write(f"Total fara TVA: {total_fara_TVA}")
     
     total_eligibil = total_eligibil1 + total_eligibil2
-    total_neeligibil = total_neeligibil1 + total_neeeligibil2
+    total_neeligibil = total_neeligibil1 + total_neeligibil2
 
     
 if uploaded_word_file is not None and df1_transformed is not None and df2_transformed is not None:
