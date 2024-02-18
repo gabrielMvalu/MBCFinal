@@ -118,9 +118,9 @@ if uploaded_word_file is not None and df1_transformed is not None and df2_transf
                 if "#total2" in cell.text:
                     cell.text = cell.text.replace("#total2", str(total2))
                 if "#total_eligibil2" in cell.text:
-                    cell.text = cell.text.replace("#total_eligibi2", str(total_eligibil2))   
+                    cell.text = cell.text.replace("#total_eligibil2", str(total_eligibil2))   
                 if "#total_neeligibil2" in cell.text:
-                    cell.text = cell.text.replace("#total_neeligibi2", str(total_neeligibil2))   
+                    cell.text = cell.text.replace("#total_neeligibil2", str(total_neeligibil2))   
                 if "#tabel1" in cell.text:
                     cell.text = ""  # Șterge placeholder
                     data_frame = df1_transformed  # Alege DataFrame-ul corespunzător
