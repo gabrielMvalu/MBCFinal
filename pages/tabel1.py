@@ -114,7 +114,7 @@ if uploaded_word_file is not None and df1_transformed is not None and df2_transf
                 if "#total_eligibil1" in cell.text:
                     cell.text = cell.text.replace("#total_eligibil1", str(total_eligibil1))
                 if "#total_neeligibil1" in cell.text:
-                    cell.text = cell.text.replace("#total_neeligibil", str(total_neeligibil1))
+                    cell.text = cell.text.replace("#total_neeligibil1", str(total_neeligibil1))
                 if "#total2" in cell.text:
                     cell.text = cell.text.replace("#total2", str(total2))
                 if "#total_eligibil2" in cell.text:
