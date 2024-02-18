@@ -72,10 +72,10 @@ if uploaded_file is not None:
     df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
 
     stop_in = df.index[df.iloc[:, 1].eq("Total proiect")].tolist()            
-            if stop_in:
-                total_fara_TVA = df.iloc[stop_in[0], 4]          
-            else:
-                total_fara_TVA = None 
+    if stop_in:
+        total_fara_TVA = df.iloc[stop_in[0], 4]          
+    else:
+        total_fara_TVA = None 
             
 
 
