@@ -111,15 +111,15 @@ if uploaded_word_file is not None and df1_transformed is not None and df2_transf
             for cell in row.cells:
                 if "#total1" in cell.text:
                     cell.text = cell.text.replace("#total1", str(total1))
-                if "#total_eligibil" in cell.text:
+                if "#total_eligibil1" in cell.text:
                     cell.text = cell.text.replace("#total_eligibil1", str(total_eligibil1))
-                if "#total_neeligibil" in cell.text:
+                if "#total_neeligibil1" in cell.text:
                     cell.text = cell.text.replace("#total_neeligibil", str(total_neeligibil1))
                 if "#total2" in cell.text:
                     cell.text = cell.text.replace("#total2", str(total2))
-                if "#total_neeligibil" in cell.text:
+                if "#total_neeligibil2" in cell.text:
                     cell.text = cell.text.replace("#total_eligibi2", str(total_eligibil2))   
-                if "#total_neeligibil" in cell.text:
+                if "#total_neeligibil2" in cell.text:
                     cell.text = cell.text.replace("#total_neeligibi2", str(total_neeligibil2))   
                 if "#tabel1" in cell.text:
                     cell.text = ""  # Șterge placeholder
