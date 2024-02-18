@@ -94,6 +94,9 @@ if uploaded_file is not None:
     st.write(f"Total Eligibil  2: {total_eligibil2}")
     st.write(f"Total Neeligibil  2: {total_neeligibil2}")
     st.write(f"Total fara TVA: {total_fara_TVA}")
+    
+    total_eligibil = total_eligibil1 + total_eligibil2
+    total_neeligibil = total_neeligibil1 + total_neeeligibil2
 
     
 if uploaded_word_file is not None and df1_transformed is not None and df2_transformed is not None:
@@ -106,6 +109,12 @@ if uploaded_word_file is not None and df1_transformed is not None and df2_transf
     for table in doc.tables:
         for row in table.rows:
             for cell in row.cells:
+                 if "#total_fara_TVA" in cell.text:
+                    cell.text = cell.text.replace("#total_fara_TVA", str(total_fara_TVA))
+                if "#total_eligibil" in cell.text:
+                    cell.text = cell.text.replace("#total_eligibil", str(total_eligibil))
+                if "#total_neeligibil" in cell.text:
+                    cell.text = cell.text.replace("#total_neeligibil", str(total_neeligibil))                
                 if "#tabel1" in cell.text:
                     cell.text = ""  # Șterge placeholder
                     data_frame = df1_transformed  # Alege DataFrame-ul corespunzător
