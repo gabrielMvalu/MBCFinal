@@ -71,6 +71,16 @@ uploaded_word_file = st.file_uploader("Încarcă documentul Word", type=['docx']
 if uploaded_file is not None:
     df = pd.read_excel(uploaded_file, sheet_name='P. FINANCIAR')
 
+    stop_in = df.index[df.iloc[:, 1].eq("Total proiect")].tolist()            
+            if stop_in:
+                total_fara_TVA = df.iloc[stop_in[0], 4]          
+            else:
+                total_fara_TVA = None 
+            
+
+
+    
+
     stop_text1 = 'Total active corporale'
     stop_text2 = 'Total active necorporale'
     start_text2 = stop_text1 
@@ -83,6 +93,8 @@ if uploaded_file is not None:
     st.write(f"Total Neeligibil  1: {total_neeligibil1}")
     st.write(f"Total Eligibil  2: {total_eligibil2}")
     st.write(f"Total Neeligibil  2: {total_neeligibil2}")
+    st.write(f"Total fara TVA: {total_fara_TVA}")
+
     
 if uploaded_word_file is not None and df1_transformed is not None and df2_transformed is not None:
     # Încărcarea și deschiderea documentului Word
