@@ -95,8 +95,8 @@ if uploaded_file is not None:
     st.write(f"Total Neeligibil  2: {total_neeligibil2}")
     st.write(f"Total fara TVA: {total_fara_TVA}")
     
-    total1_fara_TVA = total_eligibil1 + total_eligibil2
-    total2_fara_TVA = total_neeligibil1 + total_neeligibil2
+    total1 = total_eligibil1 + total_neeligibil1
+    total2 = total_eligibil2 + total_neeligibil2
 
     
 if uploaded_word_file is not None and df1_transformed is not None and df2_transformed is not None:
@@ -110,13 +110,13 @@ if uploaded_word_file is not None and df1_transformed is not None and df2_transf
         for row in table.rows:
             for cell in row.cells:
                 if "#total_fara_TVA" in cell.text:
-                    cell.text = cell.text.replace("#total1_fara_TVA", str(total1_fara_TVA))
+                    cell.text = cell.text.replace("#total1", str(total1))
                 if "#total_eligibil" in cell.text:
                     cell.text = cell.text.replace("#total_eligibil1", str(total_eligibil1))
                 if "#total_neeligibil" in cell.text:
                     cell.text = cell.text.replace("#total_neeligibil", str(total_neeligibil1))
                 if "#total_neeligibil" in cell.text:
-                    cell.text = cell.text.replace("#total2_fara_TVA", str(total2_fara_TVA))
+                    cell.text = cell.text.replace("#total2", str(total2))
                 if "#total_neeligibil" in cell.text:
                     cell.text = cell.text.replace("#total_eligibi2", str(total_eligibil2))   
                 if "#total_neeligibil" in cell.text:
