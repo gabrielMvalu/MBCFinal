@@ -109,7 +109,7 @@ if uploaded_word_file is not None and df1_transformed is not None and df2_transf
     for table in doc.tables:
         for row in table.rows:
             for cell in row.cells:
-                 if "#total_fara_TVA" in cell.text:
+                if "#total_fara_TVA" in cell.text:
                     cell.text = cell.text.replace("#total_fara_TVA", str(total_fara_TVA))
                 if "#total_eligibil" in cell.text:
                     cell.text = cell.text.replace("#total_eligibil", str(total_eligibil))
