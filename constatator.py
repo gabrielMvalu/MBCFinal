@@ -141,6 +141,7 @@ def extrage_coduri_caen(doc):
 
     return results
 
+# adaugat la cerinta din 19.02.2024 (modificari facute dupa facturare) 
 def extrage_terti_principal(doc):
     full_text = "\n".join(paragraph.text for paragraph in doc.paragraphs)
     start_marker = "SEDII SI/SAU ACTIVITATI AUTORIZATE"
