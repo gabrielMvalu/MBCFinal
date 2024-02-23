@@ -89,11 +89,11 @@ if uploaded_file is not None:
     df2_transformed, total_eligibil2, total_neeligibil2 = transforma_date(df, df.index[df.iloc[:, 1].str.contains(start_text2, na=False)].tolist()[0] + 1, stop_text2)
  
     # Afisarea totalurilor eligibile și neeligibile
-    st.write(f"Total Eligibil 1: {total_eligibil1}")
-    st.write(f"Total Neeligibil  1: {total_neeligibil1}")
-    st.write(f"Total Eligibil  2: {total_eligibil2}")
-    st.write(f"Total Neeligibil  2: {total_neeligibil2}")
-    st.write(f"Total fara TVA: {total_fara_TVA}")
+    st.write(f"Total Eligibil 1: {total_eligibil1: .2f}")
+    st.write(f"Total Neeligibil  1: {total_neeligibil1: .2f}")
+    st.write(f"Total Eligibil  2: {total_eligibil2: .2f}")
+    st.write(f"Total Neeligibil  2: {total_neeligibil2: .2f}")
+    st.write(f"Total fara TVA: {total_fara_TVA: .2f}")
     
     total1 = total_eligibil1 + total_neeligibil1
     total2 = total_eligibil2 + total_neeligibil2
@@ -110,17 +110,17 @@ if uploaded_word_file is not None and df1_transformed is not None and df2_transf
         for row in table.rows:
             for cell in row.cells:
                 if "#total1" in cell.text:
-                    cell.text = cell.text.replace("#total1", str(total1))
+                    cell.text = cell.text.replace("#total1", str(f"{total1: .2f}))
                 if "#totaleligibil1" in cell.text:
-                    cell.text = cell.text.replace("#totaleligibil1", str(total_eligibil1))
+                    cell.text = cell.text.replace("#totaleligibil1", str(f"{total_eligibil1: .2f}"))
                 if "#total_neeligibil1" in cell.text:
-                    cell.text = cell.text.replace("#total_neeligibil1", str(total_neeligibil1))
+                    cell.text = cell.text.replace("#total_neeligibil1", str(f"{total_neeligibil1: .2f}))
                 if "#total2" in cell.text:
-                    cell.text = cell.text.replace("#total2", str(total2))
+                    cell.text = cell.text.replace("#total2", str(f"{total2: .2f}))
                 if "#totaleligibil2" in cell.text:
-                    cell.text = cell.text.replace("#totaleligibil2", str(total_eligibil2))   
+                    cell.text = cell.text.replace("#totaleligibil2", str(f"{total_eligibil2: .2f}))   
                 if "#total_neeligibil2" in cell.text:
-                    cell.text = cell.text.replace("#total_neeligibil2", str(total_neeligibil2))   
+                    cell.text = cell.text.replace("#total_neeligibil2", str(f"{total_neeligibil2:. 2f}))   
                 if "#tabel1" in cell.text:
                     cell.text = ""  # Șterge placeholder
                     data_frame = df1_transformed  # Alege DataFrame-ul corespunzător
