@@ -120,7 +120,7 @@ if uploaded_word_file is not None and df1_transformed is not None and df2_transf
                 if "#totaleligibil2" in cell.text:
                     cell.text = cell.text.replace("#totaleligibil2", str(f"{total_eligibil2: .2f}"))   
                 if "#total_neeligibil2" in cell.text:
-                    cell.text = cell.text.replace("#total_neeligibil2", str(f"{total_neeligibil2:. 2f}"))   
+                    cell.text = cell.text.replace("#total_neeligibil2", str(f"{total_neeligibil2: .2f}"))   
                 if "#tabel1" in cell.text:
                     cell.text = ""  # Șterge placeholder
                     data_frame = df1_transformed  # Alege DataFrame-ul corespunzător
