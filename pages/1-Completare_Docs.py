@@ -54,7 +54,7 @@ with col2:
             sedii_si_activitati = extrage_coduri_caen(constatator_doc)
             terti_si_principal = extrage_terti_principal(constatator_doc) # adaugat dupa facturare (la cerinte noi) 19.02
             
-        
+            
             # modificari adaugare variabile noi 16 feb 2024
        
             # adaugata 16.feb 2024 pt nr mediu angajati pe 2022 din constatator       
@@ -85,7 +85,16 @@ with col2:
             terti_si_principal_text = '\n'.join(terti_si_principal) if terti_si_principal  else "N/A"
             st.info(f"Prelucrarea 'Rapor Interogare' al {firma}, este completa.")
             document2_succes = True        
-            
+
+            # modificari pentru avertizarea in cazul documentelor ce nu sunt standardizate pt 3 ani in special 20,21,22
+             
+            nrang20 = situatie_angajati.get("Numar mediu angajati 2020")
+            nrang21 = situatie_angajati.get("Numar mediu angajati 2021")
+            nrang22 = situatie_angajati.get("Numar mediu angajati 2022")
+            # Verificarea dacă oricare dintre ani nu are date extrase corespunzător
+            if nrang20 == "N/A" or nrang21 == "N/A" or nrang22 == "N/A":
+            st.info("Documentul nu este standardizat, continuarea executării poate duce la generarea de date eronate. Asigurați-vă că 'Raportul de interogare' corespunde cerințelor!")
+    
             #  Afișarea datelor în format JSON
  #           st.json({
  #               "Date Generale": informatii_firma,
