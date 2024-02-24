@@ -53,7 +53,7 @@ with col2:
             # full_text_constatator = "\n".join([p.text for p in constatator_doc.paragraphs])
             sedii_si_activitati = extrage_coduri_caen(constatator_doc)
             terti_si_principal = extrage_terti_principal(constatator_doc) # adaugat dupa facturare (la cerinte noi) 19.02
-            
+            srl = informatii_firma.get('Denumirea firmei', 'N/A')
             
             # modificari adaugare variabile noi 16 feb 2024
        
@@ -83,7 +83,7 @@ with col2:
             sedii_si_activitati_text = '\n'.join(sedii_si_activitati) if sedii_si_activitati  else "N/A"           
             #coduri_caen_text = '\n'.join([f"{cod} - {descriere}" for cod, descriere in coduri_caen_curatate]) if coduri_caen_curatate else "N/A"    
             terti_si_principal_text = '\n'.join(terti_si_principal) if terti_si_principal  else "N/A"
-            st.info(f"Prelucrarea 'Rapor Interogare' al {firma}, este completa.")
+            st.info(f"Prelucrarea 'Rapor Interogare' al {srl}, este completa.")
             document2_succes = True        
 
             # modificari pentru avertizarea in cazul documentelor ce nu sunt standardizate pt 3 ani in special 20,21,22
