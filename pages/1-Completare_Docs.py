@@ -93,7 +93,7 @@ with col2:
             nrang22 = situatie_angajati.get("Numar mediu angajati 2022")
             # Verificarea dacă oricare dintre ani nu are date extrase corespunzător
             if nrang20 == "N/A" or nrang21 == "N/A" or nrang22 == "N/A":
-                st.info("Documentul nu este standardizat, continuarea executării poate duce la generarea de date eronate. Asigurați-vă că 'Raportul de interogare' corespunde cerințelor!")
+                st.info(f"Documentul nu este standardizat {nrang20} {nrang21} {nrang22}, continuarea executării poate duce la generarea de date eronate. Asigurați-vă că 'Raportul de interogare' corespunde cerințelor!")
     
             #  Afișarea datelor în format JSON
  #           st.json({
