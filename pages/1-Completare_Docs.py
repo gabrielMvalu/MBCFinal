@@ -346,7 +346,7 @@ with col4:
                 "#NAM21": str(situatie_angajati.get('Numar mediu angajati 2021', 'N/A')),
                 "#NAM22": str(situatie_angajati.get('Numar mediu angajati 2022', 'N/A')),   
 
-                "#profitexploatare": str(cifra_venit_rezultat).get('Profit exploatare', 'N/A')),
+                "#profitexploatare": str(cifra_venit_rezultat.get('Profit exploatare', 'N/A')),
                 
                 "#CPA20": str(capital_propriu.get('Capitalul propriu al actionarilor 2020', 'N/A')), 
                 "#CPA21": str(capital_propriu.get('Capitalul propriu al actionarilor 2021', 'N/A')),
