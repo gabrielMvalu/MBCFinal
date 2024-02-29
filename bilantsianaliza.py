@@ -21,6 +21,8 @@ def extrage_date_contpp(df1):
     vt21 = f"{df1.iloc[55, 2]:.2f}"
     vt22 = f"{df1.iloc[55, 3]:.2f}"
 
+    pfexpl = f"{df1.iloc[33, 3]:.2f}"
+
     if df1.iloc[4, 6] != 0:
         pc = f"{(df1.iloc[4, 6] / df1.iloc[4, 3] * 100) - 100:.2f}%"
     else:
@@ -49,6 +51,8 @@ def extrage_date_contpp(df1):
         "Rezultat al exercitiului 2022": re22,  
         "Anul cu cea mai mare cifra de afaceri": camax, 
         "Procent crestere": pc,
+        
+        "Profit exploatare": pfexpl,
     }
     return data
 
