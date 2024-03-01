@@ -146,7 +146,7 @@ with col3:
                 
                 valoareCheltuieliNeeligibile = df_financiar.iloc[24, 7]
                 # procentNePerValoareTPtemp = df_financiar.iloc[24, 7] / df_financiar.iloc[24, 2]
-                procentNePerValoareTP = f"{procentNePerValoareTPtemp:.2%}"
+                # procentNePerValoareTP = f"{procentNePerValoareTPtemp:.2%}"
                 st.info(f"valoare 24/7 : {df_financiar.iloc[24, 7]} valoare 24/2 : {df_financiar.iloc[24, 2]}")
                 totalEligibil = df_financiar.iloc[24, 6]
                 valAFN = df_financiar.iloc[24, 8]    #end partial 16
