@@ -154,9 +154,9 @@ with col3:
                 #valAFN = df_financiar.iloc[24, 8]    #end partial 16
 
                 # modific pt funct 16
-                ca22 = df_contpp.iloc[4, 3]
-                raportCA22AFNtemp = valAFN / ca22    # Raportul dintre cuantumul finanțării solicitate si cifra de afaceri înregistrată în anul fiscal anterior lansării apelului de proiecte                
-                raportCA22AFN = f"{raportCA22AFNtemp: .2f}"   #end modfiic funct 16
+                #ca22 = df_contpp.iloc[4, 3]
+                #raportCA22AFNtemp = valAFN / ca22    # Raportul dintre cuantumul finanțării solicitate si cifra de afaceri înregistrată în anul fiscal anterior lansării apelului de proiecte                
+                #raportCA22AFN = f"{raportCA22AFNtemp: .2f}"   #end modfiic funct 16
                
 
                 # mai jos pregatire pt modificari 16 feb 
