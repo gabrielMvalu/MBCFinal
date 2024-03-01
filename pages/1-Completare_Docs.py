@@ -132,24 +132,26 @@ with col3:
                 
                 cantitati_corelate = [pd.to_numeric(item[1], errors='coerce') for item in rezultate_corelate]
                 cantitati_corelate = [0 if pd.isna(x) else x for x in cantitati_corelate]
+                
                 numar_total_utilaje = sum(cantitati_corelate)
                 rezultate_corelate, rezultate_corelate2 = coreleaza_date(date_financiare)
+                
                 rezultate2_text = '\n'.join([f"{nume} - {descriere}" for nume, _, descriere in rezultate_corelate2])
 
                 nrutlocm_temp = df_financiar.iloc[4, 21] # adaugat in 12 feb pt modificarile facute legat de extragerea nr total de noi angajati conf proiect
                 
-                procentCrestereNrLocMunca = df_financiar.iloc[3, 22] / 100 # adaugat cf cerinte din 16 feb
-                procentCrestereAngajati = f"{procentCrestereNrLocMunca:.2%}"
+                #procentCrestereNrLocMunca = df_financiar.iloc[3, 22] / 100 # adaugat cf cerinte din 16 feb
+                #procentCrestereAngajati = f"{procentCrestereNrLocMunca:.2%}"
                 
-                procentCAtemp = df_financiar.iloc[32, 18] / 100
-                procentCA = f"{procentCAtemp:.2%}"
+                #procentCAtemp = df_financiar.iloc[32, 18] / 100
+                #procentCA = f"{procentCAtemp:.2%}"
                 
-                valoareCheltuieliNeeligibile = df_financiar.iloc[24, 7]
-                procentNePerValoareTPtemp = df_financiar.iloc[24, 7] / df_financiar.iloc[24, 2]
-                procentNePerValoareTP = f"{procentNePerValoareTPtemp:.2%}"
+                #valoareCheltuieliNeeligibile = df_financiar.iloc[24, 7]
+                #procentNePerValoareTPtemp = df_financiar.iloc[24, 7] / df_financiar.iloc[24, 2]
+                #procentNePerValoareTP = f"{procentNePerValoareTPtemp:.2%}"
                
-                totalEligibil = df_financiar.iloc[24, 6]
-                valAFN = df_financiar.iloc[24, 8]    #end partial 16
+                #totalEligibil = df_financiar.iloc[24, 6]
+                #valAFN = df_financiar.iloc[24, 8]    #end partial 16
 
                 # modific pt funct 16
                 ca22 = df_contpp.iloc[4, 3]
