@@ -140,23 +140,23 @@ with col3:
 
                 nrutlocm_temp = df_financiar.iloc[4, 21] # adaugat in 12 feb pt modificarile facute legat de extragerea nr total de noi angajati conf proiect
                 
-                #procentCrestereNrLocMunca = df_financiar.iloc[3, 22] / 100 # adaugat cf cerinte din 16 feb
-                #procentCrestereAngajati = f"{procentCrestereNrLocMunca:.2%}"
+                procentCrestereNrLocMunca = df_financiar.iloc[3, 22] / 100 # adaugat cf cerinte din 16 feb
+                procentCrestereAngajati = f"{procentCrestereNrLocMunca:.2%}"
                 
-                #procentCAtemp = df_financiar.iloc[32, 18] / 100
-                #procentCA = f"{procentCAtemp:.2%}"
+                procentCAtemp = df_financiar.iloc[32, 18] / 100
+                procentCA = f"{procentCAtemp:.2%}"
                 
-                #valoareCheltuieliNeeligibile = df_financiar.iloc[24, 7]
-                #procentNePerValoareTPtemp = df_financiar.iloc[24, 7] / df_financiar.iloc[24, 2]
-                #procentNePerValoareTP = f"{procentNePerValoareTPtemp:.2%}"
+                valoareCheltuieliNeeligibile = df_financiar.iloc[24, 7]
+                procentNePerValoareTPtemp = df_financiar.iloc[24, 7] / df_financiar.iloc[24, 2]
+                procentNePerValoareTP = f"{procentNePerValoareTPtemp:.2%}"
                
-                #totalEligibil = df_financiar.iloc[24, 6]
-                #valAFN = df_financiar.iloc[24, 8]    #end partial 16
+                totalEligibil = df_financiar.iloc[24, 6]
+                valAFN = df_financiar.iloc[24, 8]    #end partial 16
 
                 # modific pt funct 16
-                #ca22 = df_contpp.iloc[4, 3]
-                #raportCA22AFNtemp = valAFN / ca22    # Raportul dintre cuantumul finanțării solicitate si cifra de afaceri înregistrată în anul fiscal anterior lansării apelului de proiecte                
-                #raportCA22AFN = f"{raportCA22AFNtemp: .2f}"   #end modfiic funct 16
+                ca22 = df_contpp.iloc[4, 3]
+                raportCA22AFNtemp = valAFN / ca22    # Raportul dintre cuantumul finanțării solicitate si cifra de afaceri înregistrată în anul fiscal anterior lansării apelului de proiecte                
+                raportCA22AFN = f"{raportCA22AFNtemp: .2f}"   #end modfiic funct 16
                
 
                 # mai jos pregatire pt modificari 16 feb 
