@@ -146,8 +146,8 @@ with col3:
                 
                 procentCAtemp = extrage_valoare_din_df(df_financiar, 17, "procent crestere CA an 1 durabilitate vs an referinta", 18, 'Valoarea pentru: Procent Crestere CA an 1 durabilitate vs an referinta Nu a putut fi gasita in P.FINANCIAR')
                 valoareCheltuieliNeeligibile = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 7, 'Valoarea pentru: Total neeligibil nu a fost extrasa')
-                procentNePerValoareTPtemp = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 2, 'Valoarea pentru: Total Proiect nu a fost extrasa')
-                totalEligibil = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 6, 'Valoarea pentru: Total eligibil nu a fost extrasa')
+               # procentNePerValoareTPtemp = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 2, 'Valoarea pentru: Total Proiect nu a fost extrasa')
+                totalEligibil = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 2, 'Valoarea pentru: Total eligibil nu a fost extrasa')
                 valAFN = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 8, 'Valoarea pentru: AFN nu a fost extrasa')
                 if procentCAtemp is not None:
                     procentCA = f"{(procentCAtemp / 100):.2%}"
