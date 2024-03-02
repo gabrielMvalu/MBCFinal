@@ -90,7 +90,27 @@ def extrage_indicatori_financiari(df2):
     }
 
     return data
+
+
+    """
+    Extrage valoarea bazată pe un termen de căutare dintr-o anumită coloană.
     
+    :param df: DataFrame-ul din care se extrag datele.
+    :param coloana_cautare: Indexul coloanei în care se caută termenul.
+    :param termen_cautare: Termenul care se caută în coloană.
+    :param coloana_valoare: Indexul coloanei de unde se extrage valoarea.
+    :param mesaj_eroare: Mesajul afișat dacă termenul de căutare nu este găsit.
+    :return: Valoarea extrasă sau None dacă termenul de căutare nu este găsit.
+    """
+def extrage_valoare_din_df(df, coloana_cautare, termen_cautare, coloana_valoare, mesaj_eroare):
+    index = df.index[df.iloc[:, coloana_cautare].eq(termen_cautare)].tolist()
+    if index:
+        return df.iloc[index[0], coloana_valoare]
+    else:
+        st.toast(mesaj_eroare)
+        return None
+
+
    # df = pd.read_excel(uploaded_file, sheet_name='1-Bilant')
    # df1 = pd.read_excel(uploaded_file, sheet_name='2-ContPP')
    # df2 = pd.read_excel(uploaded_file, sheet_name='1D-Analiza_fin_indicatori')    
