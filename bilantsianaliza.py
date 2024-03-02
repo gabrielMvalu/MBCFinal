@@ -104,16 +104,14 @@ def extrage_indicatori_financiari(df2):
     :return: Valoarea extrasă sau None dacă termenul de căutare nu este găsit.
     """
 def extrage_valoare_din_df(df, coloana_cautare, termen_cautare, coloana_valoare, mesaj_eroare):
-    st.info(f"Caut {termen_cautare} in coloana {coloana_cautare}")
     index = df.index[df.iloc[:, coloana_cautare].eq(termen_cautare)].tolist()
-    st.info(f"Index gasit: {index}")
     if index:
         valoare = df.iloc[index[0], coloana_valoare]
-        st.info(f"Valoare extrasa: {valoare}")
         return valoare
     else:
         st.toast(mesaj_eroare)
         return None
+
 
 
 
