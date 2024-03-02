@@ -154,8 +154,8 @@ with col3:
                 else:
                     procentCA = "N/A"
                                
-                if procentNePerValoareTPtemp is not None and totalEligibil is not None:
-                    procentNePerValoareTP = f"{(procentNePerValoareTPtemp / totalEligibil / 100):.2%}"
+                if valoareCheltuieliNeeligibile is not None and totalEligibil is not None:
+                    procentNePerValoareTP = f"{(valoareCheltuieliNeeligibile / totalEligibil / 100):.2%}"
                 else:
                     procentNePerValoareTP = "N/A"
                 
