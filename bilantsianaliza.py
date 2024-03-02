@@ -110,7 +110,7 @@ def extrage_valoare_din_df(df, coloana_cautare, termen_cautare, coloana_valoare,
         valoare = df.iloc[index[0], coloana_valoare]
         return valoare
     else:
-        st.toast(mesaj_eroare)
+        st.error(mesaj_eroare)
         return None
 
 
