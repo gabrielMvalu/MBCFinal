@@ -163,8 +163,6 @@ with col3:
                     raportCA22AFN = f"{(valAFN / ca22):.2f}"
                 else:
                     raportCA22AFN = "N/A"
-                   
-                st.info(f"{procentCA} {valoareCheltuieliNeeligibile} {procentNePerValoareTP} {totalEligibil} {valAFN}")
                 
                # procentCAtemp = df_financiar.iloc[32, 18] / 100      modificat pt modularitate / eroare aparuta datorita schimbarii dimensiunii P. FINANCIAR di 02.03.2024
                # procentCA = f"{procentCAtemp:.2%}"
@@ -216,13 +214,7 @@ with col3:
             rata_rent_grad = extrage_indicatori_financiari(df_analiza_fin)
 
             st.success(f"Analiza Financiara prelucrata cu succes. Va rugam Adaugati Macheta PA si completati procesul.")
-
-
-            st.info(f"Nr total utilaje: {numar_total_utilaje}")
-
-
-
-            
+                        
             document3_succes = True
     else:
         st.warning("Vă rugăm să încărcați și să procesați 'Date Solicitate', apoi 'Raport Interogare'.")
@@ -347,12 +339,12 @@ with col4:
                 "#%crestereang": str(procentCrestereAngajati),
                 "#totalangajati": str(totalAngajati), #end var ang noi
         
-                "#valoare_cheltuieli_neeligibile": str(valoareCheltuieliNeeligibile), #var noi adaugate post fact pt CF referitor la chelt neelig
-                "#procent_neeligibil_din_valoare_totala_proiect": str(procentNePerValoareTP),    
+                "#valoare_cheltuieli_neeligibile": f"{valoareCheltuieliNeeligibile:.2f}", #var noi adaugate post fact pt CF referitor la chelt neelig
+                "#procent_neeligibil_din_valoare_totala_proiect": f"{procentNePerValoareTP:.2f}",    
                 "#%crestere_CA": str(procentCA),
-                "#total_eligibil": str(totalEligibil),  
-                "#AFN": str(valAFN),
-                "#raportCA_AFN": str(raportCA22AFN),     # end modif 16.02 / eng variabile ref chelt
+                "#total_eligibil": f"{totalEligibil:.2f}",  
+                "#AFN": f"{valAFN:.2f}",
+                "#raportCA_AFN": f"{raportCA22AFN:.2f}",     # end modif 16.02 / eng variabile ref chelt
                 
                 "#zoneDN": str(solicitate_data.get('Zone vizate Prioritar', 'N/A')),
                 "#Iso14001": str(solicitate_data.get('Daca are sau nu iso14001', 'N/A')),
