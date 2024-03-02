@@ -1,5 +1,6 @@
 #bilantsianaliza.py
 import pandas as pd
+import streamlit as st
 
 def extrage_date_bilant(df):
     cpa20 = f"{df.iloc[76, 1]:.2f}"
