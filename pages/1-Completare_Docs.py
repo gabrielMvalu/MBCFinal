@@ -150,12 +150,12 @@ with col3:
                 totalEligibil = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 6, 'Valoarea pentru: Total eligibil nu a fost extrasa')
                 valAFN = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 8, 'Valoarea pentru: AFN nu a fost extrasa')
                 if procentCAtemp is not None:
-                    procentCA = f"{{procentCAtemp / 100):.2%}"
+                    procentCA = f"{(procentCAtemp / 100):.2%}"
                 else:
                     procentCA = "N/A"
                                
                 if procentNePerValoareTPtemp is not None and totalEligibil is not None:
-                    procentNePerValoareTP = f"{(procentNePerValoareTPtemp / totalEligibil):.2%}"
+                    procentNePerValoareTP = f"{(procentNePerValoareTPtemp / totalEligibil / 100):.2%}"
                 else:
                     procentNePerValoareTP = "N/A"
                 
