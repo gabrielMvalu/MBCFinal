@@ -135,28 +135,51 @@ with col3:
                 
                 numar_total_utilaje = sum(cantitati_corelate)
                 rezultate_corelate, rezultate_corelate2 = coreleaza_date(date_financiare)
-                
                 rezultate2_text = '\n'.join([f"{nume} - {descriere}" for nume, _, descriere in rezultate_corelate2])
 
                 nrutlocm_temp = df_financiar.iloc[4, 21] # adaugat in 12 feb pt modificarile facute legat de extragerea nr total de noi angajati conf proiect
-                
                 procentCrestereNrLocMunca = df_financiar.iloc[3, 22] / 100 # adaugat cf cerinte din 16 feb
                 procentCrestereAngajati = f"{procentCrestereNrLocMunca:.2%}"
+
+
+                ca22 = df_contpp.iloc[4, 3]
                 
-                procentCAtemp = df_financiar.iloc[32, 18] / 100
-                procentCA = f"{procentCAtemp:.2%}"
+                procentCAtemp = extrage_valoare_din_df(df_financiar, 18, "procent crestere CA an 1 durabilitate vs an referinta", 18, 'Valoarea pentru: Procent Crestere CA an 1 durabilitate vs an referinta Nu a putut fi gasita in P.FINANCIAR')
+                valoareCheltuieliNeeligibile = extrage_valoare_din_df(df_financiar, 7, "Total proiect", 7, 'Valoarea pentru: Total neeligibil nu a fost extrasa')
+                procentNePerValoareTPtemp = extrage_valoare_din_df(df_financiar, 2, "Total proiect", 2, 'Valoarea pentru: Total Proiect nu a fost extrasa')
+                totalEligibil = extrage_valoare_din_df(df_financiar, 6, "Total proiect", 6, 'Valoarea pentru: Total eligibil nu a fost extrasa')
+                valAFN = extrage_valoare_din_df(df_financiar, 8, "Total proiect", 8, 'Valoarea pentru: AFN nu a fost extrasa')
+                if procentCAtemp is not None:
+                    procentCA = f"{procentCAtemp:.2%}"
+                else:
+                    procentCA = "N/A"
                 
-                valoareCheltuieliNeeligibile = df_financiar.iloc[24, 7]
-                procentNePerValoareTPtemp = df_financiar.iloc[24, 7] / df_financiar.iloc[24, 2]
-                procentNePerValoareTP = f"{procentNePerValoareTPtemp:.2%}"
+                if procentNePerValoareTPtemp is not None and totalEligibil is not None:
+                    procentNePerValoareTP = f"{(procentNePerValoareTPtemp / totalEligibil):.2%}"
+                else:
+                    procentNePerValoareTP = "N/A"
+                
+                if valAFN is not None and ca22 is not None:  # Presupunând că ca22 este deja definit
+                    raportCA22AFN = f"{(valAFN / ca22):.2f}"
+                else:
+                    raportCA22AFN = "N/A"
+                   
+
+                
+               # procentCAtemp = df_financiar.iloc[32, 18] / 100      modificat pt modularitate / eroare aparuta datorita schimbarii dimensiunii P. FINANCIAR di 02.03.2024
+               # procentCA = f"{procentCAtemp:.2%}"
+                
+               # valoareCheltuieliNeeligibile = df_financiar.iloc[24, 7]
+               # procentNePerValoareTPtemp = df_financiar.iloc[24, 7] / df_financiar.iloc[24, 2]
+               # procentNePerValoareTP = f"{procentNePerValoareTPtemp:.2%}"
                
-                totalEligibil = df_financiar.iloc[24, 6]
-                valAFN = df_financiar.iloc[24, 8]    #end partial 16
+               # totalEligibil = df_financiar.iloc[24, 6]
+               # valAFN = df_financiar.iloc[24, 8]    #end partial 16
 
                 # modific pt funct 16
-                ca22 = df_contpp.iloc[4, 3]
-                raportCA22AFNtemp = valAFN / ca22    # Raportul dintre cuantumul finanțării solicitate si cifra de afaceri înregistrată în anul fiscal anterior lansării apelului de proiecte                
-                raportCA22AFN = f"{raportCA22AFNtemp: .2f}"   #end modfiic funct 16
+                #ca22 = df_contpp.iloc[4, 3]
+                #raportCA22AFNtemp = valAFN / ca22    # Raportul dintre cuantumul finanțării solicitate si cifra de afaceri înregistrată în anul fiscal anterior lansării apelului de proiecte                
+                #raportCA22AFN = f"{raportCA22AFNtemp: .2f}"   #end modfiic funct 16
                
 
                 # mai jos pregatire pt modificari 16 feb 
