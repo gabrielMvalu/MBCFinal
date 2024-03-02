@@ -340,7 +340,7 @@ with col4:
                 "#totalangajati": str(totalAngajati), #end var ang noi
         
                 "#valoare_cheltuieli_neeligibile": f"{valoareCheltuieliNeeligibile:.2f}", #var noi adaugate post fact pt CF referitor la chelt neelig
-                "#procent_neeligibil_din_valoare_totala_proiect": f"{procentNePerValoareTP:.2f}",    
+                "#procent_neeligibil_din_valoare_totala_proiect": str(procentNePerValoareTP),    
                 "#%crestere_CA": str(procentCA),
                 "#total_eligibil": f"{totalEligibil:.2f}",  
                 "#AFN": f"{valAFN:.2f}",
