@@ -164,7 +164,7 @@ with col3:
                 else:
                     raportCA22AFN = "N/A"
                    
-                st.info(f"{procentCAtemp} {valoareCheltuieliNeeligibile} {procentNePerValoareTPtemp} {totalEligibil} {valAFN}")
+                st.info(f"{procentCA} {valoareCheltuieliNeeligibile} {procentNePerValoareTP} {totalEligibil} {valAFN}")
                 
                # procentCAtemp = df_financiar.iloc[32, 18] / 100      modificat pt modularitate / eroare aparuta datorita schimbarii dimensiunii P. FINANCIAR di 02.03.2024
                # procentCA = f"{procentCAtemp:.2%}"
