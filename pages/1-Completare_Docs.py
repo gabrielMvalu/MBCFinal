@@ -344,7 +344,7 @@ with col4:
                 "#%crestere_CA": str(procentCA),
                 "#total_eligibil": f"{totalEligibil:.2f}",  
                 "#AFN": f"{valAFN:.2f}",
-                "#raportCA_AFN": f"{raportCA22AFN:.2f}",     # end modif 16.02 / eng variabile ref chelt
+                "#raportCA_AFN": str(raportCA22AFN),     # end modif 16.02 / eng variabile ref chelt
                 
                 "#zoneDN": str(solicitate_data.get('Zone vizate Prioritar', 'N/A')),
                 "#Iso14001": str(solicitate_data.get('Daca are sau nu iso14001', 'N/A')),
