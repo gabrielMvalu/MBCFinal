@@ -153,7 +153,10 @@ with col3:
                     procentCA = f"{procentCAtemp:.2%}"
                 else:
                     procentCA = "N/A"
-                
+
+                procentNePerValoareTPtemp = float(procentNePerValoareTPtemp) if procentNePerValoareTPtemp is not None else 0.0
+                totalEligibil = float(totalEligibil) if totalEligibil is not None else 0.0
+                                
                 if procentNePerValoareTPtemp is not None and totalEligibil is not None:
                     procentNePerValoareTP = f"{(procentNePerValoareTPtemp / totalEligibil):.2%}"
                 else:
