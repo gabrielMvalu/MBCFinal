@@ -105,12 +105,14 @@ def extrage_indicatori_financiari(df2):
     """
 def extrage_valoare_din_df(df, coloana_cautare, termen_cautare, coloana_valoare, mesaj_eroare):
     index = df.index[df.iloc[:, coloana_cautare].eq(termen_cautare)].tolist()
+    
     if index:
         valoare = df.iloc[index[0], coloana_valoare]
         return valoare
     else:
         st.toast(mesaj_eroare)
         return None
+
 
 
 
