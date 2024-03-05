@@ -10,6 +10,19 @@ from bilantsianaliza import extrage_date_bilant, extrage_date_contpp, extrage_in
 from serviciisiutilaje import extrage_pozitii, coreleaza_date
 from cheltuieliBugetVar import extrage_cheltuieli_buget
 
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+
+def ajusteaza_alinierea(document):
+    for paragraph in document.paragraphs:
+        paragraph.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY  # Aplică aliniere justificată
+
+    for table in document.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                ajusteaza_alinierea(cell)
+
+
+
 st.set_page_config(layout="wide")
 
 st.header(':blue[Procese pentru inlocuire "Variabile" si completare "Machete PA/CF..."]', divider='rainbow')
@@ -225,6 +238,12 @@ with col4:
         uploaded_template = st.file_uploader("Încărcați MACHETA pt procesarea finala.", type=["docx"], key="MachetaPA")
         if uploaded_template is not None:
             template_doc = Document(uploaded_template)
+
+            # Aici adăugăm apelul funcției pentru ajustarea alinierii
+            ajusteaza_alinierea(template_doc)
+
+
+            
             st.toast('A inceput procesarea Planului de afaceri', icon='⭐')
             # st.info(f"Procesare Finalizata. Pentru descarcarea documentului completat", icon="⬇️")
             st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")
