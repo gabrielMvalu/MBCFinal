@@ -4,3 +4,4 @@ openpyxl
 python-docx
 docx
 openai
+docxtpl
