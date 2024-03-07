@@ -250,15 +250,15 @@ with col4:
             
             
             placeholders = {
-                "#SRL": str(informatii_firma.get('Denumirea firmei', 'N/A')),
-                "#CUI": str(informatii_firma.get('Codul unic de înregistrare (CUI)', 'N/A')),
-                "#Nr_inmatriculare": str(informatii_firma.get('Numărul de ordine în Registrul Comerțului', 'N/A')),
-                "#data_infiintare": str(informatii_firma.get('Data înființării', 'N/A')),
-                "#Adresa_sediu": str(informatii_firma.get('Adresa sediului social', 'N/A')),
-                "#Adresa_pct_lucru": str(adrese_secundare_text),
-                "#Asociati": str(asociati_text),
-                "#Administrator": str(administratori_text),
-                "#activitatePrincipala": str(informatii_firma.get('Activitate principală', 'N/A')),
+                "SRL": str(informatii_firma.get('Denumirea firmei', 'N/A')),
+                "CUI": str(informatii_firma.get('Codul unic de înregistrare (CUI)', 'N/A')),
+                "Nr_inmatriculare": str(informatii_firma.get('Numărul de ordine în Registrul Comerțului', 'N/A')),
+                "data_infiintare": str(informatii_firma.get('Data înființării', 'N/A')),
+                "Adresa_sediu": str(informatii_firma.get('Adresa sediului social', 'N/A')),
+                "Adresa_pct_lucru": str(adrese_secundare_text),
+                "Asociati": str(asociati_text),
+                "Administrator": str(administratori_text),
+                "activitatePrincipala": str(informatii_firma.get('Activitate principală', 'N/A')),
 
                 
                 "#CAENautorizate": str(sedii_si_activitati_text), #modificar la variabila dupa 12.02 ( indicatii eronate initial date, apoi refacute, apoi iar eronata XXX
