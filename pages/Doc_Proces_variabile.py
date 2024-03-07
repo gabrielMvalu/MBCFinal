@@ -278,7 +278,7 @@ with col4:
         
                 "#Utilaj": str(rezultate_text),
                # "#cheltuieli_proiect_din_buget_excel": str(cheltuieli_text),
-                "#cheltuieli_proiect_din_buget_excel": str(cheltuieli_buget_text), #adaugat in urma modif din 14.feb.2024 pt modificarea variabilei
+                "cheltuieli_proiect_din_buget_excel": str(cheltuieli_buget_text), #adaugat in urma modif din 14.feb.2024 pt modificarea variabilei
                 
                 "#DescriereUtilaje" : str(rezultate2_text),
                 "#nr_utilaje": str(numar_total_utilaje),
