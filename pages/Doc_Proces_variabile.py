@@ -404,26 +404,6 @@ with col4:
 
             }
         
-            def inlocuieste_in_tabele(tabele, placeholders):
-                for tabel in tabele:
-                    for row in tabel.rows:
-                        for cell in row.cells:
-                            for paragraph in cell.paragraphs:
-                                for run in paragraph.runs:
-                                    for placeholder, value in placeholders.items():
-                                        if placeholder in run.text:
-                                            run.text = run.text.replace(placeholder, value)
-                            # Verifică dacă există tabele încastrate în celulă și aplică funcția recursiv
-                            if cell.tables:
-                                inlocuieste_in_tabele(cell.tables, placeholders)
-        
-            inlocuieste_in_tabele(template_doc.tables, placeholders)
-        
-            for paragraph in template_doc.paragraphs:
-                for run in paragraph.runs:
-                    for placeholder, value in placeholders.items():
-                        if placeholder in run.text:
-                            run.text = run.text.replace(placeholder, value)
         
             template_doc.render(placeholders)
             template_doc.save("plan_afaceri_completat.docx")
