@@ -70,9 +70,12 @@ def extrage_indicatori_financiari(df2):
     roa22 = f"{df2.iloc[43, 3]:.2%}" if isinstance(df2.iloc[43, 3], int) else "nu se calculeaza"
 
     
-    roe20 = f"{df2.iloc[47, 1]:.2%}"
-    roe21 = f"{df2.iloc[47, 2]:.2%}"
-    roe22 = f"{df2.iloc[47, 3]:.2%}"
+    roe20 = f"{df2.iloc[47, 1]:.2%}" if isinstance(df2.iloc[47, 1], int) else "nu se calculeaza"
+    roe21 = f"{df2.iloc[47, 2]:.2%}" if isinstance(df2.iloc[47, 2], int) else "nu se calculeaza"
+    roe22 = f"{df2.iloc[47, 3]:.2%}" if isinstance(df2.iloc[47, 3], int) else "nu se calculeaza"
+
+
+    
     #adaugare dupa schimbari din 16.feb 
     rpe22 = f"{df2.iloc[32, 3]:.2%}"
 
