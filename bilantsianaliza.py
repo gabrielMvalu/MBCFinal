@@ -64,9 +64,12 @@ def extrage_indicatori_financiari(df2):
     gdi20 = f"{df2.iloc[94, 1]:.2%}"
     gdi21 = f"{df2.iloc[94, 2]:.2%}"
     gdi22 = f"{df2.iloc[94, 3]:.2%}"
-    roa20 = f"{df2.iloc[43, 1]:.2%}"
-    roa21 = f"{df2.iloc[43, 2]:.2%}"
-    roa22 = f"{df2.iloc[43, 3]:.2%}"
+    
+    roa20 = f"{df2.iloc[43, 1]:.2%}" if isinstance(df2.iloc[43, 1], int) else "nu se calculeaza"
+    roa21 = f"{df2.iloc[43, 2]:.2%}" if isinstance(df2.iloc[43, 2], int) else "nu se calculeaza"
+    roa22 = f"{df2.iloc[43, 3]:.2%}" if isinstance(df2.iloc[43, 3], int) else "nu se calculeaza"
+
+    
     roe20 = f"{df2.iloc[47, 1]:.2%}"
     roe21 = f"{df2.iloc[47, 2]:.2%}"
     roe22 = f"{df2.iloc[47, 3]:.2%}"
