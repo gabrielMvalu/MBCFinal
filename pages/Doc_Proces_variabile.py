@@ -11,7 +11,6 @@ from bilantsianalizanou import extrage_date_bilant, extrage_date_contpp, extrage
 from serviciisiutilaje import extrage_pozitii, coreleaza_date
 from cheltuieliBugetVar import extrage_cheltuieli_buget
 
-
 st.set_page_config(layout="wide")
 
 st.header(':blue[Procese pentru inlocuire "Variabile" si completare "Machete PA/CF..."]', divider='rainbow')
@@ -149,7 +148,7 @@ with col3:
                 procentCAtemp = extrage_valoare_din_df(df_financiar, 17, "procent crestere CA an 1 durabilitate vs an referinta", 18, 'Valoarea pentru: Procent Crestere CA an 1 durabilitate vs an referinta Nu a putut fi gasita in P.FINANCIAR')
                 valoareCheltuieliNeeligibile = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 7, 'Valoarea pentru: Total neeligibil nu a fost extrasa')
                # procentNePerValoareTPtemp = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 2, 'Valoarea pentru: Total Proiect nu a fost extrasa')
-                totalEligibil = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 6, 'Valoarea pentru: Total eligibil nu a fost extrasa')
+                totalEligibil = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 2, 'Valoarea pentru: Total eligibil nu a fost extrasa')
                 valAFN = extrage_valoare_din_df(df_financiar, 1, "Total proiect", 8, 'Valoarea pentru: AFN nu a fost extrasa')
                 if procentCAtemp is not None:
                     procentCA = f"{(procentCAtemp / 100):.2%}"
@@ -226,9 +225,7 @@ with col4:
     if document3_succes and 'downloaded' in st.session_state and not st.session_state['downloaded']:
         uploaded_template = st.file_uploader("Încărcați MACHETA pt procesarea finala.", type=["docx"], key="MachetaPA")
         if uploaded_template is not None:
-            # Încărcăm template-ul folosind DocxTemplate în loc de Document
-            template_doc = DocxTemplate(uploaded_template)
-        
+            template_doc = Document(uploaded_template)
            
             st.toast('A inceput procesarea Planului de afaceri', icon='⭐')
             # st.info(f"Procesare Finalizata. Pentru descarcarea documentului completat", icon="⬇️")
@@ -250,15 +247,15 @@ with col4:
             
             
             placeholders = {
-                "SRL": str(informatii_firma.get('Denumirea firmei', 'N/A')),
-                "CUI": str(informatii_firma.get('Codul unic de înregistrare (CUI)', 'N/A')),
-                "Nr_inmatriculare": str(informatii_firma.get('Numărul de ordine în Registrul Comerțului', 'N/A')),
-                "data_infiintare": str(informatii_firma.get('Data înființării', 'N/A')),
-                "Adresa_sediu": str(informatii_firma.get('Adresa sediului social', 'N/A')),
-                "Adresa_pct_lucru": str(adrese_secundare_text),
-                "Asociati": str(asociati_text),
-                "Administrator": str(administratori_text),
-                "activitatePrincipala": str(informatii_firma.get('Activitate principală', 'N/A')),
+                "#SRL": str(informatii_firma.get('Denumirea firmei', 'N/A')),
+                "#CUI": str(informatii_firma.get('Codul unic de înregistrare (CUI)', 'N/A')),
+                "#Nr_inmatriculare": str(informatii_firma.get('Numărul de ordine în Registrul Comerțului', 'N/A')),
+                "#data_infiintare": str(informatii_firma.get('Data înființării', 'N/A')),
+                "#Adresa_sediu": str(informatii_firma.get('Adresa sediului social', 'N/A')),
+                "#Adresa_pct_lucru": str(adrese_secundare_text),
+                "#Asociati": str(asociati_text),
+                "#Administrator": str(administratori_text),
+                "#activitatePrincipala": str(informatii_firma.get('Activitate principală', 'N/A')),
 
                 
                 "#CAENautorizate": str(sedii_si_activitati_text), #modificar la variabila dupa 12.02 ( indicatii eronate initial date, apoi refacute, apoi iar eronata XXX
@@ -278,7 +275,7 @@ with col4:
         
                 "#Utilaj": str(rezultate_text),
                # "#cheltuieli_proiect_din_buget_excel": str(cheltuieli_text),
-                "cheltuieli_proiect_din_buget_excel": str(cheltuieli_buget_text), #adaugat in urma modif din 14.feb.2024 pt modificarea variabilei
+                "#cheltuieli_proiect_din_buget_excel": str(cheltuieli_buget_text), #adaugat in urma modif din 14.feb.2024 pt modificarea variabilei
                 
                 "#DescriereUtilaje" : str(rezultate2_text),
                 "#nr_utilaje": str(numar_total_utilaje),
@@ -404,8 +401,27 @@ with col4:
 
             }
         
+            def inlocuieste_in_tabele(tabele, placeholders):
+                for tabel in tabele:
+                    for row in tabel.rows:
+                        for cell in row.cells:
+                            for paragraph in cell.paragraphs:
+                                for run in paragraph.runs:
+                                    for placeholder, value in placeholders.items():
+                                        if placeholder in run.text:
+                                            run.text = run.text.replace(placeholder, value)
+                            # Verifică dacă există tabele încastrate în celulă și aplică funcția recursiv
+                            if cell.tables:
+                                inlocuieste_in_tabele(cell.tables, placeholders)
         
-            template_doc.render(placeholders)
+            inlocuieste_in_tabele(template_doc.tables, placeholders)
+        
+            for paragraph in template_doc.paragraphs:
+                for run in paragraph.runs:
+                    for placeholder, value in placeholders.items():
+                        if placeholder in run.text:
+                            run.text = run.text.replace(placeholder, value)
+        
             template_doc.save("plan_afaceri_completat.docx")
 
             # st.info(f"Procesare Finalizata. Asteptati Butonul pentru descarcarea documentului completat ")
