@@ -65,16 +65,14 @@ def extrage_indicatori_financiari(df2):
     gdi20 = f"{df2.iloc[94, 1]:.0%}"
     gdi21 = f"{df2.iloc[94, 2]:.0%}"
     gdi22 = f"{df2.iloc[94, 3]:.0%}"
-    
-    roa20 = f"{df2.iloc[43, 1]:.0%}" 
-    roa21 = f"{df2.iloc[43, 2]:.0%}" 
-    roa22 = f"{df2.iloc[43, 3]:.0%}"
 
-    
-    roe20 = f"{df2.iloc[47, 1]:.0%}"
-    roe21 = f"{df2.iloc[47, 2]:.0%}"
-    roe22 = f"{df2.iloc[47, 3]:.0%}"
+    roa20 = f"{df2.iloc[43, 1]:.0%}" if isinstance(df2.iloc[43, 1], (int, float)) else "nu se calculeaza"
+    roa21 = f"{df2.iloc[43, 2]:.0%}" if isinstance(df2.iloc[43, 2], (int, float)) else "nu se calculeaza"
+    roa22 = f"{df2.iloc[43, 3]:.0%}" if isinstance(df2.iloc[43, 3], (int, float)) else "nu se calculeaza"
 
+    roe20 = f"{df2.iloc[47, 1]:.0%}" if isinstance(df2.iloc[47, 1], (int, float)) else "nu se calculeaza"
+    roe21 = f"{df2.iloc[47, 2]:.0%}" if isinstance(df2.iloc[47, 2], (int, float)) else "nu se calculeaza"
+    roe22 = f"{df2.iloc[47, 3]:.0%}" if isinstance(df2.iloc[47, 3], (int, float)) else "nu se calculeaza"
 
     
     #adaugare dupa schimbari din 16.feb 
