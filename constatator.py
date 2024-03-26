@@ -5,7 +5,7 @@ import re
 
 def extrage_informatii_firma(doc):
     full_text = "\n".join(paragraph.text for paragraph in doc.paragraphs)
-    company_pattern = r"informaţii referitoare la\s*\n\n(.*?)\n\n?INFORMAŢII DE IDENTIFICARE"
+    company_pattern = r"informaţii referitoare la\s*\n*(.*?)\n*INFORMAŢII DE IDENTIFICARE"
     firma_match = re.search(company_pattern, full_text, re.IGNORECASE | re.DOTALL)
     firma = firma_match.group(1).strip() if firma_match else "N/A"
     
