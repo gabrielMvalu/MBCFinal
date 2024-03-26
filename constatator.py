@@ -5,10 +5,15 @@ import re
 
 def extrage_informatii_firma(doc):
     full_text = "\n".join(paragraph.text for paragraph in doc.paragraphs)
-    company_pattern = r"informaţiile referitoare la\s*\n*(.*?)\n*INFORMAŢII DE IDENTIFICARE"
-    firma_match = re.search(company_pattern, full_text, re.IGNORECASE | re.DOTALL)
-    firma = firma_match.group(1).strip() if firma_match else "N/A"
-    
+    company_pattern1 = r"informaţiile referitoare la\s*\n*(.*?)\n*INFORMAŢII DE IDENTIFICARE"
+    company_pattern2 = r"FURNIZARE INFORMAŢII\n\n(.*?)\n"
+    firma_match = re.search(company_pattern1, full_text, re.IGNORECASE | re.DOTALL)
+    if firma_match:
+        firma = firma_match.group(1).strip()
+    else:
+        firma_match = re.search(company_pattern2, full_text, re.DOTALL)
+        firma = firma_match.group(1).strip() if firma_match else "N/A"
+  
     nr_ordine_match = re.search(r"Număr de ordine în Registrul Comerţului: (\w+/\d+/\d+)", full_text)
     nr_ordine = nr_ordine_match.group(1) if nr_ordine_match else "N/A"
     cui_match = re.search(r"Cod unic de înregistrare: (\d+)", full_text)
