@@ -45,38 +45,48 @@ def extrage_informatii_firma(doc):
     }
     return data
 
+def normalize_text(input_text):
+    # Înlătură diacriticele neuniforme
+    replacements = {
+        'ă': 'a', 'â': 'a', 'î': 'i', 'ș': 's', 'ț': 't',
+        'Ă': 'A', 'Â': 'A', 'Î': 'I', 'Ș': 'S', 'Ț': 'T'
+    }
+    for search, replace in replacements.items():
+        input_text = input_text.replace(search, replace)
+
+    # Înlătură orice tip de spațiu (inclusiv non-breaking spaces) și normalizează spațiile
+    input_text = re.sub(r'\s+', ' ', input_text)
+    return input_text.strip()
+
 def extrage_asociati_admini(doc):
-    text = [re.sub(r'\s+', ' ', p.text).strip() for p in doc.paragraphs if p.text.strip()]  # Normalizează spațiile și elimină spațiile goale
+    text = [normalize_text(p.text) for p in doc.paragraphs if p.text.strip()]  # Normalizează și curăță textul
     asociati = {}
-    administratori = set()
     in_asociati_section = False
 
     for i in range(len(text)):
-        if "ASOCIAŢI PERSOANE FIZICE" in text[i].upper():
+        if "ASOCIATI PERSOANE FIZICE" in text[i].upper():
             in_asociati_section = True
-        elif "REPREZENTANT acţionar/asociat/membru" in text[i].upper() or "PERSOANE ÎMPUTERNICITE" in text[i].upper():
+        elif "REPREZENTANT ACTIONAR/ASOCIAT/MEMBRU" in text[i].upper() or "PERSOANE IMPUTERNICITE" in text[i].upper():
             in_asociati_section = False
 
         if in_asociati_section:
             if "Calitate:" in text[i]:
-                # Caută înapoi pentru numele asociatului
                 k = i - 1
                 while k > 0 and not text[k].strip():
                     k -= 1
                 nume = text[k]
 
-                # Caută înainte pentru cota de participare
                 j = i + 1
-                while j < len(text) and "Cota de participare la beneficii şi pierderi:" not in text[j]:
+                while j < len(text) and "Cota de participare la beneficii si pierderi:" not in text[j]:
                     j += 1
                 if j < len(text):
-                    cota_match = re.search(r"Cota de participare la beneficii şi pierderi:\s*(.*)", text[j])
+                    cota_match = re.search(r"Cota de participare la beneficii si pierderi:\s*(.*)", text[j])
                     cota = cota_match.group(1).strip() if cota_match else "N/A"
                     asociati[nume] = cota
 
     output_asociati = []
     for nume, cota in asociati.items():
-        info = f"{nume} – asociat cu cota de participare la beneficii și pierderi {cota}"
+        info = f"{nume} – asociat cu cota de participare la beneficii si pierderi {cota}"
         output_asociati.append(info)
 
     return output_asociati
