@@ -46,33 +46,39 @@ def extrage_informatii_firma(doc):
     return data
 
 def extrage_asociati_admini(doc):
-    text = [p.text for p in doc.paragraphs]
+    text = [p.text.strip() for p in doc.paragraphs if p.text.strip()]  # Filtrare pentru a elimina paragrafele goale
     asociati = {}
     administratori = set()
     in_asociati_section = False
-    in_persoane_imputernicite_section = False
     for i in range(len(text)):
         if "ASOCIAŢI PERSOANE FIZICE" in text[i]:
             in_asociati_section = True
-            continue
         elif "REPREZENTANT acţionar/asociat/membru" in text[i]:
             in_asociati_section = False
-        if in_asociati_section and "Calitate: " in text[i]:
-            nume = text[i - 1].strip()
-            j = i + 1
-            while "Cota de participare la beneficii şi pierderi: " not in text[j] and j < len(text) - 1:
-                j += 1
-            if j < len(text):
-                cota = text[j].split(":")[1].strip()
-                asociati[nume] = cota
+        
+        if in_asociati_section:
+            if "Calitate:" in text[i]:
+                # Caută înapoi pentru numele asociatului
+                k = i - 1
+                while k > 0 and not text[k]:
+                    k -= 1  # Sari peste rândurile goale
+                nume = text[k]
+                
+                # Caută înainte pentru cota de participare
+                j = i + 1
+                while j < len(text) and "Cota de participare la beneficii şi pierderi:" not in text[j]:
+                    j += 1
+                if j < len(text):
+                    cota = text[j].split(":")[1].strip()
+                    asociati[nume] = cota
+
         if "Persoane împuternicite (PERSOANE FIZICE)" in text[i]:
-            in_persoane_imputernicite_section = True
-            continue
-        elif "Persoane împuternicite (PERSOANE JURIDICE)" in text[i]:
-            in_persoane_imputernicite_section = False
-        if in_persoane_imputernicite_section and "Calitate: " in text[i]:
-            nume_admin = text[i - 1].strip()
+            k = i - 1
+            while k > 0 and not text[k]:
+                k -= 1  # Sari peste rândurile goale
+            nume_admin = text[k]
             administratori.add(nume_admin)
+            
     output_asociati = []
     for nume, cota in asociati.items():
         info = f"{nume} – asociat cu cota de participare la beneficii și pierderi {cota}"
@@ -81,6 +87,7 @@ def extrage_asociati_admini(doc):
         output_asociati.append(info)
     nume_administrator = ', '.join(administratori)  
     return output_asociati, nume_administrator
+
 
 def extrage_situatie_angajati(doc):
     full_text = "\n".join(paragraph.text for paragraph in doc.paragraphs)
