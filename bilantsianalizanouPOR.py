@@ -3,9 +3,9 @@ import pandas as pd
 import streamlit as st
 
 def extrage_date_bilant(df):
-    cpa21 = f"{df.iloc[99, 1]:.2f}"
-    cpa22 = f"{df.iloc[99, 2]:.2f}"
-    cpa23 = f"{df.iloc[99, 3]:.2f}"
+    cpa21 = f"{df.iloc[99, 2]:.2f}"
+    cpa22 = f"{df.iloc[99, 3]:.2f}"
+    cpa23 = f"{df.iloc[99, 4]:.2f}"
     
     data = {
         "Capitalul propriu al actionarilor 2020": cpa21, 
@@ -15,30 +15,30 @@ def extrage_date_bilant(df):
     return data
 
 def extrage_date_contpp(df1):
-    ca21 = f"{df1.iloc[4, 1]:.2f}"
-    ca22 = f"{df1.iloc[4, 2]:.2f}"
-    ca23 = f"{df1.iloc[4, 3]:.2f}"
-    vt21 = f"{df1.iloc[55, 1]:.2f}"
-    vt22 = f"{df1.iloc[55, 2]:.2f}"
-    vt23 = f"{df1.iloc[55, 3]:.2f}"
+    ca21 = f"{df1.iloc[4, 2]:.2f}"
+    ca22 = f"{df1.iloc[4, 3]:.2f}"
+    ca23 = f"{df1.iloc[4, 4]:.2f}"
+    vt21 = f"{df1.iloc[55, 2]:.2f}"
+    vt22 = f"{df1.iloc[55, 3]:.2f}"
+    vt23 = f"{df1.iloc[55, 4]:.2f}"
 
-    pfexpl = f"{df1.iloc[33, 3]:.2f}"
+    pfexpl = f"{df1.iloc[33, 4]:.2f}"
 
     if df1.iloc[4, 6] != 0:
-        pc = f"{(df1.iloc[4, 6] / df1.iloc[4, 3] * 100) - 100:.2f}%"
+        pc = f"{(df1.iloc[4, 6] / df1.iloc[4, 4] * 100) - 100:.2f}%"
     else:
         pc = "N/A" 
     
-    if df1.iloc[4, 1] > df1.iloc[4, 2] and df1.iloc[4, 1] > df1.iloc[4, 3]:
+    if df1.iloc[4, 2] > df1.iloc[4, 3] and df1.iloc[4, 2] > df1.iloc[4, 4]:
         camax = 2021
-    elif df1.iloc[4, 2] > df1.iloc[4, 1] and df1.iloc[4, 2] > df1.iloc[4, 3]:
+    elif df1.iloc[4, 3] > df1.iloc[4, 2] and df1.iloc[4, 3] > df1.iloc[4, 2]:
         camax = 2022
     else:
         camax = 2023
     
-    re21 = f"{df1.iloc[31, 1]:.2f}" if df1.iloc[31, 1] > 0 else f"{df1.iloc[32, 1]:.2f}"
-    re22 = f"{df1.iloc[31, 2]:.2f}" if df1.iloc[31, 2] > 0 else f"{df1.iloc[32, 2]:.2f}"
-    re23 = f"{df1.iloc[31, 3]:.2f}" if df1.iloc[31, 3] > 0 else f"{df1.iloc[32, 3]:.2f}"
+    re21 = f"{df1.iloc[31, 2]:.2f}" if df1.iloc[31, 2] > 0 else f"{df1.iloc[32, 2]:.2f}"
+    re22 = f"{df1.iloc[31, 3]:.2f}" if df1.iloc[31, 3] > 0 else f"{df1.iloc[32, 3]:.2f}"
+    re23 = f"{df1.iloc[31, 4]:.2f}" if df1.iloc[31, 4] > 0 else f"{df1.iloc[32, 4]:.2f}"
     
     data = {
         "Cifra de afaceri 2020": ca21, 
@@ -58,25 +58,25 @@ def extrage_date_contpp(df1):
     return data
 
 def extrage_indicatori_financiari(df2):
-    rs21 = f"{df2.iloc[89, 1]:.2f}"  
-    rs22 = f"{df2.iloc[89, 2]:.2f}"
-    rs23 = f"{df2.iloc[89, 3]:.2f}"
+    rs21 = f"{df2.iloc[89, 2]:.2f}"  
+    rs22 = f"{df2.iloc[89, 3]:.2f}"
+    rs23 = f"{df2.iloc[89, 4]:.2f}"
     
-    gdi21 = f"{df2.iloc[94, 1]:.0%}"
-    gdi22 = f"{df2.iloc[94, 2]:.0%}"
-    gdi23 = f"{df2.iloc[94, 3]:.0%}"
+    gdi21 = f"{df2.iloc[94, 2]:.0%}"
+    gdi22 = f"{df2.iloc[94, 3]:.0%}"
+    gdi23 = f"{df2.iloc[94, 4]:.0%}"
 
-    roa21 = f"{df2.iloc[43, 1]:.0%}" if isinstance(df2.iloc[43, 1], (int, float)) else "nu se calculeaza"
-    roa22 = f"{df2.iloc[43, 2]:.0%}" if isinstance(df2.iloc[43, 2], (int, float)) else "nu se calculeaza"
-    roa23 = f"{df2.iloc[43, 3]:.0%}" if isinstance(df2.iloc[43, 3], (int, float)) else "nu se calculeaza"
+    roa21 = f"{df2.iloc[43, 2]:.0%}" if isinstance(df2.iloc[43, 2], (int, float)) else "nu se calculeaza"
+    roa22 = f"{df2.iloc[43, 3]:.0%}" if isinstance(df2.iloc[43, 3], (int, float)) else "nu se calculeaza"
+    roa23 = f"{df2.iloc[43, 4]:.0%}" if isinstance(df2.iloc[43, 4], (int, float)) else "nu se calculeaza"
 
-    roe21 = f"{df2.iloc[47, 1]:.0%}" if isinstance(df2.iloc[47, 1], (int, float)) else "nu se calculeaza"
-    roe22 = f"{df2.iloc[47, 2]:.0%}" if isinstance(df2.iloc[47, 2], (int, float)) else "nu se calculeaza"
-    roe23 = f"{df2.iloc[47, 3]:.0%}" if isinstance(df2.iloc[47, 3], (int, float)) else "nu se calculeaza"
+    roe21 = f"{df2.iloc[47, 2]:.0%}" if isinstance(df2.iloc[47, 2], (int, float)) else "nu se calculeaza"
+    roe22 = f"{df2.iloc[47, 3]:.0%}" if isinstance(df2.iloc[47, 3], (int, float)) else "nu se calculeaza"
+    roe23 = f"{df2.iloc[47, 4]:.0%}" if isinstance(df2.iloc[47, 4], (int, float)) else "nu se calculeaza"
 
     
     #adaugare dupa schimbari din 16.feb 
-    rpe23 = f"{df2.iloc[32, 3]:.2%}"
+    rpe23 = f"{df2.iloc[32, 4]:.2%}"
 
     data = {
         "Rata solvabilitatii generale 2020": rs21, 
