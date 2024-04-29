@@ -114,8 +114,8 @@ with col3:
     if document2_succes:
         uploaded_doc3 = st.file_uploader("Încărcați Anexa 3 Macheta Financiară", type=["xlsx"], key="AnalizaMacheta")
         if uploaded_doc3 is not None:
-            df_bilant = pd.read_excel(uploaded_doc3, sheet_name='1-Bilant')
-            df_contpp = pd.read_excel(uploaded_doc3, sheet_name='2-ContPP')
+            df_bilant = pd.read_excel(uploaded_doc3, sheet_name='1A-Bilant')
+            df_contpp = pd.read_excel(uploaded_doc3, sheet_name='1B-ContPP')
             df_analiza_fin = pd.read_excel(uploaded_doc3, sheet_name='1D-Analiza_fin_indicatori')    
             df_financiar = pd.read_excel(uploaded_doc3, sheet_name='P. FINANCIAR')
             
