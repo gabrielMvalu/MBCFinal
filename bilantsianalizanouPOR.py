@@ -3,9 +3,9 @@ import pandas as pd
 import streamlit as st
 
 def extrage_date_bilant(df):
-    cpa21 = f"{df.iloc[99, 2]:.2f}"
-    cpa22 = f"{df.iloc[99, 3]:.2f}"
-    cpa23 = f"{df.iloc[99, 4]:.2f}"
+    cpa21 = f"{df.iloc[97, 2]:.2f}"
+    cpa22 = f"{df.iloc[97, 3]:.2f}"
+    cpa23 = f"{df.iloc[97, 4]:.2f}"
     
     data = {
         "Capitalul propriu al actionarilor 2020": cpa21, 
