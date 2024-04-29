@@ -36,9 +36,9 @@ def extrage_date_contpp(df1):
     else:
         camax = 2022
     
-    re20 = f"{df1.iloc[31, 1]:.2f}" if df1.iloc[66, 1] > 0 else f"{df1.iloc[32, 1]:.2f}"
-    re21 = f"{df1.iloc[31, 2]:.2f}" if df1.iloc[66, 2] > 0 else f"{df1.iloc[32, 2]:.2f}"
-    re22 = f"{df1.iloc[31, 3]:.2f}" if df1.iloc[66, 3] > 0 else f"{df1.iloc[32, 3]:.2f}"
+    re20 = f"{df1.iloc[31, 1]:.2f}" if df1.iloc[31, 1] > 0 else f"{df1.iloc[32, 1]:.2f}"
+    re21 = f"{df1.iloc[31, 2]:.2f}" if df1.iloc[31, 2] > 0 else f"{df1.iloc[32, 2]:.2f}"
+    re22 = f"{df1.iloc[31, 3]:.2f}" if df1.iloc[31, 3] > 0 else f"{df1.iloc[32, 3]:.2f}"
     
     data = {
         "Cifra de afaceri 2020": ca20, 
