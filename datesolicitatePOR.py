@@ -127,10 +127,10 @@ def extrage_date_solicitate(df):
         "Activitate": activitate,
         "Cod CAEN": caen,
         "Doar nr CAEN": nr_caen,
-        "Număr locuri de muncă noi": nr_locuri_munca_noi,
+       # "Număr locuri de muncă noi": nr_locuri_munca_noi,
         "Județ": judet,
         "Utilaj pentru persoane cu dizabilități": utilaj_dizabilitati,
-        "Utilaj cu tocător": utilaj_cu_tocator,
+       # "Utilaj cu tocător": utilaj_cu_tocator,
         "Adresa locației de implementare": adresa_loc_implementare,
         "Număr clasare notificare": nr_clasare_notificare,
         "Clienți actuali": clienti_actuali,
@@ -158,15 +158,11 @@ def extrage_date_solicitate(df):
 
         
         "Tipul investitiei": dacaTipInvest,
-     #   "Procent 30% din total locuri munca nou create": nrlocmunca30,        anulate in urma modificarilor din 16.02.2024
-     #   "Procent 20% din total locuri munca nou create": nrlocmunca20,
         "Zone vizate Prioritar": zoneDN,
         "Daca are sau nu iso14001": iso14001,
     }
     
-    # Apelarea funcției pentru a extrage datele suplimentare
     date_suplimentare = extrage_date_suplimentare(judet, nr_caen, tip_activitate)
-    # Actualizarea dicționarului `data` cu datele suplimentare extrase
     data.update(date_suplimentare)
 
     return data
