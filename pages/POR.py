@@ -7,7 +7,7 @@ from docx import Document
 from docxtpl import DocxTemplate
 from constatator import extrage_informatii_firma, extrage_asociati_admini, extrage_situatie_angajati, extrage_coduri_caen, extrage_terti_principal
 from datesolicitatePOR import extrage_date_solicitate, extrage_date_suplimentare
-from bilantsianalizaPOR import extrage_date_bilant, extrage_date_contpp, extrage_indicatori_financiari, extrage_valoare_din_df
+from bilantsianalizanouPOR import extrage_date_bilant, extrage_date_contpp, extrage_indicatori_financiari, extrage_valoare_din_df
 from serviciisiutilaje import extrage_pozitii, coreleaza_date
 from cheltuieliBugetVar import extrage_cheltuieli_buget
 
