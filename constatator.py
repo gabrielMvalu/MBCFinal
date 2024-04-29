@@ -50,45 +50,36 @@ def extrage_asociati_admini(doc):
     asociati = {}
     administratori = set()
     in_asociati_section = False
-    in_admin_section = False
 
     for i in range(len(text)):
         if "ASOCIAŢI PERSOANE FIZICE" in text[i].upper():
             in_asociati_section = True
-            in_admin_section = False
         elif "REPREZENTANT acţionar/asociat/membru" in text[i].upper() or "PERSOANE ÎMPUTERNICITE" in text[i].upper():
             in_asociati_section = False
-            in_admin_section = True
 
         if in_asociati_section:
             if "Calitate:" in text[i]:
+                # Caută înapoi pentru numele asociatului
                 k = i - 1
                 while k > 0 and not text[k].strip():
                     k -= 1
                 nume = text[k]
+
+                # Caută înainte pentru cota de participare
                 j = i + 1
                 while j < len(text) and "Cota de participare la beneficii şi pierderi:" not in text[j]:
                     j += 1
                 if j < len(text):
-                    cota = re.search(r"Cota de participare la beneficii şi pierderi:\s*(.*)", text[j]).group(1).strip() if re.search(r"Cota de participare la beneficii şi pierderi:\s*(.*)", text[j]) else "N/A"
+                    cota_match = re.search(r"Cota de participare la beneficii şi pierderi:\s*(.*)", text[j])
+                    cota = cota_match.group(1).strip() if cota_match else "N/A"
                     asociati[nume] = cota
-
-        if in_admin_section:
-            if "Calitate:" in text[i]:
-                k = i - 1
-                while k > 0 and not text[k].strip():
-                    k -= 1
-                nume_admin = text[k]
-                administratori.add(nume_admin)
 
     output_asociati = []
     for nume, cota in asociati.items():
         info = f"{nume} – asociat cu cota de participare la beneficii și pierderi {cota}"
-        if nume in administratori:
-            info += " și administrator"
         output_asociati.append(info)
-    nume_administrator = ', '.join(administratori)
-    return output_asociati, nume_administrator
+
+    return output_asociati
 
 
 def extrage_situatie_angajati(doc):
