@@ -361,43 +361,43 @@ with col4:
 
                    #end modif pt 12 feb
                             
-                "#NAM20": str(situatie_angajati.get('Numar mediu angajati 2020', 'N/A')),
                 "#NAM21": str(situatie_angajati.get('Numar mediu angajati 2021', 'N/A')),
-                "#NAM22": str(situatie_angajati.get('Numar mediu angajati 2022', 'N/A')),   
+                "#NAM22": str(situatie_angajati.get('Numar mediu angajati 2022', 'N/A')),
+                "#NAM23": str(situatie_angajati.get('Numar mediu angajati 2023', 'N/A')),   
 
                 "#profitexploatare": str(cifra_venit_rezultat.get('Profit exploatare', 'N/A')),
                 
-                "#CPA20": str(capital_propriu.get('Capitalul propriu al actionarilor 2020', 'N/A')), 
-                "#CPA21": str(capital_propriu.get('Capitalul propriu al actionarilor 2021', 'N/A')),
-                "#CPA22": str(capital_propriu.get('Capitalul propriu al actionarilor 2022', 'N/A')),
+                "#CPA21": str(capital_propriu.get('Capitalul propriu al actionarilor 2020', 'N/A')), 
+                "#CPA22": str(capital_propriu.get('Capitalul propriu al actionarilor 2021', 'N/A')),
+                "#CPA23": str(capital_propriu.get('Capitalul propriu al actionarilor 2022', 'N/A')),
                 
-                "#CA20": str(cifra_venit_rezultat.get('Cifra de afaceri 2020', 'N/A')),
-                "#CA21": str(cifra_venit_rezultat.get('Cifra de afaceri 2021', 'N/A')),
-                "#CA22": str(cifra_venit_rezultat.get('Cifra de afaceri 2022', 'N/A')),
-                "#VT20": str(cifra_venit_rezultat.get('Venituri totale 2020', 'N/A')),
-                "#VT21": str(cifra_venit_rezultat.get('Venituri totale 2021', 'N/A')),
-                "#VT22": str(cifra_venit_rezultat.get('Venituri totale 2022', 'N/A')),     
-                "#REX20": str(cifra_venit_rezultat.get('Rezultat al exercitiului 2020', 'N/A')),
-                "#REX21": str(cifra_venit_rezultat.get('Rezultat al exercitiului 2021', 'N/A')), 
-                "#REX22": str(cifra_venit_rezultat.get('Rezultat al exercitiului 2022', 'N/A')),
+                "#CA21": str(cifra_venit_rezultat.get('Cifra de afaceri 2020', 'N/A')),
+                "#CA22": str(cifra_venit_rezultat.get('Cifra de afaceri 2021', 'N/A')),
+                "#CA23": str(cifra_venit_rezultat.get('Cifra de afaceri 2022', 'N/A')),
+                "#VT21": str(cifra_venit_rezultat.get('Venituri totale 2020', 'N/A')),
+                "#VT22": str(cifra_venit_rezultat.get('Venituri totale 2021', 'N/A')),
+                "#VT23": str(cifra_venit_rezultat.get('Venituri totale 2022', 'N/A')),     
+                "#REX21": str(cifra_venit_rezultat.get('Rezultat al exercitiului 2020', 'N/A')),
+                "#REX22": str(cifra_venit_rezultat.get('Rezultat al exercitiului 2021', 'N/A')), 
+                "#REX23": str(cifra_venit_rezultat.get('Rezultat al exercitiului 2022', 'N/A')),
                 "#MAXCA": str(cifra_venit_rezultat.get('Anul cu cea mai mare cifra de afaceri', 'N/A')),
                 
-                "#RSG20": str(rata_rent_grad.get('Rata solvabilitatii generale 2020', 'N/A')),
-                "#RSG21": str(rata_rent_grad.get('Rata solvabilitatii generale 2021', 'N/A')), 
-                "#RSG22": str(rata_rent_grad.get('Rata solvabilitatii generale 2022', 'N/A')),
-                "#GITS20": str(rata_rent_grad.get('Gradul de indatorare pe termen scurt 2020', 'N/A')),
-                "#GITS21": str(rata_rent_grad.get('Gradul de indatorare pe termen scurt 2021', 'N/A')),
-                "#GITS22": str(rata_rent_grad.get('Gradul de indatorare pe termen scurt 2022', 'N/A')),
-                "#ROA20": str(rata_rent_grad.get('Rentabilitatea activelor (ROA) 2020', 'N/A')),
-                "#ROA21": str(rata_rent_grad.get('Rentabilitatea activelor (ROA) 2021', 'N/A')),
-                "#ROA22": str(rata_rent_grad.get('Rentabilitatea activelor (ROA) 2022', 'N/A')),
-                "#ROE20": str(rata_rent_grad.get('Rentabilitatea capitalului propriu (ROE) 2020', 'N/A')),
-                "#ROE21": str(rata_rent_grad.get('Rentabilitatea capitalului propriu (ROE) 2021', 'N/A')),
-                "#ROE22": str(rata_rent_grad.get('Rentabilitatea capitalului propriu (ROE) 2022', 'N/A')),
+                "#RSG21": str(rata_rent_grad.get('Rata solvabilitatii generale 2020', 'N/A')),
+                "#RSG22": str(rata_rent_grad.get('Rata solvabilitatii generale 2021', 'N/A')), 
+                "#RSG23": str(rata_rent_grad.get('Rata solvabilitatii generale 2022', 'N/A')),
+                "#GITS21": str(rata_rent_grad.get('Gradul de indatorare pe termen scurt 2020', 'N/A')),
+                "#GITS22": str(rata_rent_grad.get('Gradul de indatorare pe termen scurt 2021', 'N/A')),
+                "#GITS23": str(rata_rent_grad.get('Gradul de indatorare pe termen scurt 2022', 'N/A')),
+                "#ROA21": str(rata_rent_grad.get('Rentabilitatea activelor (ROA) 2020', 'N/A')),
+                "#ROA22": str(rata_rent_grad.get('Rentabilitatea activelor (ROA) 2021', 'N/A')),
+                "#ROA23": str(rata_rent_grad.get('Rentabilitatea activelor (ROA) 2022', 'N/A')),
+                "#ROE21": str(rata_rent_grad.get('Rentabilitatea capitalului propriu (ROE) 2020', 'N/A')),
+                "#ROE22": str(rata_rent_grad.get('Rentabilitatea capitalului propriu (ROE) 2021', 'N/A')),
+                "#ROE23": str(rata_rent_grad.get('Rentabilitatea capitalului propriu (ROE) 2022', 'N/A')),
                 
                 #schimbari 16 feb pt CF
-                "#RPE22": str(rata_rent_grad.get('Rata profitului din exploatare RPE22', 'N/A')),
-                "#REF22": str(rata_rent_grad.get('Rentabilitatea capitalului propriu (ROE) 2022', 'N/A')), # end here sch 16 CF
+                "#RPE23": str(rata_rent_grad.get('Rata profitului din exploatare RPE22', 'N/A')),
+                "#REF23": str(rata_rent_grad.get('Rentabilitatea capitalului propriu (ROE) 2022', 'N/A')), # end here sch 16 CF
 
             }
         
