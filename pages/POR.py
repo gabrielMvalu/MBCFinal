@@ -144,7 +144,7 @@ with col3:
 
 
                 ca22 = df_contpp.iloc[4, 3]
-                afneuro = df_financiar.iloc[65, 7] #AFNeuro variabila noua
+                afneuro = df_financiar.iloc[66, 7] #AFNeuro variabila noua
                 st.info('afneuro')
                 
                 procentCAtemp = extrage_valoare_din_df(df_financiar, 17, "procent crestere CA an 1 durabilitate vs an referinta", 18, 'Valoarea pentru: Procent Crestere CA an 1 durabilitate vs an referinta Nu a putut fi gasita in P.FINANCIAR')
