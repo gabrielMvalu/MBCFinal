@@ -91,7 +91,7 @@ def extrage_asociati_admini(doc):
 
 def extrage_situatie_angajati(doc):
     full_text = "\n".join(paragraph.text for paragraph in doc.paragraphs)
-    angajati_pattern_2020 = r"SITUAŢIA FINANCIARĂ PE ANUL 2020.*?(?:Numar|Număr) mediu de salari(?:aţi|ati): (\d+)"
+    angajati_pattern_2020 = r"SITUAȚIA FINANCIARĂ PE ANUL 2020.*?(?:Numar|Număr) mediu de salari(?:aţi|ati): (\d+)"
     angajati_match_2020 = re.search(angajati_pattern_2020, full_text, re.DOTALL)
     nrang20 = angajati_match_2020.group(1) if angajati_match_2020 else "N/A"
     angajati_pattern_2021 = r"SITUAŢIA FINANCIARĂ PE ANUL 2021.*?(?:Numar|Număr) mediu de salari(?:aţi|ati): (\d+)"
