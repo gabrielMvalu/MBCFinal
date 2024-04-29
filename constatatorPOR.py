@@ -14,7 +14,7 @@ def extrage_informatii_firma(doc):
         firma_match = re.search(company_pattern2, full_text, re.DOTALL)
         firma = firma_match.group(1).strip() if firma_match else "N/A"
   
-    nr_ordine_match = re.search(r"Număr de ordine în Registrul Comerţului: ([\w/]+)", full_text)
+    nr_ordine_match = re.search(r"Număr de ordine în Registrul Comerțului:\s*([\w/]+)", full_text)
     nr_ordine = nr_ordine_match.group(1) if nr_ordine_match else "N/A"
     cui_match = re.search(r"Cod unic de înregistrare: (\d+)", full_text)
     cui = cui_match.group(1) if cui_match else "N/A"
