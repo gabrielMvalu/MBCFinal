@@ -58,25 +58,25 @@ def extrage_date_contpp(df1):
     return data
 
 def extrage_indicatori_financiari(df2):
-    rs21 = f"{df2.iloc[89, 2]:.2f}"  
-    rs22 = f"{df2.iloc[89, 3]:.2f}"
-    rs23 = f"{df2.iloc[89, 4]:.2f}"
+    rs21 = f"{df2.iloc[104, 1]:.2f}"  
+    rs22 = f"{df2.iloc[104, 2]:.2f}"
+    rs23 = f"{df2.iloc[104, 3]:.2f}"
     
-    gdi21 = f"{df2.iloc[94, 2]:.0%}"
-    gdi22 = f"{df2.iloc[94, 3]:.0%}"
-    gdi23 = f"{df2.iloc[94, 4]:.0%}"
+    gdi21 = f"{df2.iloc[109, 1]:.0%}"
+    gdi22 = f"{df2.iloc[109, 2]:.0%}"
+    gdi23 = f"{df2.iloc[109, 3]:.0%}"
 
-    roa21 = f"{df2.iloc[58, 2]:.0%}" if isinstance(df2.iloc[58, 2], (int, float)) else "nu se calculeaza"
-    roa22 = f"{df2.iloc[58, 3]:.0%}" if isinstance(df2.iloc[58, 3], (int, float)) else "nu se calculeaza"
-    roa23 = f"{df2.iloc[58, 4]:.0%}" if isinstance(df2.iloc[58, 4], (int, float)) else "nu se calculeaza"
+    roa21 = f"{df2.iloc[58, 1]:.0%}" if isinstance(df2.iloc[58, 1], (int, float)) else "nu se calculeaza"
+    roa22 = f"{df2.iloc[58, 2]:.0%}" if isinstance(df2.iloc[58, 2], (int, float)) else "nu se calculeaza"
+    roa23 = f"{df2.iloc[58, 3]:.0%}" if isinstance(df2.iloc[58, 3], (int, float)) else "nu se calculeaza"
 
-    roe21 = f"{df2.iloc[62, 2]:.0%}" if isinstance(df2.iloc[62, 2], (int, float)) else "nu se calculeaza"
-    roe22 = f"{df2.iloc[62, 3]:.0%}" if isinstance(df2.iloc[62, 3], (int, float)) else "nu se calculeaza"
-    roe23 = f"{df2.iloc[62, 4]:.0%}" if isinstance(df2.iloc[62, 4], (int, float)) else "nu se calculeaza"
+    roe21 = f"{df2.iloc[62, 1]:.0%}" if isinstance(df2.iloc[62, 1], (int, float)) else "nu se calculeaza"
+    roe22 = f"{df2.iloc[62, 2]:.0%}" if isinstance(df2.iloc[62, 2], (int, float)) else "nu se calculeaza"
+    roe23 = f"{df2.iloc[62, 3]:.0%}" if isinstance(df2.iloc[62, 3], (int, float)) else "nu se calculeaza"
 
     
     #adaugare dupa schimbari din 16.feb 
-    rpe23 = f"{df2.iloc[32, 4]:.2%}"
+    rpe23 = f"{df2.iloc[32, 3]:.2%}"
 
     data = {
         "Rata solvabilitatii generale 2020": rs21, 
