@@ -47,20 +47,24 @@ def extrage_informatii_firma(doc):
 
 import re
 
+import re
+
 def extrage_asociati_admini(doc):
-    text = [re.sub(r'\s+', ' ', p.text).strip() for p in doc.paragraphs if p.text.strip()]  # Normalizează spațiile și elimină spațiile goale
+    # Normalizează spațiile și elimină spațiile goale
+    text = [re.sub(r'\s+', ' ', p.text).strip() for p in doc.paragraphs if p.text.strip()]
     asociati = {}
     administratori = set()
     in_asociati_section = False
+
     for i in range(len(text)):
-        if "ASOCIAŢI PERSOANE FIZICE" in text[i]:
+        if "ASOCIAŢI PERSOANE FIZICE" in text[i].upper():
             in_asociati_section = True
-        elif "REPREZENTANT acţionar/asociat/membru" in text[i]:
+        elif "REPREZENTANT acţionar/asociat/membru" in text[i].upper():
             in_asociati_section = False
 
         if in_asociati_section:
             if "Calitate:" in text[i]:
-                # Caută înapoi pentru numele asociatului folosind expresii regulate pentru a evita problemele cu spații
+                # Caută înapoi pentru numele asociatului
                 k = i - 1
                 while k > 0 and not text[k].strip():
                     k -= 1
@@ -71,23 +75,24 @@ def extrage_asociati_admini(doc):
                 while j < len(text) and "Cota de participare la beneficii şi pierderi:" not in text[j]:
                     j += 1
                 if j < len(text):
-                    cota = re.search(r"Cota de participare la beneficii şi pierderi:\s*(.*)", text[j]).group(1).strip() if re.search(r"Cota de participare la beneficii şi pierderi:\s*(.*)", text[j]) else "N/A"
+                    match = re.search(r"Cota de participare la beneficii şi pierderi:\s*(.*)", text[j])
+                    cota = match.group(1).strip() if match else "N/A"
                     asociati[nume] = cota
 
-        if "Persoane împuternicite (PERSOANE FIZICE)" in text[i]:
+        if "Persoane împuternicite (PERSOANE FIZICE)" in text[i].upper():
             k = i - 1
             while k > 0 and not text[k].strip():
                 k -= 1
             nume_admin = text[k]
             administratori.add(nume_admin)
-            
+
     output_asociati = []
     for nume, cota in asociati.items():
         info = f"{nume} – asociat cu cota de participare la beneficii și pierderi {cota}"
         if nume in administratori:
             info += " și administrator"
         output_asociati.append(info)
-    nume_administrator = ', '.join(administratori)  
+    nume_administrator = ', '.join(administratori)
     return output_asociati, nume_administrator
 
 
