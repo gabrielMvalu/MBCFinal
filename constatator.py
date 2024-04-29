@@ -55,8 +55,8 @@ def normalize_text(input_text):
         input_text = input_text.replace(search, replace)
 
     # Înlătură orice tip de spațiu (inclusiv non-breaking spaces) și normalizează spațiile
-    input_text = re.sub(r'\s+', ' ', input_text)
-    return input_text.strip()
+    input_text = re.sub(r'\s+', ' ', input_text).strip()  # Adaugă .strip() pentru a elimina spațiile de la început și sfârșit
+    return input_text
 
 def extrage_asociati_admini(doc):
     text = [normalize_text(p.text) for p in doc.paragraphs if p.text.strip()]  # Normalizează și curăță textul
@@ -90,6 +90,7 @@ def extrage_asociati_admini(doc):
         output_asociati.append(info)
 
     return output_asociati
+
 
 
 def extrage_situatie_angajati(doc):
