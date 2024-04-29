@@ -45,8 +45,10 @@ def extrage_informatii_firma(doc):
     }
     return data
 
+import re
+
 def extrage_asociati_admini(doc):
-    text = [p.text.strip() for p in doc.paragraphs if p.text.strip()]  # Filtrare pentru a elimina paragrafele goale
+    text = [re.sub(r'\s+', ' ', p.text).strip() for p in doc.paragraphs if p.text.strip()]  # Normalizează spațiile și elimină spațiile goale
     asociati = {}
     administratori = set()
     in_asociati_section = False
@@ -55,27 +57,27 @@ def extrage_asociati_admini(doc):
             in_asociati_section = True
         elif "REPREZENTANT acţionar/asociat/membru" in text[i]:
             in_asociati_section = False
-        
+
         if in_asociati_section:
             if "Calitate:" in text[i]:
-                # Caută înapoi pentru numele asociatului
+                # Caută înapoi pentru numele asociatului folosind expresii regulate pentru a evita problemele cu spații
                 k = i - 1
-                while k > 0 and not text[k]:
-                    k -= 1  # Sari peste rândurile goale
+                while k > 0 and not text[k].strip():
+                    k -= 1
                 nume = text[k]
-                
+
                 # Caută înainte pentru cota de participare
                 j = i + 1
                 while j < len(text) and "Cota de participare la beneficii şi pierderi:" not in text[j]:
                     j += 1
                 if j < len(text):
-                    cota = text[j].split(":")[1].strip()
+                    cota = re.search(r"Cota de participare la beneficii şi pierderi:\s*(.*)", text[j]).group(1).strip() if re.search(r"Cota de participare la beneficii şi pierderi:\s*(.*)", text[j]) else "N/A"
                     asociati[nume] = cota
 
         if "Persoane împuternicite (PERSOANE FIZICE)" in text[i]:
             k = i - 1
-            while k > 0 and not text[k]:
-                k -= 1  # Sari peste rândurile goale
+            while k > 0 and not text[k].strip():
+                k -= 1
             nume_admin = text[k]
             administratori.add(nume_admin)
             
