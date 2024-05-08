@@ -333,8 +333,8 @@ with col4:
                 "#CreareActivVizata": str(solicitate_data.get('Crearea de activități în domeniul vizat', 'N/A')),
                 "#DezavantajeConcurentiale": str(solicitate_data.get('Identificarea dezavantajelor concurențiale', 'N/A')),
                 
-                "#30nrLocMunca": str(nrLocMunca30), #modificari aduse in 16 feb 2024 pt 30 si pt 20, 30Procent si 20 Procent
-                "#20NrLocMunca": str(nrLocMunca20),
+                #"#30nrLocMunca": str(nrLocMunca30), #modificari aduse in 16 feb 2024 pt 30 si pt 20, 30Procent si 20 Procent
+                #"#20NrLocMunca": str(nrLocMunca20),
                 
                 "#30%total": str(procentTotalSi30), #var noi adaugate post facturare pt CF referitor la anagajati
                 "#20%total": str(procentTotalSi20),
