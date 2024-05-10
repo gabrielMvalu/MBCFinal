@@ -4,9 +4,9 @@ import pandas as pd
 import re
 import math
 from docx import Document
-from constatatorPOR import extrage_informatii_firma, extrage_asociati_admini, extrage_situatie_angajati, extrage_coduri_caen, extrage_terti_principal
+from constatator import extrage_informatii_firma, extrage_asociati_admini, extrage_situatie_angajati, extrage_coduri_caen, extrage_terti_principal
 from datesolicitate import extrage_date_solicitate, extrage_date_suplimentare
-from bilantsianalizanou import extrage_date_bilant, extrage_date_contpp, extrage_indicatori_financiari, extrage_valoare_din_df
+from bilantsianaliza import extrage_date_bilant, extrage_date_contpp, extrage_indicatori_financiari, extrage_valoare_din_df
 from serviciisiutilaje import extrage_pozitii, coreleaza_date
 from cheltuieliBugetVar import extrage_cheltuieli_buget
 
