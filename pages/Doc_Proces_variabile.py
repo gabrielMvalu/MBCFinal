@@ -338,8 +338,8 @@ with col4:
                 
            #     "#30%total": str(procentTotalSi30), #var noi adaugate post facturare pt CF referitor la anagajati
            #     "#20%total": str(procentTotalSi20),
-                "#%crestereang": str(procentCrestereAngajati),
-                "#totalangajati": str(totalAngajati), #end var ang noi
+           #     "#%crestereang": str(procentCrestereAngajati),
+           #     "#totalangajati": str(totalAngajati), #end var ang noi
         
                 "#valoare_cheltuieli_neeligibile": f"{valoareCheltuieliNeeligibile:.2f}", #var noi adaugate post fact pt CF referitor la chelt neelig
                 "#procent_neeligibil_din_valoare_totala_proiect": str(procentNePerValoareTP),    
